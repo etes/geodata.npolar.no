@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=7,IE=9">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+<title></title>
+
+<link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/dojo/dijit/themes/tundra/tundra.css">
+<link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/esri/css/esri.css">
+<style>
+  html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
+  #map { margin: 0; padding-top: 0px; width: 50%; }
+  #meta {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    width: 300px;
+    height: 100px;
+    z-index: 40;
+    background: #fff;
+    color: #777;
+    padding: 5px;
+    border: 2px solid #666;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px; 
+    font-family: arial;
+    font-size: 0.9em;
+  }
+  #meta h3 {
+    color: #666;
+    font-size: 1.1em;
+    padding: 0px;
+    margin: 0px;
+    display: inline-block;
+  }
+  #loading { 
+    float: right;
+  }
+</style>
+
+<script>var dojoConfig = { parseOnLoad: true };</script>
+<script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/"></script>
+<script>
+  dojo.require("dijit.layout.BorderContainer");
+  dojo.require("dijit.layout.ContentPane");
+  dojo.require("esri.map");
+  dojo.require("esri.layers.KMLLayer");
+  
+  var map;
+
+  function init() {
+    map = new esri.Map("map", { 
+      logo:false,
+      center: [15.663, 78.68],
+      zoom: 5
+    });
+    
+	var basemap = new esri.layers.ArcGISTiledMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer");
+    map.addLayer(basemap);
+    var kmlUrl = "http://umberto.npolar.no/ris15/ssfprojects.kml";
+    var kml = new esri.layers.KMLLayer(kmlUrl, { 
+      outSR: new esri.SpatialReference({ wkid: 32633 }) 
+	}); 
+    map.addLayer(kml);
+    dojo.connect(kml, "onLoad", function() {
+      dojo.style(dojo.byId("loading"), "display", "none");
+    });
+  }
+  dojo.ready(init);
+</script>
+</head>
+
+<body class="tundra">
+
+  <div>
+  	
+  	<H4 class=dtH4>Description</H4>
+  	<p style='margin-right: 0em; margin-bottom: 0.5em; margin-left: 0em; color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; line-height: normal; background-color: rgb(255, 255, 255); '></p>
+  	<p style='margin-right: 0em; margin-bottom: 0.5em; margin-left: 0em; '>
+  		<a href="http://geodata.npolar.no/documentation/map_risFull.html" target="_blank"><b>View sample</b></a>
+  		<br/>This sample shows how to add a KML file as a layer to an ArcGIS API for JavaScript application. Adding a KML file (.kml or .kmz) is as simple as requiring the relevant API module:</p>
+  	<p style='margin-right: 0em; margin-bottom: 0.5em; margin-left: 0em; '><font color='#000066' face='Courier New'> dojo.require(&quot;esri.layers.KMLLayer&quot;);</font></p><div><p style='margin-right: 0em; margin-bottom: 0.5em; margin-left: 0em; '>And then creating a KML layer and adding it to the map:</p>
+  		<font color='#000066' face='Courier New'>var kmlUrl = 'http://umberto.npolar.no/ris15/ssfprojects.kml';</font></div><div><font color='#000066' face='Courier New'>     var kml = new esri.layers.KMLLayer(kmlUrl);</font></div><div><font face='Courier New'><font color='#000066'>     </font><span style='color: rgb(0, 0, 102); font-family: '>map.addLayer(kml);</span></font></div><div><br /></div><div>Note: The KML layer needs to be publicly accessible. </div><div><p></p></div>
+  <div data-dojo-type="dijit.layout.BorderContainer" 
+     data-dojo-props="design:'headline',gutters:false" 
+     style="width: 100%; height: 100%; margin: 0;">
+    </div>
+  <div id="map" 
+       data-dojo-type="dijit.layout.ContentPane" 
+       data-dojo-props="region:'center'"> 
+    <div id="meta">
+      <span id="loading"><img src="images/loading_black.gif" /></span>
+      <h3>Sample displaying a KML file </h3>
+      <br />
+      The map displays a KML file of RIS projects that is available on the RIS project portal (<a>http://ris.npolar.no/pages/RiSmap.htm</a>).
+    </div>
+  </div>
+</div>
+</body>
+</html>

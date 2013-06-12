@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9">
+  <!--The viewport meta tag is used to improve the presentation and behavior of the samples
+    on iOS devices-->
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+  <title>XML Content</title>
+
+  <style>
+    #content {
+      width: 400px; height: 350px; padding: 5px; overflow: auto;
+      border: solid 2px #AAAAAA; background-color: #FFFFFF;
+      -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;
+      -moz-box-shadow: 0 0 0.5em black; -webkit-box-shadow: 0 0 0.5em black; -o-box-shadow: 0 0 0.5em black; box-shadow: 0 0 0.5em black;
+    }
+    .failure { color: red; }
+    #status { font-size: 12px; }
+  </style>
+
+  <script>var dojoConfig = { isDebug: true };</script>
+  <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/"></script>
+  <script>
+    dojo.require("esri.map");
+    dojo.require("dojox.xml.parser");
+
+    dojo.ready(function() {
+      dojo.byId("url").value = "http://earthquake.usgs.gov/earthquakes/catalogs/7day-M5.xml";
+      dojo.byId("content").value = "";
+    });
+
+    function getContent() {
+      dojo.byId("content").value = "";
+      dojo.removeClass(dojo.byId("content"), "failure");
+      dojo.byId("status").innerHTML = "Downloading...";
+
+      var url = esri.urlToObject(dojo.byId("url").value);
+
+      esri.config.defaults.io.proxyUrl = "proxy/proxy.ashx";
+
+      var requestHandle = esri.request({
+        url: url.path,
+        content: url.query,
+        handleAs: "xml"
+      });
+      requestHandle.then(requestSucceeded, requestFailed);
+    }
+
+    function requestSucceeded(response, io) {
+      console.log("Succeeded: ", response);
+      requestCompleted();
+
+      dojo.byId("content").value = dojox.xml.parser.innerXML(response);
+    }
+
+    function requestFailed(error, io) {
+      console.log("Failed: ", error);
+      dojo.addClass(dojo.byId("content"), "failure");
+      requestCompleted();
+
+      dojo.toJsonIndentStr = "  ";
+      dojo.byId("content").value = dojo.toJson(error, true);
+    }
+
+    function requestCompleted() {
+      dojo.byId("status").innerHTML = "Done.";
+      var reset = function() {
+        dojo.byId("status").innerHTML = "";
+      };
+      setTimeout(reset, 2000);
+    }
+  </script>
+</head>
+<body style="font-family: Arial Unicode MS,Arial,sans-serif;">
+  <p>
+    Using esri.request to download content available in <b>XML</b> format.
+  </p>
+  <p>
+    Enter URL here: <input type="text" id="url" disabled="true" size="75" />
+    <input type="button" value="GO" onclick="getContent();" />
+    <span id="status"></span>
+  </p>
+  <p>
+    <p>Content:</p>
+    <textarea id="content"></textarea>
+  </p>
+</body>
+</html>

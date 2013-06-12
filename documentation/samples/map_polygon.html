@@ -1,0 +1,218 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>JS Extent Helper</title>
+        <link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/dojo/dojo/resources/dojo.css"/>
+        <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/dojo/dijit/themes/claro/claro.css"/>
+        <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/esri/css/esri.css"/>
+        <style type="text/css">
+            html, body {
+                height: 100%;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+        <script type="text/javascript">
+            var djConfig = {
+                parseOnLoad: true
+            };
+        </script>
+        <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.5">
+        </script>
+        <script type="text/javascript">
+            dojo.require("dijit.layout.BorderContainer");
+            dojo.require("dijit.layout.ContentPane");
+            dojo.require("esri.map");
+            dojo.require("esri.toolbars.draw");
+            dojo.require("esri.tasks.geometry");
+            
+            var map, drawToolbar, infoTemplate;
+            
+            function init(){
+                map = new esri.Map("map", {logo: false});
+                gsvc = new esri.tasks.GeometryService("http://willem3.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer");
+                var basemap = new esri.layers.ArcGISTiledMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer");
+                map.addLayer(basemap);
+                
+                drawToolbar = new esri.toolbars.Draw(map);
+                dojo.connect(drawToolbar, "onDrawEnd", addToMap);
+                infoTemplate = new esri.InfoTemplate("Extent", "JSON:${extentjson}<br/><BR/>Compact:${extent}");
+                map.infoWindow.resize(600, 130);
+            }            
+                        
+            function addToMap(geometry){
+                var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([255, 0, 0]), 2), new dojo.Color([255, 255, 0, 0.25]));
+                var graphic = new esri.Graphic(geometry, symbol, {
+                    extentjson: dojo.toJson(geometry.toJson()),
+                    extent: geometry.xmin + "," + geometry.ymin + "," + geometry.xmax + "," + geometry.ymax
+                }, infoTemplate);
+                map.graphics.add(graphic);
+                drawToolbar.deactivate();
+                map.setMapCursor("default");
+                
+                var geometries = [geometry.xmin,geometry.ymin,geometry.xmax,geometry.ymax];
+                //console.log (geometries);
+                projectToLatLon(geometries);
+                
+                
+               dojo.byId("extentOutput").innerHTML = "Graphic extent json: " + dojo.toJson(geometry.toJson()) + "<br/>Graphic extent compact: " + geometries + "<div id='latlong'></div>";
+               dijit.byId("extentInfo").show();
+   
+            }
+            
+            function projectToLatLon(geometriesU33){
+
+                	esri.request({
+			url:"http://willem3.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer/project?inSR=32633&outSR=4326&geometries=" + geometriesU33 +"",
+			content:{f:"json"},
+			callbackParamName:"callback",
+			load:toWGS84,
+			error:esriConfig.defaults.io.errorHandler
+			});
+			function toWGS84 (response, ioArgs) {
+				var ext = [
+				" West Longitude: " + response.geometries[0].x, 
+				" South Latitude: " + response.geometries[0].y, 
+				" East Longitude: " + response.geometries[1].x, 
+				" North Latitude: " +response.geometries[1].y];
+				//console.log(dojo.toJson(response, true));  
+				 dojo.byId("latlong").innerHTML = "Graphic extent in Lat long: " + ext;
+				 
+				 dojo.byId("westBound").value = response.geometries[0].x;
+				 dojo.byId("eastBound").value = response.geometries[1].x;
+				 dojo.byId("southBound").value = response.geometries[0].y;
+				 dojo.byId("northBound").value = response.geometries[1].y;
+				 //dijit.byId("extentInfo").show();
+				}
+			
+                
+                }
+            
+            function createExtentGraphic(extentString){
+                extentValues = extentString.split(",");
+                if (extentValues.length === 4) {
+                    var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([0, 0, 255]), 2), new dojo.Color([0, 0, 255, 0.25]));
+                    var geometry = new esri.geometry.Extent(parseFloat(extentValues[0]), parseFloat(extentValues[1]), parseFloat(extentValues[2]), parseFloat(extentValues[3]), map.spatialReference);
+                    var graphic = new esri.Graphic(geometry, symbol, {
+                        extentjson: dojo.toJson(geometry.toJson()),
+                        extent: extentValues[0] + "," + extentValues[1] + "," + extentValues[2] + "," + extentValues[3]
+                    }, infoTemplate);
+                    map.graphics.add(graphic);
+                    map.setExtent(geometry, true);
+                }
+               //dijit.byId('createExtent').hide();
+                dojo.byId('extentCoords').value = "";
+            }
+            function updateExtentGraphic(west,east,south,north){
+                //extentValues = extentString.split(",");
+                extentValues = [west,south,east,north];
+                var geomW84 = [parseFloat(west), parseFloat(south), parseFloat(east), parseFloat(north)];
+                geomW84 = geomW84.filter(function(n){return n});
+                console.log(geomW84);
+            
+                if (geomW84.length == 4) {
+                	esri.request({
+			url:"http://willem3.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer/project?inSR=4326&outSR=32633&geometries=" + geomW84 +"",
+			content:{f:"json"},
+			callbackParamName:"callback",
+			load:toU33,
+			error:esriConfig.defaults.io.errorHandler
+			});
+			function toU33 (response, ioArgs) {
+				 
+				  var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([0, 0, 255]), 2), new dojo.Color([0, 0, 255, 0.25]));
+                    var geometry = new esri.geometry.Extent(response.geometries[0].x, response.geometries[0].y, response.geometries[1].x, response.geometries[1].y, map.spatialReference);
+                    console.log(response);
+                    //response.geometries[0].x, response.geometries[0].y, response.geometries[1].x, response.geometries[1].y
+                    var graphic = new esri.Graphic(geometry, symbol, {
+                        extentjson: dojo.toJson(geometry.toJson()),
+                        extent: extentValues[0] + "," + extentValues[1] + "," + extentValues[2] + "," + extentValues[3]
+                    }, infoTemplate);
+                    map.graphics.add(graphic);
+                    map.setExtent(geometry, true);
+				}
+                   
+                }
+                
+                else{
+                	alert("Please add coordinates correctly");
+                }
+                
+            }
+            
+            function mapExtent(){
+                dojo.byId("extentOutput").innerHTML = "Map extent json: " + dojo.toJson(map.extent.toJson()) + "<br/>Map extent compact: " + map.extent.xmin + "," + map.extent.ymin + "," + map.extent.xmax + "," + map.extent.ymax + "<div id='latlong'></div>";
+                dijit.byId("extentInfo").show();
+                var geometries = [map.extent.xmin,map.extent.ymin,map.extent.xmax,map.extent.ymax];
+                console.log(geometries);
+                projectToLatLon(geometries);
+            }
+  
+            
+            dojo.addOnLoad(init);
+        </script>
+    </head>
+    <body class="claro">
+        <div dojotype="dijit.layout.BorderContainer" design="headline" gutters="false" style="width: 50%; height: 50%; margin: 0; padding: 0;">
+            <div id="map" dojotype="dijit.layout.ContentPane" region="center" style="overflow:hidden;margin: 0; padding: 0;">
+                <div style="position:absolute; right:10px; top:10px; z-Index:999;">
+                    <!--
+                    <button dojoType="dijit.form.Button" onClick="map.graphics.clear();drawToolbar.activate(esri.toolbars.Draw.EXTENT);map.setMapCursor('crosshair');">
+                        Draw Extent
+                    </button>
+                   -->
+                    <input class="btn btn-primary" type= "button" value="Draw Extent" onClick="map.graphics.clear();drawToolbar.activate(esri.toolbars.Draw.EXTENT);map.setMapCursor('crosshair');">
+                    <button dojoType="dijit.form.Button" onClick="mapExtent();">
+                        Get Current Map Extent
+                    </button>
+                    <!--<button dojoType="dijit.form.Button" onClick="dijit.byId('createExtent').show();">
+                        Create Extent
+                    </button>
+                   -->
+                    <button dojoType="dijit.form.Button" onClick="map.graphics.clear();map.infoWindow.hide();">
+                        Clear Map
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div dojoType="dijit.Dialog" title="Extent Info" id="extentInfo">
+            <div id="extentOutput">
+            </div>
+            <center>
+                <button dojoType="dijit.form.Button" onClick="dijit.byId('extentInfo').hide();">
+                    <div>
+                        OK
+                    </div>
+                </button>
+            </center>
+        </div>    <!--    
+        <div title="Create Extent" id="createExtent" style="margin:10px 10px 0 10px; position: absolute; width: 50%; z-index: 2;">
+						<form action="" method="get">
+							<input type="search" id="extentCoords" value="" style="width:50%;" placeholder="Xmin, Ymin, Xmax, Ymax"/><br />
+							Example: xmin,ymin,xmax,ymax (note: coordinates must be in current projection)
+			
+						</form>
+                <button onClick="map.graphics.clear();createExtentGraphic(dojo.byId('extentCoords').value);">
+                    Create
+                </button>
+               </div>
+               -->
+               <div title="Create Extent" id="createExtent" style="margin:10px 10px 0 10px; position: absolute; width: 50%; z-index: 2;">
+                <form class="form-inline" accept-charset="UTF-8" action="create" method="get">
+							West Bounding Longitude <input class="input-xlarge" type="search" id="westBound" value="" placeholder="Longitude"/><br />
+							East Bounding Longitude <input class="input-xlarge" type="search" id="eastBound" value="" placeholder="Longitude"/><br />
+							South Bounding Latitude <input class="input-xlarge" type="search" id="southBound" value="" placeholder="Latitude"/><br />
+							North Bounding Latitude <input class="input-xlarge" type="search" id="northBound" value="" placeholder="Latitude"/><br />
+
+						</form>
+						<input class="btn btn-primary" type= "submit" value="Save" onClick="map.graphics.clear();updateExtentGraphic(dojo.byId('westBound').value,dojo.byId('eastBound').value,dojo.byId('southBound').value,dojo.byId('northBound').value);">
+
+                </div>
+                <div></div>
+    </body>
+</html>

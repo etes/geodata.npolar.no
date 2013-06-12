@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Lat/Lon</title>
+    
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/dojo/dijit/themes/tundra/tundra.css">
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/esri/css/esri.css">
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.4"></script>
+
+    <script type="text/javascript">
+      dojo.require("esri.map");
+      dojo.require("esri.tasks.geometry");
+      
+      var map;
+      
+      function init() {
+      	
+        map = new esri.Map("map", {logo:false});
+        map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer"));
+      }
+      
+      function addPointToMap(lon, lat) {
+		esri.request({
+			url:"http://tasks.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer/project?inSR=4326&outSR=32633&geometries={'geometryType':'esriGeometryPoint','geometries':[{'x':" + lon + ",'y':" + lat + "}]}",
+			content:{f:"json"},
+			callbackParamName:"callback",
+			load:addXYToMap,
+			error:esriConfig.defaults.io.errorHandler
+		});
+      }
+
+      function addXYToMap(response, ioArgs)
+      {
+      	var geocoords = response.geometries;
+		//alert(geocoords[0].y + " " + geocoords[0].x);
+		map.graphics.add(
+			new esri.Graphic(
+		    new esri.geometry.Point(geocoords[0].x , geocoords[0].y , map.spatialReference),
+		    new esri.symbol.SimpleMarkerSymbol().setColor(new dojo.Color([255,0,0,0.5]))
+		    )
+      	)
+      }
+      
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  <body class="tundra">
+    longitude <input type="text" id="lon" value="15" />
+    latitude <input type="text" id="lat" value="78" />
+    <button onclick="addPointToMap(parseFloat(dojo.byId('lon').value), parseFloat(dojo.byId('lat').value));">Add Point to Map</button>
+    <div id="map" style="width:1024px; height:512px; border:1px solid #000;"></div>
+  </body>
+</html>
