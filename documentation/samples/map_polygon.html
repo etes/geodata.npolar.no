@@ -113,7 +113,7 @@
                 extentValues = [west,south,east,north];
                 var geomW84 = [parseFloat(west), parseFloat(south), parseFloat(east), parseFloat(north)];
                 geomW84 = geomW84.filter(function(n){return n});
-                console.log(geomW84);
+                //console.log(geomW84);
             
                 if (geomW84.length == 4) {
                 	esri.request({
@@ -127,7 +127,7 @@
 				 
 				  var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([0, 0, 255]), 2), new dojo.Color([0, 0, 255, 0.25]));
                     var geometry = new esri.geometry.Extent(response.geometries[0].x, response.geometries[0].y, response.geometries[1].x, response.geometries[1].y, map.spatialReference);
-                    console.log(response);
+                    //console.log(response);
                     //response.geometries[0].x, response.geometries[0].y, response.geometries[1].x, response.geometries[1].y
                     var graphic = new esri.Graphic(geometry, symbol, {
                         extentjson: dojo.toJson(geometry.toJson()),
@@ -167,16 +167,21 @@
                     </button>
                    -->
                     <input class="btn btn-primary" type= "button" value="Draw Extent" onClick="map.graphics.clear();drawToolbar.activate(esri.toolbars.Draw.EXTENT);map.setMapCursor('crosshair');">
+                    <input class="btn btn-primary" type= "button" value="Get Current Map Extent" onClick="mapExtent();">
+                    <!--
                     <button dojoType="dijit.form.Button" onClick="mapExtent();">
                         Get Current Map Extent
                     </button>
+                   -->
                     <!--<button dojoType="dijit.form.Button" onClick="dijit.byId('createExtent').show();">
                         Create Extent
                     </button>
-                   -->
+                   
                     <button dojoType="dijit.form.Button" onClick="map.graphics.clear();map.infoWindow.hide();">
                         Clear Map
                     </button>
+                    -->
+                    <input class="btn btn-primary" type= "button" value="Clear Map" onClick="map.graphics.clear();map.infoWindow.hide();">
                 </div>
             </div>
         </div>
