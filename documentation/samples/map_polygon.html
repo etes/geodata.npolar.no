@@ -34,7 +34,8 @@
             var map, drawToolbar, infoTemplate;
             
             function init(){
-                map = new esri.Map("map", {logo: false});
+            	var initialExtent = new esri.geometry.Extent({"xmin": 477423.89,"ymin":8663685.98,"xmax":553624.05,"ymax":8714486.09,"spatialReference":{"wkid":32633}});
+                map = new esri.Map("map", {extent: initialExtent, logo: false});
                 gsvc = new esri.tasks.GeometryService("http://willem3.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer");
                 var basemap = new esri.layers.ArcGISTiledMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer");
                 map.addLayer(basemap);
@@ -161,27 +162,17 @@
         <div dojotype="dijit.layout.BorderContainer" design="headline" gutters="false" style="width: 50%; height: 50%; margin: 0; padding: 0;">
             <div id="map" dojotype="dijit.layout.ContentPane" region="center" style="overflow:hidden;margin: 0; padding: 0;">
                 <div style="position:absolute; right:10px; top:10px; z-Index:999;">
-                    <!--
-                    <button dojoType="dijit.form.Button" onClick="map.graphics.clear();drawToolbar.activate(esri.toolbars.Draw.EXTENT);map.setMapCursor('crosshair');">
-                        Draw Extent
-                    </button>
-                   -->
-                    <input class="btn btn-primary" type= "button" value="Draw Extent" onClick="map.graphics.clear();drawToolbar.activate(esri.toolbars.Draw.EXTENT);map.setMapCursor('crosshair');">
-                    <input class="btn btn-primary" type= "button" value="Get Current Map Extent" onClick="mapExtent();">
-                    <!--
-                    <button dojoType="dijit.form.Button" onClick="mapExtent();">
-                        Get Current Map Extent
-                    </button>
-                   -->
-                    <!--<button dojoType="dijit.form.Button" onClick="dijit.byId('createExtent').show();">
+                    
+                    <button class="btn btn-primary" onClick="map.graphics.clear();drawToolbar.activate(esri.toolbars.Draw.EXTENT);map.setMapCursor('crosshair');">Draw Extent</button>
+                    <button class="btn btn-primary" onClick="mapExtent();">Get Current Extent</button>
+
+                    <!--<button class="btn btn-primary" onClick="dijit.byId('createExtent').show();">
                         Create Extent
                     </button>
-                   
-                    <button dojoType="dijit.form.Button" onClick="map.graphics.clear();map.infoWindow.hide();">
-                        Clear Map
-                    </button>
                     -->
-                    <input class="btn btn-primary" type= "button" value="Clear Map" onClick="map.graphics.clear();map.infoWindow.hide();">
+                   
+                    <button class="btn btn-primary" onClick="map.graphics.clear();map.infoWindow.hide();">Clear
+                    </button>
                 </div>
             </div>
         </div>
@@ -189,7 +180,7 @@
             <div id="extentOutput">
             </div>
             <center>
-                <button dojoType="dijit.form.Button" onClick="dijit.byId('extentInfo').hide();">
+                <button class="btn btn-primary" onClick="dijit.byId('extentInfo').hide();">
                     <div>
                         OK
                     </div>
