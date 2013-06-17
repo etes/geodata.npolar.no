@@ -24,6 +24,8 @@
         </script>
         <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.5">
         </script>
+        
+<script src="/js/proj4js.min.js" type="text/javascript"></script>
         <script type="text/javascript">
             dojo.require("dijit.layout.BorderContainer");
             dojo.require("dijit.layout.ContentPane");
@@ -31,13 +33,21 @@
             dojo.require("esri.toolbars.draw");
             dojo.require("esri.tasks.geometry");
             
+
+// Create projection definition of UTM33
+//Proj4js.defs["EPSG:4326"] = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs";
+Proj4js.defs["EPSG:32633"] = "+proj=utm +zone=33 +ellps=WGS84 +datum=WGS84 +units=m +no_defs";
+
+var wgs84 = new Proj4js.Proj('EPSG:4326');
+var utm33 = new Proj4js.Proj('EPSG:32633');
+            
             var map, drawToolbar, infoTemplate;
             
             function init(){
             	var initialExtent = new esri.geometry.Extent({"xmin": 477423.89,"ymin":8663685.98,"xmax":553624.05,"ymax":8714486.09,"spatialReference":{"wkid":32633}});
                 map = new esri.Map("map", {extent: initialExtent, logo: false});
                 gsvc = new esri.tasks.GeometryService("http://willem3.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer");
-                var basemap = new esri.layers.ArcGISTiledMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer");
+                var basemap = new esri.layers.ArcGISTiledMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer");
                 map.addLayer(basemap);
                 
                 drawToolbar = new esri.toolbars.Draw(map);
@@ -57,17 +67,38 @@
                 map.setMapCursor("default");
                 
                 var geometries = [geometry.xmin,geometry.ymin,geometry.xmax,geometry.ymax];
-                //console.log (geometries);
-                projectToLatLon(geometries);
+                
                 
                 
                dojo.byId("extentOutput").innerHTML = "Graphic extent json: " + dojo.toJson(geometry.toJson()) + "<br/>Graphic extent compact: " + geometries + "<div id='latlong'></div>";
+               //console.log (geometries);
+                projectToLatLon(geometries);
+                
                dijit.byId("extentInfo").show();
    
             }
             
             function projectToLatLon(geometriesU33){
-
+            	//console.log(geometriesU33);
+            	var minPt = new Proj4js.Point(geometriesU33[0], geometriesU33[1]);
+            	var maxPt = new Proj4js.Point(geometriesU33[2], geometriesU33[3]);
+            	// transform to wgs84
+            	Proj4js.transform(utm33, wgs84, minPt);
+            	Proj4js.transform(utm33, wgs84, maxPt);
+            	
+            	var ext = [
+				" West Longitude: " + minPt.x, 
+				" South Latitude: " + minPt.y, 
+				" East Longitude: " + maxPt.x, 
+				" North Latitude: " + maxPt.y];
+				
+				 dojo.byId("latlong").innerHTML = "Graphic extent in Lat long: " + ext;
+				 
+				 dojo.byId("westBound").value = minPt.x;
+				 dojo.byId("eastBound").value = maxPt.x;
+				 dojo.byId("southBound").value = minPt.y;
+				 dojo.byId("northBound").value = maxPt.y;
+/*
                 	esri.request({
 			url:"http://willem3.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer/project?inSR=32633&outSR=4326&geometries=" + geometriesU33 +"",
 			content:{f:"json"},
@@ -90,8 +121,7 @@
 				 dojo.byId("northBound").value = response.geometries[1].y;
 				 //dijit.byId("extentInfo").show();
 				}
-			
-                
+                */
                 }
             
             function createExtentGraphic(extentString){
@@ -111,12 +141,28 @@
             }
             function updateExtentGraphic(west,east,south,north){
                 //extentValues = extentString.split(",");
+                
                 extentValues = [west,south,east,north];
                 var geomW84 = [parseFloat(west), parseFloat(south), parseFloat(east), parseFloat(north)];
                 geomW84 = geomW84.filter(function(n){return n});
                 //console.log(geomW84);
             
                 if (geomW84.length == 4) {
+                	
+                var minPt = new Proj4js.Point(west, south);
+            	var maxPt = new Proj4js.Point(east, north);
+            	// transform to utm33
+            	Proj4js.transform(wgs84, utm33, minPt);
+            	Proj4js.transform(wgs84, utm33, maxPt);
+            	var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([0, 0, 255]), 2), new dojo.Color([0, 0, 255, 0.25]));
+                var geometry = new esri.geometry.Extent(minPt.x, minPt.y, maxPt.x, maxPt.y, map.spatialReference);
+                var graphic = new esri.Graphic(geometry, symbol, {
+                        extentjson: dojo.toJson(geometry.toJson()),
+                        extent: extentValues[0] + "," + extentValues[1] + "," + extentValues[2] + "," + extentValues[3]
+                    }, infoTemplate);
+                    map.graphics.add(graphic);
+                    map.setExtent(geometry, true);               	
+                	/*
                 	esri.request({
 			url:"http://willem3.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer/project?inSR=4326&outSR=32633&geometries=" + geomW84 +"",
 			content:{f:"json"},
@@ -137,7 +183,7 @@
                     map.graphics.add(graphic);
                     map.setExtent(geometry, true);
 				}
-                   
+                  */ 
                 }
                 
                 else{
@@ -150,7 +196,6 @@
                 dojo.byId("extentOutput").innerHTML = "Map extent json: " + dojo.toJson(map.extent.toJson()) + "<br/>Map extent compact: " + map.extent.xmin + "," + map.extent.ymin + "," + map.extent.xmax + "," + map.extent.ymax + "<div id='latlong'></div>";
                 dijit.byId("extentInfo").show();
                 var geometries = [map.extent.xmin,map.extent.ymin,map.extent.xmax,map.extent.ymax];
-                console.log(geometries);
                 projectToLatLon(geometries);
             }
   
