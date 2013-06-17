@@ -289,53 +289,36 @@ function initialize() {
 		<section  id="layers"> <div class="page-header">
 						<h2>Map Service Layers</h2>
 					</div>
-					<p>Norwegian Polar Institute provides various thematic map services which can easily be overlayed on the top basemaps with the Javascript API.
-						Those maps are dynamic map services that are drawn by the server each time the user zooms or pans.
+					<p>Norwegian Polar Institute provides various dynamic thematic map services that can easily be overlayed on the top basemaps with the Javascript API.
+						You can use our map <a href="http://geodata.npolar.no/arcgis/rest/services">Services Directory</a> to discover the available map services.  <br />
 						Dynamic map services are more flexible than cached services by providing the user options such as turn on and off layers in the service, change layer transparency, freely adjust the scale,
 						retrieve layer info and legend, etc.
 					</p>
 					<p>
-						To create dynamic layer, you only need to call the <code>esri.layers.ArcGISDynamicMapServiceLayer()</code> constructor pointing to the URL of service's REST endpoint 
+						To create dynamic layer to a map, you only need to call the <code>esri.layers.ArcGISDynamicMapServiceLayer()</code> constructor pointing to the URL of service's REST endpoint 
 						(e.g. <a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire3/SjøfuglKolonier/MapServer">http://geodata.npolar.no/ArcGIS/rest/services/inspire3/SjøfuglKolonier/MapServer</a>).
-						Then calling the maps <code>addLayer()</code> method to add the layer to the map.
 					</p>
 					<pre><code>//Use the ImageParameters to set the visible layers in the map service during ArcGISDynamicMapServiceLayer construction.
     var imageParameters = new esri.layers.ImageParameters();
-    imageParameters.format = "png";  //set the image type to PNG24, note default is PNG8.
+    imageParameters.format = "png32";  //sets the image format to PNG32.
     //Takes a URL to a dynamic map service.
     serviceURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire3/SjøfuglKolonier/MapServer";
-    var layer = new esri.layers.ArcGISDynamicMapServiceLayer(serviceURL, {
-          "opacity":0.5, 
+    var dynamicLayer = new esri.layers.ArcGISDynamicMapServiceLayer(serviceURL, {
+          "opacity":0.75, 
           "imageParameters":imageParameters
-        });
-        
-    map.addLayer(layer);</code></pre>
-					
-					<div id="map4" style="width:100%; height:256px;"></div>
-<ol>
-  <li>In the "initialize" function, add the following line immediately before the end of the function: 
-  	<pre><code>
-var dynamicMap = new esri.arcgis.gmaps.DynamicMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire3/SjøfuglKolonier/MapServer", null, 0.75, dynmapcallback); </code> </pre>
-  	 
-  	 This code creates a layer from a dynamic ArcGIS Server map service. To create the layer, you passed four arguments to the DynamicMapServiceLayer constructor:
+        });              
+    map.addLayer(dynamicLayer);</code></pre>
+<p>	 
+  	 The above code creates a layer from a dynamic ArcGIS Server map service. To create the layer, the following arguments were passed to the DynamicMapServiceLayer constructor:
     <ul>
-      <li>The URL of the map service. The URL provided in this sample is from an ESRI sample server. You can replace it with the URL to one of your map services if you want. If you're not sure how to construct the URL to your map service, use the <a href="http://geodata.npolar.no/arcgis/rest/services">Services Directory</a> to discover it.</li>
+      <li>The URL of the map service. The URL provided in this sample is the Seabird colonies map of Svalbard. </li>
       <li>Optional parameters to specify the image format (You left this as null).</li>
       <li>An opacity setting that determines how much you can see through the map. This is a value between 0 and 1. The closer to 0, the more you can see through the map. You used 0.75.</li>
-      <li>A callback function. This is an optional function that runs once the map is created. You'll add code for this function (dynmapcallback) in the next step.</li>
     </ul>
-    If you were writing this code without using the example, you could use the <a href="http://help.arcgis.com/en/webapi/javascript/gmaps/help/topics/apiref.htm">API Reference</a> to learn how to supply these parameters to the constructor.</li>
-  <li>Although you've created the dynamic map service layer, you need to add it on top of the base map. You do this in the callback function. Remember from the previous step that we passed an argument to the DynamicMapServiceLayer constructor that was the name of this function (dynmapcallback). 
-  	This function runs once the dynamic map has been created. The code in the callback function is what adds your ArcGIS Server map on top of Google Maps. Add the following in the header section below the "initialize" function:
-    <div>
-      <pre><code>
-function dynmapcallback(mapservicelayer) {
-	gmap.addOverlay(mapservicelayer);
-	}  </code></pre>
-    </div>
-    Notice that this function has one argument, mapservicelayer, which represents the layer that you'll add to the map.</li>
-  <li>Verify that your code matches the code below. Save the page and load it into a browser (double-click on the file in your file browser, or access it through your Web server's URL). You'll see the sample population density map over the Google Maps base map.</li>
-</ol>
+Although you've created the dynamic map service layer, you need to add it on top of the basemap. You do this by calling the map's <code>addLayer()</code> method.
+
+  </p>
+  <div id="map4" style="width:100%; height:256px;"></div>
 <p>
 
 </p>	
@@ -416,16 +399,15 @@ function dynmapcallback(mapservicelayer) {
        map4.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));
        
         var imageParameters = new esri.layers.ImageParameters();
-        imageParameters.format = "png"; 
-        //set the image type to PNG24, note default is PNG8.
+        imageParameters.format = "png32"; //sets the image format to PNG32.
     //Takes a URL to a dynamic map service.
     serviceURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire3/SjøfuglKolonier/MapServer";
-    var layer = new esri.layers.ArcGISDynamicMapServiceLayer(serviceURL, {
-          "opacity":0.8, 
+    var dynamicLayer = new esri.layers.ArcGISDynamicMapServiceLayer(serviceURL, {
+          "opacity":0.75, 
           "imageParameters":imageParameters
         });
         
-    map4.addLayer(layer);
+    map4.addLayer(dynamicLayer);
        
 
     }
