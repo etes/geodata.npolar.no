@@ -26,7 +26,7 @@
 	================================================== -->
 	<header class="jumbotron subhead">
 		<div class="container">
-			<img src="/img/np-logo.png" style="float:left">
+			<img src="img/np-logo.png" style="float:left">
 			<h1>Norwegian Polar Institute Maps API<sup style="font-size:14px">Javascript </sup></h1>
 		</div>
 	</header>
@@ -272,6 +272,15 @@ function initialize() {
 					<h4>Drawing on map</h4>
 					<p>If you would like the users to draw a points, lines, or polygons on the screen and capture that geometry, the easiest is to use <a href = "http://developers.arcgis.com/en/javascript/jsapi/draw.html">Draw</a> toolbar of ArCGIS API for Javascript. 
 					</p>
+			<div id="info" style="margin:5px 0 0 25%; position: absolute; width: 50%; z-index: 2;">
+			<button class="btn btn-primary" id="drawPoint">Point</button>
+			<button class="btn btn-primary" id="drawPolyline">Polyline</button>
+			<button class="btn btn-primary" id="drawPolygon">Polygon</button>
+			<button class="btn btn-primary" id="drawExtent">Extent</button>
+			<button class="btn" id="clear">Clear</button>
+			</div>
+
+		<div id="mapDiv"></div>
 					
 		</section>
 		
@@ -318,7 +327,7 @@ function dynmapcallback(mapservicelayer) {
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,700' rel='stylesheet' type='text/css'>
 <script src="http://yui.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
 <script src="/js/proj4js.min.js" type="text/javascript"></script>
-<script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/"></script>
+<script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5compact"></script>
 <script src="/js/npmaps.js" type="text/javascript"></script>
 
 <script>
@@ -346,6 +355,7 @@ function dynmapcallback(mapservicelayer) {
 </script>
 <script type="text/javascript">
     dojo.require("esri.map");
+    dojo.require("esri.toolbars.draw");
 
     var map;
 
@@ -374,8 +384,73 @@ function dynmapcallback(mapservicelayer) {
         	var graphic = new esri.Graphic(new esri.geometry.Point(514589.2466, 8682916.3628,{"wkid":32633}), symbol);
         	map2.graphics.add(graphic);
         	});
+       
+       map3 = new esri.Map("mapDiv", {extent : initialExtent,logo : false});
+       var basemap = new esri.layers.ArcGISTiledMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer");
+       map3.addLayer(basemap);
+                
+       dojo.connect(map, "onLoad", initToolbar);
 
     }
+    
+     function initToolbar() {
+                tb = new esri.toolbars.Draw(map3);
+                dojo.connect(tb, "onDrawEnd", addGraphic);
+
+                //hook up the button click events
+                dojo.connect(dojo.byId("drawPoint"), "click", function() {
+                    tb.activate(esri.toolbars.Draw.POINT);
+                });
+
+                dojo.connect(dojo.byId("drawExtent"), "click", function() {
+                    tb.activate(esri.toolbars.Draw.EXTENT);
+                });
+
+                dojo.connect(dojo.byId("drawPolyline"), "click", function() {
+                    tb.activate(esri.toolbars.Draw.POLYLINE);
+                });
+                dojo.connect(dojo.byId("drawPolygon"), "click", function() {
+                    tb.activate(esri.toolbars.Draw.POLYGON);
+                });
+                dojo.connect(dojo.byId("clear"), "click", function() {
+                    tb.deactivate();
+                    map3.graphics.clear();
+                });
+            }
+            
+     function addGraphic(geometry) {
+                //deactivate the toolbar and clear existing graphics
+                //tb.deactivate();
+                //map.graphics.clear();
+
+                //create a random color for the symbols
+                var r = Math.floor(Math.random() * 250);
+                var g = Math.floor(Math.random() * 100);
+                var b = Math.floor(Math.random() * 100);
+                
+                //Marker symbol used for point created using svg path. See this site for more examples
+                // http://raphaeljs.com/icons/#talkq. You could also create marker symbols using the SimpleMarkerSymbol class
+                //to define color, size, style or the PictureMarkerSymbol class to specify an image to use for the symbol.
+                var markerSymbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 20, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([r, g, b, 0.5]), 10), new dojo.Color([r, g, b, 0.9]));
+
+                //line symbol used for polyline.
+                var lineSymbol = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([r, g, b, 0.85]), 6);
+
+                //a simple fill symbol used for extent, polygon and freehand polygon.
+                var fillSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([r, g, b]), 2), new dojo.Color([r, g, b, 0.3]));
+
+                var type = geometry.type, symbol;
+                if (type === "point") {
+                    symbol = markerSymbol;
+                } else if (type === "polyline") {
+                    symbol = lineSymbol;
+                } else {
+                    symbol = fillSymbol;
+                }
+
+                //Add the graphic to the map
+                map3.graphics.add(new esri.Graphic(geometry, symbol));
+            }       
     dojo.ready(initialize); 
 </script>
 </body>
