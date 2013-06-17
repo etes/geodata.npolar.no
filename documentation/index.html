@@ -280,7 +280,7 @@ function initialize() {
 			<button class="btn" id="clear">Clear</button>
 			</div>
 
-		<div id="mapDiv"></div>
+			<div id="map3" style="width:100%; height:256px;"></div>
 					
 		</section>
 		
@@ -289,10 +289,33 @@ function initialize() {
 		<section  id="layers"> <div class="page-header">
 						<h2>Map Service Layers</h2>
 					</div>
+					<p>Norwegian Polar Institute provides various thematic map services which can easily be overlayed on the top basemaps with the Javascript API.
+						Those maps are dynamic map services that are drawn by the server each time the user zooms or pans.
+						Dynamic map services are more flexible than cached services by providing the user options such as turn on and off layers in the service, change layer transparency, freely adjust the scale,
+						retrieve layer info and legend, etc.
+					</p>
+					<p>
+						To create dynamic layer, you only need to call the <code>esri.layers.ArcGISDynamicMapServiceLayer()</code> constructor pointing to the URL of service's REST endpoint 
+						(e.g. <a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire3/SjøfuglKolonier/MapServer">http://geodata.npolar.no/ArcGIS/rest/services/inspire3/SjøfuglKolonier/MapServer</a>).
+						Then calling the maps <code>addLayer()</code> method to add the layer to the map.
+					</p>
+					<pre><code>//Use the ImageParameters to set the visible layers in the map service during ArcGISDynamicMapServiceLayer construction.
+    var imageParameters = new esri.layers.ImageParameters();
+    imageParameters.format = "png";  //set the image type to PNG24, note default is PNG8.
+    //Takes a URL to a dynamic map service.
+    serviceURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire3/SjøfuglKolonier/MapServer";
+    var layer = new esri.layers.ArcGISDynamicMapServiceLayer(serviceURL, {
+          "opacity":0.5, 
+          "imageParameters":imageParameters
+        });
+        
+    map.addLayer(layer);</code></pre>
+					
+					<div id="map4" style="width:100%; height:256px;"></div>
 <ol>
   <li>In the "initialize" function, add the following line immediately before the end of the function: 
   	<pre><code>
-var dynamicMap = new esri.arcgis.gmaps.DynamicMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Sj%C3%B8fuglKolonier/MapServer", null, 0.75, dynmapcallback); </code> </pre>
+var dynamicMap = new esri.arcgis.gmaps.DynamicMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire3/SjøfuglKolonier/MapServer", null, 0.75, dynmapcallback); </code> </pre>
   	 
   	 This code creates a layer from a dynamic ArcGIS Server map service. To create the layer, you passed four arguments to the DynamicMapServiceLayer constructor:
     <ul>
@@ -385,11 +408,25 @@ function dynmapcallback(mapservicelayer) {
         	map2.graphics.add(graphic);
         	});
        
-       map3 = new esri.Map("mapDiv", {extent : initialExtent,logo : false});
-       var basemap = new esri.layers.ArcGISTiledMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer");
-       map3.addLayer(basemap);
-                
+       map3 = new esri.Map("map3", {extent : initialExtent,logo : false});
+       map3.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));                
        dojo.connect(map, "onLoad", initToolbar);
+       
+       map4 = new esri.Map("map4", {extent : initialExtent,logo : false});
+       map4.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));
+       
+        var imageParameters = new esri.layers.ImageParameters();
+        imageParameters.format = "png"; 
+        //set the image type to PNG24, note default is PNG8.
+    //Takes a URL to a dynamic map service.
+    serviceURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire3/SjøfuglKolonier/MapServer";
+    var layer = new esri.layers.ArcGISDynamicMapServiceLayer(serviceURL, {
+          "opacity":0.8, 
+          "imageParameters":imageParameters
+        });
+        
+    map4.addLayer(layer);
+       
 
     }
     
