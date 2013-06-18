@@ -2,105 +2,139 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<title>Norwegian Polar Institute Maps API</title>
+		<title>Norwegian Polar Institute Maps and Services</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="css/jquery-ui-custom.min.css" media="screen" rel="stylesheet" type="text/css"/>
-		<link href="css/sunburst.css" media="screen" rel="stylesheet" type="text/css"/>
-		<link href="css/bootstrap.css" media="screen" rel="stylesheet" type="text/css"/>
-		<link href="css/bootstrap-responsive.min.css" rel="stylesheet"/>      
-		<link href="css/app.css" media="screen" rel="stylesheet" type="text/css"/>	
-		<link href="css/esri.css" rel="stylesheet" type="text/css" >
+
+		<!-- Styles -->
+		<link href="/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+		<link href="/css/app.css" rel="stylesheet">
+		<link href="/css/prettify.css" rel="stylesheet">
 	</head>
-	<body data-spy="scroll" onload="prettyPrint();">
+	<body data-spy="scroll" data-target=".bs-docs-sidebar">
+
+		<!-- Load fallback css when there is no javascript -->
+		<noscript>
+			<link href="/css/fallback.css" media="screen" rel="stylesheet" type="text/css"/>
+		</noscript>
+
+		<!-- Subhead
+		================================================== -->
 		<header class="jumbotron subhead">
 			<div class="container">
-				<h2>
-				 <a href="index.html"><img src="images/np-logo-no-text.png" alt="Norwegian Polar Maps and Services">  Norwegian Polar Maps and Services</a>  
-				    <p style="float:right;"><a href="mailto:data@npolar.no">Feedback</a></p>
-			</h2> 			                    
-            </div>
+				<img src="/img/np-logo.png" style="float:left">
+				<h1>Norwegian Polar Institute Maps and Services</h1>
+
+				<p style="float:right;">
+					<a href="mailto:data@npolar.no">Feedback</a>
+				</p>
+			</div>
 		</header>
 		
-		<!-- Menu -->
-		<div class="tabbable tabs-left">
-			<ul id="myTab" class="nav nav-tabs">
-				<li class="active"><a href="#tab1" data-toggle="tab">Map Viewers</a></li>
-				<li><a href="#tab2" data-toggle="tab">Map Services</a></li>
+		<div class="container">
+		<!-- Docs nav
+		================================================== -->
+		<div class="row">
+			<div class="span9">
+
+			<!-- Menu -->
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a href="#tab1" data-toggle="tab">Map Viewers<i class="icon-chevron-down"></i></a>
+				</li>
+				<li>
+					<a href="#tab2" data-toggle="tab">Map Services<i class="icon-chevron-down"></i></a>
+				</li>
 			</ul>
-			<div class="tab-content">
-				<div id="tab1" class"tab-pane fade active">
+			<div class="tab-content" >
+				<div class="tab-pane active" id="tab1">
+					<a href="http://svalbardkartet.npolar.no" target="_blank"><img src="images/svalbardkartet_thumbnail.png" alt="svalbardkartet_thumbnail.png" width="260" height="180"></a>
+
+					<p>
+						The Geospatial data and services portal facilitates the coordinated development, maintenance, and sharing of geospatial data and web map services by Norwegian Polar Instiute.
+					</p>
+					<p>
+						To meet the ever increasing number of tile-based queries against forum Administration WMS services, we now offer a selection of our basic mapping services that cache services. The services can be used in clients with support for WMS-C as OpenLayers, Google Maps or Microsoft Virtual Earth
+						The purpose of the cache is to achieve fast response times of map requests. A cache service is not as flexible as for example, a WMS service. For example, when a WMS service could select one or more layers while in a cache must select all or nothing.
+						Authority uses free software component GeoWebCache to caching services.
+					</p>
+
+					2.1. SERVICES IN MAP CACHE
+					<p>
+						WMS services; included WMS layers; Layer name in cache;
+						Kartdata2 WMS; Alle; kartdata2
+						Sjo hovedkart2 WMS; Alle; sjo_hovedkart2;
+						Toporaster2 WMS; Alle; toporaster2;
+						Topografisk Svalbar WMS; Alle; topo2;
+						Topografisk Jan Mayen gråtone WMS; Alle; topo2graatone;
+					</p>
+					<p>
+						URL of the service will vary according to whether the WMS-C, Google Maps or Microsoft VE protocol used. For handling of security mechanisms see Chapter 3
+					</p>
+
+					2.3. Image formats and coordinate systems.
+					<p>
+						Services are available in two image formats:
+					</p>
 					<ul>
-					<li class="span3">
-						<div class="thumbnail">
-							<a href="http://svalbardkartet.npolar.no" target="_blank"><img src="images/svalbardkartet_thumbnail.png" alt="svalbardkartet_thumbnail.png" width="260" height="180"></a>
-						</div>
-					</li>
-					<li class="span3">
-						<div class="thumbnail">
-							<a href="http://toposvalbard.npolar.no" target="_blank"><img src="images/toposvalbard_thumbnail.png" alt="svalbardkartet_thumbnail.png" width="260" height="180"></a>
-						</div>
-					</li>
+						<li>
+							Image / jpeg (does not support transparency)
+						</li>
+						<li>
+							Image / png (supports transparency)
+						</li>
+					</ul>
+					<p>
+						Tilstørrelsen for jpeg is about 1/3 of the png so it must be considered what is important, speed or support for transparency.
+						Services are provided in the following coordinate systems:
+					</p>
+
+				</div>
+
+				<div class="tab-pane" id="tab2">
+					<a href="http://toposvalbard.npolar.no" target="_blank"><img src="images/toposvalbard_thumbnail.png" alt="svalbardkartet_thumbnail.png" width="260" height="180"></a>
+
+						WMS is a service where a server request to send map section in the form of raster files back to the user, either directly in the browser, a web application or a desktop application.
+						<br />
+						<br />
+						This type of service requires some expertise to take in use, and it's the software that makes calls to map server.
+		
+
+						<h4> Flexible Web Services </h4>
+
+					services based on WMS specification is flexible and provides the user with many options, such as:
+
+					<ul>
+						<li>
+							Choosing which coordinate chart will be produced in
+						</li>
+						<li>
+							turn on or off layers in the service, for example, you can select only the roads and water to be drawn and everything else omitted
+						</li>
+						<li>
+							Freely choose scale
+						</li>
+						<li>
+							Select the background color, or whether this should be transparent
+						</li>
+						<li>
+							Which format to be produced
+						</li>
+						<li>
+							Retrieving Legend of the various map layers
+						</li>
+						<li>
+							Obtaining basic information about objects on the chart, such as buildings, roads and properties
+						</li>
 					</ul>
 				</div>
-				<div id="tab2" class"tab-pane fade">
-					<ul>
-						<li class="span3">
-						<div class="thumbnail">
-							<a href="http://svalbardkartet.npolar.no" target="_blank"><img src="images/svalbardkartet_thumbnail.png" alt="svalbardkartet_thumbnail.png" width="260" height="180"></a>
-						</div>
-					</li>
-					<li class="span3">
-						<div class="thumbnail">
-							<a href="http://toposvalbard.npolar.no" target="_blank"><img src="images/toposvalbard_thumbnail.png" alt="svalbardkartet_thumbnail.png" width="260" height="180"></a>
-						</div>
-					</li>
-					</ul>
-				</div>
+				
 			</div>
 		</div>
-		<div class="span9">
-			
-			<section id= "overview">
-			<p>The Geospatial data and services portal facilitates the coordinated development, maintenance, and sharing of geospatial data and web map services by Norwegian Polar Instiute.</p>
-		<p>
-			To meet the ever increasing number of tile-based queries against forum Administration WMS services, we now offer a selection of our basic mapping services that cache services. The services can be used in clients with support for WMS-C as OpenLayers, Google Maps or Microsoft Virtual Earth
-The purpose of the cache is to achieve fast response times of map requests. A cache service is not as flexible as for example, a WMS service. For example, when a WMS service could select one or more layers while in a cache must select all or nothing.
-Authority uses free software component GeoWebCache to caching services.</p>
-
-
-2.1. SERVICES IN MAP CACHE
-<p>
-WMS services; included WMS layers; Layer name in cache;
-Kartdata2 WMS; Alle; kartdata2
-Sjo hovedkart2 WMS; Alle; sjo_hovedkart2;
-Toporaster2 WMS; Alle; toporaster2;
-Topografisk Svalbar WMS; Alle; topo2;
-Topografisk Jan Mayen gråtone WMS; Alle; topo2graatone;
-</p>
-<p>
-URL of the service will vary according to whether the WMS-C, Google Maps or Microsoft VE protocol used. For handling of security mechanisms see Chapter 3
-</p>
-
-
-2.3. Image formats and coordinate systems.
-<p>Services are available in two image formats:</p>
-<ul>
-	<li>Image / jpeg (does not support transparency)
-	</li>
-	<li>Image / png (supports transparency)
-	</li>
-</ul>
-<p>
-Tilstørrelsen for jpeg is about 1/3 of the png so it must be considered what is important, speed or support for transparency.
-Services are provided in the following coordinate systems:
-		</p>
-		
-		
 		</div>
-		</section>
-
+</div>
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script src="/js/prettify.js" type="text/javascript"></script>
+		<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	</body>
 </html>
-<script type="text/javascript" src="js/prettify.js"></script>
-<!--<script type="text/javascript" src="js/bootstrap.min.js"></script>-->
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
