@@ -52,9 +52,14 @@
 					<li>
 						<a href="#layers"><i class="icon-chevron-right"></i>Layers</a>
 					</li>
+					<!--
+					<li>
+						<a href="#ogc"><i class="icon-chevron-right"></i>OGC Web Services</a>
+					</li>
 					<li>
 						<a href="samples"><i class="icon-chevron-right"></i>Sample Codes</a>
 					</li>
+					-->
 				</ul>
 			</div>
 
@@ -272,14 +277,13 @@ function initialize() {
 					<h4>Drawing on map</h4>
 					<p>If you would like the users to draw a points, lines, or polygons on the screen and capture that geometry, the easiest is to use <a href = "http://developers.arcgis.com/en/javascript/jsapi/draw.html">Draw</a> toolbar of ArCGIS API for Javascript. 
 					</p>
-			<div id="info" style="margin:5px 0 0 25%; position: absolute; width: 50%; z-index: 2;">
+			<div id="info" style="margin:5px 0 0 25%; position: absolute; z-index: 2;">
 			<button class="btn btn-primary" id="drawPoint">Point</button>
 			<button class="btn btn-primary" id="drawPolyline">Polyline</button>
 			<button class="btn btn-primary" id="drawPolygon">Polygon</button>
 			<button class="btn btn-primary" id="drawExtent">Extent</button>
 			<button class="btn" id="clear">Clear</button>
 			</div>
-
 			<div id="map3" style="width:100%; height:256px;"></div>
 					
 		</section>
@@ -289,8 +293,8 @@ function initialize() {
 		<section  id="layers"> <div class="page-header">
 						<h2>Map Service Layers</h2>
 					</div>
-					<p>Norwegian Polar Institute provides various dynamic thematic map services that can easily be overlayed on the top basemaps with the Javascript API.
-						You can use our map <a href="http://geodata.npolar.no/arcgis/rest/services">Services Directory</a> to discover the available map services.  <br />
+					<p>Norwegian Polar Institute provides various dynamic thematic map services that can easily be overlayed on the top basemaps.
+						You can use the map <a href="http://geodata.npolar.no/arcgis/rest/services">Services Directory</a> to discover the available map services.  <br />
 						Dynamic map services are more flexible than cached services by providing the user options such as turn on and off layers in the service, change layer transparency, freely adjust the scale,
 						retrieve layer info and legend, etc.
 					</p>
@@ -309,22 +313,27 @@ function initialize() {
         });              
     map.addLayer(dynamicLayer);</code></pre>
 <p>	 
-  	 The above code creates a layer from a dynamic ArcGIS Server map service. To create the layer, the following arguments were passed to the DynamicMapServiceLayer constructor:
+  	 The above code creates a layer from a dynamic ArcGIS Server map service. To create the layer, the following arguments were passed to the <a href="https://developers.arcgis.com/en/javascript/jsapi/arcgisdynamicmapservicelayer.html">ArcGISDynamicMapServiceLayer</a> constructor:
     <ul>
       <li>The URL of the map service. The URL provided in this sample is the Seabird colonies map of Svalbard. </li>
-      <li>Optional parameters to specify the image format (You left this as null).</li>
-      <li>An opacity setting that determines how much you can see through the map. This is a value between 0 and 1. The closer to 0, the more you can see through the map. You used 0.75.</li>
+      <li>Optional parameters to specify the image format (png, jpg, png32 etc).</li>
+      <li>An opacity setting that determines the transparency of the layer which is between 0 and 1.</li>
     </ul>
-Although you've created the dynamic map service layer, you need to add it on top of the basemap. You do this by calling the map's <code>addLayer()</code> method.
+Finally, you need to add that dynamic layer on top of the basemap by calling the map's <code>addLayer()</code> method.
 
   </p>
-  <div id="map4" style="width:100%; height:256px;"></div>
-<p>
-
-</p>	
+  <div id="map4" style="width:100%; height:256px;"></div>	
 	
 	</section>
-
+	
+	<!-- Map Service Layers
+				================================================== 
+	
+	<section  id="ogc"> <div class="page-header">
+						<h2>OGC Map Services</h2>
+					</div>
+	</section>
+	-->
 			</div>
 		</div>
 	</div>
@@ -369,6 +378,7 @@ Although you've created the dynamic map service layer, you need to add it on top
     	
       	var initialExtent = new esri.geometry.Extent({"xmin": 477423.89,"ymin":8663685.98,"xmax":553624.05,"ymax":8714486.09,"spatialReference":{"wkid":32633}});
       	// create map instance and add a basemap
+      	// Geocoding Service (Search placename map)
         map = new esri.Map("map", {extent: initialExtent, logo : false});
         
         basemapURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer"
@@ -379,9 +389,11 @@ Although you've created the dynamic map service layer, you need to add it on top
         map.addLayer(graphicLayer);       
         graphicLayer.show();
 
+        // Setting the map
         var map1 = new esri.Map("map1", {extent: initialExtent, logo : false});
         map1.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));
         
+        // Adding graphics map
         var map2 = new esri.Map("map2", {extent: initialExtent, logo : false});
         map2.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));
         
@@ -390,11 +402,12 @@ Although you've created the dynamic map service layer, you need to add it on top
         	var graphic = new esri.Graphic(new esri.geometry.Point(514589.2466, 8682916.3628,{"wkid":32633}), symbol);
         	map2.graphics.add(graphic);
         	});
-       
+       //Drawing tool map
        map3 = new esri.Map("map3", {extent : initialExtent,logo : false});
        map3.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));                
        dojo.connect(map, "onLoad", initToolbar);
        
+       //Dynamic Map Service Layers
        map4 = new esri.Map("map4", {extent : initialExtent,logo : false});
        map4.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));
        
