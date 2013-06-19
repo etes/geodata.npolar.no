@@ -3,9 +3,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>JS Extent Helper</title>
-        <link href="/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <title>Bounding Extent</title>
+        <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/public/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/dojo/dojo/resources/dojo.css"/>
         <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/dojo/dijit/themes/claro/claro.css"/>
         <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/esri/css/esri.css"/>
@@ -25,7 +25,7 @@
         <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.5">
         </script>
         
-<script src="/js/proj4js.min.js" type="text/javascript"></script>
+<script src="/public/js/proj4js.min.js" type="text/javascript"></script>
         <script type="text/javascript">
             dojo.require("dijit.layout.BorderContainer");
             dojo.require("dijit.layout.ContentPane");
@@ -46,8 +46,8 @@ var utm33 = new Proj4js.Proj('EPSG:32633');
             function init(){
             	var initialExtent = new esri.geometry.Extent({"xmin": 477423.89,"ymin":8663685.98,"xmax":553624.05,"ymax":8714486.09,"spatialReference":{"wkid":32633}});
                 map = new esri.Map("map", {extent: initialExtent, logo: false});
-                gsvc = new esri.tasks.GeometryService("http://willem3.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer");
-                var basemap = new esri.layers.ArcGISTiledMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer");
+
+                var basemap = new esri.layers.ArcGISTiledMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer");
                 map.addLayer(basemap);
                 
                 drawToolbar = new esri.toolbars.Draw(map);
@@ -66,10 +66,7 @@ var utm33 = new Proj4js.Proj('EPSG:32633');
                 drawToolbar.deactivate();
                 map.setMapCursor("default");
                 
-                var geometries = [geometry.xmin,geometry.ymin,geometry.xmax,geometry.ymax];
-                
-                
-                
+                var geometries = [geometry.xmin,geometry.ymin,geometry.xmax,geometry.ymax];             
                dojo.byId("extentOutput").innerHTML = "Graphic extent json: " + dojo.toJson(geometry.toJson()) + "<br/>Graphic extent compact: " + geometries + "<div id='latlong'></div>";
                //console.log (geometries);
                 projectToLatLon(geometries);
@@ -79,7 +76,7 @@ var utm33 = new Proj4js.Proj('EPSG:32633');
             }
             
             function projectToLatLon(geometriesU33){
-            	//console.log(geometriesU33);
+
             	var minPt = new Proj4js.Point(geometriesU33[0], geometriesU33[1]);
             	var maxPt = new Proj4js.Point(geometriesU33[2], geometriesU33[3]);
             	// transform to wgs84
@@ -98,59 +95,23 @@ var utm33 = new Proj4js.Proj('EPSG:32633');
 				 dojo.byId("eastBound").value = maxPt.x;
 				 dojo.byId("southBound").value = minPt.y;
 				 dojo.byId("northBound").value = maxPt.y;
-/*
-                	esri.request({
-			url:"http://willem3.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer/project?inSR=32633&outSR=4326&geometries=" + geometriesU33 +"",
-			content:{f:"json"},
-			callbackParamName:"callback",
-			load:toWGS84,
-			error:esriConfig.defaults.io.errorHandler
-			});
-			function toWGS84 (response, ioArgs) {
-				var ext = [
-				" West Longitude: " + response.geometries[0].x, 
-				" South Latitude: " + response.geometries[0].y, 
-				" East Longitude: " + response.geometries[1].x, 
-				" North Latitude: " +response.geometries[1].y];
-				//console.log(dojo.toJson(response, true));  
-				 dojo.byId("latlong").innerHTML = "Graphic extent in Lat long: " + ext;
-				 
-				 dojo.byId("westBound").value = response.geometries[0].x;
-				 dojo.byId("eastBound").value = response.geometries[1].x;
-				 dojo.byId("southBound").value = response.geometries[0].y;
-				 dojo.byId("northBound").value = response.geometries[1].y;
-				 //dijit.byId("extentInfo").show();
-				}
-                */
+
                 }
-            
-            function createExtentGraphic(extentString){
-                extentValues = extentString.split(",");
-                if (extentValues.length === 4) {
-                    var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([0, 0, 255]), 2), new dojo.Color([0, 0, 255, 0.25]));
-                    var geometry = new esri.geometry.Extent(parseFloat(extentValues[0]), parseFloat(extentValues[1]), parseFloat(extentValues[2]), parseFloat(extentValues[3]), map.spatialReference);
-                    var graphic = new esri.Graphic(geometry, symbol, {
-                        extentjson: dojo.toJson(geometry.toJson()),
-                        extent: extentValues[0] + "," + extentValues[1] + "," + extentValues[2] + "," + extentValues[3]
-                    }, infoTemplate);
-                    map.graphics.add(graphic);
-                    map.setExtent(geometry, true);
-                }
-               //dijit.byId('createExtent').hide();
-                dojo.byId('extentCoords').value = "";
-            }
             function updateExtentGraphic(west,east,south,north){
-                //extentValues = extentString.split(",");
-                
-                extentValues = [west,south,east,north];
-                var geomW84 = [parseFloat(west), parseFloat(south), parseFloat(east), parseFloat(north)];
+            	
+            	//check if input coordinates are valid
+                if (west >= -180 && west <= 180){var w = west};
+                if (east >= -180 && east <= 180){var e = east};
+                if (north >= -90 && north <= 90){var n = north};
+                if (south >= -90 && south <= 90){var s = south};
+
+                var geomW84 = [parseFloat(w), parseFloat(s), parseFloat(e), parseFloat(n)];
                 geomW84 = geomW84.filter(function(n){return n});
-                //console.log(geomW84);
             
-                if (geomW84.length == 4) {
+                if (geomW84.length == 4 && [west <=180]) {
                 	
-                var minPt = new Proj4js.Point(west, south);
-            	var maxPt = new Proj4js.Point(east, north);
+                var minPt = new Proj4js.Point(geomW84[0], geomW84[1]);
+            	var maxPt = new Proj4js.Point(geomW84[2], geomW84[3]);
             	// transform to utm33
             	Proj4js.transform(wgs84, utm33, minPt);
             	Proj4js.transform(wgs84, utm33, maxPt);
@@ -158,36 +119,14 @@ var utm33 = new Proj4js.Proj('EPSG:32633');
                 var geometry = new esri.geometry.Extent(minPt.x, minPt.y, maxPt.x, maxPt.y, map.spatialReference);
                 var graphic = new esri.Graphic(geometry, symbol, {
                         extentjson: dojo.toJson(geometry.toJson()),
-                        extent: extentValues[0] + "," + extentValues[1] + "," + extentValues[2] + "," + extentValues[3]
+                        extent: geometry.xmin + "," + geometry.ymin + "," + geometry.xmax + "," + geometry.ymax
                     }, infoTemplate);
                     map.graphics.add(graphic);
                     map.setExtent(geometry, true);               	
-                	/*
-                	esri.request({
-			url:"http://willem3.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer/project?inSR=4326&outSR=32633&geometries=" + geomW84 +"",
-			content:{f:"json"},
-			callbackParamName:"callback",
-			load:toU33,
-			error:esriConfig.defaults.io.errorHandler
-			});
-			function toU33 (response, ioArgs) {
-				 
-				  var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([0, 0, 255]), 2), new dojo.Color([0, 0, 255, 0.25]));
-                    var geometry = new esri.geometry.Extent(response.geometries[0].x, response.geometries[0].y, response.geometries[1].x, response.geometries[1].y, map.spatialReference);
-                    //console.log(response);
-                    //response.geometries[0].x, response.geometries[0].y, response.geometries[1].x, response.geometries[1].y
-                    var graphic = new esri.Graphic(geometry, symbol, {
-                        extentjson: dojo.toJson(geometry.toJson()),
-                        extent: extentValues[0] + "," + extentValues[1] + "," + extentValues[2] + "," + extentValues[3]
-                    }, infoTemplate);
-                    map.graphics.add(graphic);
-                    map.setExtent(geometry, true);
-				}
-                  */ 
                 }
                 
                 else{
-                	alert("Please add coordinates correctly");
+                	alert("Please add valid coordinates");
                 }
                 
             }
@@ -206,18 +145,9 @@ var utm33 = new Proj4js.Proj('EPSG:32633');
     <body class="claro">
         <div dojotype="dijit.layout.BorderContainer" design="headline" gutters="false" style="width: 50%; height: 50%; margin: 0; padding: 0;">
             <div id="map" dojotype="dijit.layout.ContentPane" region="center" style="overflow:hidden;margin: 0; padding: 0;">
-                <div style="position:absolute; right:10px; top:10px; z-Index:999;">
-                    
-                    <button class="btn btn-primary" onClick="map.graphics.clear();drawToolbar.activate(esri.toolbars.Draw.EXTENT);map.setMapCursor('crosshair');">Draw Extent</button>
-                    <button class="btn btn-primary" onClick="mapExtent();">Get Current Extent</button>
-
-                    <!--<button class="btn btn-primary" onClick="dijit.byId('createExtent').show();">
-                        Create Extent
-                    </button>
-                    -->
-                   
-                    <button class="btn btn-primary" onClick="map.graphics.clear();map.infoWindow.hide();">Clear
-                    </button>
+                <div style="position:absolute; right:10px; top:10px; z-Index:999;">                   
+                    <button class="btn btn-primary" onClick="map.graphics.clear();drawToolbar.activate(esri.toolbars.Draw.EXTENT);map.setMapCursor('crosshair');">Draw Extent</button>               
+                    <button class="btn btn-primary" onClick="map.graphics.clear();map.infoWindow.hide();">Clear</button>
                 </div>
             </div>
         </div>
@@ -231,18 +161,8 @@ var utm33 = new Proj4js.Proj('EPSG:32633');
                     </div>
                 </button>
             </center>
-        </div>    <!--    
-        <div title="Create Extent" id="createExtent" style="margin:10px 10px 0 10px; position: absolute; width: 50%; z-index: 2;">
-						<form action="" method="get">
-							<input type="search" id="extentCoords" value="" style="width:50%;" placeholder="Xmin, Ymin, Xmax, Ymax"/><br />
-							Example: xmin,ymin,xmax,ymax (note: coordinates must be in current projection)
-			
-						</form>
-                <button onClick="map.graphics.clear();createExtentGraphic(dojo.byId('extentCoords').value);">
-                    Create
-                </button>
-               </div>
-               -->
+        </div>      
+
                <div title="Create Extent" id="createExtent" style="margin:10px 10px 0 10px; position: absolute; width: 50%; z-index: 2;">
                 <form class="form-inline" accept-charset="UTF-8" action="create" method="get">
 							West Bounding Longitude <input class="input-xlarge" type="search" id="westBound" value="" placeholder="Longitude"/><br />
