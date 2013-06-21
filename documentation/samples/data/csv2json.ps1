@@ -1,0 +1,1 @@
+﻿Import-Csv .\JSON2.csv -Delimiter ";" | ConvertTo-Json > JSON2.json
