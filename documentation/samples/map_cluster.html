@@ -24,6 +24,8 @@
       };
     </script>
     <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/"></script>
+    
+<script src="/public/js/proj4js.min.js" type="text/javascript"></script>
     <script>
       var map;
       require([
@@ -63,6 +65,10 @@
       ) {
         ready(function() {
           parser.parse();
+          Proj4js.defs["EPSG:32633"] = "+proj=utm +zone=33 +ellps=WGS84 +datum=WGS84 +units=m +no_defs";
+
+var wgs84 = new Proj4js.Proj('EPSG:4326');
+var utm33 = new Proj4js.Proj('EPSG:32633');
 
           var clusterLayer;
           var popupOptions = {
@@ -70,11 +76,18 @@
             "marginLeft": "20",
             "marginTop": "20"
           };
+          var initialExtent = new esri.geometry.Extent({"xmin":399754.4661755939,"ymin":8450127.836795567,"xmax":798027.2627211874,"ymax":8932390.134653497,"spatialReference":{"wkid":32633}});
+          /*
           map = new Map("map", {
             basemap: "oceans",
-            center: [-117.789, 33.543],
+            center: [15.629, 78.183],
             zoom: 13
           });
+          */
+          map = new esri.Map("map", {extent: initialExtent, logo: false});
+
+                var basemap = new esri.layers.ArcGISTiledMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer");
+                map.addLayer(basemap);
 
           map.on("load", function() {
             // hide the popup's ZoomTo link as it doesn't make sense for cluster features
@@ -82,10 +95,11 @@
 
             // get the latest 1000 photos from instagram/laguna beach
             var photos = esriRequest({
-              "url": "data/1000-photos.json",
+              "url": "data/JSON2.json",
               "handleAs": "json"
             });
-            photos.then(addClusters, error);
+            console.log(photos);
+            photos.then(addClusters);
           });
 
           function addClusters(resp) {
@@ -94,34 +108,41 @@
               "wkid": 4326
             });
             photoInfo.data = array.map(resp, function(p) {
-              var latlng = new  Point(parseFloat(p.lng), parseFloat(p.lat), wgs);
-              var webMercator = webMercatorUtils.geographicToWebMercator(latlng);
+            	
+             // var latlng = new  Point(parseFloat(p.longitude), parseFloat(p.latitude), wgs);
+              var latlng = new Proj4js.Point(parseFloat(p.longitude), parseFloat(p.latitude));
+              
+              Proj4js.transform(wgs84, utm33, latlng);
+             //console.log(latlng);
               var attributes = {
                 "Caption": p.caption,
-                "Name": p.full_name,
+                "Name": p.Place,
                 "Image": p.image,
-                "Link": p.link
+                "Link": p.link,
+                "Copyright": p.Copyright,
+                "Place": p.Place
               };
               return {
-                "x": webMercator.x,
-                "y": webMercator.y,
+                "x": latlng.x,
+                "y": latlng.y,
                 "attributes": attributes
               };
             });
-
+            
             // popupTemplate to work with attributes specific to this dataset
             var popupTemplate = PopupTemplate({
               "title": "",
               "fieldInfos": [{
-                "fieldName": "Caption",
+                "fieldName": "Place",
+                "label": "Place",
                 visible: true
               }, {
-                "fieldName": "Name",
+                "fieldName": "Copyright",
                 "label": "By",
                 visible: true
               }, {
-                "fieldName": "Link",
-                "label": "On Instagram",
+                "fieldName": "Caption",
+                "label": "Tags",
                 visible: true
               }],
               "mediaInfos": [{
@@ -130,15 +151,16 @@
                 "type": "image",
                 "value": {
                   "sourceURL": "{Image}",
-                  "linkURL": "{Link}"
+                  "linkURL": "{Iink}"
                 }
               }]
             });
 
             // cluster layer that uses OpenLayers style clustering
+             // distance of cluster algorithm
             clusterLayer = new ClusterLayer({
               "data": photoInfo.data,
-              "distance": 100,
+              "distance": 50,
               "id": "clusters",
               "labelColor": "#fff",
               "labelOffset": 10,
