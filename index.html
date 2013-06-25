@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<title>Norwegian Polar Institute Maps and Services</title>
+		<title>Geospatial Data and Services</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<!-- Styles -->
@@ -12,22 +12,66 @@
 		<link href="/public/css/prettify.css" rel="stylesheet">
 	</head>
 	<body data-spy="scroll" data-target=".bs-docs-sidebar">
+		
+		
+          <!-- Render login partial -->
+          <!-- Display the user when logged in -->
 
 		<!-- Load fallback css when there is no javascript -->
 		<noscript>
 			<link href="/public/css/fallback.css" media="screen" rel="stylesheet" type="text/css"/>
 		</noscript>
+		
+		<!-- Menu -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span2"></div>
+        <div class="span8"> 
+        	
+          <!-- Brand Title -->
+          
+          <a class="brand" href="">Geospatial Data and Services</a>
+                
+          <!-- Menu Colapse button -->
+          
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+         
+          <!-- Menu Items -->
+          
+          <ul class="nav nav-collapse collapse">
+            <li><a href="#tab2">Map Services</a></li>
+          </ul>
+            
+          <!-- Render feedback partial -->
+
+
+<ul class="nav nav-collapse collapse pull-right">
+  
+    <li class="pull-right">
+    	<a href="mailto:data@npolar.no">
+    		<i class="icon-envelope icon-white"></i> Feedback</a>     
+    </li>
+  
+</ul>
+        </div>
+        <div class="span2"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 		<!-- Subhead
 		================================================== -->
 		<header class="jumbotron subhead">
 			<div class="container">
 				<img src="/public/img/np-logo.png" style="float:left">
-				<h1>Norwegian Polar Institute Maps and Services</h1>
-
-				<p style="float:right;">
-					<a href="mailto:data@npolar.no">Feedback</a>
-				</p>
+				<h2>Map Viewers</h2>
 			</div>
 		</header>
 		
@@ -93,12 +137,12 @@
 
 				<div class="tab-pane" id="tab2">
 					<a href="http://toposvalbard.npolar.no" target="_blank"><img src="/public/img/toposvalbard_thumbnail.png" alt="svalbardkartet_thumbnail.png" width="260" height="180"></a>
-
+					<p>
 						WMS is a service where a server request to send map section in the form of raster files back to the user, either directly in the browser, a web application or a desktop application.
-						<br />
-						<br />
+
 						This type of service requires some expertise to take in use, and it's the software that makes calls to map server.
 		
+					</p>
 
 						<h4> Flexible Web Services </h4>
 
