@@ -1,0 +1,111 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.6/js/dojo/dijit/themes/tundra/tundra.css">
+    
+	<link href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/esri/css/esri.css" rel="stylesheet" type="text/css" >
+    <style>
+      html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
+    </style>
+    <script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.5"></script>
+    <script type="text/javascript">
+      dojo.require("dijit.layout.BorderContainer");
+      dojo.require("dijit.layout.ContentPane");
+      dojo.require("esri.map");
+      var map, geometryService;
+      var overlayMapService = 'http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Miljo/MapServer';
+      var layers = [{ name: 'HvalrossLiggeplasser', id: 0 }, { name: 'Røye', id: 1 }, { name: 'Alle Sjøfugl kolonier', id: 3 }, { name: 'Alle Sjøpattdyr observasjoner', id: 24 }, { name: 'Strandrydding per år', id: 56 }, { name: 'Scooterbegrensninger tilreisende', id: 5 }, { name: 'Scooterbegrensninger fastboende', id: 6}];
+      var geometryServiceUrl = 'http://geodata.npolar.no/ArcGIS/rest/services/geometry/Geometry/GeometryServer';
+	  var decimalPlacesWGS84 = 6;
+
+      // Read a page's GET URL variables and return them as an associative array.
+      function getUrlVars() {
+          var vars = [], hash;
+          var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+          for (var i = 0; i < hashes.length; i++) {
+              hash = hashes[i].split('=');
+              vars.push(hash[0]);
+              vars[hash[0]] = hash[1];
+          }
+          return vars;
+      }
+
+      function init() {
+          geometryService = new esri.tasks.GeometryService(geometryServiceUrl);
+          dojo.connect(geometryService, "onProjectComplete", onProjectComplete);
+          var urlParams = getUrlVars();
+          var width = urlParams["width"];
+          var height = urlParams["height"];
+          dojo.style("map", "width", width + "px");
+          dojo.style("map", "height", height + "px");
+          var slider = true;
+          if (urlParams["n"])
+              slider = !(urlParams["n"] * 1 == 0);
+          if (urlParams["extent"]) {
+              var extent = urlParams["extent"].split(';');
+              var wkid = "32633";
+              if (urlParams["wkid"]) wkid = urlParams["wkid"];
+              var initExtent = new esri.geometry.Extent({ "xmin": extent[0] * 1, "ymin": extent[1] * 1, "xmax": extent[2] * 1, "ymax": extent[3] * 1, "spatialReference": { "wkid": wkid} });
+              //var initExtent = new esri.geometry.Extent({ "xmin": -13635568, "ymin": 4541606, "xmax": -13625430, "ymax": 4547310, "spatialReference": { "wkid": 102100} });
+              map = new esri.Map("map", { extent: initExtent, logo: false });
+          }
+          else {
+              map = new esri.Map("map", { logo: false });
+          }
+          var basemap = null;
+          var mapUrl = decodeURIComponent(urlParams["mapUrl"]);
+          if (urlParams["t"] && urlParams["t"] == "1")
+              basemap = new esri.layers.ArcGISTiledMapServiceLayer(mapUrl);
+          else
+              basemap = new esri.layers.ArcGISDynamicMapServiceLayer(mapUrl);
+          map.addLayer(basemap);
+          if (urlParams["cl"]) {
+              var overlayMap = new esri.layers.ArcGISDynamicMapServiceLayer(overlayMapService, { opacity: 0.7 });
+              overlayMap.id = 'overlayMap';
+              var visibleLayers = [];
+              dojo.forEach(urlParams["cl"].split(";"), function(item) {
+                  visibleLayers.push(1 * item);
+              });
+              overlayMap.setVisibleLayers(visibleLayers);
+              map.addLayer(overlayMap);
+          }
+          dojo.connect(map, "onLoad", function() {
+              if (!slider) {
+                  map.disableMapNavigation();
+              }
+              if ((urlParams["x"]) && (urlParams["y"])) {
+                  var x = urlParams["x"] * 1;
+                  var y = urlParams["y"] * 1;
+                  var symbol = null;
+                  if(urlParams["sym"] == '0')
+                      symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_X, 15, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0, 0, 0]), 2));
+                  else
+                      symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 0, 0]), 2), new dojo.Color([255, 0, 0]));
+
+                  map.graphics.add(new esri.Graphic(new esri.geometry.Point(x, y, new esri.SpatialReference({"wkid": 32633})), symbol));
+                  if (urlParams["sc"] == '1') {
+                      geometryService.project(map.graphics.graphics, new esri.SpatialReference({ "wkid": 4326 }));
+                  }
+              }
+          });
+      }
+
+      function onProjectComplete(graphics) {
+          if (graphics && graphics.length == 1) {
+              var g = graphics[0];
+              dojo.byId('wgs84coords').innerHTML = dojo.string.substitute("Markert punkt har (Lat, Long): ${1}, ${0}", [dojo.number.format(g.geometry.x, { places: decimalPlacesWGS84 }), dojo.number.format(g.geometry.y, { places: decimalPlacesWGS84 })]);
+              dojo.style('wgs84coords', 'display', 'block');
+          }
+      }
+
+      dojo.addOnLoad(init);
+    </script>
+  </head>
+  
+  <body class="tundra">
+    <div id="map"></div><div style="display: none; position: absolute; left: 20px; bottom: 20px;" id="wgs84coords"></div>
+  </body>
+</html>

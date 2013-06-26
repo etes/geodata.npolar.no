@@ -1,0 +1,248 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Polarinstituttets IFrame Designer</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.6/js/dojo/dijit/themes/tundra/tundra.css">
+    <!--esri.css can be downloaded from http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/esri/css/esri.css-->
+	<link href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/esri/css/esri.css" rel="stylesheet" type="text/css" >
+    <script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
+    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.5"></script>
+    <script type="text/javascript">
+      dojo.require("dijit.layout.BorderContainer");
+      dojo.require("dijit.layout.ContentPane");
+      dojo.require("esri.map");
+      dojo.require("dojox.html.entities");
+      
+      var overlayMapService = 'http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Miljo/MapServer';
+      var layers = [{ name: 'HvalrossLiggeplasser', id: 0 }, { name: 'Røye', id: 1 }, { name: 'Alle Sjøfugl kolonier', id: 3 }, { name: 'Alle Sjøpattdyr observasjoner', id: 24 }, { name: 'Strandrydding per år', id: 56 }, { name: 'Scooterbegrensninger tilreisende', id: 5 }, { name: 'Scooterbegrensninger fastboende', id: 6}];
+      var root = location.protocol + "//" + location.host;
+      var mapletUrl = root + "/iframe/iframe.html"; // Relative path to MapLet page, should be absolute path when deployed, for example http://svalbardkartet.npolar.no/iframe.html
+      var exampleUrl = 'iframesample.html'; // Relative path, should be absolute path when deployed.
+      var mapServiceUrl = 'http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer';
+      var geometryServiceUrl = 'http://geodata.npolar.no/ArcGIS/rest/services/geometry/Geometry/GeometryServer';
+      var isTiledMap = true;
+      //var isTiledMap = false;
+      var decimalPlacesWGS84 = 6;
+      var map, point, mode, symbolCross, symbolDot, geometryService;
+
+      function init() {
+          geometryService = new esri.tasks.GeometryService(geometryServiceUrl);
+          dojo.connect(geometryService, "onProjectComplete", onProjectComplete);
+          var startExtent = new esri.geometry.Extent({ "xmin": 356350.3184, "ymin": 8456631.06, "xmax" : 886026.044, "ymax" : 8989694.055, "spatialReference": { "wkid": 32633} });
+          
+          map = new esri.Map("map", {extent: startExtent, logo: false});
+          //var imageParameters = new esri.layers.ImageParameters();
+          //imageParameters.transparent = true;
+          var overlayMap = new esri.layers.ArcGISDynamicMapServiceLayer(overlayMapService, { opacity: 0.7 });
+          overlayMap.id = 'overlayMap';
+          overlayMap.setVisibleLayers([]);
+          //overlayMap.setImageFormat('gif');
+          //overlayMap.setImageTransparency(true); //.imageParameters = imageParameters;
+          var basemap = null;
+          if (isTiledMap)
+              basemap = new esri.layers.ArcGISTiledMapServiceLayer(mapServiceUrl);
+          else
+              basemap = new esri.layers.ArcGISDynamicMapServiceLayer(mapServiceUrl);
+          map.addLayer(basemap);
+          map.addLayer(overlayMap);
+          symbolCross = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_X, 15, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0, 0, 0]), 2));
+          symbolDot = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 0, 0]), 2), new dojo.Color([255, 0, 0]));
+          dojo.connect(dojo.byId('btnPlaceMarker'), "onclick", btnPlaceMarker_click);
+          dojo.connect(dojo.byId('btnCancelMarker'), "onclick", btnCancelMarker_click);
+          dojo.connect(map, "onClick", map_click);
+          dojo.connect(map, "onExtentChange", map_extentChanged);
+          dojo.connect(dojo.byId('btnRemoveMarker'), "onclick", btnRemoveMarker_click);
+          dojo.connect(dojo.byId('btnExamplePage'), "onclick", btnExamplePage_click);
+          dojo.connect(dojo.byId('txtWidth'), "onchange", generateCode);
+          dojo.connect(dojo.byId('txtHeight'), "onchange", generateCode);
+          dojo.connect(dojo.byId('rbLockedYes'), "onchange", generateCode);
+          dojo.connect(dojo.byId('rbLockedNo'), "onchange", generateCode);
+          dojo.connect(dojo.byId('rbSymbolCross'), "onchange", symbolChanged);
+          dojo.connect(dojo.byId('rbSymbolDot'), "onchange", symbolChanged);
+          dojo.connect(dojo.byId('chkSC'), 'onchange', generateCode);
+          var layersDiv = dojo.byId('layersDiv');
+          dojo.forEach(layers, function(item) {
+              var checkBox = document.createElement('input');
+              checkBox.type = 'checkbox';
+              checkBox.id = 'layerCheckbox' + item.id;
+              layersDiv.appendChild(checkBox);
+              var label = document.createElement('span');
+              label.innerHTML = item.name;
+              layersDiv.appendChild(label);
+              var br = document.createElement('br');
+              layersDiv.appendChild(br);
+              dojo.connect(checkBox, 'onchange', layerCheckBox_click);
+          });
+      }
+
+      function getCheckedLayers() {
+          var result = [];
+          dojo.forEach(layers, function(item) {
+              var checkBox = dojo.byId('layerCheckbox' + item.id);
+              if (checkBox && checkBox.checked)
+                  result.push(item.id);
+          });
+          return result;
+      }
+      
+      function layerCheckBox_click(e) {
+          var checkBox = e.target;
+          var layer = map.getLayer('overlayMap');
+          if (layer) {
+              layer.setVisibleLayers(getCheckedLayers());
+              layer.visible = true;
+          }
+          generateCode();
+      }
+
+      function btnPlaceMarker_click() {
+          mode = "marker";
+          dojo.attr('btnPlaceMarker', 'disabled', 'disabled');
+          dojo.removeAttr('btnCancelMarker', 'disabled');
+      }
+
+      function btnCancelMarker_click() {
+          mode = "default";
+          dojo.attr('btnCancelMarker', 'disabled', 'disabled');
+          dojo.removeAttr('btnPlaceMarker', 'disabled');
+      }
+
+      function btnRemoveMarker_click() {
+          mode = "default";
+          map.graphics.clear();
+          point = null;
+          dojo.attr('btnRemoveMarker', 'disabled', 'disabled');
+          dojo.attr('btnCancelMarker', 'disabled', 'disabled');
+          dojo.removeAttr('btnPlaceMarker', 'disabled');
+          generateCode();
+          dojo.byId('utm33Ncoords').innerHTML = "";
+          dojo.byId('wgs84coords').innerHTML = ""; 
+      }
+
+      function btnExamplePage_click() {
+          var w = window.open(exampleUrl, '_blank', null, false);
+          if (!(w))
+            alert('Du må skru av popup blockers for å kunne åpne en eksempelside.');
+      }
+      
+      function generateCode() {
+          var checkedLayers = getCheckedLayers();
+          var code = dojo.string.substitute(
+            '<iframe scrolling="no" src="${url}?${sc}width=${width}&height=${height}&sym=${symbol}&extent=${extent}&wkid=32633${point}&mapUrl=${mapUrl}${overlay}&t=${tiled}&n=${nav}" width="${width}" height="${height}"></iframe>', {
+            url: mapletUrl,
+            sc: dojo.byId('chkSC').checked ? "sc=1&" : "",
+            extent: Math.round(map.extent.xmin) + ";" + Math.round(map.extent.ymin) + ";" + Math.round(map.extent.xmax) + ";" + Math.round(map.extent.ymax),
+            width: dojo.byId('txtWidth').value,
+            height: dojo.byId('txtHeight').value,
+            point: (point ? "&x=" + Math.round(point.x) + "&y=" + Math.round(point.y) : ""),
+            nav: dojo.byId('rbLockedYes').checked ? "0" : "1",
+            symbol: dojo.byId('rbSymbolCross').checked ? "0" : "1",
+            tiled: isTiledMap ? "1" : "0",
+            mapUrl: encodeURIComponent(mapServiceUrl),
+            overlay: checkedLayers.length == 0 ? "" : "&cl=" + checkedLayers.join(";")
+        });
+        dojo.byId('divCode').innerHTML = dojox.html.entities.encode(code);
+        return code;
+      }
+
+      function map_click(e) {
+          if (mode == "marker") {
+              point = e.mapPoint;
+              map.graphics.clear();
+              var sym = symbolDot;
+              if (dojo.byId('rbSymbolCross').checked)
+                  sym = symbolCross;
+              map.graphics.add(new esri.Graphic(point, sym));
+              dojo.removeAttr('btnRemoveMarker', 'disabled');
+              generateCode();
+              dojo.byId('utm33Ncoords').innerHTML = dojo.string.substitute("UTM-koordinater (sone 33N): ${0}, ${1}", [Math.round(point.x), Math.round(point.y)]);
+              geometryService.project(map.graphics.graphics, new esri.SpatialReference({ "wkid": 4326 }));
+          }
+      }
+
+      function symbolChanged() {
+          var sym = symbolDot;
+          if (dojo.byId('rbSymbolCross').checked)
+              sym = symbolCross;
+          if (map.graphics.graphics[0])
+              map.graphics.graphics[0].setSymbol(sym);
+          generateCode();     
+      }
+      
+      function onProjectComplete(graphics) {
+          if (graphics && graphics.length == 1) {
+              var g = graphics[0];
+              dojo.byId('wgs84coords').innerHTML = dojo.string.substitute("Geografiske koordinater (Lat, Long): ${1}, ${0}", [dojo.number.format(g.geometry.x, { places: decimalPlacesWGS84 }), dojo.number.format(g.geometry.y, { places: decimalPlacesWGS84 })]);
+          }
+      }
+      
+      function map_extentChanged() {
+        generateCode();
+      }
+      
+      dojo.addOnLoad(init);
+    </script>
+    <style>
+      html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
+      body { font-family: Arial; font-size: 12px; padding-left: 20px; padding-top: 20px; }
+      .heading { font-size: 16px; }
+      .subheading { font-size: 14px; padding-bottom: 10px; }
+      .mapdiv { float: left; }
+      .paramdiv { float: left; padding-left: 10px; }
+      .widthdiv, .heightdiv, .navigationdiv, .pointdiv { margin-bottom: 10px; }
+      .examplediv { margin-top: 10px; }
+      .pointdivbuttons, .symboldiv, .showcoordinatediv, .pointcoordinates { margin-top: 5px; }
+      .paramdiv input { height: 20px; width: 100px; font-size: 10px; vertical-align: middle; margin-top: 0px; padding-top: 0px;}
+      .widthdiv input, .heightdiv input { height: 16px; width: 60px; font-size: 10px; }
+      .navigationdiv input, .symboldiv input { height: 12px; width: 12px; vertical-align: inherit; }
+      .code { width: 600px; padding: 15px; font-size: 12px; border: solid 1px black; background-color: #DDDDDD; color: #222222; word-wrap: break-word; white-space:pre-wrap;}
+      .layersDiv input, .showcoordinatediv input { width: 25px; }
+      .layersDiv { margin-bottom: 10px; }
+    </style>
+  </head>
+  
+  <body class="tundra">
+    <div class="heading">Iframe Designer</div>
+    <div class="subheading">Her kan du designe et interaktivt kart som du kan legge inn i dine egne nettsider. Velg et kartutsnitt du vil vise, ved å navigere til ønsket kartutsnitt.</div>
+    <div class="mapdiv" id="map" style="border: 1px solid black; width: 400px; height: 400px;"></div>
+    <div class="paramdiv">
+        <div class="widthdiv">
+        Velg ønsket bredde på kartet: <input id="txtWidth" type="text" value="400" /> pixler.
+        </div>
+        <div class="heightdiv">
+        Velg ønsket høyde på kartet: <input id="txtHeight" type="text" value="400" /> pixler.
+        </div>
+        <div class="navigationdiv">
+        Skal kartet være fastlåst til dette kartutsnittet? <input id="rbLockedYes" name="rbLocked" type="radio" value="0"/>Ja   <input id="rbLockedNo" name="rbLocked" type="radio" value="1" checked/> Nei.
+        </div>
+        <div class="pointdiv">Trykk på denne knappen, og deretter på et punkt i kartet, for å plassere en markør i kartet.
+            <div class="pointdivbuttons">
+            <input id="btnPlaceMarker" value="Plasser punkt" type="button" />
+            <input id="btnCancelMarker" value="Avbryt" type="button" disabled="disabled" />
+            <input id="btnRemoveMarker" value="Fjern markør" type="button" disabled="disabled" />
+            </div>
+        <div class="symboldiv">
+        Symbol for markøren <input id="rbSymbolCross" name="rbSymbol" type="radio" value="0"/>Sort kryss<input id="rbSymbolDot" name="rbSymbol" type="radio" value="1" checked/>Rød prikk
+        </div>
+            <div class="pointcoordinates">
+                <div id="utm33Ncoords"></div>
+                <div id="wgs84coords"></div>
+                <div class="showcoordinatediv">
+                <input id="chkSC" name="chkSC" type="checkbox" checked="checked" />Vis valgt geografisk koordinat i kartet
+                </div>
+            </div>
+        </div>
+        <div id="layersDiv" class="layersDiv">Karttema som skal vises oppå bakgrunnskartet:<br /><br />
+        </div>
+        <div class="codeDiv">
+            <div class="codeheader">Din Maplet-kode:</div>
+            <div class="code" id="divCode"></div>
+            <div class="codefooter">Lim den genererte koden inn i html-siden din for å legge inn kartet du har designet.</div>
+            <div class="examplediv">
+                <input id="btnExamplePage" value="Vis eksempelside" type="button" />
+            </div>
+        </div>
+        </div>
+  </body>
+</html>
