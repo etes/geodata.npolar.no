@@ -2,9 +2,8 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title></title>
-    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/1.6/js/dojo/dijit/themes/tundra/tundra.css">
-    
+    <title>Svalbardkartet IFrame</title>
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/dojo/dijit/themes/tundra/tundra.css">    
 	<link href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/esri/css/esri.css" rel="stylesheet" type="text/css" >
     <style>
       html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
@@ -17,7 +16,7 @@
       dojo.require("esri.map");
       var map, geometryService;
       var overlayMapService = 'http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Miljo/MapServer';
-      var layers = [{ name: 'HvalrossLiggeplasser', id: 0 }, { name: 'Røye', id: 1 }, { name: 'Alle Sjøfugl kolonier', id: 3 }, { name: 'Alle Sjøpattdyr observasjoner', id: 24 }, { name: 'Strandrydding per år', id: 56 }, { name: 'Scooterbegrensninger tilreisende', id: 5 }, { name: 'Scooterbegrensninger fastboende', id: 6}];
+      var layers = [{ name: 'HvalrossLiggeplasser', id: 0 }, { name: 'Røye', id: 1 }, { name: 'Sjøfugl kolonier', id: 3 }, { name: 'Alle Sjøpattdyr observasjoner', id: 25 }, { name: 'Isbjørn observasjoner', id: 35 }, { name: 'Strandrydding per år', id: 56 }, { name: 'Reinbestandområder', id: 57 }, { name: 'Biogeografiske soner', id: 58 }, { name: 'Vegetasjon (10 kasser)', id: 60}];
       var geometryServiceUrl = 'http://geodata.npolar.no/ArcGIS/rest/services/geometry/Geometry/GeometryServer';
 	  var decimalPlacesWGS84 = 6;
 
@@ -48,7 +47,7 @@
               var extent = urlParams["extent"].split(';');
               var wkid = "32633";
               if (urlParams["wkid"]) wkid = urlParams["wkid"];
-              var initExtent = new esri.geometry.Extent({ "xmin": extent[0] * 1, "ymin": extent[1] * 1, "xmax": extent[2] * 1, "ymax": extent[3] * 1, "spatialReference": { "wkid": wkid} });
+              var initExtent = new esri.geometry.Extent({ "xmin": extent[0] * 1, "ymin": extent[1] * 1, "xmax": extent[2] * 1, "ymax": extent[3] * 1, "spatialReference": { "wkid": 32633} });
               //var initExtent = new esri.geometry.Extent({ "xmin": -13635568, "ymin": 4541606, "xmax": -13625430, "ymax": 4547310, "spatialReference": { "wkid": 102100} });
               map = new esri.Map("map", { extent: initExtent, logo: false });
           }
@@ -75,6 +74,7 @@
           dojo.connect(map, "onLoad", function() {
               if (!slider) {
                   map.disableMapNavigation();
+                  map.hideZoomSlider();
               }
               if ((urlParams["x"]) && (urlParams["y"])) {
                   var x = urlParams["x"] * 1;
