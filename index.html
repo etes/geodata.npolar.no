@@ -84,16 +84,16 @@
 			<!-- Menu -->
 			<ul class="nav nav-tabs">
 				<li class="active">
-					<a href="#tab1" data-toggle="tab">Map Viewers<i class="icon-chevron-down"></i></a>
+					<a href="#tab1" data-toggle="tab">Map Services<i class="icon-chevron-down"></i></a>
 				</li>
 				<li>
-					<a href="#tab2" data-toggle="tab">Map Services<i class="icon-chevron-down"></i></a>
+					<a href="#tab2" data-toggle="tab">Map Viewers<i class="icon-chevron-down"></i></a>
 				</li>
 			</ul>
 			<div class="tab-content" >
-				<div class="tab-pane active" id="tab1">
-					<a href="http://svalbardkartet.npolar.no" target="_blank"><img src="/public/img/svalbardkartet_thumbnail.png" alt="svalbardkartet_thumbnail.png" width="260" height="180"></a>
+				
 
+				<div class="tab-pane active" id="tab1">
 					<p>
 						The Geospatial data and services portal facilitates the coordinated development, maintenance, and sharing of geospatial data and web map services by Norwegian Polar Instiute.
 					</p>
@@ -102,21 +102,53 @@
 						The purpose of the cache is to achieve fast response times of map requests. A cache service is not as flexible as for example, a WMS service. For example, when a WMS service could select one or more layers while in a cache must select all or nothing.
 						Authority uses free software component GeoWebCache to caching services.
 					</p>
-
-					2.1. SERVICES IN MAP CACHE
+					<h4>1. Cached Map Services</h4>
 					<p>
-						WMS services; included WMS layers; Layer name in cache;
-						Kartdata2 WMS; Alle; kartdata2
-						Sjo hovedkart2 WMS; Alle; sjo_hovedkart2;
-						Toporaster2 WMS; Alle; toporaster2;
-						Topografisk Svalbar WMS; Alle; topo2;
-						Topografisk Jan Mayen gråtone WMS; Alle; topo2graatone;
+						A cached map service is a regular map service that has been enhanced to serve maps very quickly using a cache of static images. 
+						The map cache is a directory that contains image tiles of a map extent at specific scale levels. 
+						Returning a tile from the cache takes the server much less time than drawing the map image on demand. 
+						Map caching is a very effective way to make your ArcGIS Server maps run faster. When you create a map cache, the server draws the entire map at several different scales, and stores copies of the map images. 
+						The server can then distribute these images whenever someone asks for a map. 
+						It's much quicker for ArcGIS Server to hand out a cached image than to draw the map each time someone requests it. 
+						Another benefit of caching is that the amount of detail in the image doesn't noticeably affect how quickly the server can distribute the copy.
+						Cache services are based on a cache with touches of thousands detailed maps images or tiles at 256x256 pixels at predefined scales (zoom levels), in the same way as Google Maps or Esri Maps is built up. 
+						Therefore, a cache service does not provide map images in freely chosen scale, but only in the predefined scales defined in the service. 
 					</p>
+					
+					<h4>1.1. SERVICES IN MAP CACHE</h4>
 					<p>
-						URL of the service will vary according to whether the WMS-C, Google Maps or Microsoft VE protocol used. For handling of security mechanisms see Chapter 3
+						
 					</p>
-
-					2.3. Image formats and coordinate systems.
+<table width="100%" border="1">
+  <caption>
+    Cached Map Services
+  </caption>
+  <tr>
+    <th scope="col">Service Name</th>
+    <th scope="col">Included Layers</th>
+    <th scope="col">Map Projection</th>
+    <th scope="col">Service Description</th>
+  </tr>
+  <tr>
+    <th scope="row"><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer?f=jsapi">NP_TopoSvalbard_U33_CHL</a></th>
+    <td>Svalbard topography</td>
+    <td><div align="center">UTM 33</div></td>
+    <td>Topographic map of Svalbard</td>
+  </tr>
+  <tr>
+    <th scope="row"><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoJanMayen_U29_CHL/MapServer?f=jsapi">NP_TopoJanMayen_U29_CHL</a><br /></th>
+    <td>Jan Mayen Topography</td>
+    <td><div align="center">UTM 29</div></td>
+    <td>Topographic map of Jan Mayen</td>
+  </tr>
+  <tr>
+    <th scope="row"><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer?f=jsapi">NP_TopoNordomr_U33_CHL</a></th>
+    <td>Svalbard and Jan Mayen Topography</td>
+    <td><div align="center">UTM 33</div></td>
+    <td>Topographic map of Svalbard and Jan Mayen</td>
+  </tr>
+</table>
+					<h4>1.2. Image formats and coordinate systems</h4>
 					<p>
 						Services are available in two image formats:
 					</p>
@@ -129,22 +161,280 @@
 						</li>
 					</ul>
 					<p>
-						Tilstørrelsen for jpeg is about 1/3 of the png so it must be considered what is important, speed or support for transparency.
+						Tile size for jpeg is about 1/3 of the png so it must be considered what is important, speed or support for transparency.
 						Services are provided in the following coordinate systems:
+						<!--TODO description of available Coordinate systems-->
 					</p>
+					
+					<h4>1.3 Zoom levels and scales</h4>
+				<ul class="nav nav-tabs">
+				<li class="active">
+					<a href="#tab3" data-toggle="pill">Overview of Zoom levels</a>
+				</li>
+				<li>
+					<a href="#tab4" data-toggle="pill">JSON format</a>
+				</li>
+			</ul>
+			<div class="tab-content" >
+				
 
-				</div>
+				<div class="tab-pane active" id="tab3">
 
-				<div class="tab-pane" id="tab2">
-					<a href="http://toposvalbard.npolar.no" target="_blank"><img src="/public/img/toposvalbard_thumbnail.png" alt="svalbardkartet_thumbnail.png" width="260" height="180"></a>
-					<p>
+<table width="741" height="585" border="1">
+  <caption>
+    Overview of zoom levels, scales and resolution
+  </caption>
+  <tbody>
+    <tr>
+      <th width="123">Zoom Level</th>
+      <th width="118">Scale</th>
+      <th width="155">Resolution</th>
+      <th width="149">Tile size x meter</th>
+      <th width="162">Tile size y meter</th>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>1:81920000</td>
+      <td width="155">21674.7100160867</td>
+      <td>5545984</td>
+      <td>5545984</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1:40960000</td>
+      <td>10837.3550080434</td>
+      <td>2772992</td>
+      <td>2772992</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>1:20480000</td>
+      <td>5418.67750402168</td>
+      <td>1386496</td>
+      <td>1386496</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>1:10240000</td>
+      <td>2709.33875201084</td>
+      <td>693248</td>
+      <td>693248</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>1:5120000</td>
+      <td>1354.66937600542</td>
+      <td>346624</td>
+      <td>346624</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>1:2560000</td>
+      <td>677.334688002709</td>
+      <td>173312</td>
+      <td>173312</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>1:1280000</td>
+      <td>338.667344001355</td>
+      <td>86656</td>
+      <td>86656</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>1:640000</td>
+      <td>169.333672000677</td>
+      <td>43328</td>
+      <td>43328</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>1:320000</td>
+      <td>84.6668360003387</td>
+      <td>21664</td>
+      <td>21664</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>1:160000</td>
+      <td>42.3334180001693</td>
+      <td>10832</td>
+      <td>10832</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>1:80000</td>
+      <td>21.1667090000847</td>
+      <td>5416</td>
+      <td>5416</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>1:40000</td>
+      <td>10.5833545000423</td>
+      <td>2708</td>
+      <td>2708</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>1:20000</td>
+      <td>5.29167725002117</td>
+      <td>1354</td>
+      <td>1354</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>1:10000</td>
+      <td>2.64583862501058</td>
+      <td>677</td>
+      <td>677</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>1:50000 </td>
+      <td>1.32291931250529</td>
+      <td>338.5</td>
+      <td>338.5</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>1:2500</td>
+      <td>0.661459656252646</td>
+      <td>169.25</td>
+      <td>169.25</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>1:1250</td>
+      <td>0.330729828126323</td>
+      <td>84.625</td>
+      <td>84.625</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>1:625</td>
+      <td>0.165364914063161</td>
+      <td>42.3125</td>
+      <td>42.3125</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>1:321.3</td>
+      <td>0.0826295402590805</td>
+      <td>21.15625</td>
+      <td>21.15625</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="tab-pane" id="tab4">
+<pre><code>[
+{
+level: 0,
+resolution: 21674.7100160867,
+scale: 81920000
+},
+{
+level: 1,
+resolution: 10837.3550080434,
+scale: 40960000
+},
+{
+level: 2,
+resolution: 5418.67750402168,
+scale: 20480000
+},
+{
+level: 3,
+resolution: 2709.33875201084,
+scale: 10240000
+},
+{
+level: 4,
+resolution: 1354.66937600542,
+scale: 5120000
+},
+{
+level: 5,
+resolution: 677.334688002709,
+scale: 2560000
+},
+{
+level: 6,
+resolution: 338.667344001355,
+scale: 1280000
+},
+{
+level: 7,
+resolution: 169.333672000677,
+scale: 640000
+},
+{
+level: 8,
+resolution: 84.6668360003387,
+scale: 320000
+},
+{
+level: 9,
+resolution: 42.3334180001693,
+scale: 160000
+},
+{
+level: 10,
+resolution: 21.1667090000847,
+scale: 80000
+},
+{
+level: 11,
+resolution: 10.5833545000423,
+scale: 40000
+},
+{
+level: 12,
+resolution: 5.29167725002117,
+scale: 20000
+},
+{
+level: 13,
+resolution: 2.64583862501058,
+scale: 10000
+},
+{
+level: 14,
+resolution: 1.32291931250529,
+scale: 5000
+},
+{
+level: 15,
+resolution: 0.661459656252646,
+scale: 2500
+},
+{
+level: 16,
+resolution: 0.330729828126323,
+scale: 1250
+},
+{
+level: 17,
+resolution: 0.165364914063161,
+scale: 625
+},
+{
+level: 18,
+resolution: 0.0826295402590805,
+scale: 312.3
+}
+]</code></pre>
+</div>
+</div>
+						<h4>2. Thematic Map Services </h4>
+						<p>
 						WMS is a service where a server request to send map section in the form of raster files back to the user, either directly in the browser, a web application or a desktop application.
 
 						This type of service requires some expertise to take in use, and it's the software that makes calls to map server.
 		
 					</p>
-
-						<h4> Flexible Web Services </h4>
 
 					services based on WMS specification is flexible and provides the user with many options, such as:
 
@@ -176,7 +466,20 @@
 Currently there is no limit for WMS calls to users ip address but there is timeout for client using a service and client waiting to get a service. 
 					</p>
 				</div>
-				
+				<div class="tab-pane" id="tab2">
+					<h4>Svalbardkartet</h4>
+					<a href="http://svalbardkartet.npolar.no" target="_blank"><img src="/public/img/svalbardkartet_thumbnail.png" alt="svalbardkartet_thumbnail.png" width="260" height="180"></a>
+					<br>
+					<section>
+						<h4>TopoSvalbard</h4>
+					<a href="http://toposvalbard.npolar.no" target="_blank"><img src="/public/img/toposvalbard_thumbnail.png" alt="svalbardkartet_thumbnail.png" width="260" height="180"></a>
+						
+					</section>
+					<section>
+						<h4>TopoJanMayen</h4>
+					</section>
+					
+				</div>
 			</div>
 		</div>
 		</div>
