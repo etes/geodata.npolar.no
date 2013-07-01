@@ -21,6 +21,51 @@
 	<noscript>
 		<link href="/public/css/fallback.css" media="screen" rel="stylesheet" type="text/css"/>
 	</noscript>
+			<!-- Menu -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span2"></div>
+        <div class="span8"> 
+        	
+          <!-- Brand Title -->
+          
+          <a class="brand" href="">Geospatial Data and Services</a>
+                
+          <!-- Menu Colapse button -->
+          
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+         
+          <!-- Menu Items -->
+          
+          <ul class="nav nav-collapse collapse">
+            <li><a href="#tab2">Map Services</a></li>
+            <li><a href="documentation">Documentation</a></li>
+          </ul>
+            
+          <!-- Render feedback partial -->
+
+
+<ul class="nav nav-collapse collapse pull-right">
+  
+    <li class="pull-right">
+    	<a href="mailto:data@npolar.no">
+    		<i class="icon-envelope icon-white"></i> Feedback</a>     
+    </li>
+  
+</ul>
+        </div>
+        <div class="span2"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 	<!-- Subhead
 	================================================== -->
@@ -91,6 +136,35 @@
 					<div class="page-header">
 						<h2>Setting the map</h2>
 					</div>
+					<p>The easiest way to setup a map of Svalbard using ArcGIS API for JavaScript is to see a simple example. The following html page displays a map of Svalbard centered around Longyearbyen: </p>
+					<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta name="viewport" content="initial-scale=1.0, user-scalable=no" /&gt;
+    &lt;link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/esri/css/esri.css"/&gt;
+    &lt;style type="text/css"&gt;
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map { height: 100% }
+    &lt;/style&gt;
+    &lt;script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/"&gt;&lt;/script&gt;
+    &lt;script type="text/javascript"&gt;
+      dojo.require("esri.map");
+function initialize() {
+	var initialExtent = new esri.geometry.Extent({"xmin": 477423.89,"ymin":8663685.98,"xmax":553624.05,"ymax":8714486.09,"spatialReference":{"wkid":32633}});
+	// create map instance and add a basemap
+	map = new esri.Map("map", {extent: initialExtent, logo : false});
+	basemapURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer"
+	map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));
+    }
+
+    dojo.ready(initialize); 
+    &lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="map" style="width:100%; height:100%;"/&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
 					<p>There are a few steps to follow in order to initialize a map in your web application:</p>
 					<ol>
 					  <li>Setup an HTML document and include esri.css style sheet in the head section of the document to have styles and various widgets for the map.
@@ -100,7 +174,7 @@
 					  	<pre><code>&lt;script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/"&gt;&lt;/script&gt;</code></pre>
 					  </li>					  
 					  <li>Create a <code>div</code> element with a certain id to hold the map. The size of the map is specified in the style attribute of the div.
-					  	<pre><code>&lt;div id="map" style="width:100%; height:256px;"&gt;&lt;/div&gt;</code></pre>
+					  	<pre><code>&lt;div id="map" style="width:100%; height:100%;"/&gt;</code></pre>
 					  	</li>
 					  <li>Use another <code>&lt;script&gt;</code> tag to load the mapping modules from ArcGIS JavaScript API using the <code>dojo.require()</code> function.
 					  	The initialize function creates a map instance using the <code>esri.Map</code> module and connects it with the DIV element created above by referencing it using the <code>"map"</code> id.
@@ -337,7 +411,32 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
 			</div>
 		</div>
 	</div>
+<!-- Footer
+				================================================== -->
 
+<footer class="footer">
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span2"></div>
+      <div class="span8">
+        <hr/>          
+        <div class="footer-block-right">
+          <address>
+            <strong>Norwegian Polar Data</strong><br/>
+            Norwegian Polar Institute<br/>
+            9296 Tromsø<br/>
+            Norway
+          </address>
+        </div>         
+        
+        <div class="footer-block"></div>
+      </div>
+      <div class="span2"></div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
 
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,700' rel='stylesheet' type='text/css'>
 <script src="http://yui.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
@@ -485,5 +584,3 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
             }       
     dojo.ready(initialize); 
 </script>
-</body>
-</html>

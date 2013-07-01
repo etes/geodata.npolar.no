@@ -46,6 +46,7 @@
           
           <ul class="nav nav-collapse collapse">
             <li><a href="#tab2">Map Services</a></li>
+            <li><a href="/documentation">Documentation</a></li>
           </ul>
             
           <!-- Render feedback partial -->
@@ -71,7 +72,7 @@
 		<header class="jumbotron subhead">
 			<div class="container">
 				<img src="/public/img/np-logo.png" style="float:left">
-				<h2>Map Viewers</h2>
+				<h2>&nbsp;Norwegian Polar Institute Maps and Services</h2>
 			</div>
 		</header>
 		
@@ -115,59 +116,51 @@
 						Therefore, a cache service does not provide map images in freely chosen scale, but only in the predefined scales defined in the service. 
 					</p>
 					
-					<h4>1.1. SERVICES IN MAP CACHE</h4>
+					<h4>1.1. Services in Map Cache</h4>
 					<p>
-						
+						Services are provided in the following coordinate systems:
+						<!--TODO description of available Coordinate systems-->
 					</p>
-<table width="100%" border="1">
+<table border="1">
   <caption>
     Cached Map Services
   </caption>
   <tr>
-    <th scope="col">Service Name</th>
-    <th scope="col">Included Layers</th>
-    <th scope="col">Map Projection</th>
-    <th scope="col">Service Description</th>
+    <th>Service Name</th>
+    <th>Included Layers</th>
+    <th>Map Projection</th>
+    <th>Service Description</th>
   </tr>
   <tr>
-    <th scope="row"><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer?f=jsapi">NP_TopoSvalbard_U33_CHL</a></th>
+    <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer?f=jsapi">NP_TopoSvalbard_U33_CHL</a></td>
     <td>Svalbard topography</td>
     <td><div align="center">UTM 33</div></td>
     <td>Topographic map of Svalbard</td>
   </tr>
   <tr>
-    <th scope="row"><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoJanMayen_U29_CHL/MapServer?f=jsapi">NP_TopoJanMayen_U29_CHL</a><br /></th>
+    <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoJanMayen_U29_CHL/MapServer?f=jsapi">NP_TopoJanMayen_U29_CHL</a><br /></td>
     <td>Jan Mayen Topography</td>
     <td><div align="center">UTM 29</div></td>
     <td>Topographic map of Jan Mayen</td>
   </tr>
   <tr>
-    <th scope="row"><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer?f=jsapi">NP_TopoNordomr_U33_CHL</a></th>
+    <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer?f=jsapi">NP_TopoNordomr_U33_CHL</a></td>
     <td>Svalbard and Jan Mayen Topography</td>
     <td><div align="center">UTM 33</div></td>
     <td>Topographic map of Svalbard and Jan Mayen</td>
   </tr>
 </table>
 <!--TODO link to sample codes and maps-->
-					<h4>1.2. Image formats and coordinate systems</h4>
-					<p>
-						Services are available in two image formats:
-					</p>
-					<ul>
-						<li>
-							Image / jpeg (does not support transparency)
-						</li>
-						<li>
-							Image / png (supports transparency)
-						</li>
-					</ul>
-					<p>
-						Tile size for jpeg is about 1/3 of the png so it must be considered what is important, speed or support for transparency.
-						Services are provided in the following coordinate systems:
-						<!--TODO description of available Coordinate systems-->
-					</p>
 					
-					<h4>1.3 Zoom levels and scales</h4>
+					
+					<h4>1.2 Zoom levels and scales</h4>
+					<p>To easily combine cache from different services in the same chart window, there is an advantage to have a common definition of the geographic area that defines the service. 
+						Because the cached services have fixed zoom levels can service does not deliver images that lies between two defined zoom levels. 
+						Zoom levels obtained by halving the service's basic definition area.
+					</p>
+					<p>The table shows the zoom level used when creating cache at Norwegian Polar Institute which is based on Norwegian Mapping Authority's <a href="http://www.kartverket.no/Kart/Kartverksted/Visningstjenester/Cache-tjenester/">cache standard</a>. 
+
+</p>
 				<ul class="nav nav-tabs">
 				<li class="active">
 					<a href="#tab3" data-toggle="pill">Overview of Zoom levels</a>
@@ -181,116 +174,86 @@
 
 				<div class="tab-pane active" id="tab3">
 
-<table width="741" height="585" border="1">
+<table class="table-condensed" border="1">
   <caption>
     Overview of zoom levels, scales and resolution
   </caption>
   <tbody>
     <tr>
-      <th width="123">Zoom Level</th>
-      <th width="118">Scale</th>
-      <th width="155">Resolution</th>
-      <th width="149">Tile size x meter</th>
-      <th width="162">Tile size y meter</th>
+      <th>Zoom Level</th>
+      <th>Scale</th>
+      <th>Resolution</th>
     </tr>
     <tr>
       <td>0</td>
       <td>1:81920000</td>
-      <td width="155">21674.7100160867</td>
-      <td>5545984</td>
-      <td>5545984</td>
+      <td>21674.7100160867</td>
     </tr>
     <tr>
       <td>1</td>
       <td>1:40960000</td>
       <td>10837.3550080434</td>
-      <td>2772992</td>
-      <td>2772992</td>
     </tr>
     <tr>
       <td>2</td>
       <td>1:20480000</td>
       <td>5418.67750402168</td>
-      <td>1386496</td>
-      <td>1386496</td>
     </tr>
     <tr>
       <td>3</td>
       <td>1:10240000</td>
       <td>2709.33875201084</td>
-      <td>693248</td>
-      <td>693248</td>
     </tr>
     <tr>
       <td>4</td>
       <td>1:5120000</td>
       <td>1354.66937600542</td>
-      <td>346624</td>
-      <td>346624</td>
     </tr>
     <tr>
       <td>5</td>
       <td>1:2560000</td>
       <td>677.334688002709</td>
-      <td>173312</td>
-      <td>173312</td>
     </tr>
     <tr>
       <td>6</td>
       <td>1:1280000</td>
       <td>338.667344001355</td>
-      <td>86656</td>
-      <td>86656</td>
     </tr>
     <tr>
       <td>7</td>
       <td>1:640000</td>
       <td>169.333672000677</td>
-      <td>43328</td>
-      <td>43328</td>
     </tr>
     <tr>
       <td>8</td>
       <td>1:320000</td>
       <td>84.6668360003387</td>
-      <td>21664</td>
-      <td>21664</td>
     </tr>
     <tr>
       <td>9</td>
       <td>1:160000</td>
       <td>42.3334180001693</td>
-      <td>10832</td>
-      <td>10832</td>
     </tr>
     <tr>
       <td>10</td>
       <td>1:80000</td>
       <td>21.1667090000847</td>
-      <td>5416</td>
-      <td>5416</td>
     </tr>
     <tr>
       <td>11</td>
       <td>1:40000</td>
       <td>10.5833545000423</td>
-      <td>2708</td>
-      <td>2708</td>
     </tr>
     <tr>
       <td>12</td>
       <td>1:20000</td>
       <td>5.29167725002117</td>
-      <td>1354</td>
-      <td>1354</td>
     </tr>
     <tr>
       <td>13</td>
       <td>1:10000</td>
       <td>2.64583862501058</td>
-      <td>677</td>
-      <td>677</td>
-    </tr>
+    </tr><!--
     <tr>
       <td>14</td>
       <td>1:50000 </td>
@@ -325,7 +288,7 @@
       <td>0.0826295402590805</td>
       <td>21.15625</td>
       <td>21.15625</td>
-    </tr>
+    </tr>-->
   </tbody>
 </table>
 </div>
@@ -399,7 +362,7 @@ scale: 20000
 {
 level: 13,
 resolution: 2.64583862501058,
-scale: 10000
+scale: 10000 <!--
 },
 {
 level: 14,
@@ -424,11 +387,29 @@ scale: 625
 {
 level: 18,
 resolution: 0.0826295402590805,
-scale: 312.3
+scale: 312.3 -->
 }
 ]</code></pre>
 </div>
 </div>
+						
+					<h4>1.3. Image formats and coordinate systems</h4>
+					<p>
+						Services are available in two image formats:
+					</p>
+					<ul>
+						<li>
+							Image / jpeg (does not support transparency)
+						</li>
+						<li>
+							Image / png (supports transparency)
+						</li>
+					</ul>
+					<p>
+						Tile size for jpeg is about 1/3 of the png so it must be considered what is important, speed or support for transparency. 
+The scale is correct at 96 dpi, but then most monitors are not exactly this, the scale in most cases not be completely accurate. 
+Typically, a modern office display between 90 and 100 dpi, older CRT monitors can often have 72 dpi. By 96 dpi is a tile (256x256 pixels) is 6.77 cm wide and high.
+					</p>
 						<h4>2. Thematic Map Services </h4>
 						<p>
 						WMS is a service where a server request to send map section in the form of raster files back to the user, either directly in the browser, a web application or a desktop application.
@@ -485,6 +466,30 @@ Currently there is no limit for WMS calls to users ip address but there is timeo
 		</div>
 		</div>
 </div>
+<!-- Footer
+				================================================== -->
+
+<footer class="footer">
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span2"></div>
+      <div class="span8">
+        <hr/>          
+        <div class="footer-block-right">
+          <address>
+            <strong>Norwegian Polar Data</strong><br/>
+            Norwegian Polar Institute<br/>
+            9296 Tromsø<br/>
+            Norway
+          </address>
+        </div>         
+        
+        <div class="footer-block"></div>
+      </div>
+      <div class="span2"></div>
+    </div>
+  </div>
+</footer>
 		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 		<script src="/public/js/prettify.js" type="text/javascript"></script>
 		<script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
