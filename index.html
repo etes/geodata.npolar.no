@@ -96,16 +96,21 @@
 			<!-- Menu -->
 			<ul class="nav nav-tabs">
 				<li class="active">
-					<a href="#tab1" data-toggle="tab">Map Services<i class="icon-chevron-down"></i></a>
+					<a href="#tab-main" data-toggle="tab">Map Services<i class="icon-chevron-down"></i></a>
 				</li>
 				<li>
-					<a href="#tab2" data-toggle="tab">Map Viewers<i class="icon-chevron-down"></i></a>
+					<a href="#tab-viewers" data-toggle="tab">Map Viewers<i class="icon-chevron-down"></i></a>
 				</li>
-			</ul>
-			<div class="tab-content" >
 				
+				<li>
+					<a href="#tab-themes" data-toggle="tab">Thematic Maps<i class="icon-chevron-down"></i></a>
+				</li>
+				
+			</ul>
 
-				<div class="tab-pane active" id="tab1">
+			<div class="tab-content" >
+
+				<div class="tab-pane active" id="tab-main">
 					<p>
 						Norwegian Polar Institute provides free access to a wide range of basemap and thematic map services for the Nowegian polar regions which can be consumed to create interactive web mapping application.
 						The basemaps are cached map services while the thematic maps are dynamic map services.
@@ -415,41 +420,41 @@ Typically, a modern office display between 90 and 100 dpi, older CRT monitors ca
 						<p>
 						WMS is a service where a server request to send map section in the form of raster files back to the user, either directly in the browser, a web application or a desktop application.
 
-						This type of service requires some expertise to take in use, and it's the software that makes calls to map server.
-		
+						This type of service requires some expertise to take in use, and it's the software that makes calls to map server. Services based on WMS specification are flexible and provides the user with many options, such as:
 					</p>
-
-					services based on WMS specification is flexible and provides the user with many options, such as:
 
 					<ul>
 						<li>
-							Choosing which coordinate chart will be produced in
+							Choosing which map projection will be produced in
 						</li>
 						<li>
-							turn on or off layers in the service, for example, you can select only the roads and water to be drawn and everything else omitted
+							Turn on or off layers in the service.
 						</li>
 						<li>
-							Freely choose scale
+							Choose scale freely
 						</li>
 						<li>
-							Select the background color, or whether this should be transparent
-						</li>
-						<li>
-							Which format to be produced
+							Which image format and transparency to be produced
 						</li>
 						<li>
 							Retrieving Legend of the various map layers
 						</li>
 						<li>
-							Obtaining basic information about objects on the chart, such as buildings, roads and properties
+							Obtaining basic information about objects on the map from attributes (feature info) etc
 						</li>
 					</ul>
+					
+					<p><strong> Checkout the <a href="http://geodata.npolar.no/arcgis/rest/services/inspire3">list of thematic map services</a> provided by NPI.</strong></p>
+					
 					
 					<h4>Terms of Use</h4>
 					<p>It's free to use Norwegian Polar Institute's map services, but remember to read the <a href="http://geodata.npolar.no/bruksvilkar">terms of use of NPI's map services</a> (Norwegian).</p>
 					
 				</div>
-				<div class="tab-pane" id="tab2">
+				<!-- Map Viewers
+					=============================-->
+					
+				<div class="tab-pane" id="tab-viewers">
 					<div id="featuredMaps">
 					<ul class="mapsList">
 						<li class="item Application">
@@ -458,6 +463,11 @@ Typically, a modern office display between 90 and 100 dpi, older CRT monitors ca
 					</a>
 					<h4 class="title">Svalbardkartet</h4><p>Svalbardkartet is an interactive thematic atlas of Svalbard supplemented with a rich datasets of environmental data layers with advanced map viewer.
 						In addition to the detailed topography and large amount of thematic maps, the portal provides advanced GIS capabilities such as high-resolution map printing, identifiying map objects, advanced drawing and measurements </p>
+						</li>
+						
+						<li class="item Application">
+						<a class="block" id="mapItem2" href="http://willem.npolar.no/barentsportal/Viewer.html?Viewer=Barentsportal" target="_blank"><img src="/public/img/barentsportal_thumbnail.png" alt="barentsportal_thumbnail.png"></a>
+					<h4 class="title">Barentsportal</h4><p>Barentsportal is an interactive thematic atlas of the joint Norwegian-Russian environmental status report for the barents sea. </p>
 						</li>
 						<li class="item Application">
 					<a class="block" id="mapItem1" href="http://toposvalbard.npolar.no" target="_blank"><img src="/public/img/toposvalbard_thumbnail.png" alt="toposvalbard_thumbnail.png"></a>
@@ -472,6 +482,110 @@ Typically, a modern office display between 90 and 100 dpi, older CRT monitors ca
 					</ul>
 					</div>
 					
+				</div>
+				
+				<!-- Thematic map services
+					========================================== -->
+				<div class="tab-pane" id="tab-themes">
+					
+<table class="table-condensed" border="1">
+  <caption>
+   <h4> List of thematic maps</h4>
+  </caption>
+  <tr>
+    <th>Service URL</th>
+    <th>Name</th>
+    <th>Show on Svalbardkartet</th>
+    <th>WMS Capabilities</th>
+    <th>Owner</th>
+  </tr>
+  <tr>
+    <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/CryoClim/glaciers/MapServer">Glaciers</a></td>
+    <td>Svalbard Glacier Area Outlines</td>
+    <td><a href="http://svalbardkartet.npolar.no/en/Viewer.html?Viewer=Svalbardkartet&showAdvancedTools=True&showDataFrame=True&extent=453925.632753013,8669122.04466099,615847.099861399,8764021.49848276&showOverviewMap=False&layers=6,0,0,5,1,0,4,1,0,3,1,0,10,1,0,9,0,3,0,1,2,8,0,0,0,0,0,11,0,0,">Isbreer</a></td>
+    <td><a href="http://geodata.npolar.no/ArcGIS/services/CryoClim/glaciers/MapServer/WMSServer?request=GetCapabilities&service=WMS">GetCapabilities</a></td>
+    <td>Norwegian Polar Institute</td>
+  </tr>
+  <tr>
+    <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire2/Geologi_S750/MapServer">Geologi-S750</a></td>
+    <td>Geological Map of Svalbard 1:750000</td>
+    <td><a href="http://svalbardkartet.npolar.no/en/Viewer.html?Viewer=Svalbardkartet&showAdvancedTools=True&showDataFrame=True&extent=365645.670692461,8609882.48352378,689488.604909234,8799681.39116732&showOverviewMap=False&layers=6,0,0,5,1,0,4,1,0,3,1,0,10,1,0,9,1,0,8,1,0,0,1,0,11,1,0,&">Geologi 1:750000</a></td>
+    <td><a href="http://geodata.npolar.no/ArcGIS/services/inspire2/Geologi_S750/MapServer/WMSServer?request=GetCapabilities&service=WMS">GetCapabilities</a></td>
+    <td>Norwegian Polar Institute</td>
+  </tr>
+  <tr>
+    <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Sjøfuglkolonier/MapServer">Sjøfuglkolonier</a></td>
+    <td>Seabirds of Svalbard</td>
+    <td><a href="http://svalbardkartet.npolar.no/en/Viewer.html?Viewer=Svalbardkartet&showAdvancedTools=True&showDataFrame=True&extent=307569.069943427,8504296.67749686,955254.938376966,8937790.87781859&showOverviewMap=False&layers=6,0,0,5,0,0,4,0,1,2,3,0,0,10,0,0,9,0,0,8,0,0,0,0,0,11,0,0,&">Sjøfugl kolonier</a></td>
+    <td><a href="http://geodata.npolar.no/ArcGIS/services/inspire3/Sjøfuglkolonier/MapServer/WMSServer?request=GetCapabilities&service=WMS">GetCapabilities</a></td>
+    <td>Norwegian Polar Institute</td>
+  </tr>
+  <tr>
+    <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Hvalrossliggeplasser/MapServer">Hvalrossliggeplasser</a></td>
+    <td>Walrus haulout sites</td>
+    <td><a href="http://svalbardkartet.npolar.no/en/Viewer.html?Viewer=Svalbardkartet&showAdvancedTools=True&showDataFrame=True&extent=8351.2081993814,8196250.95958335,1303722.94506646,9063239.36022681&showOverviewMap=False&layers=6,0,0,5,1,0,4,0,1,0,3,1,0,10,1,0,9,1,0,8,0,0,0,0,0,11,0,0,&">Hvalrossliggeplasser</a></td>
+    <td><a href="http://geodata.npolar.no/ArcGIS/services/inspire3/Hvalrossliggeplasser/MapServer/WMSServer?request=GetCapabilities&service=WMS">GetCapabilities</a></td>
+    <td>Norwegian Polar Institute</td>
+  </tr>
+  <tr>
+    <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Roye/MapServer">Roye</a></td>
+    <td>Arctic char in Svalbard</td>
+    <td><a href="http://svalbardkartet.npolar.no/en/Viewer.html?Viewer=Svalbardkartet&showAdvancedTools=True&showDataFrame=True&extent=262500.541078252,8566556.29469205,910186.409511791,8946154.10997914&showOverviewMap=False&layers=6,0,0,5,1,0,4,0,1,1,3,1,0,10,1,0,9,1,0,8,0,0,0,0,0,11,0,0,&">Roye</a></td>
+    <td><a href="http://geodata.npolar.no/ArcGIS/services/inspire3/Roye/MapServer/WMSServer?request=GetCapabilities&service=WMS">GetCapabilities</a></td>
+    <td>Norwegian Polar Institute</td>
+  </tr>
+  <tr>
+    <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire3/SjøpattedyrObservasjon/MapServer">SjøpattedyrObservasjon</a></td>
+    <td>Marine mammals sightings</td>
+    <td><a href="http://svalbardkartet.npolar.no/en/Viewer.html?Viewer=Svalbardkartet&showAdvancedTools=False&showDataFrame=True&extent=-559883.954708953,7528121.63475736,2030859.5190252,9262098.43604428&showOverviewMap=False&layers=6,0,0,5,1,0,4,0,1,24,3,1,0,10,1,0,9,1,0,8,0,0,0,0,0,11,0,0,&">Sjøpattedyr Observasjoner 2009</a></td>
+    <td><a href="http://geodata.npolar.no/ArcGIS/services/inspire3/SjøpattedyrObservasjon/MapServer/WMSServer?request=GetCapabilities&service=WMS">GetCapablities</a></td>
+    <td>Norwegian Polar Institute</td>
+  </tr>
+  <tr>
+    <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Vegetasjon/MapServer">Vegetasjon</a></td>
+    <td>Svalbard Vegetation</td>
+    <td><a href="http://svalbardkartet.npolar.no/en/Viewer.html?Viewer=Svalbardkartet&showAdvancedTools=True&showDataFrame=True&extent=261571.293060411,8499650.43740767,909257.161493954,8879248.25269476&showOverviewMap=False&layers=6,0,0,5,1,0,4,0,1,59,3,1,0,10,1,0,9,1,0,8,0,0,0,0,0,11,0,0,&">Vegetasjon</a></td>
+    <td><a href="http://geodata.npolar.no/ArcGIS/services/inspire3/Vegetasjon/MapServer/WMSServer?request=GetCapabilities&service=WMS">GetCapabilities</a></td>
+    <td>Norwegian Polar Institute</td>
+  </tr>
+  <tr>
+    <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Biogeografiske/MapServer">Biogeografiske</a></td>
+    <td>Biogeographic zones of Svalbard</td>
+    <td><a href="http://svalbardkartet.npolar.no/en/Viewer.html?Viewer=Svalbardkartet&showAdvancedTools=True&showDataFrame=True&extent=261803.605064871,8499650.43740767,909489.473498414,8879248.25269476&showOverviewMap=False&layers=6,0,0,5,1,0,4,0,1,58,3,1,0,10,1,0,9,1,0,8,0,0,0,0,0,11,0,0,&">Biogeografiske</a></td>
+    <td><a href="http://geodata.npolar.no/ArcGIS/services/inspire3/Biogeografiske/MapServer/WMSServer?request=GetCapabilities&service=WMS">GetCapabilities</a></td>
+    <td>Norwegian Polar Institute</td>
+  </tr>
+  <tr>
+    <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Strandrydding/MapServer">Strandrydding</a></td>
+    <td>Beach cleaning activities in Svalbard</td>
+    <td><a href="http://svalbardkartet.npolar.no/en/Viewer.html?Viewer=Svalbardkartet&showAdvancedTools=True&showDataFrame=True&extent=211390.499731244,8618245.71568432,859076.36816479,8997843.53097142&showOverviewMap=False&layers=6,0,0,5,1,0,4,0,1,52,3,1,0,10,1,0,9,1,0,8,0,0,0,0,0,11,0,0,&">Strandrydding</a></td>
+    <td><a href="http://geodata.npolar.no/ArcGIS/services/inspire3/Strandrydding/MapServer/WMSServer?request=GetCapabilities&service=WMS">GetCapablities</a></td>
+    <td>Governor of Svalbard</td>
+  </tr>
+  <tr>
+    <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Fritid/MapServer/3">Skuterbegrensning</a></td>
+    <td>Snowmobile restrictions on Svalbard</td>
+    <td><a href="http://svalbardkartet.npolar.no/en/Viewer.html?Viewer=Svalbardkartet&showAdvancedTools=True&showDataFrame=True&extent=374010.303218889,8605352.39943682,697853.237435661,8795151.30708036&showOverviewMap=False&layers=6,0,0,5,1,0,4,1,0,3,1,1,0,10,0,1,3,9,1,0,8,0,0,0,0,0,11,0,0,&">Skuterbegrensning</a></td>
+    <td><a href="http://geodata.npolar.no/ArcGIS/services/inspire3/Fritid/MapServer/WMSServer?request=GetCapabilities&service=WMS">GetCapabilities</a></td>
+    <td>Governor of Svalbard</td>
+  </tr>
+  <tr>
+    <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Fritid/MapServer/2">Skyte-jaktforbudssoner</a></td>
+    <td>Hunting restrictions on Svalbard</td>
+    <td><a href="http://svalbardkartet.npolar.no/en/Viewer.html?Viewer=Svalbardkartet&showAdvancedTools=True&showDataFrame=True&extent=368434.815111858,8613018.69558399,692277.749328628,8802817.60322753&showOverviewMap=False&layers=6,0,0,5,1,0,4,1,0,3,1,1,0,10,0,1,2,9,1,0,8,0,0,0,0,0,11,0,0,&">Skyte-jaktforbudssoner</a></td>
+    <td><a href="http://geodata.npolar.no/ArcGIS/services/inspire3/Fritid/MapServer/WMSServer?request=GetCapabilities&service=WMS">GetCapabilities</a></td>
+    <td>Governor of Svalbard</td>
+  </tr>
+  <tr>
+    <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Svalbardgrenser/MapServer">Svalbardgrenser</a></td>
+    <td>Svalbard sea borders</td>
+    <td><a href="http://svalbardkartet.npolar.no/en/Viewer.html?Viewer=Svalbardkartet&showAdvancedTools=True&showDataFrame=True&extent=-370783.383444695,7960802.74306346,2219960.09028954,9479194.00421186&showOverviewMap=False&layers=6,0,0,5,1,0,4,0,0,3,0,2,0,10,10,1,0,9,1,0,8,0,0,0,0,0,11,0,0,&">Svalbardgrenser</a></td>
+    <td><a href="http://geodata.npolar.no/ArcGIS/services/inspire3/Svalbardgrenser/MapServer/WMSServer?request=GetCapabilities&service=WMS">GetCapabilities</a></td>
+    <td>Governor of Svalbard</td>
+  </tr>
+  
+</table>
+
 				</div>
 			</div>
 		</div>
