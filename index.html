@@ -45,7 +45,7 @@
           <!-- Menu Items -->
           
           <ul class="nav nav-collapse collapse">
-            <li><a href="#tab2">Map Services</a></li>
+            <li><a href="/">Map Services</a></li>
             <li><a href="/documentation">Documentation</a></li>
           </ul>
             
@@ -67,14 +67,25 @@
   </div>
 </div>
 
-		<!-- Subhead
-		================================================== -->
-		<header class="jumbotron subhead">
-			<div class="container">
-				<img src="/public/img/np-logo.png" style="float:left">
-				<h2>&nbsp;Norwegian Polar Institute Maps and Services</h2>
-			</div>
-		</header>
+<!-- Header -->
+    <div class="layout-header">
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span2"><div class="page-logo">
+  <a href="/">
+    <img src="/public/img/logo.png"/>
+  </a>
+</div></div>
+      <div class="span8">
+      	<h2>Norwegian Polar Institute Maps and Services</h2>
+</div>
+      <!--<div class="span2"></div>-->
+    </div>
+  </div>
+</div>
+
+		<!-- Content 
+		===================================================-->
 		
 		<div class="container">
 		<!-- Docs nav
@@ -96,71 +107,61 @@
 
 				<div class="tab-pane active" id="tab1">
 					<p>
-						The Geospatial data and services portal facilitates the coordinated development, maintenance, and sharing of geospatial data and web map services by Norwegian Polar Instiute.
-					</p>
-					<p>
-						To meet the ever increasing number of tile-based queries against forum Administration WMS services, we now offer a selection of our basic mapping services that cache services. The services can be used in clients with support for WMS-C as OpenLayers, Google Maps or Microsoft Virtual Earth
-						The purpose of the cache is to achieve fast response times of map requests. A cache service is not as flexible as for example, a WMS service. For example, when a WMS service could select one or more layers while in a cache must select all or nothing.
-						Authority uses free software component GeoWebCache to caching services.
-					</p>
-					<h4>1. Cached Map Services</h4>
-					<p>
-						A cached map service is a regular map service that has been enhanced to serve maps very quickly using a cache of static images. 
-						The map cache is a directory that contains image tiles of a map extent at specific scale levels. 
-						Returning a tile from the cache takes the server much less time than drawing the map image on demand. 
-						Map caching is a very effective way to make your ArcGIS Server maps run faster. When you create a map cache, the server draws the entire map at several different scales, and stores copies of the map images. 
-						The server can then distribute these images whenever someone asks for a map. 
-						It's much quicker for ArcGIS Server to hand out a cached image than to draw the map each time someone requests it. 
-						Another benefit of caching is that the amount of detail in the image doesn't noticeably affect how quickly the server can distribute the copy.
-						Cache services are based on a cache with touches of thousands detailed maps images or tiles at 256x256 pixels at predefined scales (zoom levels), in the same way as Google Maps or Esri Maps is built up. 
-						Therefore, a cache service does not provide map images in freely chosen scale, but only in the predefined scales defined in the service. 
+						Norwegian Polar Institute provides free access to a wide range of basemap and thematic map services for the Nowegian polar regions which can be consumed to create interactive web mapping application.
+						The basemaps are cached map services while the thematic maps are dynamic map services.
 					</p>
 					
-					<h4>1.1. Services in Map Cache</h4>
+					<h3> Cached Map Services</h3>
 					<p>
-						Services are provided in the following coordinate systems:
+						<a href="http://webhelp.esri.com/arcgisserver/9.2/dotnet/manager/publishing/static_map_svcs.htm">Cached map service</a> is a regular map service that has been predrawn by the server at defined scales (zoom levels) in order to serve maps very quickly. 
+					</p>
+					<p>
+						NPI offers a selection of basemap services that are cached services. The services can be used in clients with support for ArcGIS Server tiles such as OpenLayers, Google Maps or Esri's JavaScript API in the same way as Google Maps or Esri Maps is built up. 
+						<br/>Read the <strong><a href="documentation">developer's guide</a></strong> on how to create web applications with those basemaps. The following basemaps are provided as cached map services:
 						<!--TODO description of available Coordinate systems-->
 					</p>
-<table border="1">
+<table class="table-condensed" border="1">
   <caption>
-    Cached Map Services
+   <h4> Services in Map Cache</h4>
   </caption>
   <tr>
     <th>Service Name</th>
     <th>Included Layers</th>
-    <th>Map Projection</th>
-    <th>Service Description</th>
+    <th>Projection</th>
+    <th>Service URL</th>
+    <th>Capabilities</th>
   </tr>
   <tr>
     <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer?f=jsapi">NP_TopoSvalbard_U33_CHL</a></td>
     <td>Svalbard topography</td>
     <td><div align="center">UTM 33</div></td>
-    <td>Topographic map of Svalbard</td>
+    <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer">NP_TopoSvalbard_U33_CHL</a></td>
+    <td><a href="http://geodata.npolar.no/ArcGIS/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer/WMSServer?request=GetCapabilities&service=WMS">GetCapabilities</a></td>
   </tr>
   <tr>
     <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoJanMayen_U29_CHL/MapServer?f=jsapi">NP_TopoJanMayen_U29_CHL</a><br /></td>
-    <td>Jan Mayen Topography</td>
+    <td>Jan Mayen topography</td>
     <td><div align="center">UTM 29</div></td>
-    <td>Topographic map of Jan Mayen</td>
+    <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoJanMayen_U29_CHL/MapServer">NP_TopoJanMayen_U29_CHL</a></td>
+    <td><a href="http://geodata.npolar.no/ArcGIS/services/inspire1/NP_TopoJanMayen_U29_CHL/MapServer/WMSServer?request=GetCapabilities&service=WMS">GetCapabilities</a></td>
   </tr>
   <tr>
     <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer?f=jsapi">NP_TopoNordomr_U33_CHL</a></td>
-    <td>Svalbard and Jan Mayen Topography</td>
+    <td>Svalbard and Jan Mayen topography</td>
     <td><div align="center">UTM 33</div></td>
-    <td>Topographic map of Svalbard and Jan Mayen</td>
+    <td><a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer">NP_TopoNordomr_U33_CHL</a></td>
+    <td><a href="http://geodata.npolar.no/ArcGIS/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer/WMSServer?request=GetCapabilities&service=WMS">GetCapablities</a></td>
   </tr>
 </table>
 <!--TODO link to sample codes and maps-->
 					
 					
-					<h4>1.2 Zoom levels and scales</h4>
-					<p>To easily combine cache from different services in the same chart window, there is an advantage to have a common definition of the geographic area that defines the service. 
-						Because the cached services have fixed zoom levels can service does not deliver images that lies between two defined zoom levels. 
-						Zoom levels obtained by halving the service's basic definition area.
+					<h4> Zoom levels and scales</h4>
+					<p>To easily combine cache from different services in the same map window, there is an advantage to have a common definition of the geographic area that defines the service. 
+						Because the cached services have fixed zoom levels, the service can not deliver tiles that lies between two defined zoom levels.
 					</p>
-					<p>The table shows the zoom level used when creating cache at Norwegian Polar Institute which is based on Norwegian Mapping Authority's <a href="http://www.kartverket.no/Kart/Kartverksted/Visningstjenester/Cache-tjenester/">cache standard</a>. 
-
-</p>
+					<p>The table shows the zoom level used when creating cache at Norwegian Polar Institute which is similar to Norwegian Mapping Authority's <a href="http://www.kartverket.no/Kart/Kartverksted/Visningstjenester/Cache-tjenester/">cache standard</a>.
+					</p>
 				<ul class="nav nav-tabs">
 				<li class="active">
 					<a href="#tab3" data-toggle="pill">Overview of Zoom levels</a>
@@ -393,7 +394,7 @@ scale: 312.3 -->
 </div>
 </div>
 						
-					<h4>1.3. Image formats and coordinate systems</h4>
+					<h4> Image formats and coordinate systems</h4>
 					<p>
 						Services are available in two image formats:
 					</p>
@@ -410,7 +411,7 @@ scale: 312.3 -->
 The scale is correct at 96 dpi, but then most monitors are not exactly this, the scale in most cases not be completely accurate. 
 Typically, a modern office display between 90 and 100 dpi, older CRT monitors can often have 72 dpi. By 96 dpi is a tile (256x256 pixels) is 6.77 cm wide and high.
 					</p>
-						<h4>2. Thematic Map Services </h4>
+						<h3> Thematic Map Services </h3>
 						<p>
 						WMS is a service where a server request to send map section in the form of raster files back to the user, either directly in the browser, a web application or a desktop application.
 
@@ -443,23 +444,33 @@ Typically, a modern office display between 90 and 100 dpi, older CRT monitors ca
 							Obtaining basic information about objects on the chart, such as buildings, roads and properties
 						</li>
 					</ul>
-					<h4>Limit of WMS calls</h4>
-					<p>
-Currently there is no limit for WMS calls to users ip address but there is timeout for client using a service and client waiting to get a service. 
-					</p>
+					
+					<h4>Terms of Use</h4>
+					<p>It's free to use Norwegian Polar Institute's map services, but remember to read the <a href="http://geodata.npolar.no/bruksvilkar">terms of use of NPI's map services</a> (Norwegian).</p>
+					
 				</div>
 				<div class="tab-pane" id="tab2">
-					<h4>Svalbardkartet</h4>
-					<a href="http://svalbardkartet.npolar.no" target="_blank"><img src="/public/img/svalbardkartet_thumbnail.png" alt="svalbardkartet_thumbnail.png" width="260" height="180"></a>
-					<br>
-					<section>
-						<h4>TopoSvalbard</h4>
-					<a href="http://toposvalbard.npolar.no" target="_blank"><img src="/public/img/toposvalbard_thumbnail.png" alt="svalbardkartet_thumbnail.png" width="260" height="180"></a>
+					<div id="featuredMaps">
+					<ul class="mapsList">
+						<li class="item Application">
+					<a class="block" id="mapItem0" href="http://svalbardkartet.npolar.no" target="_blank"><img src="/public/img/svalbardkartet_thumbnail.png" alt="svalbardkartet_thumbnail.png">
 						
-					</section>
-					<section>
-						<h4>TopoJanMayen</h4>
-					</section>
+					</a>
+					<h4 class="title">Svalbardkartet</h4><p>Svalbardkartet is an interactive thematic atlas of Svalbard supplemented with a rich datasets of environmental data layers with advanced map viewer.
+						In addition to the detailed topography and large amount of thematic maps, the portal provides advanced GIS capabilities such as high-resolution map printing, identifiying map objects, advanced drawing and measurements </p>
+						</li>
+						<li class="item Application">
+					<a class="block" id="mapItem1" href="http://toposvalbard.npolar.no" target="_blank"><img src="/public/img/toposvalbard_thumbnail.png" alt="toposvalbard_thumbnail.png"></a>
+					<h4 class="title">TopoSvalbard</h4><p>TopoSvalbard is an interactive topographical map portal of Svalbard. 
+						In addition to the presentation of detailed topography and placenames, the portal includes basic user requirements such as coordinate readings and distance measurements. 
+						It also includes 3D map of Svalbard as well as areal and landscape photos</p>
+						</li>
+						<li class="item Application">
+						<a class="block" id="mapItem2" href="http://topojanmayen.npolar.no" target="_blank"><img src="/public/img/topojanmayen_thumbnail.png" alt="topojanmayen_thumbnail.png"></a>
+					<h4 class="title">TopoJanMayen</h4><p>TopoJanMayen is an interactive topographical map of Jan Mayen. </p>
+						</li>
+					</ul>
+					</div>
 					
 				</div>
 			</div>
