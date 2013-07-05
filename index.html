@@ -96,14 +96,13 @@
 			<!-- Menu -->
 			<ul class="nav nav-tabs">
 				<li class="active">
-					<a href="#tab-main" data-toggle="tab">Map Services<i class="icon-chevron-down"></i></a>
+					<a href="#tab-main" data-toggle="tab">Base Maps<i class="icon-chevron-down"></i></a>
+				</li>
+				<li>
+					<a href="#tab-themes" data-toggle="tab">Thematic Maps<i class="icon-chevron-down"></i></a>
 				</li>
 				<li>
 					<a href="#tab-viewers" data-toggle="tab">Map Viewers<i class="icon-chevron-down"></i></a>
-				</li>
-				
-				<li>
-					<a href="#tab-themes" data-toggle="tab">Thematic Maps<i class="icon-chevron-down"></i></a>
 				</li>
 				
 			</ul>
@@ -413,80 +412,27 @@ scale: 312.3 -->
 					</ul>
 					<p>
 						Tile size for jpeg is about 1/3 of the png so it must be considered what is important, speed or support for transparency. 
-The scale is correct at 96 dpi, but then most monitors are not exactly this, the scale in most cases not be completely accurate. 
-Typically, a modern office display between 90 and 100 dpi, older CRT monitors can often have 72 dpi. By 96 dpi is a tile (256x256 pixels) is 6.77 cm wide and high.
+The image tiles have a resolution of 96 dpi with a size of (256x256 pixels).
 					</p>
-						<h3> Thematic Map Services </h3>
-						<p>
-						WMS is a service where a server request to send map section in the form of raster files back to the user, either directly in the browser, a web application or a desktop application.
-
-						This type of service requires some expertise to take in use, and it's the software that makes calls to map server. Services based on WMS specification are flexible and provides the user with many options, such as:
-					</p>
-
-					<ul>
-						<li>
-							Choosing which map projection will be produced in
-						</li>
-						<li>
-							Turn on or off layers in the service.
-						</li>
-						<li>
-							Choose scale freely
-						</li>
-						<li>
-							Which image format and transparency to be produced
-						</li>
-						<li>
-							Retrieving Legend of the various map layers
-						</li>
-						<li>
-							Obtaining basic information about objects on the map from attributes (feature info) etc
-						</li>
-					</ul>
-					
-					<p><strong> Checkout the <a href="http://geodata.npolar.no/arcgis/rest/services/inspire3">list of thematic map services</a> provided by NPI.</strong></p>
-					
 					
 					<h4>Terms of Use</h4>
 					<p>It's free to use Norwegian Polar Institute's map services, but remember to read the <a href="http://geodata.npolar.no/bruksvilkar">terms of use of NPI's map services</a> (Norwegian).</p>
 					
 				</div>
-				<!-- Map Viewers
-					=============================-->
-					
-				<div class="tab-pane" id="tab-viewers">
-					<div id="featuredMaps">
-					<ul class="mapsList">
-						<li class="item Application">
-					<a class="block" id="mapItem0" href="http://svalbardkartet.npolar.no" target="_blank"><img src="/public/img/svalbardkartet_thumbnail.png" alt="svalbardkartet_thumbnail.png">
-						
-					</a>
-					<h4 class="title">Svalbardkartet</h4><p>Svalbardkartet is an interactive thematic atlas of Svalbard supplemented with a rich datasets of environmental data layers with advanced map viewer.
-						In addition to the detailed topography and large amount of thematic maps, the portal provides advanced GIS capabilities such as high-resolution map printing, identifiying map objects, advanced drawing and measurements </p>
-						</li>
-						
-						<li class="item Application">
-						<a class="block" id="mapItem2" href="http://willem.npolar.no/barentsportal/Viewer.html?Viewer=Barentsportal" target="_blank"><img src="/public/img/barentsportal_thumbnail.png" alt="barentsportal_thumbnail.png"></a>
-					<h4 class="title">Barentsportal</h4><p>Barentsportal is an interactive thematic atlas of the joint Norwegian-Russian environmental status report for the barents sea. </p>
-						</li>
-						<li class="item Application">
-					<a class="block" id="mapItem1" href="http://toposvalbard.npolar.no" target="_blank"><img src="/public/img/toposvalbard_thumbnail.png" alt="toposvalbard_thumbnail.png"></a>
-					<h4 class="title">TopoSvalbard</h4><p>TopoSvalbard is an interactive topographical map portal of Svalbard. 
-						In addition to the presentation of detailed topography and placenames, the portal includes basic user requirements such as coordinate readings and distance measurements. 
-						It also includes 3D map of Svalbard as well as areal and landscape photos</p>
-						</li>
-						<li class="item Application">
-						<a class="block" id="mapItem2" href="http://topojanmayen.npolar.no" target="_blank"><img src="/public/img/topojanmayen_thumbnail.png" alt="topojanmayen_thumbnail.png"></a>
-					<h4 class="title">TopoJanMayen</h4><p>TopoJanMayen is an interactive topographical map of Jan Mayen. </p>
-						</li>
-					</ul>
-					</div>
-					
-				</div>
+				
+				
 				
 				<!-- Thematic map services
 					========================================== -->
 				<div class="tab-pane" id="tab-themes">
+					
+						<h3> Thematic Map Services </h3>
+						<p>
+						Polar institute delivers a wealth of thematic maps as dynamic map services. Dynamic map service is a service where a server request to send map section in the form of raster files back to the user, either directly in the browser, a web application or a desktop application.
+
+						This type of service requires some expertise to take in use, and it's the application that makes calls to map server. 
+						</p>
+						
 					
 <table class="table-condensed" border="1">
   <caption>
@@ -586,7 +532,67 @@ Typically, a modern office display between 90 and 100 dpi, older CRT monitors ca
   
 </table>
 
+					<p>Services based on WMS specification are flexible and provides the user with many options, such as:
+					</p>
+
+					<ul>
+						<li>
+							Choosing which map projection will be produced in
+						</li>
+						<li>
+							Turn on or off layers in the service.
+						</li>
+						<li>
+							Choose scale freely
+						</li>
+						<li>
+							Which image format and transparency to be produced
+						</li>
+						<li>
+							Retrieving Legend of the various map layers
+						</li>
+						<li>
+							Obtaining basic information about objects on the map from attributes (feature info) etc
+						</li>
+					</ul>
+					
+					<p> Checkout also the <strong><a href="http://geodata.npolar.no/arcgis/rest/services/inspire3">list of map services</a></strong> provided by NPI on the ArcGIS Server REST API.</p>
+
 				</div>
+			
+				<!-- Map Viewers
+					=============================-->
+					
+				<div class="tab-pane" id="tab-viewers">
+					<div id="featuredMaps">
+					<ul class="mapsList">
+						<li class="item Application">
+					<a class="block" id="mapItem0" href="http://svalbardkartet.npolar.no" target="_blank"><img src="/public/img/svalbardkartet_thumbnail.png" alt="svalbardkartet_thumbnail.png">
+						
+					</a>
+					<h4 class="title">Svalbardkartet</h4><p>Svalbardkartet is an interactive thematic atlas of Svalbard supplemented with a rich datasets of environmental data layers with advanced map viewer.
+						In addition to the detailed topography and large amount of thematic maps, the portal provides advanced GIS capabilities such as high-resolution map printing, identifiying map objects, advanced drawing and measurements </p>
+						</li>
+						
+						<li class="item Application">
+						<a class="block" id="mapItem2" href="http://willem.npolar.no/barentsportal/Viewer.html?Viewer=Barentsportal" target="_blank"><img src="/public/img/barentsportal_thumbnail.png" alt="barentsportal_thumbnail.png"></a>
+					<h4 class="title">Barentsportal</h4><p>Barentsportal is an interactive thematic atlas of the joint Norwegian-Russian environmental status report for the barents sea. </p>
+						</li>
+						<li class="item Application">
+					<a class="block" id="mapItem1" href="http://toposvalbard.npolar.no" target="_blank"><img src="/public/img/toposvalbard_thumbnail.png" alt="toposvalbard_thumbnail.png"></a>
+					<h4 class="title">TopoSvalbard</h4><p>TopoSvalbard is an interactive topographical map portal of Svalbard. 
+						In addition to the presentation of detailed topography and placenames, the portal includes basic user requirements such as coordinate readings and distance measurements. 
+						It also includes 3D map of Svalbard as well as areal and landscape photos</p>
+						</li>
+						<li class="item Application">
+						<a class="block" id="mapItem2" href="http://topojanmayen.npolar.no" target="_blank"><img src="/public/img/topojanmayen_thumbnail.png" alt="topojanmayen_thumbnail.png"></a>
+					<h4 class="title">TopoJanMayen</h4><p>TopoJanMayen is an interactive topographical map of Jan Mayen. </p>
+						</li>
+					</ul>
+					</div>
+					
+				</div>
+			
 			</div>
 		</div>
 		</div>
