@@ -84,6 +84,7 @@
       dojo.require("dojox.html.entities");
       
       var overlayMapService = 'http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Miljo/MapServer';
+      //@TODO create a map service with all thematic layers
       var layers = [{ name: 'HvalrossLiggeplasser', id: 0 }, { name: 'Røye', id: 1 }, { name: 'Sjøfugl kolonier', id: 3 }, { name: 'Alle Sjøpattdyr observasjoner', id: 25 }, { name: 'Isbjørn observasjoner', id: 35 }, { name: 'Strandrydding per år', id: 56 }, { name: 'Reinbestandområder', id: 57 }, { name: 'Biogeografiske soner', id: 58 }, { name: 'Vegetasjon (10 kasser)', id: 60}];
       var root = location.protocol + "//" + location.host;
       var mapletUrl = root + "/iframe/iframe.html"; // Relative path to Iframe page, should be absolute path when deployed, for example http://svalbardkartet.npolar.no/iframe.html
@@ -92,7 +93,6 @@
       var geometryServiceUrl = 'http://geodata.npolar.no/ArcGIS/rest/services/geometry/Geometry/GeometryServer';
       var isTiledMap = true;
       //var isTiledMap = false;
-      //@TODO add map popup and feature info function
       var decimalPlacesWGS84 = 6;
       var map, point, mode, symbolCross, symbolDot, geometryService;
 
@@ -119,6 +119,7 @@
               basemap = new esri.layers.ArcGISDynamicMapServiceLayer(mapServiceUrl);
           map.addLayer(basemap);
           map.addLayer(overlayMap);
+          //@TODO add map popup and feature info function
           symbolCross = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_X, 15, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0, 0, 0]), 2));
           symbolDot = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 0, 0]), 2), new dojo.Color([255, 0, 0]));
           dojo.connect(dojo.byId('btnPlaceMarker'), "onclick", btnPlaceMarker_click);
@@ -135,6 +136,7 @@
           dojo.connect(dojo.byId('rbSymbolDot'), "onchange", symbolChanged);
           dojo.connect(dojo.byId('chkSC'), 'onchange', generateCode);
           var layersDiv = dojo.byId('layersDiv');
+          //@TODO new funtioanlity for users to reorder layers (requires ArcGIS Server 10.1 service https://developers.arcgis.com/en/javascript/jssamples/layers_dynamic_reorder.html)
           dojo.forEach(layers, function(item) {
               var checkBox = document.createElement('input');
               checkBox.type = 'checkbox';
