@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Svalbardkartet IFrame</title>
-    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/dojo/dijit/themes/claro/claro.css">    
+    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/dojo/dijit/themes/tundra/tundra.css">    
 	<link href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/esri/css/esri.css" rel="stylesheet" type="text/css" >
     <style>
       html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
@@ -14,13 +14,11 @@
       dojo.require("dijit.layout.BorderContainer");
       dojo.require("dijit.layout.ContentPane");
       dojo.require("esri.map");
-dojo.require("esri.dijit.Popup");
       var map, geometryService;
-      var overlayMapService = 'http://willem3.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer';
-      var layers = [{ name: 'HvalrossLiggeplasser', id: 2 }, { name: 'Røye', id: 3 }, { name: 'Sjøfugl kolonier', id: 5 }, { name: 'Alle Sjøpattdyr observasjoner', id: 27 }, { name: 'Isbjørn observasjoner', id: 37 }, { name: 'Strandrydding per år', id: 58 }, { name: 'Reinbestandområder', id: 59 }, { name: 'Biogeografiske soner', id: 60 }, { name: 'Vegetasjon (10 kasser)', id: 62}, { name: 'Geologi', id: 87 }];
+      var overlayMapService = 'http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Miljo/MapServer';
+      var layers = [{ name: 'HvalrossLiggeplasser', id: 0 }, { name: 'Røye', id: 1 }, { name: 'Sjøfugl kolonier', id: 3 }, { name: 'Alle Sjøpattdyr observasjoner', id: 25 }, { name: 'Isbjørn observasjoner', id: 35 }, { name: 'Strandrydding per år', id: 56 }, { name: 'Reinbestandområder', id: 57 }, { name: 'Biogeografiske soner', id: 58 }, { name: 'Vegetasjon (10 kasser)', id: 60}];
       var geometryServiceUrl = 'http://geodata.npolar.no/ArcGIS/rest/services/geometry/Geometry/GeometryServer';
 	  var decimalPlacesWGS84 = 6;
-	  var opacity =0.8;
 
       // Read a page's GET URL variables and return them as an associative array.
       function getUrlVars() {
@@ -38,13 +36,11 @@ dojo.require("esri.dijit.Popup");
           geometryService = new esri.tasks.GeometryService(geometryServiceUrl);
           dojo.connect(geometryService, "onProjectComplete", onProjectComplete);
           var urlParams = getUrlVars();
-          console.log(urlParams);
           var width = urlParams["width"];
           var height = urlParams["height"];
           dojo.style("map", "width", width + "px");
           dojo.style("map", "height", height + "px");
           var slider = true;
-
           if (urlParams["n"])
               slider = !(urlParams["n"] * 1 == 0);
           if (urlParams["extent"]) {
@@ -53,27 +49,20 @@ dojo.require("esri.dijit.Popup");
               if (urlParams["wkid"]) wkid = urlParams["wkid"];
               var initExtent = new esri.geometry.Extent({ "xmin": extent[0] * 1, "ymin": extent[1] * 1, "xmax": extent[2] * 1, "ymax": extent[3] * 1, "spatialReference": { "wkid": 32633} });
               //var initExtent = new esri.geometry.Extent({ "xmin": -13635568, "ymin": 4541606, "xmax": -13625430, "ymax": 4547310, "spatialReference": { "wkid": 102100} });
-              map = new esri.Map("map", {extent: initExtent, logo: false });
+              map = new esri.Map("map", { extent: initExtent, logo: false });
           }
           else {
-              map = new esri.Map("map", {logo: false });
+              map = new esri.Map("map", { logo: false });
           }
-          
           var basemap = null;
-          //var mapUrl = "http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer";
           var mapUrl = decodeURIComponent(urlParams["mapUrl"]);
           if (urlParams["t"] && urlParams["t"] == "1")
               basemap = new esri.layers.ArcGISTiledMapServiceLayer(mapUrl);
           else
               basemap = new esri.layers.ArcGISDynamicMapServiceLayer(mapUrl);
           map.addLayer(basemap);
-          
-          // set the layer opacity
-          if (urlParams["opValue"]<=1&&urlParams["opValue"]>=0)
-              opacity = urlParams["opValue"];	
-          	
           if (urlParams["cl"]) {
-              var overlayMap = new esri.layers.ArcGISDynamicMapServiceLayer(overlayMapService, { opacity: opacity });
+              var overlayMap = new esri.layers.ArcGISDynamicMapServiceLayer(overlayMapService, { opacity: 0.7 });
               overlayMap.id = 'overlayMap';
               var visibleLayers = [];
               dojo.forEach(urlParams["cl"].split(";"), function(item) {
@@ -116,10 +105,7 @@ dojo.require("esri.dijit.Popup");
     </script>
   </head>
   
-  <body class="claro">
-    <div id="map">
-    	<div id="nplogo" style="position: absolute; bottom: 0px; left: 5px; z-index: 80;"><img src="images/iframe_nplogo.png" /></div>
-    </div>
-    <div style="display: none; position: absolute; left: 20px; bottom: 20px;" id="wgs84coords"></div>
+  <body class="tundra">
+    <div id="map"></div><div style="display: none; position: absolute; left: 20px; bottom: 20px;" id="wgs84coords"></div>
   </body>
 </html>

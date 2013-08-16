@@ -3,11 +3,29 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Svalbardkartet IFrame Designer</title>
-    <style>
+    <style type="text/css">
       html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
       body { font-family: Arial; font-size: 12px; padding-left: 20px; padding-top: 20px; }
-      .heading { font-size: 16px; }
-      .subheading { font-size: 14px; padding-bottom: 10px; }
+      .heading {
+			-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;
+ 			margin:0px;
+			padding:0px;
+			position: fixed;
+			top: 22px;
+			left: 22px;
+			width: 160px;
+			z-index: 50;
+			font-size: 12px; }
+      .subheading { 
+      		-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;
+			font-size:12px;
+			margin:0px;
+			padding:0px;
+			position: fixed;
+			top: 36px;
+			width: 160px;
+			left: 22px;
+			z-index: 50;}
       .mapdiv { float: left; }
       .paramdiv { float: left; padding-left: 10px; }
       .iframesizediv,.widthdiv, .heightdiv, .navigationdiv, .pointdiv { margin-bottom: 10px; }
@@ -19,15 +37,54 @@
       .code { width: 600px; padding: 15px; font-size: 12px; border: solid 1px black; background-color: #DDDDDD; color: #222222; word-wrap: break-word; white-space:pre-wrap;}
       .layersDiv input, .showcoordinatediv input { width: 25px; }
       .layersDiv { margin-bottom: 10px; }
+      #showhide{
+			/*-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;*/
+ 			margin:0px;
+			padding:0px;
+			height:20px;
+			position: fixed;
+			top: 2px;
+			width: 20px;
+			left: 2px;
+			z-index: 50;
+			}
+      #showhideomap{
+			/*-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;*/
+ 			margin:0px;
+			padding:0px;
+			height:20px;
+			position: fixed;
+			top: 2px;
+			width: 20px;
+			right: 2px;
+			z-index: 50;
+			display:none;
+			}
+	
+      #panel{
+			-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;
+			display:none;
+ 			margin:0px;
+			padding:0px;
+			width:1px;
+			position: fixed;
+			height:1px;
+			left:1px;
+			top:1px;
+			z-index: 40;
+			}
     </style>
   </head>
   
   <body>
-    <div class="heading"><strong>Iframe Designer</strong> </div>
-    <div class="subheading">
-    	Here you can design an interactive map that you can incorporate in a website. Select a layers to overlay, navigate to the desired map section.
-    	</div>
-    <div class="mapdiv" id="map" style="border: 1px solid black; width: 50%; height: 70%;"></div>
+  	
+	<div dojotype="dijit.layout.BorderContainer" design="headline" gutters="false" style="width:100%; height:100%;">
+    <div id="showhide" oncontextmenu="return false" onclick="showhide();"><img src="images/showhide.png" title="Skjul/vis plakat" onmousedown="src='images/showhide_down.png'" onmouseup="src='images/showhide.png'" onmouseover="this.style.cursor='pointer'"></div>
+    <div id="panel"><img oncontextmenu="return false" onmouseover="" src="images/background.png">
+    <div class="heading"><strong>Embed Map in Website </strong> </div>
+    <div class="subheading">Here you can design an interactive map that you can incorporate in a website. Select a layers to overlay and navigate to the desired map section.</div>
+    </div>
+    <div class="mapdiv" id="map" oncontextmenu="return false" style="border: 1px solid black; width: 50%; height: 70%;" region="center"></div>
     <div class="paramdiv">
         <div id="layersDiv" class="layersDiv">Select layers to show on map:<br /><br />
         </div>
@@ -70,6 +127,7 @@
             </div>
         </div>
         </div>
+        </div>
   </body>
 </html>
 
@@ -83,9 +141,8 @@
       dojo.require("esri.map");
       dojo.require("dojox.html.entities");
       
-      var overlayMapService = 'http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Miljo/MapServer';
-      //@TODO create a map service with all thematic layers
-      var layers = [{ name: 'HvalrossLiggeplasser', id: 0 }, { name: 'Røye', id: 1 }, { name: 'Sjøfugl kolonier', id: 3 }, { name: 'Alle Sjøpattdyr observasjoner', id: 25 }, { name: 'Isbjørn observasjoner', id: 35 }, { name: 'Strandrydding per år', id: 56 }, { name: 'Reinbestandområder', id: 57 }, { name: 'Biogeografiske soner', id: 58 }, { name: 'Vegetasjon (10 kasser)', id: 60}];
+      var overlayMapService = 'http://willem3.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer';
+      var layers = [{ name: 'HvalrossLiggeplasser', id: 2 }, { name: 'Røye', id: 3 }, { name: 'Sjøfugl kolonier', id: 5 }, { name: 'Alle Sjøpattdyr observasjoner', id: 27 }, { name: 'Isbjørn observasjoner', id: 37 }, { name: 'Strandrydding per år', id: 58 }, { name: 'Reinbestandområder', id: 59 }, { name: 'Biogeografiske soner', id: 60 }, { name: 'Vegetasjon (10 kasser)', id: 62}, { name: 'Geologi', id: 87 }];
       var root = location.protocol + "//" + location.host;
       var mapletUrl = root + "/iframe/iframe.html"; // Relative path to Iframe page, should be absolute path when deployed, for example http://svalbardkartet.npolar.no/iframe.html
       var exampleUrl = 'iframesample.html'; // Relative path, should be absolute path when deployed.
@@ -93,10 +150,16 @@
       var geometryServiceUrl = 'http://geodata.npolar.no/ArcGIS/rest/services/geometry/Geometry/GeometryServer';
       var isTiledMap = true;
       //var isTiledMap = false;
+      //@TODO add map popup and feature info function
       var decimalPlacesWGS84 = 6;
       var map, point, mode, symbolCross, symbolDot, geometryService;
 
       function init() {
+      	
+      	// hideable panel
+		document.getElementById("panel").style.display = "none";
+		document.getElementById("showhide").style.display = "block";
+		
           geometryService = new esri.tasks.GeometryService(geometryServiceUrl);
           dojo.connect(geometryService, "onProjectComplete", onProjectComplete);
           var startExtent = new esri.geometry.Extent({ "xmin": 356350.3184, "ymin": 8456631.06, "xmax" : 886026.044, "ymax" : 8989694.055, "spatialReference": { "wkid": 32633} });
@@ -119,7 +182,6 @@
               basemap = new esri.layers.ArcGISDynamicMapServiceLayer(mapServiceUrl);
           map.addLayer(basemap);
           map.addLayer(overlayMap);
-          //@TODO add map popup and feature info function
           symbolCross = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_X, 15, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0, 0, 0]), 2));
           symbolDot = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 0, 0]), 2), new dojo.Color([255, 0, 0]));
           dojo.connect(dojo.byId('btnPlaceMarker'), "onclick", btnPlaceMarker_click);
@@ -136,7 +198,6 @@
           dojo.connect(dojo.byId('rbSymbolDot'), "onchange", symbolChanged);
           dojo.connect(dojo.byId('chkSC'), 'onchange', generateCode);
           var layersDiv = dojo.byId('layersDiv');
-          //@TODO new funtioanlity for users to reorder layers (requires ArcGIS Server 10.1 service https://developers.arcgis.com/en/javascript/jssamples/layers_dynamic_reorder.html)
           dojo.forEach(layers, function(item) {
               var checkBox = document.createElement('input');
               checkBox.type = 'checkbox';
@@ -148,7 +209,6 @@
               var br = document.createElement('br');
               layersDiv.appendChild(br);
               dojo.connect(checkBox, 'onchange', layerCheckBox_click);
-              //@TODO Fix parameter for checkbox when 0 layers are selected
           });
       }
 
@@ -257,6 +317,34 @@
       function map_extentChanged() {
         generateCode();
       }
+      
+      
+			//show hide menu
+			function showhide () {
+				if(document.getElementById("panel").style.display == "none") {
+					document.getElementById("panel").style.display = "block";
+					//document.getElementById("panelright").style.display = "block";
+					document.getElementById("panel").style.display = "block";
+					//document.getElementById("panelright").style.display = "block";
+					//document.getElementById("navcontrols").style.display = "block";
+				}
+				else {
+					document.getElementById("panel").style.display = "none";
+					//document.getElementById("panelright").style.display = "none";
+					//document.getElementById("navcontrols").style.display = "none";
+					
+				}
+			}
+			function showhideomap () {
+				if(document.getElementById("ovWin").style.display == "none") {
+					document.getElementById("ovWin").style.display = "block";
+					document.getElementById("omapback").style.display = "block";
+				}
+				else {
+					document.getElementById("ovWin").style.display = "none";
+					document.getElementById("omapback").style.display = "none";
+				}
+			}
       
       dojo.addOnLoad(init);
     </script>
