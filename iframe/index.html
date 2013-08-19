@@ -163,7 +163,7 @@
    	        var layers = [{ name: 'HvalrossLiggeplasser', id: 2 }, { name: 'Røye', id: 3 }, { name: 'Sjøfugl kolonier', id: 5 }, { name: 'Alle Sjøpattdyr observasjoner', id: 27 }, { name: 'Isbjørn observasjoner', id: 37 }, { name: 'Strandrydding per år', id: 58 }, { name: 'Reinbestandområder', id: 59 }, { name: 'Biogeografiske soner', id: 60 }, { name: 'Vegetasjon (10 kasser)', id: 62}, { name: 'Geologi', id: 94 }];
    	        var root = location.protocol + "//" + location.host;
    	        var mapletUrl = root + "/iframe/embed.html"; // Relative path to Iframe page, should be absolute path when deployed, for example http://svalbardkartet.npolar.no/iframe.html
-   	        var exampleUrl = 'iframesample.html'; // Relative path, should be absolute path when deployed.
+   	        var previewURL = 'preview.html'; // Relative path, should be absolute path when deployed.
    	        var basemapServiceUrl = 'http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer';
    	        var dynamicServiceUrl = 'http://willem3.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer';
    	        var geometryServiceUrl = 'http://geodata.npolar.no/ArcGIS/rest/services/geometry/Geometry/GeometryServer';
@@ -259,6 +259,7 @@
           dojo.connect(map, "onExtentChange", map_extentChanged);
           dojo.connect(dojo.byId('btnRemoveMarker'), "onclick", btnRemoveMarker_click);
           dojo.connect(dojo.byId('btnGenerateCode'), "onclick", generateCode);
+          dojo.connect(dojo.byId('btnExamplePage'), "onclick", btnExamplePage_click);
           dojo.connect(dojo.byId('txtWidth'), "onchange", generateCode);
           dojo.connect(dojo.byId('txtHeight'), "onchange", generateCode);
           dojo.connect(dojo.byId('rbLockedYes'), "onchange", generateCode);
@@ -404,9 +405,9 @@
             }
 
             function btnExamplePage_click() {
-                var w = window.open(exampleUrl, '_blank', null, false);
+                var w = window.open(previewURL, '_blank', null, false);
                 if (!(w))
-                    alert('Du må skru av popup blockers for å kunne åpne en eksempelside.');
+                    alert('You need to turn off pop-up blockers to open the sample page.');
             }
 
             function generateCode() {
@@ -440,7 +441,7 @@
                     map.graphics.add(new esri.Graphic(point, sym));
                     dojo.removeAttr('btnRemoveMarker', 'disabled');
                     generateCode();
-                    dojo.byId('utm33Ncoords').innerHTML = dojo.string.substitute("UTM-koordinater (sone 33N): ${0}, ${1}", [Math.round(point.x), Math.round(point.y)]);
+                    dojo.byId('utm33Ncoords').innerHTML = dojo.string.substitute("UTM coordinates (zone 33N): ${0}, ${1}", [Math.round(point.x), Math.round(point.y)]);
                     geometryService.project(map.graphics.graphics, new esri.SpatialReference({
                         "wkid" : 32633
                     }));
@@ -459,7 +460,7 @@
             function onProjectComplete(graphics) {
                 if (graphics && graphics.length == 1) {
                     var g = graphics[0];
-                    dojo.byId('wgs84coords').innerHTML = dojo.string.substitute("Geografiske koordinater (Lat, Long): ${1}, ${0}", [dojo.number.format(g.geometry.x, {
+                    dojo.byId('wgs84coords').innerHTML = dojo.string.substitute("Geographic coordinates (Lat, Long): ${1}, ${0}", [dojo.number.format(g.geometry.x, {
                         places : decimalPlacesWGS84
                     }), dojo.number.format(g.geometry.y, {
                         places : decimalPlacesWGS84
@@ -597,8 +598,11 @@
 						<div class="codefooter">
 							Copy and paste above HTML code to embed on a website.
 						</div>
-						<div class="examplediv">
+						<div class="previewdiv">
 							<input id="btnGenerateCode" value="Update Code" type="button" />
+							<input id="btnExamplePage" value="Preview" type="button" />
+							Opens in new page
+
 						</div>
 					</div>
 				</div>
