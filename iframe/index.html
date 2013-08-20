@@ -222,7 +222,7 @@
                       title: "Svalbardkartet",
                       //collapsed: false, // whether this root layer should be collapsed initially, default false.
                       slider: true, // whether to display a transparency slider. default false.
-                      autoToggle: false //whether to automatically collapse when turned off, and expand when turn on for groups layers. default true. 
+                      autoToggle: true //whether to automatically collapse when turned off, and expand when turn on for groups layers. default true. 
                     }]
                   }, 'tocDiv');
                   toc.startup();
@@ -257,6 +257,7 @@
           dojo.connect(dojo.byId('btnCancelMarker'), "onclick", btnCancelMarker_click);
           dojo.connect(map, "onClick", map_click);
           dojo.connect(map, "onExtentChange", map_extentChanged);
+          dojo.connect(dynaLayer1, "onOpacityChange", generateCode);
           dojo.connect(dojo.byId('btnRemoveMarker'), "onclick", btnRemoveMarker_click);
           dojo.connect(dojo.byId('btnGenerateCode'), "onclick", generateCode);
           dojo.connect(dojo.byId('btnExamplePage'), "onclick", btnExamplePage_click);
@@ -570,6 +571,7 @@
 						<input id="rbLockedNo" name="rbLocked" type="radio" value="1" checked/>
 						No.
 					</div>
+					<br />
 					<div class="pointdiv">
 						Add point marker to map.
 						<div class="pointdivbuttons">
@@ -600,9 +602,7 @@
 						</div>
 						<div class="previewdiv">
 							<input id="btnGenerateCode" value="Update Code" type="button" />
-							<input id="btnExamplePage" value="Preview" type="button" />
-							Opens in new page
-
+							<input id="btnExamplePage" value="Preview" type="button" /> (Opens in new page)
 						</div>
 					</div>
 				</div>
