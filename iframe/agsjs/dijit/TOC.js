@@ -148,7 +148,8 @@ define("agsjs/dijit/TOC", ['dojo/_base/declare','dijit/_Widget','dijit/_Template
       rootLayer.collapsed = this.rootLayerTOC.config.collapsed;
       if (this.rootLayerTOC.config.slider) {
         this.sliderNode = dojo.create('div', {
-          'class': 'agsjsTOCSlider'
+          'class': 'agsjsTOCSlider',
+          'title': "Adjust transparency"
         }, this.rowNode, 'last');//
         this.slider = new dijit.form.HorizontalSlider({
           showButtons: false,
