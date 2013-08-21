@@ -7,6 +7,73 @@
 	<link href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/esri/css/esri.css" rel="stylesheet" type="text/css" >
     <style>
       html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
+      
+      #nplogo{
+      	position: absolute;
+      	bottom: 10px;
+      	left: 0px;
+      	z-index: 80;
+      }
+      #backgroundbottom{
+			position:absolute;
+			background-color:rgba(255,255,255,0.8);
+			bottom:0px;
+			left:0px;
+			height:14px;
+			width:100%;
+			z-index:20;
+			}
+      #fullmap{
+			position:absolute;
+			bottom:0px;
+			left:5px;
+			z-index:80;
+			font-size: 11px;
+			}
+			
+	.esriControlsBR{
+		position: absolute;
+		right: 5px;
+		bottom: 0px;
+		z-index: 30;
+	}
+
+      /*Esri zoom silder*/
+.esriSimpleSlider {
+	top: 5px;
+	left: 8px;
+	border: none !important;
+	background-color: transparent !important;
+	color: white !important;
+	box-shadow: none !important;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+}
+
+.esriSimpleSlider div {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	width: 20px;
+	height: 20px;
+	line-height: 18px;
+	font-size: 18px;
+}
+	.esriSimpleSliderVertical .esriSimpleSliderIncrementButton,
+	.esriSimpleSliderVertical .esriSimpleSliderDecrementButton {
+	background: #858585;
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzVkYWRkZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMTdiYzIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top, #858585 0%, #242424 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #858585), color-stop(100%, #242424));
+	background: -webkit-linear-gradient(top, #858585 0%, #242424 100%);
+	background: -o-linear-gradient(top, #858585 0%, #242424 100%);
+	background: -ms-linear-gradient(top, #858585 0%, #242424 100%);
+	background: linear-gradient(top, #858585 0%, #242424 100%);	
+	border: solid 1px #545454;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	box-shadow: 0 0 0.25em #BBB;
+}
     </style>
     <script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
     <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.5"></script>
@@ -48,7 +115,8 @@ dojo.require("esri.dijit.Popup");
           if (urlParams["n"])
               slider = !(urlParams["n"] * 1 == 0);
           if (urlParams["extent"]) {
-              var extent = urlParams["extent"].split(';');
+              var extent = urlParams["extent"].split(',');
+              //dojo.byId('fullmap').innerHTML = '<a id="fullmaplink" href="http://svalbardkartet.npolar.no/Viewer.html?Viewer=Svalbardkartet&extent='+ extent + '" target="_blank">Show on Svalbardkartet</a>';
               var wkid = "32633";
               if (urlParams["wkid"]) wkid = urlParams["wkid"];
               var initExtent = new esri.geometry.Extent({ "xmin": extent[0] * 1, "ymin": extent[1] * 1, "xmax": extent[2] * 1, "ymax": extent[3] * 1, "spatialReference": { "wkid": 32633} });
@@ -61,11 +129,13 @@ dojo.require("esri.dijit.Popup");
           
           var basemap = null;
           //var mapUrl = "http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer";
+          //var mapUrl2 = "http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHX/MapServer";
           var mapUrl = decodeURIComponent(urlParams["mapUrl"]);
           if (urlParams["t"] && urlParams["t"] == "1")
               basemap = new esri.layers.ArcGISTiledMapServiceLayer(mapUrl);
           else
               basemap = new esri.layers.ArcGISDynamicMapServiceLayer(mapUrl);
+              //basemap = new esri.layers.ArcGISTiledMapServiceLayer(mapUrl2);
           map.addLayer(basemap);
           
           // set the layer opacity
@@ -82,6 +152,10 @@ dojo.require("esri.dijit.Popup");
               overlayMap.setVisibleLayers(visibleLayers);
               map.addLayer(overlayMap);
           }
+          
+          showFullMap();
+          dojo.connect(map, "onExtentChange", showFullMap);
+          
           dojo.connect(map, "onLoad", function() {
               if (!slider) {
                   map.disableMapNavigation();
@@ -103,6 +177,11 @@ dojo.require("esri.dijit.Popup");
               }
           });
       }
+      
+      function showFullMap (){
+      	var extent = Math.round(map.extent.xmin) + "," + Math.round(map.extent.ymin) + "," + Math.round(map.extent.xmax) + "," + Math.round(map.extent.ymax);
+      	dojo.byId('fullmap').innerHTML = '<a id="fullmaplink" href="http://svalbardkartet.npolar.no/Viewer.html?Viewer=Svalbardkartet&extent='+ extent + '" target="_blank">Show on Svalbardkartet</a>';
+      }
 
       function onProjectComplete(graphics) {
           if (graphics && graphics.length == 1) {
@@ -118,7 +197,11 @@ dojo.require("esri.dijit.Popup");
   
   <body class="claro">
     <div id="map">
-    	<div id="nplogo" style="position: absolute; bottom: 0px; left: 5px; z-index: 80;"><img src="images/iframe_nplogo.png" /></div>
+    	<div id="nplogo"><img src="images/iframe_nplogo.png" /></div>
+    	<div id="backgroundbottom">
+    		<div id="fullmap"><a id="fullmaplink"  href="http://svalbardkartet.npolar.no/Viewer.html?Viewer=Svalbardkartet" target="_blank">Show on Svalbardkartet</a></div>
+    	</div>
+    	
     </div>
     <div style="display: none; position: absolute; left: 20px; bottom: 20px;" id="wgs84coords"></div>
   </body>
