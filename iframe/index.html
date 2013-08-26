@@ -65,6 +65,15 @@
 				word-wrap: break-word;
 				white-space: pre-wrap;
 			}
+			
+			.buttonText{
+        -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;
+			border: solid 2px #E0DFDF;
+			background-color: #EEEEEE;
+ 			margin-top:10px;
+			padding:2px;
+			width: auto;
+			}
 			*/
 			#divCode { 
         width: 400px; padding: 5px; overflow: auto;
@@ -157,7 +166,6 @@
 		</script>
 		<script type="text/javascript">
 		        
-
    	        var layers = [{ name: 'HvalrossLiggeplasser', id: 2 }, { name: 'Røye', id: 3 }, { name: 'Sjøfugl kolonier', id: 5 }, { name: 'Alle Sjøpattdyr observasjoner', id: 27 }, { name: 'Isbjørn observasjoner', id: 37 }, { name: 'Strandrydding per år', id: 58 }, { name: 'Reinbestandområder', id: 59 }, { name: 'Biogeografiske soner', id: 60 }, { name: 'Vegetasjon (10 kasser)', id: 62}, { name: 'Geologi', id: 94 }];
    	        var root = location.protocol + "//" + location.host;
    	        var mapletUrl = root + "/iframe/embed.html"; // Relative path to Iframe page, should be absolute path when deployed, for example http://svalbardkartet.npolar.no/iframe.html
@@ -541,7 +549,7 @@
 		</script>
 	</head>
 	<body class="claro">
-		<div id="content" data-dojo-type="dijit.layout.BorderContainer" design="headline" gutters="true" style="width: 100%; height: 100%; margin: 0;">
+		<div id="content" data-dojo-type="dijit.layout.BorderContainer" design="headline" gutters="false" style="width: 100%; height: 100%; margin: 0;">
 
 			<div data-dojo-type="dojox.layout.ExpandoPane" data-dojo-props="duration:300, region:'left', maxWidth:'280px'" style="width:280px;" splitter="true">
 				<div id="tocDiv"></div>
@@ -554,8 +562,6 @@
 				-->
 				
     <div id="showhide" onclick="showhide();"><img id="showhideImg" src="/iframe/images/chevron_right.png" title="Show/hide toolbox" onmouseover="this.style.cursor='pointer'"></div>
-    
-
 				<div class="param" id="paramDiv">
 					<div id="layersDiv" class="layersDiv">
 						<div><strong>Embed Map in Website </strong> </div>
@@ -601,6 +607,10 @@
 						<div class="previewdiv">
 							<input id="btnGenerateCode" value="Update Code" type="button" />
 							<input id="btnExamplePage" value="Preview" type="button" /> (Opens in new page)
+							<!--
+							<span class = "buttonText" onclick="generateCode();" title="Get IFrame Code" onmouseover="this.style.cursor='pointer'">Update Code</span>
+							<span class = "buttonText" onclick="btnExamplePage_click();" title="Preview Iframe" onmouseover="this.style.cursor='pointer'">Preview</span> (Opens in new page)
+							-->
 						</div>
 					</div>
 				</div>
