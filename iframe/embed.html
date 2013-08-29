@@ -88,6 +88,9 @@ dojo.require("esri.dijit.Popup");
       var geometryServiceUrl = 'http://geodata.npolar.no/ArcGIS/rest/services/geometry/Geometry/GeometryServer';
 	  var decimalPlacesWGS84 = 6;
 	  var opacity =0.8;
+	  var visible = [];
+	  var visibleLayers = [];
+      var identifyTask, identifyParams, identifyHandle = 0;
 
       // Read a page's GET URL variables and return them as an associative array.
       function getUrlVars() {
@@ -116,7 +119,7 @@ dojo.require("esri.dijit.Popup");
               slider = !(urlParams["n"] * 1 == 0);
           if (urlParams["extent"]) {
               var extent = urlParams["extent"].split(',');
-              //dojo.byId('fullmap').innerHTML = '<a id="fullmaplink" href="http://svalbardkartet.npolar.no/Viewer.html?Viewer=Svalbardkartet&extent='+ extent + '" target="_blank">Show on Svalbardkartet</a>';
+              //dojo.byId('fullmap').innerHTML = '<a id="fullmaplink" href="http://svalbardkartet.npolar.no/Viewer.html?Viewer=Svalbardkartet&extent='+ extent + '" target="_blank">Vis i Svalbardkartet</a>';
               var wkid = "32633";
               if (urlParams["wkid"]) wkid = urlParams["wkid"];
               var initExtent = new esri.geometry.Extent({ "xmin": extent[0] * 1, "ymin": extent[1] * 1, "xmax": extent[2] * 1, "ymax": extent[3] * 1, "spatialReference": { "wkid": 32633} });
@@ -145,7 +148,7 @@ dojo.require("esri.dijit.Popup");
           if (urlParams["cl"]) {
               var overlayMap = new esri.layers.ArcGISDynamicMapServiceLayer(overlayMapService, { opacity: opacity });
               overlayMap.id = 'overlayMap';
-              var visibleLayers = [];
+              
               dojo.forEach(urlParams["cl"].split(";"), function(item) {
                   visibleLayers.push(1 * item);
               });
@@ -155,8 +158,10 @@ dojo.require("esri.dijit.Popup");
           
           showFullMap();
           dojo.connect(map, "onExtentChange", showFullMap);
+          dojo.connect(map, "onClick", updateIdentifyTask);
           
           dojo.connect(map, "onLoad", function() {
+          	initIdentify(map);
               if (!slider) {
                   map.disableMapNavigation();
                   map.hideZoomSlider();
@@ -178,9 +183,76 @@ dojo.require("esri.dijit.Popup");
           });
       }
       
+                  // Identify Task (PopUp)
+            
+            function initIdentify(map) {
+        //create identify tasks and setup parameters 
+        identifyTask = new esri.tasks.IdentifyTask("http://willem3.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer");
+
+        identifyParams = new esri.tasks.IdentifyParameters();
+        identifyParams.tolerance = 5;
+        identifyParams.returnGeometry = true;
+        identifyParams.layerIds = visibleLayers;
+        identifyParams.layerOption = esri.tasks.IdentifyParameters.LAYER_OPTION_VISIBLE;
+        identifyParams.width = map.width;
+        identifyParams.height = map.height;
+        //console.log('set up ID');
+
+        // Save a reference to the event listener so it can be
+        // disconnected when no layers are selected
+        identifyHandle = dojo.connect(map, "onClick", executeIdentifyTask);
+      }
+      
+      function updateIdentifyTask() {
+        visible = visibleLayers;
+        // If no layers are visible set the array value to = -1
+        // and disconnect the identify task
+        if (visible.length === 0) {
+          visible = [-1];
+          dojo.disconnect(identifyHandle);
+          map.infoWindow.hide();
+          console.log('disconnected ID');
+        } else if ( ! identifyHandle[0] ) { 
+          // There are visible layers to re-connect identify task
+          // and the identify task is not connected 
+          identifyHandle = dojo.connect(map, "onClick", executeIdentifyTask);
+          //console.log('connected ID');
+        }
+        // Update Identifys layers
+        identifyParams.layerIds = visible;
+      }
+            
+            function executeIdentifyTask(evt) {
+        identifyParams.geometry = evt.mapPoint;
+        identifyParams.mapExtent = map.extent;
+
+        var deferred = identifyTask.execute(identifyParams);
+
+        deferred.addCallback(function (response) {
+          // response is an array of identify result objects    
+          // return an array of features.
+          return dojo.map(response, function (result) {
+            var feature = result.feature;
+            feature.attributes.layerName = result.layerName;
+
+            //console.log(feature.attributes);
+ 
+            var template = new esri.InfoTemplate();
+            template.setTitle("${layerName}");
+            template.setContent("${*}");
+            feature.setInfoTemplate(template);
+
+            return feature;
+          });
+        });
+
+        map.infoWindow.setFeatures([deferred]);
+        map.infoWindow.show(evt.mapPoint);
+      }
+      
       function showFullMap (){
       	var extent = Math.round(map.extent.xmin) + "," + Math.round(map.extent.ymin) + "," + Math.round(map.extent.xmax) + "," + Math.round(map.extent.ymax);
-      	dojo.byId('fullmap').innerHTML = '<a id="fullmaplink" href="http://svalbardkartet.npolar.no/Viewer.html?Viewer=Svalbardkartet&extent='+ extent + '" target="_blank">Show on Svalbardkartet</a>';
+      	dojo.byId('fullmap').innerHTML = '<a id="fullmaplink" href="http://svalbardkartet.npolar.no/Viewer.html?Viewer=Svalbardkartet&extent='+ extent + '" target="_blank">Vis i Svalbardkartet</a>';
       }
 
       function onProjectComplete(graphics) {
@@ -199,7 +271,7 @@ dojo.require("esri.dijit.Popup");
     <div id="map">
     	<div id="nplogo"><img src="images/iframe_nplogo.png" /></div>
     	<div id="backgroundbottom">
-    		<div id="fullmap"><a id="fullmaplink"  href="http://svalbardkartet.npolar.no/Viewer.html?Viewer=Svalbardkartet" target="_blank">Show on Svalbardkartet</a></div>
+    		<div id="fullmap"><a id="fullmaplink"  href="http://svalbardkartet.npolar.no/Viewer.html?Viewer=Svalbardkartet" target="_blank">Vis i Svalbardkartet</a></div>
     	</div>
     	
     </div>

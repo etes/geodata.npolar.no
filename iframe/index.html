@@ -37,6 +37,7 @@
 			width: 20px;
 			z-index: 50;
 			}
+			
 			#paramDiv{
 			/*-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;*/
         	-moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;
@@ -158,15 +159,18 @@
             // uncomment if want dojo widget style checkbox
             //dojo.require('dijit.form.CheckBox');
             dojo.require("esri.map");
+            //dojo.require("esri.InfoTemplate");
             dojo.require("esri.layers.FeatureLayer");
             dojo.require("dojox.html.entities");
             //dojo.require("dojo.fx");// needed if use jsapi 3.0
             dojo.require("agsjs.dijit.TOC");
             dojo.require("dojox.layout.ExpandoPane");
+            
+      dojo.require("esri.dijit.Popup");
 		</script>
 		<script type="text/javascript">
 		        
-   	        var layers = [{ name: 'HvalrossLiggeplasser', id: 2 }, { name: 'Røye', id: 3 }, { name: 'Sjøfugl kolonier', id: 5 }, { name: 'Alle Sjøpattdyr observasjoner', id: 27 }, { name: 'Isbjørn observasjoner', id: 37 }, { name: 'Strandrydding per år', id: 58 }, { name: 'Reinbestandområder', id: 59 }, { name: 'Biogeografiske soner', id: 60 }, { name: 'Vegetasjon (10 kasser)', id: 62}, { name: 'Geologi', id: 94 }];
+   	        var layers = [{ name: 'HvalrossLiggeplasser', id: 2 }, { name: 'RÃ¸ye', id: 3 }, { name: 'SjÃ¸fugl kolonier', id: 5 }, { name: 'Alle SjÃ¸pattdyr observasjoner', id: 27 }, { name: 'IsbjÃ¸rn observasjoner', id: 37 }, { name: 'Strandrydding per Ã¥r', id: 58 }, { name: 'ReinbestandomrÃ¥der', id: 59 }, { name: 'Biogeografiske soner', id: 60 }, { name: 'Vegetasjon (10 kasser)', id: 62}, { name: 'Geologi', id: 94 }];
    	        var root = location.protocol + "//" + location.host;
    	        var mapletUrl = root + "/iframe/embed.html"; // Relative path to Iframe page, should be absolute path when deployed, for example http://svalbardkartet.npolar.no/iframe.html
    	        var previewURL = 'preview.html'; // Relative path, should be absolute path when deployed.
@@ -182,6 +186,8 @@
       
             var map, toc, dynaLayer1, dynaLayer2, featLayer1;
             var layerInfo = [];
+            var visible = [];
+            var identifyTask, identifyParams, identifyHandle = 0;
             var opacityValue = 0.8;
             function init(){
             	
@@ -191,12 +197,24 @@
 		
           geometryService = new esri.tasks.GeometryService(geometryServiceUrl);
           dojo.connect(geometryService, "onProjectComplete", onProjectComplete);
+          
+          //setup the popup window 
+        var popup = new esri.dijit.Popup({
+          fillSymbol: new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 0, 0]), 2), new dojo.Color([255, 255, 0, 0.25]))
+        }, dojo.create("div"));
             
               var initialExtent = new esri.geometry.Extent({ "xmin": 356350.3184, "ymin": 8456631.06, "xmax" : 886026.044, "ymax" : 8989694.055, "spatialReference": { "wkid": 32633} });
               map = new esri.Map("map", {
                 extent: initialExtent,
+                infoWindow: popup,
                 logo: false
               });
+              
+             dojo.place(popup.domNode, map.root);
+        /*
+        dojo.connect(map, "onLoad", function(map) {
+          initIdentify(map);
+        });*/
               
               var basemap = new esri.layers.ArcGISTiledMapServiceLayer(basemapServiceUrl);
               map.addLayer(basemap);
@@ -205,12 +223,12 @@
                 opacity: 0.8
               });
               
-              featLayer1 = new esri.layers.FeatureLayer("http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/1", {
+              featLayer1 = new esri.layers.FeatureLayer("http://willem3.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer/9", {
                 mode: esri.layers.FeatureLayer.MODE_SNAPSHOT,
-                outFields: ["POP07_SQMI"]//,
+                outFields: ["Navn"]//,
               });
               
-              featLayer1.setDefinitionExpression("STCOFIPS='21111'"); //Louisville, KY
+              featLayer1.setDefinitionExpression("STCOFIPS='21111'"); //
               var h = dojo.connect(map, 'onLayersAddResult', function(results){
                 // overwrite the default visibility of service.
                 // TOC will honor the overwritten value.
@@ -246,17 +264,7 @@
               //map.addLayers([dynaLayer1, featLayer1]);
               map.addLayers([dynaLayer1]);
               
-          //overlayMap.id = 'overlayMap';
-          //overlayMap.setVisibleLayers([]);
-          //overlayMap.setImageFormat('gif');
-          //overlayMap.setImageTransparency(true); //.imageParameters = imageParameters;
-        //  var basemap = null;
-        //  if (isTiledMap)
-        //      basemap = new esri.layers.ArcGISTiledMapServiceLayer(basemapServiceUrl);
-        //  else
-        //      basemap = new esri.layers.ArcGISDynamicMapServiceLayer(basemapServiceUrl);
-        //  map.addLayer(basemap);
-        //  map.addLayer(overlayMap);
+
           symbolCross = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_X, 15, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0, 0, 0]), 2));
           symbolDot = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 0, 0]), 2), new dojo.Color([255, 0, 0]));
           dojo.connect(dojo.byId('btnPlaceMarker'), "onclick", btnPlaceMarker_click);
@@ -275,6 +283,8 @@
           dojo.connect(dojo.byId('rbSymbolDot'), "onchange", symbolChanged);
           dojo.connect(dojo.byId('chkSC'), 'onchange', generateCode);
           
+          //dojo.connect(map, "onClick", executeIdentifyTask);
+          dojo.connect(map, "onClick", updateIdentifyTask);
           //var layersDiv = dojo.byId('layersDiv');
           /*dojo.forEach(layers, function(item) {
               var checkBox = document.createElement('input');
@@ -293,6 +303,7 @@
               //the following help topic for more details http://help.esri.com/EN/webapi/javascript/arcgis/help/jshelp_start.htm#jshelp/inside_guidelines.htm      
               var resizeTimer;
               dojo.connect(map, 'onLoad', function(theMap){
+              	initIdentify(map);
                 dojo.connect(dijit.byId('map'), 'resize', function(){ //resize the map if the div is resized
                   clearTimeout(resizeTimer);
                   resizeTimer = setTimeout(function(){
@@ -521,9 +532,78 @@
             function testFindNodeByLayer() {
                 // 0 is the layerId of group "Basis"
                 toc.findTOCNode(dynaLayer1, 0).collapse();
-                // 	12 is the id of layer "Kortnebbgås"
+                // 	12 is the id of layer "KortnebbgÃ¥s"
                 toc.findTOCNode(dynaLayer1, 12).hide();
             }
+            
+            
+            // Identify Task (PopUp)
+            
+            function initIdentify(map) {
+        //create identify tasks and setup parameters 
+        identifyTask = new esri.tasks.IdentifyTask("http://willem3.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer");
+
+        identifyParams = new esri.tasks.IdentifyParameters();
+        identifyParams.tolerance = 5;
+        identifyParams.returnGeometry = true;
+        identifyParams.layerIds = getCheckedLayers();
+        identifyParams.layerOption = esri.tasks.IdentifyParameters.LAYER_OPTION_VISIBLE;
+        identifyParams.width = map.width;
+        identifyParams.height = map.height;
+        //console.log('set up ID');
+
+        // Save a reference to the event listener so it can be
+        // disconnected when no layers are selected
+        identifyHandle = dojo.connect(map, "onClick", executeIdentifyTask);
+      }
+      
+      function updateIdentifyTask() {
+        visible = getCheckedLayers();
+        // If no layers are visible set the array value to = -1
+        // and disconnect the identify task
+        if (visible.length === 0) {
+          visible = [-1];
+          dojo.disconnect(identifyHandle);
+          map.infoWindow.hide();
+          console.log('disconnected ID');
+        } else if ( ! identifyHandle[0] ) { 
+          // There are visible layers to re-connect identify task
+          // and the identify task is not connected 
+          identifyHandle = dojo.connect(map, "onClick", executeIdentifyTask);
+          //console.log('connected ID');
+        }
+        // Update Identifys layers
+        identifyParams.layerIds = visible;
+      }
+            
+            function executeIdentifyTask(evt) {
+        identifyParams.geometry = evt.mapPoint;
+        identifyParams.mapExtent = map.extent;
+
+        var deferred = identifyTask.execute(identifyParams);
+
+        deferred.addCallback(function (response) {
+          // response is an array of identify result objects    
+          // return an array of features.
+          return dojo.map(response, function (result) {
+            var feature = result.feature;
+            feature.attributes.layerName = result.layerName;
+
+            //console.log(feature.attributes);
+ 
+            var template = new esri.InfoTemplate();
+            template.setTitle("${layerName}");
+            template.setContent("${*}");
+            feature.setInfoTemplate(template);
+
+            return feature;
+          });
+        });
+
+        map.infoWindow.setFeatures([deferred]);
+        map.infoWindow.show(evt.mapPoint);
+      }
+      
             
             //show hide menu
 			function showhide () {
@@ -595,8 +675,8 @@
 						</div>
 					</div>
 					<div class="iframesizediv">
-						<div class="widthdiv"><label for="txtWidth">Custom Width:</label><input id="txtWidth" type="text" value="400" /></div>
-						<div class="heightdiv"><label for="txtHeight">Custom Height:</label><input id="txtHeight" type="text" value="400" /></div>
+						<div class="widthdiv"><label for="txtWidth">Custom Width:</label><input id="txtWidth" type="text" value="500" /></div>
+						<div class="heightdiv"><label for="txtHeight">Custom Height:</label><input id="txtHeight" type="text" value="500" /></div>
 					</div>
 					<br />
 					<div id="codeDiv">
