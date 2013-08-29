@@ -156,7 +156,6 @@
 		<script type="text/javascript">
             dojo.require("dijit.layout.BorderContainer");
             dojo.require("dijit.layout.ContentPane");
-            // uncomment if want dojo widget style checkbox
             dojo.require('dijit.form.CheckBox');
             dojo.require("esri.map");
             dojo.require("esri.dijit.Popup");
@@ -206,10 +205,7 @@
                 infoWindow: popup,
                 logo: false
               });
-              
-            // dojo.place(popup.domNode, map.root);
-
-              
+                            
               var basemap = new esri.layers.ArcGISTiledMapServiceLayer(basemapServiceUrl);
               map.addLayer(basemap);
               
@@ -231,10 +227,6 @@
                   toc = new agsjs.dijit.TOC({
                     map: map,
                     layerInfos: [
-                   // {
-                   //   layer: featLayer1,
-                   //   title: "FeatureLayer1"
-                   // }, 
                     {
                       layer: dynaLayer1,
                       title: "Svalbardkartet",
@@ -255,7 +247,6 @@
                 }
               });
               
-              //map.addLayers([dynaLayer1, featLayer1]);
               map.addLayers([dynaLayer1]);
               
 
@@ -277,21 +268,8 @@
           dojo.connect(dojo.byId('rbSymbolDot'), "onchange", symbolChanged);
           dojo.connect(dojo.byId('chkSC'), 'onchange', generateCode);
           
-          //dojo.connect(map, "onClick", executeIdentifyTask);
           dojo.connect(map, "onClick", updateIdentifyTask);
-          //var layersDiv = dojo.byId('layersDiv');
-          /*dojo.forEach(layers, function(item) {
-              var checkBox = document.createElement('input');
-              checkBox.type = 'checkbox';
-              checkBox.id = 'layerCheckbox' + item.id;
-              layersDiv.appendChild(checkBox);
-              var label = document.createElement('span');
-              label.innerHTML = item.name;
-              layersDiv.appendChild(label);
-              var br = document.createElement('br');
-              layersDiv.appendChild(br);
-              dojo.connect(checkBox, 'onchange', layerCheckBox_click);
-          });*/
+
                             
               //resize the map when the browser resizes - view the 'Resizing and repositioning the map' section in
               //the following help topic for more details http://help.esri.com/EN/webapi/javascript/arcgis/help/jshelp_start.htm#jshelp/inside_guidelines.htm      
@@ -321,12 +299,6 @@
                     if (layerInfo[i] !== -1 && checkBox && checkBox.checked)
                         result.push(i);
                 }
-                /*
-                 dojo.forEach(layers, function(item) {
-                 var checkBox = dojo.byId('layercheckbox_' + item.id);
-                 if (checkBox && checkBox.checked)
-                 result.push(item.id);
-                 });*/
                 return result;
                 
 
@@ -362,18 +334,12 @@
 
             function requestSucceeded(response, io) {
 
-                //pad = dojo.string.pad;
-
-                // console.log("Succeeded: ", response);
                 // dojo.toJson method converts the given JavaScript object
                 // and its properties and values into simple text.
                 dojo.toJsonIndentStr = "  ";
-                //console.log("response as text:\n", dojo.toJson(response, true));
-                //dojo.byId("status").innerHTML = "";
 
                 // show layer indexes and names
                 if (response.hasOwnProperty("layers")) {
-                    //console.log("got some layers");
 
                     layerInfo = dojo.map(response.layers, function(f) {
                         if (f.subLayerIds == null) {
@@ -382,7 +348,6 @@
                             return -1;
                         }
                     });
-                    // console.log(layerInfo);
                 } else {
                     // console.log ("no layers");
                 }
@@ -544,7 +509,6 @@
         identifyParams.layerOption = esri.tasks.IdentifyParameters.LAYER_OPTION_VISIBLE;
         identifyParams.width = map.width;
         identifyParams.height = map.height;
-        //console.log('set up ID');
 
         // Save a reference to the event listener so it can be
         // disconnected when no layers are selected
@@ -582,8 +546,6 @@
           return dojo.map(response, function (result) {
             var feature = result.feature;
             feature.attributes.layerName = result.layerName;
-
-            //console.log(feature.attributes);
  
             var template = new esri.InfoTemplate();
             template.setTitle("${layerName}");
@@ -604,16 +566,10 @@
 				if(document.getElementById("paramDiv").style.display == "none") {
 					document.getElementById("paramDiv").style.display = "block";
 					document.getElementById("showhideImg").src = "/iframe/images/chevron_right.png";
-					//document.getElementById("panelright").style.display = "block";
-					//document.getElementById("paramDiv").style.display = "block";
-					//document.getElementById("panelright").style.display = "block";
-					//document.getElementById("navcontrols").style.display = "block";
 				}
 				else {
 					document.getElementById("paramDiv").style.display = "none";
 					document.getElementById("showhideImg").src = "/iframe/images/chevron_left.png";
-					//document.getElementById("panelright").style.display = "none";
-					//document.getElementById("navcontrols").style.display = "none";
 					
 				}
 			}
@@ -631,9 +587,6 @@
 			</div>
 			<div id="map" data-dojo-type="dijit.layout.ContentPane" region="center" style="padding:0px"></div>
 
-			<!--Parameters section
-			<div id="header" data-dojo-type="dijit.layout.ContentPane" id="rightPane" region="right">
-				-->
 				
     <div id="showhide" onclick="showhide();"><img id="showhideImg" src="/iframe/images/chevron_right.png" title="Show/hide toolbox" onmouseover="this.style.cursor='pointer'"></div>
 				<div class="param" id="paramDiv">
@@ -681,10 +634,6 @@
 						<div class="previewdiv">
 							<input id="btnGenerateCode" value="Update Code" type="button" />
 							<input id="btnExamplePage" value="Preview" type="button" /> (Opens in new page)
-							<!--
-							<span class = "buttonText" onclick="generateCode();" title="Get IFrame Code" onmouseover="this.style.cursor='pointer'">Update Code</span>
-							<span class = "buttonText" onclick="btnExamplePage_click();" title="Preview Iframe" onmouseover="this.style.cursor='pointer'">Preview</span> (Opens in new page)
-							-->
 						</div>
 					</div>
 				</div>
