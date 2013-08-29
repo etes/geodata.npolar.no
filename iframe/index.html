@@ -157,16 +157,13 @@
             dojo.require("dijit.layout.BorderContainer");
             dojo.require("dijit.layout.ContentPane");
             // uncomment if want dojo widget style checkbox
-            //dojo.require('dijit.form.CheckBox');
+            dojo.require('dijit.form.CheckBox');
             dojo.require("esri.map");
-            //dojo.require("esri.InfoTemplate");
+            dojo.require("esri.dijit.Popup");
             dojo.require("esri.layers.FeatureLayer");
             dojo.require("dojox.html.entities");
-            //dojo.require("dojo.fx");// needed if use jsapi 3.0
             dojo.require("agsjs.dijit.TOC");
-            dojo.require("dojox.layout.ExpandoPane");
-            
-      dojo.require("esri.dijit.Popup");
+            dojo.require("dojox.layout.ExpandoPane");  
 		</script>
 		<script type="text/javascript">
 		        
@@ -210,11 +207,8 @@
                 logo: false
               });
               
-             dojo.place(popup.domNode, map.root);
-        /*
-        dojo.connect(map, "onLoad", function(map) {
-          initIdentify(map);
-        });*/
+            // dojo.place(popup.domNode, map.root);
+
               
               var basemap = new esri.layers.ArcGISTiledMapServiceLayer(basemapServiceUrl);
               map.addLayer(basemap);
