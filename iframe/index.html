@@ -4,6 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
 		<title>Svalbardkartet IFrame Designer</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.6/js/dojo/dijit/themes/claro/claro.css">
 		<link rel="stylesheet" type="text/css" href="css/ExpandoPane.css">
 		<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.6/js/esri/css/esri.css" />
@@ -24,10 +25,12 @@
 			}
 			#showhide{
 			/*-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;*/
-        -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;
-        /*-moz-box-shadow: 0 0 0.5em black; -webkit-box-shadow: 0 0 0.5em black; -o-box-shadow: 0 0 0.5em black; box-shadow: 0 0 0.5em black;*/
+			-moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;
+        	-moz-box-shadow: 0 0 0.5em black; -webkit-box-shadow: 0 0 0.5em black; -o-box-shadow: 0 0 0.5em black; box-shadow: 0 0 0.5em black;
 			border: solid 2px #AAAAAA;
-			background-color: #EEEEEE;
+			background-color: rgba(255,255,255,0.9);
+			background-image: url(images/glyphicons-halflings.png);
+			background-position: -448px -72px;
  			margin:0px;
 			padding:0px;
 			height:20px;
@@ -46,36 +49,30 @@
  			margin:0px;
 			padding:5px;
 			width:auto;
-			background-color: #FFFFFF;
+			line-height: 15px;
+			background-color: rgba(255,255,255,0.9);
 			position: fixed;
 			height:auto;
 			right:5px;
 			top:5px;
 			z-index: 40;
 			}
-			#layersDiv{
-				width: 400px;	
+			#copyright{
+			position:absolute;
+			bottom:0px;
+			right:10px;
+			z-index:80;
+			font-size: 11px;
 			}
-/*
-			.code {
-				padding: 5px;
-				font-size: 12px;
-				border: solid 1px black;
-				background-color: #DDDDDD;
-				color: #222222;
-				word-wrap: break-word;
-				white-space: pre-wrap;
+			.esriControlsBR{
+			position: absolute;
+			right: 0px;
+			width: 5px;
+			bottom: 0px;
+			z-index: 30;
 			}
 			
-			.buttonText{
-        -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;
-			border: solid 2px #E0DFDF;
-			background-color: #EEEEEE;
- 			margin-top:10px;
-			padding:2px;
-			width: auto;
-			}
-			*/
+
 			#divCode { 
         width: 400px; padding: 5px; overflow: auto;
         border: solid 2px #EEEEEE;
@@ -91,6 +88,18 @@
 			.agsjsTOCOutOfScale {
 				/*    display: none; */
 			}
+			
+/* Custom Scrollbar*/
+::-webkit-scrollbar {
+	width: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
 			
 			/*Esri zoom silder*/
 .esriSimpleSlider {
@@ -156,6 +165,7 @@
 		<script type="text/javascript">
             dojo.require("dijit.layout.BorderContainer");
             dojo.require("dijit.layout.ContentPane");
+            // uncomment if want dojo widget style checkbox
             //dojo.require('dijit.form.CheckBox');
             dojo.require("esri.map");
             dojo.require("esri.dijit.Popup");
@@ -166,7 +176,7 @@
 		</script>
 		<script type="text/javascript">
 		        
-   	        var layers = [{ name: 'HvalrossLiggeplasser', id: 2 }, { name: 'RÃ¸ye', id: 3 }, { name: 'SjÃ¸fugl kolonier', id: 5 }, { name: 'Alle SjÃ¸pattdyr observasjoner', id: 27 }, { name: 'IsbjÃ¸rn observasjoner', id: 37 }, { name: 'Strandrydding per Ã¥r', id: 58 }, { name: 'ReinbestandomrÃ¥der', id: 59 }, { name: 'Biogeografiske soner', id: 60 }, { name: 'Vegetasjon (10 kasser)', id: 62}, { name: 'Geologi', id: 94 }];
+   	        var layers = [{ name: 'HvalrossLiggeplasser', id: 2 }, { name: 'RÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¸ye', id: 3 }, { name: 'SjÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¸fugl kolonier', id: 5 }, { name: 'Alle SjÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¸pattdyr observasjoner', id: 27 }, { name: 'IsbjÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¸rn observasjoner', id: 37 }, { name: 'Strandrydding per ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¥r', id: 58 }, { name: 'ReinbestandomrÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¥der', id: 59 }, { name: 'Biogeografiske soner', id: 60 }, { name: 'Vegetasjon (10 kasser)', id: 62}, { name: 'Geologi', id: 94 }];
    	        var root = location.protocol + "//" + location.host;
    	        var mapletUrl = root + "/iframe/embed.html"; // Relative path to Iframe page, should be absolute path when deployed, for example http://svalbardkartet.npolar.no/iframe.html
    	        var previewURL = 'preview.html'; // Relative path, should be absolute path when deployed.
@@ -192,7 +202,7 @@
 		document.getElementById("showhide").style.display = "block";
 		
           geometryService = new esri.tasks.GeometryService(geometryServiceUrl);
-          dojo.connect(geometryService, "onProjectComplete", onProjectComplete);
+          //dojo.connect(geometryService, "onProjectComplete", onProjectComplete);
           
           //setup the popup window 
         var popup = new esri.dijit.Popup({
@@ -205,11 +215,16 @@
                 infoWindow: popup,
                 logo: false
               });
-                            
+              
+            // dojo.place(popup.domNode, map.root);
+
+           // @TODO Add overview map
+              
               var basemap = new esri.layers.ArcGISTiledMapServiceLayer(basemapServiceUrl);
               map.addLayer(basemap);
               
               dynaLayer1 = new esri.layers.ArcGISDynamicMapServiceLayer(dynamicServiceUrl, {
+                showAttribution: false,
                 opacity: 0.8
               });
               
@@ -227,6 +242,10 @@
                   toc = new agsjs.dijit.TOC({
                     map: map,
                     layerInfos: [
+                   // {
+                   //   layer: featLayer1,
+                   //   title: "FeatureLayer1"
+                   // }, 
                     {
                       layer: dynaLayer1,
                       title: "Svalbardkartet",
@@ -247,6 +266,7 @@
                 }
               });
               
+              //map.addLayers([dynaLayer1, featLayer1]);
               map.addLayers([dynaLayer1]);
               
 
@@ -267,9 +287,22 @@
           dojo.connect(dojo.byId('rbSymbolCross'), "onchange", symbolChanged);
           dojo.connect(dojo.byId('rbSymbolDot'), "onchange", symbolChanged);
           dojo.connect(dojo.byId('chkSC'), 'onchange', generateCode);
-          
           dojo.connect(map, "onClick", updateIdentifyTask);
-
+          
+          //dojo.connect(map, "onClick", executeIdentifyTask);
+          //var layersDiv = dojo.byId('layersDiv');
+          /*dojo.forEach(layers, function(item) {
+              var checkBox = document.createElement('input');
+              checkBox.type = 'checkbox';
+              checkBox.id = 'layerCheckbox' + item.id;
+              layersDiv.appendChild(checkBox);
+              var label = document.createElement('span');
+              label.innerHTML = item.name;
+              layersDiv.appendChild(label);
+              var br = document.createElement('br');
+              layersDiv.appendChild(br);
+              dojo.connect(checkBox, 'onchange', layerCheckBox_click);
+          });*/
                             
               //resize the map when the browser resizes - view the 'Resizing and repositioning the map' section in
               //the following help topic for more details http://help.esri.com/EN/webapi/javascript/arcgis/help/jshelp_start.htm#jshelp/inside_guidelines.htm      
@@ -299,6 +332,12 @@
                     if (layerInfo[i] !== -1 && checkBox && checkBox.checked)
                         result.push(i);
                 }
+                /*
+                 dojo.forEach(layers, function(item) {
+                 var checkBox = dojo.byId('layercheckbox_' + item.id);
+                 if (checkBox && checkBox.checked)
+                 result.push(item.id);
+                 });*/
                 return result;
                 
 
@@ -334,12 +373,18 @@
 
             function requestSucceeded(response, io) {
 
+                //pad = dojo.string.pad;
+
+                // console.log("Succeeded: ", response);
                 // dojo.toJson method converts the given JavaScript object
                 // and its properties and values into simple text.
                 dojo.toJsonIndentStr = "  ";
+                //console.log("response as text:\n", dojo.toJson(response, true));
+                //dojo.byId("status").innerHTML = "";
 
                 // show layer indexes and names
                 if (response.hasOwnProperty("layers")) {
+                    //console.log("got some layers");
 
                     layerInfo = dojo.map(response.layers, function(f) {
                         if (f.subLayerIds == null) {
@@ -348,6 +393,7 @@
                             return -1;
                         }
                     });
+                    // console.log(layerInfo);
                 } else {
                     // console.log ("no layers");
                 }
@@ -377,8 +423,8 @@
                 dojo.attr('btnCancelMarker', 'disabled', 'disabled');
                 dojo.removeAttr('btnPlaceMarker', 'disabled');
                 generateCode();
-                dojo.byId('utm33Ncoords').innerHTML = "";
-                dojo.byId('wgs84coords').innerHTML = "";
+                //dojo.byId('utm33Ncoords').innerHTML = "";
+                //dojo.byId('wgs84coords').innerHTML = "";
             }
 
             function btnExamplePage_click() {
@@ -391,7 +437,7 @@
                 var checkedLayers = getCheckedLayers();
                 var code = dojo.string.substitute('<iframe scrolling="no" src="${url}?${sc}width=${width}&height=${height}&sym=${symbol}&extent=${extent}&wkid=32633${point}&mapUrl=${mapUrl}${overlay}&t=${tiled}&n=${nav}&opValue=${opValue}" width="${width}" height="${height}"></iframe>', {
                     url : mapletUrl,
-                    // @TODO show marker coordinates on map
+                    // @TODO show marker coordinates on map for points, lines and polygons with popup
                     sc : dojo.byId('chkSC').checked ? "sc=0&" : "",
                     extent : Math.round(map.extent.xmin) + "," + Math.round(map.extent.ymin) + "," + Math.round(map.extent.xmax) + "," + Math.round(map.extent.ymax),
                     opValue: opacityValue,
@@ -418,10 +464,10 @@
                     map.graphics.add(new esri.Graphic(point, sym));
                     dojo.removeAttr('btnRemoveMarker', 'disabled');
                     generateCode();
-                    dojo.byId('utm33Ncoords').innerHTML = dojo.string.substitute("UTM coordinates (zone 33N): ${0}, ${1}", [Math.round(point.x), Math.round(point.y)]);
-                    geometryService.project(map.graphics.graphics, new esri.SpatialReference({
-                        "wkid" : 32633
-                    }));
+                    //dojo.byId('utm33Ncoords').innerHTML = dojo.string.substitute("UTM coordinates (zone 33N): ${0}, ${1}", [Math.round(point.x), Math.round(point.y)]);
+                    outSR = new esri.SpatialReference({wkid : 4326});
+                    inSR = new esri.SpatialReference({wkid : 32633});
+                    geometryService.project(map.graphics.graphics, outSR);
                 }
             }
 
@@ -437,11 +483,12 @@
             function onProjectComplete(graphics) {
                 if (graphics && graphics.length == 1) {
                     var g = graphics[0];
-                    dojo.byId('wgs84coords').innerHTML = dojo.string.substitute("Geographic coordinates (Lat, Long): ${1}, ${0}", [dojo.number.format(g.geometry.x, {
+                   /* dojo.byId('wgs84coords').innerHTML = dojo.string.substitute("Geographic coordinates (Lat, Long): ${1}, ${0}", [dojo.number.format(g.geometry.x, {
                         places : decimalPlacesWGS84
                     }), dojo.number.format(g.geometry.y, {
                         places : decimalPlacesWGS84
                     })]);
+                    */
                 }
             }
 
@@ -491,7 +538,7 @@
             function testFindNodeByLayer() {
                 // 0 is the layerId of group "Basis"
                 toc.findTOCNode(dynaLayer1, 0).collapse();
-                // 	12 is the id of layer "KortnebbgÃ¥s"
+                // 	12 is the id of layer "KortnebbgÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¥s"
                 toc.findTOCNode(dynaLayer1, 12).hide();
             }
             
@@ -509,6 +556,7 @@
         identifyParams.layerOption = esri.tasks.IdentifyParameters.LAYER_OPTION_VISIBLE;
         identifyParams.width = map.width;
         identifyParams.height = map.height;
+        //console.log('set up ID');
 
         // Save a reference to the event listener so it can be
         // disconnected when no layers are selected
@@ -546,6 +594,8 @@
           return dojo.map(response, function (result) {
             var feature = result.feature;
             feature.attributes.layerName = result.layerName;
+
+            //console.log(feature.attributes);
  
             var template = new esri.InfoTemplate();
             template.setTitle("${layerName}");
@@ -565,11 +615,17 @@
 			function showhide () {
 				if(document.getElementById("paramDiv").style.display == "none") {
 					document.getElementById("paramDiv").style.display = "block";
-					document.getElementById("showhideImg").src = "/iframe/images/chevron_right.png";
+					document.getElementById("showhide").style.backgroundPosition = "-448px  -72px";
+					//document.getElementById("panelright").style.display = "block";
+					//document.getElementById("paramDiv").style.display = "block";
+					//document.getElementById("panelright").style.display = "block";
+					//document.getElementById("navcontrols").style.display = "block";
 				}
 				else {
 					document.getElementById("paramDiv").style.display = "none";
-					document.getElementById("showhideImg").src = "/iframe/images/chevron_left.png";
+					document.getElementById("showhide").style.backgroundPosition = "-430px -72px";
+					//document.getElementById("panelright").style.display = "none";
+					//document.getElementById("navcontrols").style.display = "none";
 					
 				}
 			}
@@ -580,20 +636,22 @@
 	</head>
 	<body class="claro">
 		<div id="content" data-dojo-type="dijit.layout.BorderContainer" design="headline" gutters="false" style="width: 100%; height: 100%; margin: 0;">
-
+		
 			<div data-dojo-type="dojox.layout.ExpandoPane" data-dojo-props="duration:300, region:'left', maxWidth:'280px'" style="width:280px;" splitter="true">
 				<div id="tocDiv"></div>
-
 			</div>
-			<div id="map" data-dojo-type="dijit.layout.ContentPane" region="center" style="padding:0px"></div>
+			<div id="map" data-dojo-type="dijit.layout.ContentPane" region="center" style="padding:0px">
+				<div id="copyright">© <a href="http://npolar.no" target="_blank">Norsk Polarinstitutt</a></div>
+			</div>
 
+			<!--Parameters section
+			<div id="header" data-dojo-type="dijit.layout.ContentPane" id="rightPane" region="right">
+				-->
 				
-    <div id="showhide" onclick="showhide();"><img id="showhideImg" src="/iframe/images/chevron_right.png" title="Show/hide toolbox" onmouseover="this.style.cursor='pointer'"></div>
+    <div id="showhide" onclick="showhide();" title="Show/hide panel" onmouseover="this.style.cursor='pointer'"></div>
 				<div class="param" id="paramDiv">
-					<div id="layersDiv" class="layersDiv">
-						<div><strong>Embed Map in Website </strong> </div>
-    <div style="padding: 5px">Select a layers to overlay and navigate to the desired map section.</div>
-					</div>
+						<strong>Embed Map in Website</strong>
+						<p>Select a layers to overlay and navigate to the desired map section.</p>
 
 					<div class="navigationdiv">
 						Create static map (disable zooming and panning)
@@ -621,11 +679,15 @@
 							<div class="showcoordinatediv"><input id="chkSC" name="chkSC" type="checkbox" checked="checked" /> Show marker coordinates on map </div>
 						</div>
 					</div>
-					<div class="iframesizediv">
-						<div class="widthdiv"><label for="txtWidth">Custom Width:</label><input id="txtWidth" type="text" value="500" /></div>
-						<div class="heightdiv"><label for="txtHeight">Custom Height:</label><input id="txtHeight" type="text" value="500" /></div>
-					</div>
 					<br />
+					<div id="embedSize-box">
+						<div class="widthdiv input-prepend input-append">
+							<span class="add-on"> Width:</span><input id="txtWidth" type="text" class="input-mini textright" placeholder="width" value="500" /><span class="add-on">px</span>
+							</div>
+						<div class="heightdiv input-prepend input-append">
+							<span class="add-on"> Height:</span><input id="txtHeight" type="text" class="input-mini textright" placeholder="height" value="500" /><span class="add-on">px</span>
+							</div>
+					</div>
 					<div id="codeDiv">
 						<div class="code" id="divCode"></div>
 						<div class="codefooter">
@@ -634,6 +696,10 @@
 						<div class="previewdiv">
 							<input id="btnGenerateCode" value="Update Code" type="button" />
 							<input id="btnExamplePage" value="Preview" type="button" /> (Opens in new page)
+							<!--
+							<span class = "buttonText" onclick="generateCode();" title="Get IFrame Code" onmouseover="this.style.cursor='pointer'">Update Code</span>
+							<span class = "buttonText" onclick="btnExamplePage_click();" title="Preview Iframe" onmouseover="this.style.cursor='pointer'">Preview</span> (Opens in new page)
+							-->
 						</div>
 					</div>
 				</div>
