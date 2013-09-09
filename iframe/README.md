@@ -1,6 +1,6 @@
-## IFrame Code generator
+## Embeded Map Maker
 
-A simple Javascript utility to embed maps from [Svalbardkartet] (http://svalbardkartet.npolar.no) to your own website using Iframe.
+A simple Javascript utility to create embedable map iFrames from [Svalbardkartet] (http://svalbardkartet.npolar.no) to display on your webpage.
 
 ###Components:
 
