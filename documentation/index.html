@@ -137,7 +137,7 @@
 		
 					<h4><a name="Audience"></a>Audience</h4>
 					<p>This documentation is designed with the assumption that you are familiar with basic JavaScript programming and mapping concepts (such as Google Maps). 
-						It's also desirable if you make yourself familiar with Esri’s <a href="http://help.arcgis.com/en/webapi/javascript/arcgis/">ArcGIS API for Javascript</a> to take full advantage of the mapping API. 
+						It's also desirable if you make yourself familiar with Esri's <a href="http://help.arcgis.com/en/webapi/javascript/arcgis/">ArcGIS API for Javascript</a> to take full advantage of the mapping API. 
 						</p>
 				</section>
 
@@ -391,13 +391,13 @@ function initialize() {
 					</p>
 					<p>
 						To create dynamic layer to a map, you only need to call the <code>esri.layers.ArcGISDynamicMapServiceLayer()</code> constructor pointing to the URL of service's REST endpoint 
-						(e.g. <a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire3/SjøfuglKolonier/MapServer">http://geodata.npolar.no/ArcGIS/rest/services/inspire3/SjøfuglKolonier/MapServer</a>).
+						(e.g. <a href="http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Sjofuglkolonier/MapServer">http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Sjofuglkolonier/MapServer</a>).
 					</p>
 					<pre class="prettyprint">//Use the ImageParameters to set the visible layers in the map service during ArcGISDynamicMapServiceLayer construction.
     var imageParameters = new esri.layers.ImageParameters();
     imageParameters.format = "png32";  //sets the image format to PNG32.
     //Takes a URL to a dynamic map service.
-    serviceURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire3/SjøfuglKolonier/MapServer";
+    serviceURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Sjofuglkolonier/MapServer";
     var dynamicLayer = new esri.layers.ArcGISDynamicMapServiceLayer(serviceURL, {
           "opacity":0.75, 
           "imageParameters":imageParameters
@@ -441,7 +441,7 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
           <address>
             <strong>Norwegian Polar Data</strong><br/>
             Norwegian Polar Institute<br/>
-            9296 Tromsø<br/>
+            9296 Troms�, <br/>
             Norway
           </address>
         </div>         
@@ -530,7 +530,7 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
         var imageParameters = new esri.layers.ImageParameters();
         imageParameters.format = "png32"; //sets the image format to PNG32.
     //Takes a URL to a dynamic map service.
-    serviceURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire3/SjøfuglKolonier/MapServer";
+    serviceURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Sjofuglkolonier/MapServer";
     var dynamicLayer = new esri.layers.ArcGISDynamicMapServiceLayer(serviceURL, {
           "opacity":0.75, 
           "imageParameters":imageParameters
