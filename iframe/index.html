@@ -100,6 +100,8 @@
 ::-webkit-scrollbar-thumb:hover {
     background-color: rgba(0, 0, 0, 0.2);
 }
+
+
 			
 			/*Esri zoom silder*/
 .esriSimpleSlider {
@@ -182,7 +184,7 @@
    	        var previewURL = 'preview.html'; // Relative path, should be absolute path when deployed.
    	        var basemapServiceUrl = 'http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer';
    	        var dynamicServiceUrl = 'http://willem3.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer';
-   	        var geometryServiceUrl = 'http://geodata.npolar.no/ArcGIS/rest/services/geometry/Geometry/GeometryServer';
+   	        var geometryServiceUrl = 'http://willem.npolar.no/ArcGIS/rest/services/geometry/Geometry/GeometryServer';
    	        var isTiledMap = true;
    	        //var isTiledMap = false;
    	        //@TODO add map popup and feature info function
@@ -654,7 +656,8 @@
 						<p>Select a layers to overlay and navigate to the desired map section.</p>
 
 					<div class="navigationdiv">
-						Create static map (disable zooming and panning)
+						<!--Create static map (disable zooming and panning)-->
+						Enable map zooming using mouse scroll wheel.
 						<input id="rbLockedYes" name="rbLocked" type="radio" value="0"/>
 						Yes
 						<input id="rbLockedNo" name="rbLocked" type="radio" value="1" checked/>

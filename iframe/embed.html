@@ -30,10 +30,18 @@
 			z-index:80;
 			font-size: 11px;
 			}
+	 #copyright{
+			position:absolute;
+			bottom:0px;
+			right:10px;
+			z-index:80;
+			font-size: 11px;
+			}
 			
 	.esriControlsBR{
 		position: absolute;
-		right: 5px;
+		right: 0px;
+		width: 5px;
 		bottom: 0px;
 		z-index: 30;
 	}
@@ -85,7 +93,7 @@ dojo.require("esri.dijit.Popup");
       var map, geometryService;
       var overlayMapService = 'http://willem3.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer';
       var layers = [{ name: 'HvalrossLiggeplasser', id: 2 }, { name: 'Røye', id: 3 }, { name: 'Sjøfugl kolonier', id: 5 }, { name: 'Alle Sjøpattdyr observasjoner', id: 27 }, { name: 'Isbjørn observasjoner', id: 37 }, { name: 'Strandrydding per år', id: 58 }, { name: 'Reinbestandområder', id: 59 }, { name: 'Biogeografiske soner', id: 60 }, { name: 'Vegetasjon (10 kasser)', id: 62}, { name: 'Geologi', id: 87 }];
-      var geometryServiceUrl = 'http://geodata.npolar.no/ArcGIS/rest/services/geometry/Geometry/GeometryServer';
+      var geometryServiceUrl = 'http://willem.npolar.no/ArcGIS/rest/services/geometry/Geometry/GeometryServer';
 	  var decimalPlacesWGS84 = 6;
 	  var opacity =0.8;
 	  var visible = [];
@@ -116,7 +124,7 @@ dojo.require("esri.dijit.Popup");
           var slider = true;
 
           if (urlParams["n"])
-              slider = !(urlParams["n"] * 1 == 0);
+              slider = (urlParams["n"] * 1 == 0);
           if (urlParams["extent"]) {
               var extent = urlParams["extent"].split(',');
               //dojo.byId('fullmap').innerHTML = '<a id="fullmaplink" href="http://svalbardkartet.npolar.no/Viewer.html?Viewer=Svalbardkartet&extent='+ extent + '" target="_blank">Vis i Svalbardkartet</a>';
@@ -146,7 +154,7 @@ dojo.require("esri.dijit.Popup");
               opacity = urlParams["opValue"];	
           	
           if (urlParams["cl"]) {
-              var overlayMap = new esri.layers.ArcGISDynamicMapServiceLayer(overlayMapService, { opacity: opacity });
+              var overlayMap = new esri.layers.ArcGISDynamicMapServiceLayer(overlayMapService, {showAttribution: false, opacity: opacity });
               overlayMap.id = 'overlayMap';
               
               dojo.forEach(urlParams["cl"].split(";"), function(item) {
@@ -162,9 +170,11 @@ dojo.require("esri.dijit.Popup");
           
           dojo.connect(map, "onLoad", function() {
           	initIdentify(map);
+          	// Disables map zooming using mouse scroll wheel.
               if (!slider) {
-                  map.disableMapNavigation();
-                  map.hideZoomSlider();
+              	map.disableScrollWheelZoom();
+                  //map.disableMapNavigation();
+                  //map.hideZoomSlider();
               }
               if ((urlParams["x"]) && (urlParams["y"])) {
                   var x = urlParams["x"] * 1;
@@ -249,10 +259,39 @@ dojo.require("esri.dijit.Popup");
         map.infoWindow.setFeatures([deferred]);
         map.infoWindow.show(evt.mapPoint);
       }
-      
+      mapLayers = [{layerName:"Alle kolonier",layerID:12,svbkID:"6,0,0,5,0,0,4,0,1,2,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Alke",layerID:13,svbkID:"6,0,0,5,0,0,4,0,3,3,2,4,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Alkekonge",layerID:14,svbkID:"6,0,0,5,0,0,4,0,3,3,2,5,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Gråmåke",layerID:15,svbkID:"6,0,0,5,0,0,4,0,3,3,2,6,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Havhest",layerID:16,svbkID:"6,0,0,5,0,0,4,0,3,3,2,7,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Hvitkinngås",layerID:17,svbkID:"6,0,0,5,0,0,4,0,3,3,2,8,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Ismåke",layerID:18,svbkID:"6,0,0,5,0,0,4,0,3,3,2,9,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Kortnebbgås",layerID:19,svbkID:"6,0,0,5,0,0,4,0,3,3,2,10,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Krykkje",layerID:20,svbkID:"6,0,0,5,0,0,4,0,3,3,2,11,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Lomvi",layerID:21,svbkID:"6,0,0,5,0,0,4,0,3,3,2,12,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Lunde",layerID:22,svbkID:"6,0,0,5,0,0,4,0,3,3,2,13,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Polarlomvi",layerID:23,svbkID:"6,0,0,5,0,0,4,0,3,3,2,14,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Polarmåke",layerID:24,svbkID:"6,0,0,5,0,0,4,0,3,3,2,15,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Praktærfugl",layerID:25,svbkID:"6,0,0,5,0,0,4,0,3,3,2,16,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Ringgås",layerID:26,svbkID:"6,0,0,5,0,0,4,0,3,3,2,17,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Rødnebbterne",layerID:27,svbkID:"6,0,0,5,0,0,4,0,3,3,2,18,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Sildemåke",layerID:28,svbkID:"6,0,0,5,0,0,4,0,3,3,2,19,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Storjo",layerID:29,svbkID:"6,0,0,5,0,0,4,0,3,3,2,20,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Svartbak",layerID:30,svbkID:"6,0,0,5,0,0,4,0,3,3,2,21,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Teist",layerID:31,svbkID:"6,0,0,5,0,0,4,0,3,3,2,22,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Ærfugl",layerID:32,svbkID:"6,0,0,5,0,0,4,0,3,3,2,23,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+      {layerName:"Geologi 1:750000",layerID:118,svbkID:"6,0,0,5,0,0,4,0,0,3,0,0,10,0,0,9,0,0,8,1,0,12,0,0,0,0,0,11,0,0,"}]
       function showFullMap (){
+      	visibleUrl = "";
+      	for (var i = 0; i < mapLayers.length; i++) {
+      		if(visibleLayers[0] == mapLayers[i]['layerID']){
+      			visibleUrl = mapLayers[i]['svbkID'];
+      			//console.log(mapLayers[i]['layerID'], mapLayers[i]['layerName']);
+      		}
+      	}
       	var extent = Math.round(map.extent.xmin) + "," + Math.round(map.extent.ymin) + "," + Math.round(map.extent.xmax) + "," + Math.round(map.extent.ymax);
-      	dojo.byId('fullmap').innerHTML = '<a id="fullmaplink" href="http://svalbardkartet.npolar.no/Viewer.html?Viewer=Svalbardkartet&extent='+ extent + '" target="_blank">Vis i Svalbardkartet</a>';
+      	dojo.byId('fullmap').innerHTML = '<a id="fullmaplink" href="http://svalbardkartet.npolar.no/Viewer.html?Viewer=Svalbardkartet&extent='+ extent + '&layers=' + visibleUrl +'" target="_blank">Vis i Svalbardkartet</a>';
+      	//layers=
       }
 
       function onProjectComplete(graphics) {
@@ -272,6 +311,7 @@ dojo.require("esri.dijit.Popup");
     	<div id="nplogo"><img src="images/iframe_nplogo.png" /></div>
     	<div id="backgroundbottom">
     		<div id="fullmap"><a id="fullmaplink"  href="http://svalbardkartet.npolar.no/Viewer.html?Viewer=Svalbardkartet" target="_blank">Vis i Svalbardkartet</a></div>
+    		<div id="copyright" title="Norsk Polarinstitutts forside">© <a href="http://npolar.no" target="_blank">Norsk Polarinstitutt</a></div>
     	</div>
     	
     </div>
