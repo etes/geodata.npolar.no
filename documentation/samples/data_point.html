@@ -22,7 +22,7 @@
       
       function addPointToMap(lon, lat) {
 		esri.request({
-			url:"http://tasks.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer/project?inSR=4326&outSR=32633&geometries={'geometryType':'esriGeometryPoint','geometries':[{'x':" + lon + ",'y':" + lat + "}]}",
+			url:"http://geodata.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer/project?inSR=4326&outSR=32633&geometries={'geometryType':'esriGeometryPoint','geometries':[{'x':" + lon + ",'y':" + lat + "}]}",
 			content:{f:"json"},
 			callbackParamName:"callback",
 			load:addXYToMap,
