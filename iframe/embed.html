@@ -5,84 +5,8 @@
     <title>Svalbardkartet IFrame</title>
     <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/dojo/dijit/themes/claro/claro.css">    
 	<link href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/esri/css/esri.css" rel="stylesheet" type="text/css" >
-    <style>
-      html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
-      
-      #nplogo{
-      	position: absolute;
-      	bottom: 10px;
-      	left: 0px;
-      	z-index: 80;
-      }
-      #backgroundbottom{
-			position:absolute;
-			background-color:rgba(255,255,255,0.8);
-			bottom:0px;
-			left:0px;
-			height:14px;
-			width:100%;
-			z-index:20;
-			}
-      #fullmap{
-			position:absolute;
-			bottom:0px;
-			left:5px;
-			z-index:80;
-			font-size: 11px;
-			}
-	 #copyright{
-			position:absolute;
-			bottom:0px;
-			right:10px;
-			z-index:80;
-			font-size: 11px;
-			}
-			
-	.esriControlsBR{
-		position: absolute;
-		right: 0px;
-		width: 5px;
-		bottom: 0px;
-		z-index: 30;
-	}
-
-      /*Esri zoom silder*/
-.esriSimpleSlider {
-	top: 5px;
-	left: 8px;
-	border: none !important;
-	background-color: transparent !important;
-	color: white !important;
-	box-shadow: none !important;
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-}
-
-.esriSimpleSlider div {
-	margin-top: 5px;
-	margin-bottom: 5px;
-	width: 20px;
-	height: 20px;
-	line-height: 18px;
-	font-size: 18px;
-}
-	.esriSimpleSliderVertical .esriSimpleSliderIncrementButton,
-	.esriSimpleSliderVertical .esriSimpleSliderDecrementButton {
-	background: #858585;
-	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzVkYWRkZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMTdiYzIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
-	background: -moz-linear-gradient(top, #858585 0%, #242424 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #858585), color-stop(100%, #242424));
-	background: -webkit-linear-gradient(top, #858585 0%, #242424 100%);
-	background: -o-linear-gradient(top, #858585 0%, #242424 100%);
-	background: -ms-linear-gradient(top, #858585 0%, #242424 100%);
-	background: linear-gradient(top, #858585 0%, #242424 100%);	
-	border: solid 1px #545454;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	box-shadow: 0 0 0.25em #BBB;
-}
-    </style>
+	<link rel="stylesheet" type="text/css" href="css/main.min.css">
+	<script type="text/javascript" src="js/proj4js.min.js"></script>
     <script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
     <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.5"></script>
     <script type="text/javascript">
@@ -98,6 +22,9 @@ dojo.require("esri.dijit.Popup");
 	  var opacity =0.8;
 	  var visible = [];
 	  var visibleLayers = [];
+	  var IFpoigraphicid = 1;
+	  var IFgraphicLayer;
+	  var pts = [];
       var identifyTask, identifyParams, identifyHandle = 0;
 
       // Read a page's GET URL variables and return them as an associative array.
@@ -111,12 +38,67 @@ dojo.require("esri.dijit.Popup");
           }
           return vars;
       }
+      
+      //var p  = $("pre"),
+    var qStr = "test=Hello&person[]=jeff&person[]=jim&person[extra]=john&test3&nocache="+(+new Date()),
+    result = "",
+    urlParams = {};
 
+if (!window.location.search)
+    window.location.href = window.location.href.replace("/edit") + "?" + qStr;
+
+(function () {
+    var e,
+        d = function (s) { return decodeURIComponent(s).replace(/\+/g, " "); },
+        q = window.location.search.substring(1),
+        r = /([^&=]+)=?([^&]*)/g;
+
+    while (e = r.exec(q)) {
+        if (e[1].indexOf("[") == "-1")
+            urlParams[d(e[1])] = d(e[2]);
+        else {
+            var b1 = e[1].indexOf("["),
+                aN = e[1].slice(b1+1, e[1].indexOf("]", b1)),
+                pN = d(e[1].slice(0, b1));
+          
+            if (typeof urlParams[pN] != "object")
+                urlParams[d(pN)] = {},
+                urlParams[d(pN)].length = 0;
+            
+            if (aN)
+                urlParams[d(pN)][d(aN)] = d(e[2]);
+            else
+                Array.prototype.push.call(urlParams[d(pN)], d(e[2]));
+
+        }
+    }
+})();
+/*
+if (JSON)
+    result = JSON.stringify(urlParams, null, 4);
+else {
+    
+    
+    result = "urlParams: \r\n";
+    
+    for (var k in urlParams)
+      if (typeof urlParams[k] == "object") {
+        result += "    " + k + ":\r\n";
+        for (var k2 in urlParams[k])
+          result += "        " + k2 + ": " + urlParams[k][k2] + "\r\n";
+      } 
+      else
+        result += "    " + k + ":" + urlParams[k] + "\r\n";
+    
+} 
+*/
       function init() {
           geometryService = new esri.tasks.GeometryService(geometryServiceUrl);
           dojo.connect(geometryService, "onProjectComplete", onProjectComplete);
-          var urlParams = getUrlVars();
-          //console.log(urlParams);
+          
+          IFgraphicLayer = new esri.layers.GraphicsLayer();
+          //dojo.connect(IFgraphicLayer,"onClick", IFpoigraphicpointf);
+          dojo.connect(IFgraphicLayer,"onMouseOver", IFpoigraphicpointf);
           var width = urlParams["width"];
           var height = urlParams["height"];
           dojo.style("map", "width", width + "px");
@@ -148,7 +130,6 @@ dojo.require("esri.dijit.Popup");
               basemap = new esri.layers.ArcGISDynamicMapServiceLayer(mapUrl);
               //basemap = new esri.layers.ArcGISTiledMapServiceLayer(mapUrl2);
           map.addLayer(basemap);
-          
           // set the layer opacity
           if (urlParams["opValue"]<=1 && urlParams["opValue"]>=0)
               opacity = urlParams["opValue"];	
@@ -176,25 +157,74 @@ dojo.require("esri.dijit.Popup");
                   //map.disableMapNavigation();
                   //map.hideZoomSlider();
               }
-              if ((urlParams["x"]) && (urlParams["y"])) {
-                  var x = urlParams["x"] * 1;
-                  var y = urlParams["y"] * 1;
-                  var symbol = null;
-                  if(urlParams["sym"] == '0')
-                      symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_X, 15, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0, 0, 0]), 2));
-                  else
-                      symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 0, 0]), 2), new dojo.Color([255, 0, 0]));
+              
 
-                  map.graphics.add(new esri.Graphic(new esri.geometry.Point(x, y, new esri.SpatialReference({"wkid": 32633})), symbol));
-                  if (urlParams["sc"] == '1') {
-                      geometryService.project(map.graphics.graphics, new esri.SpatialReference({ "wkid": 4326 }));
-                  }
-              }
+
+
+            if (urlParams["poi"]) {
+            	
+            for (var i = 0; i < urlParams["poi"].length; i++){
+            	//console.log(urlParams["poi"][i]);
+            	var values = [];
+            	values = urlParams["poi"][i].split(',');
+            	
+			IFurlpoilat = values[0];
+			//IFurlpoilat = IFurlpoilat.replace(",",".");
+			IFurlpoilong = values[1];
+			poiColor = values[2];
+			IFurlpoititle = values[3];
+			IFurlpoiinfo = values[4];
+            	
+            	if (poiColor == "r") {
+				poiSymbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 0, 0]), 2), new dojo.Color([255, 0, 0]));
+			}	
+			if (poiColor == "g") {
+				poiSymbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0, 255, 0]), 2), new dojo.Color([0, 255, 0]));					
+			}	
+			if (poiColor == "b") {
+				poiSymbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0, 0, 255]), 2), new dojo.Color([0, 0, 255]));
+			}
+			if (poiColor == "y") {
+				poiSymbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 0, 0]), 2), new dojo.Color([255, 0, 0]));
+			}
+			
+			else if (poiColor == "") {
+			poiSymbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 0, 0]), 2), new dojo.Color([255, 0, 0]));
+			}
+            	
+            	IFpoiupos = new Proj4js.Point(IFurlpoilong,IFurlpoilat);
+			//Proj4js.transform(u33, w84, IFpoiupos);
+			//IFpoipl = {"geometry":{"x":IFpoiupos.x,"y":IFpoiupos.y},"spatialreference":{"wkid":32633},"attributes":{"Title":IFurlpoititle,"Info":IFurlpoiinfo}};
+			IFpoipl = {"geometry":{"x":IFurlpoilat,"y":IFurlpoilong},"attributes":{"Title":IFurlpoititle,"Info":IFurlpoiinfo}};
+			IFpoigraphic = new esri.Graphic(IFpoipl);
+			//IFpoigraphic = new esri.Graphic(new esri.geometry.Point(IFurlpoilat,IFurlpoilong));			
+			IFpoigraphic.setSymbol(poiSymbol);
+			IFpoigraphic[IFpoigraphicid] = IFgraphicLayer.add(IFpoigraphic);
+			//console.log(IFgraphicLayer);
+			//IFurlpart = IFurlpart.slice(IFurlpart.indexOf("poi=")+4, IFurlpart.length);
+			
+            }
+            map.addLayer(IFgraphicLayer);
+            //IFgraphicLayer.show();
+		}
           });
+          
+          
+      
       }
       
                   // Identify Task (PopUp)
             
+            function IFpoigraphicpointf(evt) {
+	map.infoWindow.setTitle((evt.graphic.attributes.Title).replace(/¤¤/g, '\''));
+	IFinfo = evt.graphic.attributes.Info;
+	if (IFinfo.slice(0,1)=="\'") {IFinfo=IFinfo.slice(1);}
+	if (IFinfo.slice(-1)==";") {IFinfo=IFinfo.slice(0,-1);}
+	if (IFinfo.slice(-1)=="\'") {IFinfo=IFinfo.slice(0,-1);}
+	map.infoWindow.setContent(IFinfo.replace(/¤¤/g, '\''));
+	map.infoWindow.show(evt.screenPoint,map.getInfoWindowAnchor(evt.screenPoint));
+	IFpl = new esri.geometry.Point(evt.mapPoint.x,evt.mapPoint.y);
+}
             function initIdentify(map) {
         //create identify tasks and setup parameters 
         identifyTask = new esri.tasks.IdentifyTask("http://willem3.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer");
@@ -220,8 +250,8 @@ dojo.require("esri.dijit.Popup");
         if (visible.length === 0) {
           visible = [-1];
           dojo.disconnect(identifyHandle);
-          map.infoWindow.hide();
-          console.log('disconnected ID');
+          //map.infoWindow.hide();
+          //console.log('disconnected ID');
         } else if ( ! identifyHandle[0] ) { 
           // There are visible layers to re-connect identify task
           // and the identify task is not connected 
@@ -259,28 +289,31 @@ dojo.require("esri.dijit.Popup");
         map.infoWindow.setFeatures([deferred]);
         map.infoWindow.show(evt.mapPoint);
       }
-      mapLayers = [{layerName:"Alle kolonier",layerID:12,svbkID:"6,0,0,5,0,0,4,0,1,2,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Alke",layerID:13,svbkID:"6,0,0,5,0,0,4,0,3,3,2,4,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Alkekonge",layerID:14,svbkID:"6,0,0,5,0,0,4,0,3,3,2,5,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Gråmåke",layerID:15,svbkID:"6,0,0,5,0,0,4,0,3,3,2,6,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Havhest",layerID:16,svbkID:"6,0,0,5,0,0,4,0,3,3,2,7,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Hvitkinngås",layerID:17,svbkID:"6,0,0,5,0,0,4,0,3,3,2,8,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Ismåke",layerID:18,svbkID:"6,0,0,5,0,0,4,0,3,3,2,9,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Kortnebbgås",layerID:19,svbkID:"6,0,0,5,0,0,4,0,3,3,2,10,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Krykkje",layerID:20,svbkID:"6,0,0,5,0,0,4,0,3,3,2,11,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Lomvi",layerID:21,svbkID:"6,0,0,5,0,0,4,0,3,3,2,12,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Lunde",layerID:22,svbkID:"6,0,0,5,0,0,4,0,3,3,2,13,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Polarlomvi",layerID:23,svbkID:"6,0,0,5,0,0,4,0,3,3,2,14,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Polarmåke",layerID:24,svbkID:"6,0,0,5,0,0,4,0,3,3,2,15,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Praktærfugl",layerID:25,svbkID:"6,0,0,5,0,0,4,0,3,3,2,16,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Ringgås",layerID:26,svbkID:"6,0,0,5,0,0,4,0,3,3,2,17,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Rødnebbterne",layerID:27,svbkID:"6,0,0,5,0,0,4,0,3,3,2,18,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Sildemåke",layerID:28,svbkID:"6,0,0,5,0,0,4,0,3,3,2,19,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Storjo",layerID:29,svbkID:"6,0,0,5,0,0,4,0,3,3,2,20,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Svartbak",layerID:30,svbkID:"6,0,0,5,0,0,4,0,3,3,2,21,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Teist",layerID:31,svbkID:"6,0,0,5,0,0,4,0,3,3,2,22,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Ærfugl",layerID:32,svbkID:"6,0,0,5,0,0,4,0,3,3,2,23,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-      {layerName:"Geologi 1:750000",layerID:118,svbkID:"6,0,0,5,0,0,4,0,0,3,0,0,10,0,0,9,0,0,8,1,0,12,0,0,0,0,0,11,0,0,"}]
+      mapLayers = [ 
+{layerID:9,svbkID:"6,0,0,5,1,0,4,0,1,0,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:10,svbkID:"6,0,0,5,1,0,4,0,1,1,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:12,svbkID:"6,0,0,5,1,0,4,0,1,2,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:13,svbkID:"6,0,0,5,1,0,4,0,3,3,2,4,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:14,svbkID:"6,0,0,5,1,0,4,0,3,3,2,5,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:15,svbkID:"6,0,0,5,1,0,4,0,3,3,2,6,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:16,svbkID:"6,0,0,5,1,0,4,0,3,3,2,7,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:17,svbkID:"6,0,0,5,1,0,4,0,3,3,2,8,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:18,svbkID:"6,0,0,5,1,0,4,0,3,3,2,9,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:19,svbkID:"6,0,0,5,1,0,4,0,3,3,2,10,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:20,svbkID:"6,0,0,5,1,0,4,0,3,3,2,11,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:21,svbkID:"6,0,0,5,1,0,4,0,3,3,2,12,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:22,svbkID:"6,0,0,5,1,0,4,0,3,3,2,13,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:23,svbkID:"6,0,0,5,1,0,4,0,3,3,2,14,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:24,svbkID:"6,0,0,5,1,0,4,0,3,3,2,15,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:25,svbkID:"6,0,0,5,1,0,4,0,3,3,2,15,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:26,svbkID:"6,0,0,5,1,0,4,0,3,3,2,17,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:27,svbkID:"6,0,0,5,1,0,4,0,3,3,2,18,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:28,svbkID:"6,0,0,5,1,0,4,0,3,3,2,19,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:29,svbkID:"6,0,0,5,1,0,4,0,3,3,2,20,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:30,svbkID:"6,0,0,5,1,0,4,0,3,3,2,21,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:31,svbkID:"6,0,0,5,1,0,4,0,3,3,2,22,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:32,svbkID:"6,0,0,5,1,0,4,0,3,3,2,23,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:118,svbkID:"6,0,0,5,1,0,4,1,0,3,1,0,10,1,0,9,1,0,8,1,0,12,0,0,0,0,0,11,0,0,"}]
       function showFullMap (){
       	visibleUrl = "";
       	for (var i = 0; i < mapLayers.length; i++) {
