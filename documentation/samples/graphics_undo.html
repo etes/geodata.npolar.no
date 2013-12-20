@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <!--The viewport meta tag is used to improve the presentation and behavior of the samples 
+      on iOS devices-->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <title>Shapes and Symbols</title>
+    
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/dojo/dijit/themes/nihilo/nihilo.css">
+    <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/esri/css/esri.css">
+
+    <style>
+      #info {
+        top: 10px;
+        color: #444;
+        height: auto;
+        font-family: arial;
+        right: 20px;
+        margin: 5px;
+        padding: 10px;
+        position: absolute;
+        width: 25%;
+        z-index: 40;
+        border: solid 2px #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+      }
+      html,body,#mapDiv{
+        padding:0;
+        margin:0;
+        height:100%;
+      }
+
+    </style>
+    <script>var dojoConfig = {
+        parseOnLoad:true,
+        packages: [{
+          "name": "myModules",
+          "location": location.pathname.replace(/\/[^/]+$/, "") + "/extras"
+        }]
+      };
+    </script>  
+
+    <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/"></script>
+    <script>
+      dojo.require("esri.map");
+      dojo.require("esri.layers.agstiled");
+      dojo.require("esri.toolbars.draw");
+      dojo.require("myModules.customoperation");
+      var undoManager;
+
+      var map, tb, activeToolId;
+
+      function init() {
+      	
+      	//specify the number of undo operations allowed using the maxOperations parameter
+        undoManager = new esri.UndoManager();
+        
+        dojo.connect(undoManager,"onChange",function(){
+          //enable or disable buttons depending on current state of application
+          if (undoManager.canUndo) {
+            dijit.byId("undo").set("disabled", false);
+            dijit.byId("undo").set("iconClass","undoIcon");
+          } else {
+            dijit.byId("undo").set("disabled", true);
+            dijit.byId("undo").set("iconClass","undoGrayIcon");
+          }
+
+          if (undoManager.canRedo) {
+            dijit.byId("redo").set("disabled", false);
+            dijit.byId("redo").set("iconClass","redoIcon");
+          } else {
+            dijit.byId("redo").set("disabled", true);
+            dijit.byId("redo").set("iconClass","redoGrayIcon");
+          }
+        });
+
+        var initialExtent = new esri.geometry.Extent({"xmin": 477423.89,"ymin":8663685.98,"xmax":553624.05,"ymax":8714486.09,"spatialReference":{"wkid":32633}});
+                map = new esri.Map("mapDiv", {extent: initialExtent, logo: false});
+                gsvc = new esri.tasks.GeometryService("http://willem3.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer");
+                var basemap = new esri.layers.ArcGISTiledMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer");
+                map.addLayer(basemap);
+        
+        dojo.connect(map, "onLoad", initToolbar);
+      }
+
+      function initToolbar() {
+        tb = new esri.toolbars.Draw(map);
+        dojo.connect(tb, "onDrawEnd", addGraphic);
+
+        //hook up the button click events 
+        dojo.connect(dojo.byId("drawPoint"),"click", function(){
+          tb.activate(esri.toolbars.Draw.POINT);
+        });
+
+        dojo.connect(dojo.byId("drawMultipoint"),"click", function(){
+          tb.activate(esri.toolbars.Draw.MULTI_POINT);
+        });
+
+        dojo.connect(dojo.byId("drawExtent"),"click", function(){
+          tb.activate(esri.toolbars.Draw.EXTENT);
+        });
+
+        dojo.connect(dojo.byId("drawPolyline"),"click", function(){
+          tb.activate(esri.toolbars.Draw.POLYLINE);
+        });
+        dojo.connect(dojo.byId("drawFreehandPolyline"),"click", function(){
+          tb.activate(esri.toolbars.Draw.FREEHAND_POLYLINE);
+        });
+        dojo.connect(dojo.byId("drawPolygon"),"click", function(){
+          tb.activate(esri.toolbars.Draw.POLYGON);
+        });
+        dojo.connect(dojo.byId("drawFreehandPolygon"),"click", function(){
+          tb.activate(esri.toolbars.Draw.FREEHAND_POLYGON);
+        });
+        dojo.connect(dojo.byId("drawLine"),"click", function(){
+          tb.activate(esri.toolbars.Draw.LINE);
+        });
+        dojo.connect(dojo.byId("clear"),"click", function(){
+        	tb.deactivate();
+          map.graphics.clear();
+        });
+      }
+      /*
+      // Set user message
+          switch (activeToolId) {
+            case "addPoint":
+              utils.setMessage("Click the map to add a point");
+              break;
+            case "addLine":
+              utils.setMessage("Click the map. Double-click to finish line.");
+              break;
+            case "addPolygon":
+              utils.setMessage("Click the map. Double-click to finish polygon.");
+              break;
+            default:
+              utils.setMessage("Click a button to start");
+            clearAddGraphics();  
+          }
+       */
+
+
+
+      function addGraphic(geometry) {
+        //deactivate the toolbar and clear existing graphics 
+       // tb.deactivate(); 
+        //map.graphics.clear();
+
+		//create a random color for the symbols
+        var r = Math.floor(Math.random() * 250);
+        var g = Math.floor(Math.random() * 100);
+        var b = Math.floor(Math.random() * 100);
+        //Marker symbol used for point and multipoint created using svg path. See this site for more examples
+        // http://raphaeljs.com/icons/#talkq. You could also create marker symbols using the SimpleMarkerSymbol class
+        //to define color, size, style or the PictureMarkerSymbol class to specify an image to use for the symbol. 
+        var markerSymbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 20, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([r, g, b, 0.5]), 10), new dojo.Color([r, g, b, 0.9]));
+
+
+        //line symbol used for freehand polyline, polyline and line. In this example we'll use a cartographic line symbol
+        //Try modifying the cartographic line symbol properties like CAP and JOIN. For CAP try CAP_ROUND or CAP_SQUARE
+        //for JOIN try JOIN_BEVEL or JOIN_MITER or JOIN_ROUND
+        var lineSymbol = new esri.symbol.CartographicLineSymbol(
+          esri.symbol.CartographicLineSymbol.STYLE_SOLID,
+          new dojo.Color([255,0,0]), 10, 
+          esri.symbol.CartographicLineSymbol.CAP_ROUND,
+          esri.symbol.CartographicLineSymbol.JOIN_MITER, 5
+        );
+
+        //a simple fill symbol used for extent, polygon and freehand polygon.
+        var fillSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, 
+        	new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, 
+        		new dojo.Color([255,0,0]), 2),new dojo.Color([255,255,0,0.25]));
+
+
+        var type = geometry.type, symbol;
+        if (type === "point" || type === "multipoint") {
+          symbol = markerSymbol;
+        }
+        else if (type === "line" || type === "polyline") {
+          symbol = lineSymbol;
+        }
+        else {
+          symbol = fillSymbol;
+        }
+
+      var graphic = new esri.Graphic(geometry, symbol);
+      var operation = new myModules.customoperation.Add({
+          graphicsLayer: map.graphics,
+          addedGraphic: graphic
+        });
+
+        undoManager.add(operation);
+      //Add the graphic to the map 
+       map.graphics.add(graphic);
+      }
+
+     
+
+      dojo.ready(init);
+    </script>
+  </head>
+  <body class="nihilo">
+    <div id="info">
+      <div>Select a shape then draw on map to add graphic</div>
+      <button class="btn btn-primary" id="drawPoint" >Point</button>
+      <button class="btn btn-primary" id="drawLine" >Line</button>
+      <button class="btn btn-primary" id="drawPolyline" >Polyline</button>
+      <button class="btn btn-primary" id="drawPolygon" >Polygon</button>
+      <button class="btn btn-primary" id="drawExtent" >Extent</button>
+      <button class="btn btn-primary" id="clear" >Clear</button>
+      <div class="undoButtons">
+          <button id="undo" disabled="true"  onclick="undoManager.undo();" class="btn btn-primary" iconClass="undoIcon" dojoType="dijit.form.Button">Undo</button>
+          <button id="redo" disabled="true"  onclick="undoManager.redo();" class="btn btn-primary" iconClass="redoIcon" dojoType="dijit.form.Button">Redo</button><br/>
+        </div>
+    </div>
+
+    <div id="mapDiv"></div>
+
+
+
+  </body>
+</html>

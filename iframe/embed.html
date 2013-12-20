@@ -7,6 +7,7 @@
 	<link href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/esri/css/esri.css" rel="stylesheet" type="text/css" >
 	<link rel="stylesheet" type="text/css" href="css/main.min.css">
 	<script type="text/javascript" src="js/proj4js.min.js"></script>
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
     <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.5"></script>
     <script type="text/javascript">
@@ -23,6 +24,8 @@ dojo.require("esri.dijit.Popup");
 	  var visible = [];
 	  var visibleLayers = [];
 	  var IFpoigraphicid = 1;
+	  var IFloigraphicid = 1;
+	  var IFroigraphicid = 1;
 	  var IFgraphicLayer;
 	  var pts = [];
       var identifyTask, identifyParams, identifyHandle = 0;
@@ -73,32 +76,14 @@ if (!window.location.search)
         }
     }
 })();
-/*
-if (JSON)
-    result = JSON.stringify(urlParams, null, 4);
-else {
-    
-    
-    result = "urlParams: \r\n";
-    
-    for (var k in urlParams)
-      if (typeof urlParams[k] == "object") {
-        result += "    " + k + ":\r\n";
-        for (var k2 in urlParams[k])
-          result += "        " + k2 + ": " + urlParams[k][k2] + "\r\n";
-      } 
-      else
-        result += "    " + k + ":" + urlParams[k] + "\r\n";
-    
-} 
-*/
+
       function init() {
           geometryService = new esri.tasks.GeometryService(geometryServiceUrl);
           dojo.connect(geometryService, "onProjectComplete", onProjectComplete);
           
           IFgraphicLayer = new esri.layers.GraphicsLayer();
           //dojo.connect(IFgraphicLayer,"onClick", IFpoigraphicpointf);
-          dojo.connect(IFgraphicLayer,"onMouseOver", IFpoigraphicpointf);
+          //dojo.connect(IFgraphicLayer,"onMouseOver", IFpoigraphicpointf);
           var width = urlParams["width"];
           var height = urlParams["height"];
           dojo.style("map", "width", width + "px");
@@ -121,9 +106,9 @@ else {
           }
           
           var basemap = null;
-          //var mapUrl = "http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer";
+          var mapUrl = "http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer";
           //var mapUrl2 = "http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHX/MapServer";
-          var mapUrl = decodeURIComponent(urlParams["mapUrl"]);
+          //var mapUrl = decodeURIComponent(urlParams["mapUrl"]);
           if (urlParams["t"] && urlParams["t"] == "1")
               basemap = new esri.layers.ArcGISTiledMapServiceLayer(mapUrl);
           else
@@ -167,45 +152,99 @@ else {
             	//console.log(urlParams["poi"][i]);
             	var values = [];
             	values = urlParams["poi"][i].split(',');
-            	
-			IFurlpoilat = values[0];
-			//IFurlpoilat = IFurlpoilat.replace(",",".");
-			IFurlpoilong = values[1];
-			poiColor = values[2];
-			IFurlpoititle = values[3];
-			IFurlpoiinfo = values[4];
-            	
-            	if (poiColor == "r") {
-				poiSymbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 0, 0]), 2), new dojo.Color([255, 0, 0]));
-			}	
-			if (poiColor == "g") {
-				poiSymbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0, 255, 0]), 2), new dojo.Color([0, 255, 0]));					
-			}	
-			if (poiColor == "b") {
-				poiSymbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0, 0, 255]), 2), new dojo.Color([0, 0, 255]));
-			}
-			if (poiColor == "y") {
-				poiSymbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 0, 0]), 2), new dojo.Color([255, 0, 0]));
-			}
+			IFurlpoiColor = values[0];
+			IFurlpoititle = values[1].replace(/\_/g, ' ');
+			IFurlpoiinfo = values[2].replace(/\_/g, ' ');
+			IFurlpoilat = values[3];
+			IFurlpoilong = values[4];
+			IFurlroiColorRGB = hexToRgb("#" + IFurlpoiColor);
 			
-			else if (poiColor == "") {
-			poiSymbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 0, 0]), 2), new dojo.Color([255, 0, 0]));
+			if (IFurlpoiColor == "") {
+				poiSymbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 0, 0]), 2), new dojo.Color([255, 0, 0]));
+			}
+            else{
+				poiSymbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color("#" +IFurlpoiColor), 2), new dojo.Color("#" + IFurlpoiColor));
 			}
             	
-            	IFpoiupos = new Proj4js.Point(IFurlpoilong,IFurlpoilat);
+            IFpoiupos = new Proj4js.Point(IFurlpoilong,IFurlpoilat);
 			//Proj4js.transform(u33, w84, IFpoiupos);
-			//IFpoipl = {"geometry":{"x":IFpoiupos.x,"y":IFpoiupos.y},"spatialreference":{"wkid":32633},"attributes":{"Title":IFurlpoititle,"Info":IFurlpoiinfo}};
-			IFpoipl = {"geometry":{"x":IFurlpoilat,"y":IFurlpoilong},"attributes":{"Title":IFurlpoititle,"Info":IFurlpoiinfo}};
-			IFpoigraphic = new esri.Graphic(IFpoipl);
-			//IFpoigraphic = new esri.Graphic(new esri.geometry.Point(IFurlpoilat,IFurlpoilong));			
-			IFpoigraphic.setSymbol(poiSymbol);
+			IFpoigraphic = new esri.Graphic(new esri.geometry.Point(IFurlpoilat,IFurlpoilong), poiSymbol);
+	        var infoTemplate = new esri.InfoTemplate();
+	        infoTemplate.setTitle(IFurlpoititle);
+	        infoTemplate.setContent(IFurlpoiinfo);
+	        IFpoigraphic.setInfoTemplate(infoTemplate);
 			IFpoigraphic[IFpoigraphicid] = IFgraphicLayer.add(IFpoigraphic);
-			//console.log(IFgraphicLayer);
 			//IFurlpart = IFurlpart.slice(IFurlpart.indexOf("poi=")+4, IFurlpart.length);
 			
             }
             map.addLayer(IFgraphicLayer);
             //IFgraphicLayer.show();
+		}
+		
+		if (urlParams["loi"]) {
+            	
+            for (var i = 0; i < urlParams["loi"].length; i++){
+            	//console.log(urlParams["poi"][i]);
+            var values = [];
+            values = urlParams["loi"][i].split(',');
+			IFurlloiColor = values[0];
+			IFurlloititle = values[1].replace(/\_/g, ' ');
+			IFurlloiinfo = values[2].replace(/\_/g, ' ');
+			linepath = [];
+			for (var j = 3; j < values.length; j += 2) {
+				var x = values[j];
+				var y = values[j+1];
+				linepath.push([x,y]);
+				}
+			IFurlloiColorRGB = hexToRgb("#" + IFurlloiColor);
+            if (IFurlloiColor == "") {
+				loiSymbol = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color([255, 0, 0]), 4);
+          	}
+			else {
+				loiSymbol = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color("#" + IFurlloiColor), 4);
+          }
+			var geometry = new esri.geometry.Polyline([], map.spatialReference);
+			geometry.addPath(linepath);
+			IFloigraphic = new esri.Graphic(geometry, loiSymbol);
+			var infoTemplate = new esri.InfoTemplate();
+			infoTemplate.setTitle(IFurlloititle);
+			infoTemplate.setContent(IFurlloiinfo);
+			IFloigraphic.setInfoTemplate(infoTemplate);
+			IFloigraphic[IFloigraphicid] = IFgraphicLayer.add(IFloigraphic);
+			
+            }
+           map.addLayer(IFgraphicLayer);
+		}
+		
+		if (urlParams["roi"]) {
+            	
+            for (var i = 0; i < urlParams["roi"].length; i++){
+            var values = [];
+            values = urlParams["roi"][i].split(',');
+			IFurlroiColor = values[0];
+			IFurlroititle = values[1].replace(/\_/g, ' ');
+			IFurlroiinfo = values[2].replace(/\_/g, ' ');	
+			IFurlroiXMin = values[3];
+			IFurlroiYMin = values[4];	
+			IFurlroiXMax = values[5];
+			IFurlroiYMax = values[6];
+			IFurlroiColorRGB = hexToRgb("#" + IFurlroiColor);
+            if (IFurlroiColor == "") {
+				roiSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color([255, 0, 0]), 2),new dojo.Color([255, 0, 0, 0.6]));
+          	}
+			else {
+				roiSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color("#" + IFurlroiColor), 2),new dojo.Color(IFurlroiColorRGB));
+          }
+			var geometry = new esri.geometry.Extent(IFurlroiXMin, IFurlroiYMin, IFurlroiXMax, IFurlroiYMax, map.spatialReference);
+			IFroigraphic = new esri.Graphic(geometry, roiSymbol);
+        	var infoTemplate = new esri.InfoTemplate();
+        	infoTemplate.setTitle(IFurlroititle);
+        	infoTemplate.setContent(IFurlroiinfo);
+        	IFroigraphic.setInfoTemplate(infoTemplate);
+			IFroigraphic[IFroigraphicid] = IFgraphicLayer.add(IFroigraphic);
+			
+            }
+            map.addLayer(IFgraphicLayer);
 		}
           });
           
@@ -213,8 +252,17 @@ else {
       
       }
       
-                  // Identify Task (PopUp)
-            
+            function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+        a: 0.6
+    } : null;
+}
+
+              // Identify Task (PopUp)
             function IFpoigraphicpointf(evt) {
 	map.infoWindow.setTitle((evt.graphic.attributes.Title).replace(/¤¤/g, '\''));
 	IFinfo = evt.graphic.attributes.Info;
@@ -313,7 +361,7 @@ else {
 {layerID:30,svbkID:"6,0,0,5,1,0,4,0,3,3,2,21,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
 {layerID:31,svbkID:"6,0,0,5,1,0,4,0,3,3,2,22,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
 {layerID:32,svbkID:"6,0,0,5,1,0,4,0,3,3,2,23,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-{layerID:118,svbkID:"6,0,0,5,1,0,4,1,0,3,1,0,10,1,0,9,1,0,8,1,0,12,0,0,0,0,0,11,0,0,"}]
+{layerID:119,svbkID:"6,0,0,5,1,0,4,1,0,3,1,0,10,1,0,9,1,0,8,1,0,12,0,0,0,0,0,11,0,0,"}]
       function showFullMap (){
       	visibleUrl = "";
       	for (var i = 0; i < mapLayers.length; i++) {

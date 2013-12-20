@@ -2,136 +2,260 @@
  * Uses ustom ExpandoPane CSS from dojo http://ajax.googleapis.com/ajax/libs/dojo/1.9.1/dojox/layout/resources/ExpandoPane.css
 
  */
-			html, body {
-				height: 100%;
-				width: 100%;
-				margin: 0;
-				padding: 0px;
-				font-family: helvetica, arial, sans-serif;
-				font-size: 90%;
-			}
-
-			#rightPane{
-				width: 200px;
-				overflow: auto
-			}
-			#showhide{
-			/*-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;*/
-			-moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;
-        	-moz-box-shadow: 0 0 0.5em black; -webkit-box-shadow: 0 0 0.5em black; -o-box-shadow: 0 0 0.5em black; box-shadow: 0 0 0.5em black;
-			border: solid 2px #AAAAAA;
-			background-color: rgba(255,255,255,0.9);
-			background-image: url(../images/glyphicons-halflings.png);
-			background-position: -448px -72px;
- 			margin:0px;
-			padding:0px;
-			height:20px;
-			position: fixed;
-			top: 5px;
-			right: 5px;
-			width: 20px;
-			z-index: 50;
-			}
-			
-			.btnRemoveMarker{
-			/*-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;*/
-			background-color: rgba(255,255,255,0.9);
-			background-image: url(../images/glyphicons-halflings.png);
-			background-position: -456px 0px;
- 			margin:0px;
-			padding:0px;
-			height:16px;
-			width: 14px;
-			}
-			.btnRemoveMarker:hover{
-				
-			background-color: rgba(240,240,240,0.9);
-			}
-			#paramDiv{
-			/*-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;*/
-        	-moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;
-        	-moz-box-shadow: 0 0 0.5em black; -webkit-box-shadow: 0 0 0.5em black; -o-box-shadow: 0 0 0.5em black; box-shadow: 0 0 0.5em black;
-			display:none;
- 			margin:0px;
-			padding:5px;
-			width:auto;
-			line-height: 15px;
-			background-color: rgba(255,255,255,0.9);
-			position: fixed;
-			height:auto;
-			right:5px;
-			top:5px;
-			z-index: 40;
-			}
-			#nplogo{
-  position: absolute;
-  bottom: 10px;
-  left: 0px;
-  z-index: 80;
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0px;
+	font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+	font-size: 90%;
 }
-#backgroundbottom{
-position:absolute;
-background-color:rgba(255,255,255,0.8);
-bottom:0px;
-left:0px;
-height:14px;
-width:100%;
-z-index:20;
-}
-#fullmap{
-position:absolute;
-bottom:0px;
-left:5px;
-z-index:80;
-font-size: 11px;
-}
-			#copyright{
-			position:absolute;
-			bottom:0px;
-			right:10px;
-			z-index:80;
-			font-size: 11px;
-			}
-			.esriControlsBR{
-			position: absolute;
-			right: 0px;
-			width: 5px;
-			bottom: 0px;
-			z-index: 30;
-			}
-			
 
-			#divCode { 
-        width: 400px; padding: 5px; overflow: auto;
-        border: solid 2px #EEEEEE;
-        background-color: #EEEEEE;
-        font-family: monospace;
-        word-wrap: break-word;
-        white-space: pre-wrap;
-        -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;
-        -moz-box-shadow: 0 0 0.5em black; -webkit-box-shadow: 0 0 0.5em black; -o-box-shadow: 0 0 0.5em black; box-shadow: 0 0 0.5em black;
-      }
+#rightPane {
+	width: 200px;
+	overflow: auto
+}
+#showhide {
+	/*-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;*/
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: 0 0 0.5em black;
+	-webkit-box-shadow: 0 0 0.5em black;
+	-o-box-shadow: 0 0 0.5em black;
+	box-shadow: 0 0 0.5em black;
+	border: solid 2px #AAAAAA;
+	background-color: rgba(255,255,255,0.9);
+	background-image: url(../images/glyphicons-halflings.png);
+	background-position: -448px -72px;
+	margin: 0px;
+	padding: 0px;
+	height: 20px;
+	position: fixed;
+	top: 5px;
+	right: 5px;
+	width: 20px;
+	z-index: 50;
+}
 
-			/* this line hide layers when out of scale for the inline TOC */
-			.agsjsTOCOutOfScale {
-				/*    display: none; */
-			}
-			
+#btnRemoveMarker {
+	/*-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;*/
+	background-color: rgba(255,255,255,0.9);
+	background-image: url(../images/glyphicons_016_bin.png);
+	background-position: 2px 0px;
+	margin: 0px;
+	padding: 0px;
+	height: 28px;
+	width: 30px;
+}
+#btnRemoveMarker:hover {
+	background-color: rgba(240,240,240,0.9);
+}
+#drawPoint {
+	background-color: rgba(255,255,255,0.9);
+	background-image: url(../images/dot-16.png);
+	background-position: 2px 0px;
+	margin: 0px;
+	padding: 0px;
+	height: 30px;
+	width: 30px;
+}
+#drawPoint:hover {
+
+	background-color: rgba(240,240,240,0.9);
+}
+#drawPolyline {
+	background-color: rgba(255,255,255,0.9);
+	background-image: url(../images/draw-polyline-24.png);
+	background-position: 2px 0px;
+	margin: 0px;
+	padding: 0px;
+	height: 30px;
+	width: 30px;
+}
+#drawPolyline:hover {
+	background-color: rgba(240,240,240,0.9);
+}
+#drawExtent {
+	background-color: rgba(255,255,255,0.9);
+	background-image: url(../images/draw-rectangle-24.png);
+	background-position: 2px 0px;
+	margin: 0px;
+	padding: 0px;
+	height: 30px;
+	width: 30px;
+}
+#drawExtent:hover {
+	background-color: rgba(240,240,240,0.9);
+}
+#undo {
+	background-color: rgba(255,255,255,0.9);
+	background-image: url(../images/undo_icon.png);
+	background-position: 0px 0px;
+	margin: 0px;
+	padding: 0px;
+	height: 30px;
+	width: 28px;
+}
+#undo:hover {
+	background-color: rgba(240,240,240,0.9);
+}
+
+#paramDiv {
+	/*-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;*/
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: 0 0 0.5em black;
+	-webkit-box-shadow: 0 0 0.5em black;
+	-o-box-shadow: 0 0 0.5em black;
+	box-shadow: 0 0 0.5em black;
+	margin: 0px;
+	padding: 5px;
+	width: auto;
+	line-height: 15px;
+	background-color: rgba(255,255,255,0.9);
+	position: fixed;
+	height: auto;
+	right: 5px;
+	top: 5px;
+	z-index: 40;
+}
+
+#iframecomposer {
+	/*-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;*/
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px;
+	/*-moz-box-shadow: 0 0 0.5em black; -webkit-box-shadow: 0 0 0.5em black; -o-box-shadow: 0 0 0.5em black; box-shadow: 0 0 0.5em black;*/
+	border: solid 1px #ccc;
+	margin: 0px;
+	padding: 5px;
+	width: auto;
+	line-height: 15px;
+	height: auto;
+}
+
+.undoButtons {
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 4px;
+}
+.undoIcon {
+	background-image: url(images/undo.png);
+	width: 16px;
+	height: 16px;
+}
+.redoIcon {
+	background-image: url(images/redo.png);
+	width: 16px;
+	height: 16px;
+}
+.undoGrayIcon {
+	background-image: url(images/undo_gray.png);
+	width: 16px;
+	height: 16px;
+}
+.redoGrayIcon {
+	background-image: url(images/redo_gray.png);
+	width: 16px;
+	height: 16px;
+}
+
+form {
+	margin: 0 0 5px;
+}
+#nplogo {
+	position: absolute;
+	bottom: 10px;
+	left: 0px;
+	z-index: 80;
+}
+#backgroundbottom {
+	position: absolute;
+	background-color: rgba(255,255,255,0.8);
+	bottom: 0px;
+	left: 0px;
+	height: 14px;
+	width: 100%;
+	z-index: 20;
+}
+#fullmap {
+	position: absolute;
+	bottom: 0px;
+	left: 5px;
+	z-index: 80;
+	font-size: 11px;
+}
+#copyright {
+	position: absolute;
+	bottom: 0px;
+	right: 10px;
+	z-index: 80;
+	font-size: 11px;
+}
+.esriControlsBR {
+	position: absolute;
+	right: 0px;
+	width: 5px;
+	bottom: 0px;
+	z-index: 30;
+}
+
+#divCode {
+	width: 400px;
+	padding: 5px;
+	overflow: auto;
+	border: solid 2px #EEEEEE;
+	background-color: #EEEEEE;
+	font-family: monospace;
+	word-wrap: break-word;
+	white-space: pre-wrap;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: 0 0 0.5em black;
+	-webkit-box-shadow: 0 0 0.5em black;
+	-o-box-shadow: 0 0 0.5em black;
+	box-shadow: 0 0 0.5em black;
+}
+
+#btnExamplePage:hover:after {
+	background: #333;
+	font-size: 10px;
+	background: rgba(0,0,0,.8);
+	border-radius: 5px;
+	bottom: 26px;
+	color: #fff;
+	content: attr(tooltip);
+	padding: 5px;
+	position: absolute;
+	z-index: 98;
+	width: 100px;
+}
+/* this line hide layers when out of scale for the inline TOC */
+.agsjsTOCOutOfScale {
+	/*    display: none; */
+}
+
 /* Custom Scrollbar*/
 ::-webkit-scrollbar {
 	width: 8px;
 }
 ::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 6px;
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 6px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0, 0, 0, 0.2);
+	background-color: rgba(0, 0, 0, 0.2);
 }
 
-
-			
-			/*Esri zoom silder*/
+/*Esri zoom silder*/
 .esriSimpleSlider {
 	top: 5px;
 	left: 8px;
@@ -151,8 +275,7 @@ font-size: 11px;
 	line-height: 18px;
 	font-size: 18px;
 }
-	.esriSimpleSliderVertical .esriSimpleSliderIncrementButton,
-	.esriSimpleSliderVertical .esriSimpleSliderDecrementButton {
+.esriSimpleSliderVertical .esriSimpleSliderIncrementButton, .esriSimpleSliderVertical .esriSimpleSliderDecrementButton {
 	background: #858585;
 	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzVkYWRkZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMTdiYzIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
 	background: -moz-linear-gradient(top, #858585 0%, #242424 100%);
@@ -160,7 +283,7 @@ font-size: 11px;
 	background: -webkit-linear-gradient(top, #858585 0%, #242424 100%);
 	background: -o-linear-gradient(top, #858585 0%, #242424 100%);
 	background: -ms-linear-gradient(top, #858585 0%, #242424 100%);
-	background: linear-gradient(top, #858585 0%, #242424 100%);	
+	background: linear-gradient(top, #858585 0%, #242424 100%);
 	border: solid 1px #545454;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -168,6 +291,199 @@ font-size: 11px;
 	box-shadow: 0 0 0.25em #BBB;
 }
 
-		
-.dojoxExpandoPane{overflow-x:hidden;overflow-y:visible;z-index:440!important/*;background-color:rgba(240,238,238,.56)*/}
-.dojoxExpandoPane .dojoxExpandoWrapper{overflow-x:hidden;overflow-y:visible}.dojoxExpandoClosed .dojoxExpandoTitleNode{display:none}.dojoxExpandoClosed .dojoxExpandoWrapper *{overflow-x:hidden!important}.dojoxExpandoTitleNode{padding-right:6px;padding-left:6px}.dojoxExpandoIcon .a11yNode{display:none;visibility:hidden}.dojoxExpandoBottom .dojoxExpandoIcon,.dojoxExpandoTop .dojoxExpandoIcon,.dojoxExpandoLeft .dojoxExpandoIcon{float:right;margin-right:2px}.dojoxExpandoRight .dojoxExpandoIcon{float:left;margin-left:2px}.dojoxExpandoIcon{width:14px;cursor:pointer;background-position:-60px 0;background-repeat:no-repeat;height:14px}.dojoxExpandoClosed .dojoxExpandoIcon{background-position:0 0;margin:0 auto}.dijitBorderContainer-dijitExpandoPane{border:0!important}.soria .dojoxExpandoTitle{height:16px;font-size:.9em;font-weight:700;padding:3px;padding-top:6px;padding-bottom:5px;background:#f0f4fc url(../../../dijit/themes/soria/images/tabContainerSprite.gif) repeat-x scroll 0 -50px;border-left:1px solid #b1badf;border-right:1px solid #b1badf}.soria .dojoxExpandoClosed .dojoxExpandoTitle{background:0;background-color:rgba(240,238,238,.55);border:0}.soria .dojoxExpandoClosed{background:0;background-color:rgba(240,238,238,.55);border:1px solid #b1badf!important}.soria .dojoxExpandoIcon{background-image:url(../images/spriteRoundedIconsSmall.png)}.dj_ie6 .soria .dojoxExpandoIcon{background-image:url(../images/spriteRoundedIconsSmall.gif)}.tundra .dojoxExpandoTitle{font-weight:700;padding:5px;padding-top:6px;padding-bottom:6px;background:#fafafa url(../../../dijit/themes/tundra/images/accordionItemActive.gif) repeat-x scroll left top;border-top:1px solid #ccc;border-left:1px solid #ccc;border-right:1px solid #ccc}.tundra .dojoxExpandoClosed .dojoxExpandoTitle{background:0;background-color:rgba(240,238,238,.55);border:0;padding:3px}.tundra .dojoxExpandoClosed{background:0;background-color:rgba(240,238,238,.55);border:1px solid #ccc!important}.tundra .dojoxExpandoRight .dojoxExpandoTitle,.tundra .dojoxExpandoLeft .dojoxExpandoTitle,.tundra .dojoxExpandoClosed .dojoxExpandoTitle,.tundra .dojoxExpandoClosed{background-color:#fafafa}.tundra .dojoxExpandoIcon{background-image:url(../images/spriteRoundedIconsSmall.gif)}.tundra .dojoxExpandoClosed .dojoxExpandoIconLeft,.tundra .dojoxExpandoClosed .dojoxExpandoIconRight,.tundra .dojoxExpandoClosed .dojoxExpandoIconTop,.tundra .dojoxExpandoClosed .dojoxExpandoIconBottom{margin-top:3px}.claro .dojoxExpandoTitle{font-weight:700;border-bottom:0;padding:5px 7px 2px;min-height:17px}.claro .dojoxExpandoClosed .dojoxExpandoTitle{background:0;border:0;padding:3px}.claro .dojoxExpandoClosed{background:0;background-color:rgba(240,238,238,.55);border:1px solid #769dc0!important}.claro .dojoxExpandoRight .dojoxExpandoTitle,.claro .dojoxExpandoLeft .dojoxExpandoTitle,.claro .dojoxExpandoClosed .dojoxExpandoTitle{background-color:rgba(240,238,238,.55)}.claro .dojoxExpandoClosed .dojoxExpandoTitle{background-position:0 0}.claro .dojoxExpandoIcon{background-image:url(../images/glyphicons-halflings.png);background-position:-432px -72px}.claro .dojoxExpandoClosed .dojoxExpandoIconLeft,.claro .dojoxExpandoClosed .dojoxExpandoIconRight,.claro .dojoxExpandoClosed .dojoxExpandoIconTop,.claro .dojoxExpandoClosed .dojoxExpandoIconBottom{margin-top:3px}.nihilo .dojoxExpandoPane{background:#fafafa}.nihilo .dojoxExpandoTitle{height:16px;font-size:.9em;font-weight:700;padding:3px;padding-top:6px;padding-bottom:5px;background:#fafafa url(../../../dijit/themes/nihilo/images/tabContainerSprite.gif) repeat-x scroll 0 -50px;border-left:1px solid #ccc;border-right:1px solid #ccc}.nihilo .dojoxExpandoClosed .dojoxExpandoTitle{background:0;background-color:#fafafa;border:0}.nihilo .dojoxExpandoClosed{background:0;background-color:#fafafa;border:1px solid #ccc!important}.nihilo .dojoxExpandoIcon{background-image:url(../images/spriteRoundedIconsSmall.png)}.dj_ie6 .nihilo .dojoxExpandoIcon{background-image:url(../../../dijit/themes/nihilo/images/spriteRoundedIconsSmall.gif)}.nihilo .dojoxExpandoTop{border-bottom:1px solid #ccc;border-left:1px solid #ccc;border-right:1px solid #ccc}.dojoxExpandoClosed .dojoxExpandoIcon{margin-right:4px}.dojoxExpandoIconLeft{background-position:0 0}.dojoxExpandoClosed .dojoxExpandoIconLeft{background-position:-456px -72px;margin-right:4px}.dojoxExpandoIconRight{background-position:-30px 0}.dojoxExpandoClosed .dojoxExpandoIconRight{background-position:0 0;margin-left:4px}.dojoxExpandoIconBottom{background-position:-15px 0}.dojoxExpandoClosed .dojoxExpandoIconBottom{background-position:-45px 0;margin-top:1px}.dojoxExpandoIconTop{background-position:-45px 0}.dojoxExpandoClosed .dojoxExpandoIconTop{background-position:-15px 0}
+.dojoxExpandoPane {
+	overflow-x: hidden;
+	overflow-y: visible;
+	z-index: 440 !important/*;background-color:rgba(240,238,238,.56)*/
+}
+.dojoxExpandoPane .dojoxExpandoWrapper {
+	overflow-x: hidden;
+	overflow-y: visible
+}
+.dojoxExpandoClosed .dojoxExpandoTitleNode {
+	display: none
+}
+.dojoxExpandoClosed .dojoxExpandoWrapper * {
+	overflow-x: hidden !important
+}
+.dojoxExpandoTitleNode {
+	padding-right: 6px;
+	padding-left: 6px
+}
+.dojoxExpandoIcon .a11yNode {
+	display: none;
+	visibility: hidden
+}
+.dojoxExpandoBottom .dojoxExpandoIcon, .dojoxExpandoTop .dojoxExpandoIcon, .dojoxExpandoLeft .dojoxExpandoIcon {
+	float: right;
+	margin-right: 2px
+}
+.dojoxExpandoRight .dojoxExpandoIcon {
+	float: left;
+	margin-left: 2px
+}
+.dojoxExpandoIcon {
+	width: 14px;
+	cursor: pointer;
+	background-position: -60px 0;
+	background-repeat: no-repeat;
+	height: 14px
+}
+.dojoxExpandoClosed .dojoxExpandoIcon {
+	background-position: 0 0;
+	margin: 0 auto
+}
+.dijitBorderContainer-dijitExpandoPane {
+	border: 0 !important
+}
+.soria .dojoxExpandoTitle {
+	height: 16px;
+	font-size: .9em;
+	font-weight: 700;
+	padding: 3px;
+	padding-top: 6px;
+	padding-bottom: 5px;
+	background: #f0f4fc url(../../../dijit/themes/soria/images/tabContainerSprite.gif) repeat-x scroll 0 -50px;
+	border-left: 1px solid #b1badf;
+	border-right: 1px solid #b1badf
+}
+.soria .dojoxExpandoClosed .dojoxExpandoTitle {
+	background: 0;
+	background-color: rgba(240,238,238,.55);
+	border: 0
+}
+.soria .dojoxExpandoClosed {
+	background: 0;
+	background-color: rgba(240,238,238,.55);
+	border: 1px solid #b1badf !important
+}
+.soria .dojoxExpandoIcon {
+	background-image: url(../images/spriteRoundedIconsSmall.png)
+}
+.dj_ie6 .soria .dojoxExpandoIcon {
+	background-image: url(../images/spriteRoundedIconsSmall.gif)
+}
+.tundra .dojoxExpandoTitle {
+	font-weight: 700;
+	padding: 5px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	background: #fafafa url(../../../dijit/themes/tundra/images/accordionItemActive.gif) repeat-x scroll left top;
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc
+}
+.tundra .dojoxExpandoClosed .dojoxExpandoTitle {
+	background: 0;
+	background-color: rgba(240,238,238,.55);
+	border: 0;
+	padding: 3px
+}
+.tundra .dojoxExpandoClosed {
+	background: 0;
+	background-color: rgba(240,238,238,.55);
+	border: 1px solid #ccc !important
+}
+.tundra .dojoxExpandoRight .dojoxExpandoTitle, .tundra .dojoxExpandoLeft .dojoxExpandoTitle, .tundra .dojoxExpandoClosed .dojoxExpandoTitle, .tundra .dojoxExpandoClosed {
+	background-color: #fafafa
+}
+.tundra .dojoxExpandoIcon {
+	background-image: url(../images/spriteRoundedIconsSmall.gif)
+}
+.tundra .dojoxExpandoClosed .dojoxExpandoIconLeft, .tundra .dojoxExpandoClosed .dojoxExpandoIconRight, .tundra .dojoxExpandoClosed .dojoxExpandoIconTop, .tundra .dojoxExpandoClosed .dojoxExpandoIconBottom {
+	margin-top: 3px
+}
+.claro .dojoxExpandoTitle {
+	font-weight: 700;
+	border-bottom: 0;
+	padding: 5px 7px 2px;
+	min-height: 17px
+}
+.claro .dojoxExpandoClosed .dojoxExpandoTitle {
+	background: 0;
+	border: 0;
+	padding: 3px
+}
+.claro .dojoxExpandoClosed {
+	background: 0;
+	background-color: rgba(240,238,238,.55);
+	border: 1px solid #769dc0 !important
+}
+.claro .dojoxExpandoRight .dojoxExpandoTitle, .claro .dojoxExpandoLeft .dojoxExpandoTitle, .claro .dojoxExpandoClosed .dojoxExpandoTitle {
+	background-color: rgba(240,238,238,.55)
+}
+.claro .dojoxExpandoClosed .dojoxExpandoTitle {
+	background-position: 0 0
+}
+.claro .dojoxExpandoIcon {
+	background-image: url(../images/glyphicons-halflings.png);
+	background-position: -432px -72px
+}
+.claro .dojoxExpandoClosed .dojoxExpandoIconLeft, .claro .dojoxExpandoClosed .dojoxExpandoIconRight, .claro .dojoxExpandoClosed .dojoxExpandoIconTop, .claro .dojoxExpandoClosed .dojoxExpandoIconBottom {
+	margin-top: 3px
+}
+.nihilo .dojoxExpandoPane {
+	background: #fafafa
+}
+.nihilo .dojoxExpandoTitle {
+	height: 16px;
+	font-size: .9em;
+	font-weight: 700;
+	padding: 3px;
+	padding-top: 6px;
+	padding-bottom: 5px;
+	background: #fafafa url(../../../dijit/themes/nihilo/images/tabContainerSprite.gif) repeat-x scroll 0 -50px;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc
+}
+.nihilo .dojoxExpandoClosed .dojoxExpandoTitle {
+	background: 0;
+	background-color: #fafafa;
+	border: 0
+}
+.nihilo .dojoxExpandoClosed {
+	background: 0;
+	background-color: #fafafa;
+	border: 1px solid #ccc !important
+}
+.nihilo .dojoxExpandoIcon {
+	background-image: url(../images/spriteRoundedIconsSmall.png)
+}
+.dj_ie6 .nihilo .dojoxExpandoIcon {
+	background-image: url(../../../dijit/themes/nihilo/images/spriteRoundedIconsSmall.gif)
+}
+.nihilo .dojoxExpandoTop {
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc
+}
+.dojoxExpandoClosed .dojoxExpandoIcon {
+	margin-right: 4px
+}
+.dojoxExpandoIconLeft {
+	background-position: 0 0
+}
+.dojoxExpandoClosed .dojoxExpandoIconLeft {
+	background-position: -456px -72px;
+	margin-right: 4px
+}
+.dojoxExpandoIconRight {
+	background-position: -30px 0
+}
+.dojoxExpandoClosed .dojoxExpandoIconRight {
+	background-position: 0 0;
+	margin-left: 4px
+}
+.dojoxExpandoIconBottom {
+	background-position: -15px 0
+}
+.dojoxExpandoClosed .dojoxExpandoIconBottom {
+	background-position: -45px 0;
+	margin-top: 1px
+}
+.dojoxExpandoIconTop {
+	background-position: -45px 0
+}
+.dojoxExpandoClosed .dojoxExpandoIconTop {
+	background-position: -15px 0
+}

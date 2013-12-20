@@ -4,11 +4,15 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
 		<title>Svalbardkartet IFrame Designer</title>
-		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/bootstrap.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.6/js/dojo/dijit/themes/claro/claro.css">
-		<link rel="stylesheet" type="text/css" href="css/main.css">
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
 		<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.6/js/esri/css/esri.css" />
-		<link rel="stylesheet" type="text/css" href="agsjs/css/agsjs.css" />
+		<link rel="stylesheet" type="text/css" href="modules/css/agsjs.css" />
+		<script type="text/javascript" src="js/proj4js.min.js"></script>
+		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="js/spectrum.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/spectrum.css" />
 		<script type="text/javascript">
             var djConfig = {
                 parseOnLoad : true,
@@ -26,11 +30,16 @@
                     //"location": "http://gmaps-utility-gis.googlecode.com/svn/tags/agsjs/2.06/build/agsjs"
                     //"location": "http://gmaps-utility-gis.googlecode.com/svn/tags/agsjs/latest/build/agsjs"
                     //"location": "http://gmaps-utility-gis.googlecode.com/svn/trunk/agsjs/build/agsjs"
-                    "location" : location.pathname.replace(/\/[^/]+$/, '') + '/agsjs'
-                }]
+                    "location" : location.pathname.replace(/\/[^/]+$/, '') + '/modules'
+                },
+                {
+          "name": "myModules",
+          "location": location.pathname.replace(/\/[^/]+$/, "") + "/modules"
+        }
+                ]
             };
 
-		</script>
+		</script>   
 		<script src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.5"></script>
 		<script type="text/javascript">
             dojo.require("dijit.layout.BorderContainer");
@@ -42,9 +51,11 @@
             dojo.require("esri.layers.FeatureLayer");
             dojo.require("dojox.html.entities");
             dojo.require("agsjs.dijit.TOC");
-            dojo.require("dojox.layout.ExpandoPane");  
-		</script>
-		<script type="text/javascript">
+            dojo.require("dojox.layout.ExpandoPane");
+            dojo.require("myModules.customoperation");
+            
+
+      dojo.require("esri.toolbars.draw");
 		        
    	        var layers = [{ name: 'HvalrossLiggeplasser', id: 2 }, { name: 'Røye', id: 3 }, { name: 'Sjøfugl kolonier', id: 5 }, { name: 'Alle Sjøpattdyr observasjoner', id: 27 }, { name: 'Isbjørn observasjoner', id: 37 }, { name: 'Strandrydding per år', id: 58 }, { name: 'Reinbestandområder', id: 59 }, { name: 'Biogeografiske soner', id: 60 }, { name: 'Vegetasjon (10 kasser)', id: 62}, { name: 'Geologi', id: 87 }];
       		var root = location.protocol + "//" + location.host;
@@ -61,17 +72,21 @@
       
       
             var map, toc, dynaLayer1, dynaLayer2, featLayer1;
+            var tb;
+            var undoManager;
             var layerInfo = [];
+            var graphicOverlays = [];
             var visible = [];
             var identifyTask, identifyParams, identifyHandle = 0;
             var opacityValue = 0.8;
             function init(){
             	
+       
             // hideable panel
-		document.getElementById("paramDiv").style.display = "block";
-		document.getElementById("showhide").style.display = "block";
+		$("#paramDiv").css("display", "block");
+		$("#showhide").css("display", "block");
 		
-          geometryService = new esri.tasks.GeometryService(geometryServiceUrl);
+        geometryService = new esri.tasks.GeometryService(geometryServiceUrl);
           //dojo.connect(geometryService, "onProjectComplete", onProjectComplete);
           
           //setup the popup window 
@@ -138,41 +153,21 @@
               
               //map.addLayers([dynaLayer1, featLayer1]);
               map.addLayers([dynaLayer1]);
-              
 
-          symbolCross = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_X, 15, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0, 0, 0]), 2));
-          symbolDot = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255, 0, 0]), 2), new dojo.Color([255, 0, 0]));
-          dojo.connect(dojo.byId('btnPlaceMarker'), "onclick", btnPlaceMarker_click);
-          dojo.connect(dojo.byId('btnCancelMarker'), "onclick", btnCancelMarker_click);
-          dojo.connect(map, "onClick", map_click);
-          dojo.connect(map, "onExtentChange", map_extentChanged);
-          dojo.connect(dynaLayer1, "onOpacityChange", generateCode);
-          dojo.connect(dojo.byId('btnRemoveMarker'), "onclick", btnRemoveMarker_click);
-          dojo.connect(dojo.byId('btnGenerateCode'), "onclick", generateCode);
-          dojo.connect(dojo.byId('btnExamplePage'), "onclick", btnExamplePage_click);
-          dojo.connect(dojo.byId('txtWidth'), "onchange", generateCode);
-          dojo.connect(dojo.byId('txtHeight'), "onchange", generateCode);
-          dojo.connect(dojo.byId('rbLockedYes'), "onchange", generateCode);
-          dojo.connect(dojo.byId('rbLockedNo'), "onchange", generateCode);
-          dojo.connect(dojo.byId('rbSymbolCross'), "onchange", symbolChanged);
-          dojo.connect(dojo.byId('rbSymbolDot'), "onchange", symbolChanged);
-          dojo.connect(dojo.byId('chkSC'), 'onchange', generateCode);
-          dojo.connect(map, "onClick", updateIdentifyTask);
           
-          //dojo.connect(map, "onClick", executeIdentifyTask);
-          //var layersDiv = dojo.byId('layersDiv');
-          /*dojo.forEach(layers, function(item) {
-              var checkBox = document.createElement('input');
-              checkBox.type = 'checkbox';
-              checkBox.id = 'layerCheckbox' + item.id;
-              layersDiv.appendChild(checkBox);
-              var label = document.createElement('span');
-              label.innerHTML = item.name;
-              layersDiv.appendChild(label);
-              var br = document.createElement('br');
-              layersDiv.appendChild(br);
-              dojo.connect(checkBox, 'onchange', layerCheckBox_click);
-          });*/
+          $("#btnRemoveMarker").click(btnRemoveMarker_click);
+          $("#btnExamplePage").click(btnExamplePage_click);
+          $("#btnGenerateCode").click(generateCode);
+          $("#txtWidth").change(generateCode);
+          $("#txtHeight").change(generateCode);
+          $("#rbLockedYes").change(generateCode);
+          $("#rbLockedNo").change(generateCode);
+          //$("#content").change(generateCode);
+          dojo.connect(dynaLayer1, "onOpacityChange", generateCode);
+          //dojo.connect(dojo.byId('btnExamplePage'), "onclick", btnExamplePage_click);
+          //dojo.connect(dojo.byId('txtWidth'), "onchange", generateCode);
+          dojo.connect(map, "onClick", updateIdentifyTask);
+          dojo.connect(map, "onExtentChange", map_extentChanged);
                             
               //resize the map when the browser resizes - view the 'Resizing and repositioning the map' section in
               //the following help topic for more details http://help.esri.com/EN/webapi/javascript/arcgis/help/jshelp_start.htm#jshelp/inside_guidelines.htm      
@@ -188,6 +183,22 @@
                 });
               });
              
+            
+            
+            
+             //specify the number of undo operations allowed using the maxOperations parameter
+        undoManager = new esri.UndoManager();
+        
+        dojo.connect(undoManager,"onChange",function(){
+          //enable or disable buttons depending on current state of application
+          if (undoManager.canUndo) {
+          	$("#undo").removeAttr('disabled');
+          } else {
+          	$("#undo").attr("disabled", "disabled");
+          }
+        });
+              
+        dojo.connect(map, "onLoad", initToolbar);	
             } //end init
             
             
@@ -202,12 +213,6 @@
                     if (layerInfo[i] !== -1 && checkBox && checkBox.checked)
                         result.push(i);
                 }
-                /*
-                 dojo.forEach(layers, function(item) {
-                 var checkBox = dojo.byId('layercheckbox_' + item.id);
-                 if (checkBox && checkBox.checked)
-                 result.push(item.id);
-                 });*/
                 return result;
                 
 
@@ -281,21 +286,19 @@
 
             function btnCancelMarker_click() {
                 mode = "default";
-                dojo.attr('btnCancelMarker', 'disabled', 'disabled');
-                dojo.removeAttr('btnPlaceMarker', 'disabled');
+                $('btnCancelMarker').attr('disabled');
+                $('btnPlaceMarker').removeAttr('disabled');
             }
 
             function btnRemoveMarker_click() {
                 mode = "default";
                 map.graphics.clear();
-                point = null;
-                points=[];
-                dojo.attr('btnRemoveMarker', 'disabled', 'disabled');
-                dojo.attr('btnCancelMarker', 'disabled', 'disabled');
-                dojo.removeAttr('btnPlaceMarker', 'disabled');
+                graphicOverlays = [];
+                $('btnRemoveMarker').attr("disabled", "disabled");
+                //dojo.attr('btnRemoveMarker', 'disabled', 'disabled');
+                //dojo.attr('btnCancelMarker', 'disabled', 'disabled');
+                //dojo.removeAttr('btnPlaceMarker', 'disabled');
                 generateCode();
-                dojo.byId('utm33Ncoords').innerHTML = "";
-                dojo.byId('wgs84coords').innerHTML = "";
             }
 
             function btnExamplePage_click() {
@@ -307,84 +310,166 @@
             function generateCode() {
                 var checkedLayers = getCheckedLayers();
                 var ptsurl = [];
-                for (var i=0; i<points.length; i++ ){
-                	ptsurl.push("&poi[]=" + Math.round(points[i].x) + "," + Math.round(points[i].y) + ",,,");
+                var lineUrl = [];
+                var rectUrl = [];
+                for (var i=0; i<graphicOverlays.length; i++ ){
+                	if (graphicOverlays[i][0] == "point"){
+                		pointColor = graphicOverlays[i][1];
+                		pointTitle = graphicOverlays[i][2];
+                		pointInfo = 	graphicOverlays[i][3];
+                		pointX = Math.round(graphicOverlays[i][4]);
+                		pointY = Math.round(graphicOverlays[i][5]);
+                		ptsurl.push("&poi[]=" + pointColor + "," + pointTitle + "," + pointInfo + "," + pointX + "," + pointY);
+                	}
+                	if (graphicOverlays[i][0] == "polyline"){
+                		lineColor = graphicOverlays[i][1];
+                		lineTitle = graphicOverlays[i][2];
+                		lineInfo = 	graphicOverlays[i][3];
+                		var linepath = graphicOverlays[i][4];
+                		for (var j=0; j<linepath.length; j++ ){
+                			linepath[j][0] = Math.round(linepath[j][0]);
+                			linepath[j][1] = Math.round(linepath[j][1]);
+                		}
+                		lineUrl.push("&loi[]=" + lineColor + "," + lineTitle + "," + lineInfo + "," + linepath);
+                	}
+                	if (graphicOverlays[i][0] == "extent"){
+                		rectColor = graphicOverlays[i][1];
+                		rectTitle = graphicOverlays[i][2];
+                		rectInfo = 	graphicOverlays[i][3];
+                		rectXMin = Math.round(graphicOverlays[i][4][0]);
+                		rectYMin = Math.round(graphicOverlays[i][4][1]);
+                		rectXMax = Math.round(graphicOverlays[i][4][2]);
+                		rectYMax = Math.round(graphicOverlays[i][4][3]);
+                		rectUrl.push("&roi[]=" + rectColor + "," + rectTitle + "," + rectInfo + "," + rectXMin + "," + rectYMin + "," + rectXMax + "," + rectYMax);
+                	}
+                	//ptsurl.push("&poi[]=" + Math.round(points[i][0]) + "," + Math.round(points[i][1]) + "," + points[i][2] + "," + points[i][3] + "," + points[i][4]);
                 }
-                console.log(ptsurl);
-                var code = dojo.string.substitute('<iframe scrolling="no" src="${url}?${sc}width=${width}&height=${height}&sym=${symbol}&extent=${extent}&wkid=32633${point}&mapUrl=${mapUrl}${overlay}&t=${tiled}&n=${nav}&opValue=${opValue}" width="${width}" height="${height}"></iframe>', {
+                
+                var code = dojo.string.substitute('<iframe scrolling="no" src="${url}?&width=${width}&height=${height}&extent=${extent}&wkid=32633${point}${line}${rectangle}&${overlay}&t=${tiled}&n=${nav}&opValue=${opValue}" width="${width}" height="${height}"></iframe>', {
                     url : mapletUrl,
                     // @TODO show marker coordinates on map for points, lines and polygons with popup
-                    sc : dojo.byId('chkSC').checked ? "sc=0&" : "",
+                    //sc : dojo.byId('chkSC').checked ? "sc=0&" : "",
                     extent : Math.round(map.extent.xmin) + "," + Math.round(map.extent.ymin) + "," + Math.round(map.extent.xmax) + "," + Math.round(map.extent.ymax),
                     opValue: opacityValue,
-                    width : dojo.byId('txtWidth').value,
-                    height : dojo.byId('txtHeight').value,
-                    //point : ( point ? "&x=" + Math.round(point.x) + "&y=" + Math.round(point.y) : ""),
-                    //point : ( point ? "&poi[]=" + Math.round(point.x) + "," + Math.round(point.y) + ",,,": ""),
+                    width : $("#txtWidth").val(),
+                    height : $("#txtHeight").val(),
                     point : ( ptsurl ? ptsurl: ""),
-                    nav : dojo.byId('rbLockedYes').checked ? "0" : "1",
-                    symbol : dojo.byId('rbSymbolCross').checked ? "0" : "1",
+                    line : ( lineUrl ? lineUrl: ""),
+                    rectangle : ( rectUrl ? rectUrl: ""),
+                    //nav : dojo.byId('rbLockedYes').checked ? "0" : "1",
+                    nav : $('#rbLockedYes').is(':checked') ? "0" : "1",
                     tiled : isTiledMap ? "1" : "0",
-                    mapUrl : encodeURIComponent(basemapServiceUrl),
+                    //mapUrl : encodeURIComponent(basemapServiceUrl),
                     overlay : checkedLayers.length == 0 ? "" : "&cl=" + checkedLayers.join(";")
                 });
-                dojo.byId('divCode').innerHTML = dojox.html.entities.encode(code);
+                $("#divCode").html(dojox.html.entities.encode(code));
                 return code;
             }
+           
+      function initToolbar(map) {
+        tb = new esri.toolbars.Draw(map);
+        dojo.connect(tb, "onDrawEnd", addGraphic);
+               //hook up the button click events 
+        
+        $("#drawPoint").click(function(){
+          tb.activate(esri.toolbars.Draw.POINT);
+        });
+        $("#drawMultipoint").click(function(){
+          tb.activate(esri.toolbars.Draw.MULTI_POINT);
+        });
+        $("#drawExtent").click(function(){
+          tb.activate(esri.toolbars.Draw.EXTENT);
+        });
+        $("#drawPolyline").click(function(){
+          tb.activate(esri.toolbars.Draw.POLYLINE);
+        });
+        $("#drawFreehandPolyline").click(function(){
+          tb.activate(esri.toolbars.Draw.FREEHAND_POLYLINE);
+        });
+        $("#drawPolygon").click(function(){
+          tb.activate(esri.toolbars.Draw.POLYGON);
+        });
+        $("#drawCircle").click(function(){
+          tb.activate(esri.toolbars.Draw.CIRCLE);
+        });
+        $("#drawFreehandPolygon").click(function(){
+          tb.activate(esri.toolbars.Draw.FREEHAND_POLYGON);
+        });
+        $("#drawLine").click(function(){
+          tb.activate(esri.toolbars.Draw.LINE);
+        });          
+      }
+          
+      function addGraphic(geometry) {
+        iframetitleinput = $("#iframetitleinput").val();
+		iframetitleinputtext = iframetitleinput.replace(/\'/g, '¤¤');
+		iframeinfoinput = $("#iframeinfoinput").val();
+		iframeinfoinputtext = iframeinfoinput.replace(/\'/g, '¤¤');
+		iframeinfoinputtexturl = iframeinfoinputtext.replace(/ /g,"_");
+		iframetitleinputtexturl = iframetitleinputtext.replace(/ /g,"_");
+		iframegraphiccolor = $("#colorpicker").val();
+		iframegraphiccolorurl = iframegraphiccolor.replace(/#/g,"");
+		iframegraphiccolorrgb = hexToRgb(iframegraphiccolor);
 
-            var points =[];
-            function map_click(e) {
-                if (mode == "marker") {
-                	
-                    point = e.mapPoint;
-                    //map.graphics.clear();
-                    points.push(point);
-                    var sym = symbolDot;
-                    if (dojo.byId('rbSymbolCross').checked)
-                        sym = symbolCross;
-                    map.graphics.add(new esri.Graphic(point, sym));
-                    dojo.removeAttr('btnRemoveMarker', 'disabled');
-                    generateCode();
-                    dojo.byId('utm33Ncoords').innerHTML = dojo.string.substitute("UTM coordinates (zone 33N): ${0}, ${1}", [Math.round(point.x), Math.round(point.y)]);
-                    var params = new esri.tasks.ProjectParameters();
-                    outSR = new esri.SpatialReference({"wkid": 4326 });
-                    params.geometries = [point];
-                    params.outSR = outSR;
-                    //params.transformation = transformation;
-                    //@TODO project point to geographic coordinates (epsg 4326) and inject to the url parameter
-                    geometryService.project(params, function(projectedPoints) {
-                    	//point = projectedPoints[0];
-                    	console.log(points);
-                    	//generateCode();
-                    	});
-                    	
-                    	mode = "default";
-                    	
-                dojo.removeAttr('btnPlaceMarker', 'disabled');
-                }
-            }
+        var type = geometry.type;
+        var symbol; 
+        
+        if (type === "point" || type === "multipoint") {
+          symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color(iframegraphiccolor), 4), new dojo.Color(iframegraphiccolor));
+          graphicOverlays.push([type, iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, geometry.x, geometry.y]);
+        }
+        else if (type === "line" || type === "polyline") {
+          symbol = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color(iframegraphiccolor), 4);
+          graphicOverlays.push([type, iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl,geometry.paths[0]]);
+        }
+        else if (type === "extent") {
+          symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color(iframegraphiccolor), 2),new dojo.Color(iframegraphiccolorrgb));
+          graphicOverlays.push([type, iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl,[geometry.xmin, geometry.ymin, geometry.xmax, geometry.ymax]]);
+        }
+        else {
+          symbol= new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color(iframegraphiccolor), 2),new dojo.Color(iframegraphiccolorrgb));
+        }
+         
+        var graphic = new esri.Graphic(geometry, symbol);
+        var infoTemplate = new esri.InfoTemplate();
+        infoTemplate.setTitle(iframetitleinputtext);
+        infoTemplate.setContent(iframeinfoinputtext);
+        graphic.setInfoTemplate(infoTemplate);
+        
+        var operation = new myModules.customoperation.Add({
+          graphicsLayer: map.graphics,
+          addedGraphic: graphic
+        });
 
-            function symbolChanged() {
-                var sym = symbolDot;
-                if (dojo.byId('rbSymbolCross').checked)
-                    sym = symbolCross;
-                if (map.graphics.graphics[0])
-                    map.graphics.graphics[0].setSymbol(sym);
-                generateCode();
-            }
+        undoManager.add(operation);
+        map.graphics.add(graphic);
+        
+        generateCode();
+      }
+      
+      function undo_click(){
+          	graphicOverlays.pop();
+          	generateCode();
+      }
+      
+       function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+        a: 0.6
+    } : null;
+}
+
+
 
             function onProjectComplete(graphics) {
                 if (graphics && graphics.length == 1) {
                     var g = graphics[0];
-                   /* dojo.byId('wgs84coords').innerHTML = dojo.string.substitute("Geographic coordinates (Lat, Long): ${1}, ${0}", [dojo.number.format(g.geometry.x, {
-                        places : decimalPlacesWGS84
-                    }), dojo.number.format(g.geometry.y, {
-                        places : decimalPlacesWGS84
-                    })]);
-                    */
                 }
             }
-
+           
             function map_extentChanged() {
                 generateCode();
             }
@@ -431,7 +516,7 @@
             function testFindNodeByLayer() {
                 // 0 is the layerId of group "Basis"
                 toc.findTOCNode(dynaLayer1, 0).collapse();
-                // 	12 is the id of layer "KortnebbgÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¥s"
+                // 	12 is the id of layer "Kortnebbgaas"
                 toc.findTOCNode(dynaLayer1, 12).hide();
             }
             
@@ -506,24 +591,18 @@
             
             //show hide menu
 			function showhide () {
-				if(document.getElementById("paramDiv").style.display == "none") {
-					document.getElementById("paramDiv").style.display = "block";
-					document.getElementById("showhide").style.backgroundPosition = "-448px  -72px";
-					//document.getElementById("panelright").style.display = "block";
-					//document.getElementById("paramDiv").style.display = "block";
-					//document.getElementById("panelright").style.display = "block";
-					//document.getElementById("navcontrols").style.display = "block";
+				if($("#paramDiv").css("display") == "none") {
+					$("#paramDiv").css("display", "block");
+					$("#showhide").css("background-position", "-448px  -72px");
 				}
 				else {
-					document.getElementById("paramDiv").style.display = "none";
-					document.getElementById("showhide").style.backgroundPosition = "-430px -72px";
-					//document.getElementById("panelright").style.display = "none";
-					//document.getElementById("navcontrols").style.display = "none";
+					$("#paramDiv").css("display", "none");
+					$("#showhide").css("background-position", "-430px -72px");
 					
 				}
 			}
-
-
+			
+			
             dojo.ready(init);
 		</script>
 	</head>
@@ -538,7 +617,6 @@
 			</div>
 
 			<!--Parameters section
-			<div id="header" data-dojo-type="dijit.layout.ContentPane" id="rightPane" region="right">
 				-->
 				
     <div id="showhide" onclick="showhide();" title="Show/hide panel" onmouseover="this.style.cursor='pointer'"></div>
@@ -555,26 +633,26 @@
 						No.
 					</div>
 					<br />
-					<div class="pointdiv">
-						Add point marker to map.
-						<div class="pointdivbuttons">
-							<input id="btnPlaceMarker" value="Add point" type="button" />
-							<input id="btnCancelMarker" value="Cancel" type="button" disabled="disabled" />
-							<!--<input id="btnRemoveMarker" value="Delete Marker" type="button" disabled="disabled" />-->
-							<div class="btnRemoveMarker" id="btnRemoveMarker" onmouseover="this.style.cursor='pointer'"><!--<img src="0.png" alt="" onmouseover="this.style.cursor='pointer';" onmouseout="src='iframe_eraser.png'" onmousedown="src='iframe_eraser_down.png'" onmouseup="src='iframe_eraser.png'">--></div>
-							
+						<!-- iframecomposer -->
+					<div id="iframecomposer">
+						<div class="editorToolsDiv">
+							<button class="btn btn-primary" id="drawPoint" title="Draw point on the map"></button>
+							<button class="btn btn-primary" id="drawPolyline" title = "Draw polyline on the map"></button>
+							<button class="btn btn-primary" id="drawExtent" title="Draw rectangle on the map"></button>
+							<button class="btn btn-primary" id="undo" disabled="true"  onclick="undoManager.undo(); undo_click();" showLabel="false" iconClass="undoIcon" title="Undo previous drawing"></button>
+							<button class="btn btn-primary" id="btnRemoveMarker" title="Clear all drawings"></button>
+							<!-- Color picker-->
+							<input type='text' id="colorpicker" name="colorpicker" value="#ff0000" title= "Choose Color"/><!-- /. color picker-->
 						</div>
-						<div class="symboldiv">
-							Symbol for marker
-							<input id="rbSymbolCross" name="rbSymbol" type="radio" value="0"/>
-							Cross
-							<input id="rbSymbolDot" name="rbSymbol" type="radio" value="1" checked/>
-							Circle
-						</div>
+						<form class="form-inline" id="iframetitlediv" name="iframetitleform">
+							<input class="input-sm" id="iframetitleinput"  name="iframetitletext" value="" placeholder="Add title to graphic" title="Title" type="text" style="width:120px; font-size: 11px;" />
+							</form>
+						<form class="form-inline" id="iframeinfodiv" name="iframeinfoform">
+							<textarea id="iframeinfoinput" name="iframeinfotext"  value="" placeholder="Add text info to graphic here." title="Info" spellcheck="false" style="z-index:99; width:160px; font-size: 11px;"></textarea>
+						</form>
 						<div class="pointcoordinates"><div id="utm33Ncoords"></div><div id="wgs84coords"></div>
-							<div class="showcoordinatediv"><input id="chkSC" name="chkSC" type="checkbox" checked="checked" /> Show marker coordinates on map </div>
-						</div>
 					</div>
+				</div> <!-- /.iframecomposer -->
 					<br />
 					<div id="embedSize-box">
 						<div class="widthdiv input-prepend input-append">
@@ -590,12 +668,8 @@
 							Copy and paste above HTML code to embed on a website.
 						</div>
 						<div class="previewdiv">
-							<input id="btnGenerateCode" value="Update Code" type="button" />
-							<input id="btnExamplePage" value="Preview" type="button" /> (Opens in new page)
-							<!--
-							<span class = "buttonText" onclick="generateCode();" title="Get IFrame Code" onmouseover="this.style.cursor='pointer'">Update Code</span>
-							<span class = "buttonText" onclick="btnExamplePage_click();" title="Preview Iframe" onmouseover="this.style.cursor='pointer'">Preview</span> (Opens in new page)
-							-->
+							<button class="btn btn-primary" id="btnGenerateCode">Update Code</button>
+							<button class="btn btn-primary" tooltip="Opens in new page" id="btnExamplePage">Preview</button>
 						</div>
 					</div>
 				</div>
@@ -604,5 +678,11 @@
 			<!--end parameters section
 		</div>
 		-->
+	<script>
+$("#colorpicker").spectrum({
+    color: "#ff0000",
+    showButtons: false,
+});
+</script>
 	</body>
 </html>
