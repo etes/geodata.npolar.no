@@ -168,7 +168,7 @@ if (!window.location.search)
             	
             IFpoiupos = new Proj4js.Point(IFurlpoilong,IFurlpoilat);
 			//Proj4js.transform(u33, w84, IFpoiupos);
-			IFpoigraphic = new esri.Graphic(new esri.geometry.Point(IFurlpoilat,IFurlpoilong), poiSymbol);
+			IFpoigraphic = new esri.Graphic(new esri.geometry.Point(IFurlpoilat,IFurlpoilong, map.spatialReference), poiSymbol);
 	        var infoTemplate = new esri.InfoTemplate();
 	        infoTemplate.setTitle(IFurlpoititle);
 	        infoTemplate.setContent(IFurlpoiinfo);
@@ -203,7 +203,7 @@ if (!window.location.search)
 			else {
 				loiSymbol = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color("#" + IFurlloiColor), 4);
           }
-			var geometry = new esri.geometry.Polyline([], map.spatialReference);
+			var geometry = new esri.geometry.Polyline(map.spatialReference);
 			geometry.addPath(linepath);
 			IFloigraphic = new esri.Graphic(geometry, loiSymbol);
 			var infoTemplate = new esri.InfoTemplate();
