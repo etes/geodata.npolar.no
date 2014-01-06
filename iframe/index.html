@@ -17,25 +17,13 @@
             var djConfig = {
                 parseOnLoad : true,
                 packages : [{
-                    "name" : "agsjs",
-                    //if you want to host on your own server, download from
-                    //http://gmaps-utility-gis.googlecode.com/svn/tags/agsjs/
-                    // and put in folders then use path like:
-                    //"location": location.pathname.replace(/\/[^/]+$/, '') + '/../src/agsjs'
-                    // use /src/ for debug and /build/ for production.
-                    // you can also use online version using the following location,
-                    // however please noted googlecode.com is not a true CDN and is not fast and may not be available.
-                    // also, it is recommended to use a particular version from /tags/agsjs/<version>/
-                    // in a production app to avoid unexpected results.
-                    //"location": "http://gmaps-utility-gis.googlecode.com/svn/tags/agsjs/2.06/build/agsjs"
-                    //"location": "http://gmaps-utility-gis.googlecode.com/svn/tags/agsjs/latest/build/agsjs"
-                    //"location": "http://gmaps-utility-gis.googlecode.com/svn/trunk/agsjs/build/agsjs"
+                	"name" : "agsjs",
                     "location" : location.pathname.replace(/\/[^/]+$/, '') + '/modules'
                 },
                 {
-          "name": "myModules",
-          "location": location.pathname.replace(/\/[^/]+$/, "") + "/modules"
-        }
+                	"name": "myModules",
+                	"location": location.pathname.replace(/\/[^/]+$/, "") + "/modules"
+                	}
                 ]
             };
 
@@ -53,9 +41,7 @@
             dojo.require("agsjs.dijit.TOC");
             dojo.require("dojox.layout.ExpandoPane");
             dojo.require("myModules.customoperation");
-            
-
-      dojo.require("esri.toolbars.draw");
+            dojo.require("esri.toolbars.draw");
 		        
    	        var layers = [{ name: 'HvalrossLiggeplasser', id: 2 }, { name: 'Røye', id: 3 }, { name: 'Sjøfugl kolonier', id: 5 }, { name: 'Alle Sjøpattdyr observasjoner', id: 27 }, { name: 'Isbjørn observasjoner', id: 37 }, { name: 'Strandrydding per år', id: 58 }, { name: 'Reinbestandområder', id: 59 }, { name: 'Biogeografiske soner', id: 60 }, { name: 'Vegetasjon (10 kasser)', id: 62}, { name: 'Geologi', id: 87 }];
       		var root = location.protocol + "//" + location.host;
@@ -65,8 +51,8 @@
    	        var dynamicServiceUrl = 'http://willem3.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer';
    	        var geometryServiceUrl = 'http://geodata.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer';
    	        var isTiledMap = true;
+   	        
    	        //var isTiledMap = false;
-   	        //@TODO add map popup and feature info function
    	        var decimalPlacesWGS84 = 6;
    	        var overlayMap, point, mode, symbolCross, symbolDot, geometryService;
       
@@ -83,8 +69,8 @@
             	
        
             // hideable panel
-		$("#paramDiv").css("display", "block");
-		$("#showhide").css("display", "block");
+		//$("#paramDiv").css("display", "block");
+		//$("#showhide").css("display", "block");
 		
         geometryService = new esri.tasks.GeometryService(geometryServiceUrl);
           //dojo.connect(geometryService, "onProjectComplete", onProjectComplete);
@@ -162,10 +148,9 @@
           $("#txtHeight").change(generateCode);
           $("#rbLockedYes").change(generateCode);
           $("#rbLockedNo").change(generateCode);
-          //$("#content").change(generateCode);
-          dojo.connect(dynaLayer1, "onOpacityChange", generateCode);
           //dojo.connect(dojo.byId('btnExamplePage'), "onclick", btnExamplePage_click);
           //dojo.connect(dojo.byId('txtWidth'), "onchange", generateCode);
+          dojo.connect(dynaLayer1, "onOpacityChange", generateCode);
           dojo.connect(map, "onClick", updateIdentifyTask);
           dojo.connect(map, "onExtentChange", map_extentChanged);
                             
@@ -184,8 +169,6 @@
               });
              
             
-            
-            
              //specify the number of undo operations allowed using the maxOperations parameter
         undoManager = new esri.UndoManager();
         
@@ -195,6 +178,7 @@
           	$("#undo").removeAttr('disabled');
           } else {
           	$("#undo").attr("disabled", "disabled");
+          	$("#btnRemoveMarker").attr("disabled", "disabled");
           }
         });
               
@@ -278,23 +262,12 @@
                 console.log("Failed: ", error);
             }
 
-            function btnPlaceMarker_click() {
-                mode = "marker";
-                dojo.attr('btnPlaceMarker', 'disabled', 'disabled');
-                dojo.removeAttr('btnCancelMarker', 'disabled');
-            }
-
-            function btnCancelMarker_click() {
-                mode = "default";
-                $('btnCancelMarker').attr('disabled');
-                $('btnPlaceMarker').removeAttr('disabled');
-            }
-
             function btnRemoveMarker_click() {
                 mode = "default";
                 map.graphics.clear();
                 graphicOverlays = [];
-                $('btnRemoveMarker').attr("disabled", "disabled");
+                $('#btnRemoveMarker').attr("disabled", "disabled");
+                $("#undo").attr("disabled", "disabled");
                 //dojo.attr('btnRemoveMarker', 'disabled', 'disabled');
                 //dojo.attr('btnCancelMarker', 'disabled', 'disabled');
                 //dojo.removeAttr('btnPlaceMarker', 'disabled');
@@ -345,17 +318,16 @@
                 	//ptsurl.push("&poi[]=" + Math.round(points[i][0]) + "," + Math.round(points[i][1]) + "," + points[i][2] + "," + points[i][3] + "," + points[i][4]);
                 }
                 
-                var code = dojo.string.substitute('<iframe scrolling="no" src="${url}?&width=${width}&height=${height}&extent=${extent}&wkid=32633${point}${line}${rectangle}&${overlay}&t=${tiled}&n=${nav}&opValue=${opValue}" width="${width}" height="${height}"></iframe>', {
+                var code = dojo.string.substitute('<iframe scrolling="no" src="${url}?&width=${width}&height=${height}&extent=${extent}&wkid=32633${point}${line}${rectangle}${overlay}&t=${tiled}&n=${nav}&opValue=${opValue}" width="${width}" height="${height}"></iframe>', {
                     url : mapletUrl,
-                    // @TODO show marker coordinates on map for points, lines and polygons with popup
                     //sc : dojo.byId('chkSC').checked ? "sc=0&" : "",
                     extent : Math.round(map.extent.xmin) + "," + Math.round(map.extent.ymin) + "," + Math.round(map.extent.xmax) + "," + Math.round(map.extent.ymax),
                     opValue: opacityValue,
                     width : $("#txtWidth").val(),
                     height : $("#txtHeight").val(),
-                    point : ( ptsurl ? ptsurl: ""),
-                    line : ( lineUrl ? lineUrl: ""),
-                    rectangle : ( rectUrl ? rectUrl: ""),
+                    point : ( ptsurl ? ptsurl.join(""): ""),
+                    line : ( lineUrl ? lineUrl.join(""): ""),
+                    rectangle : ( rectUrl ? rectUrl.join(""): ""),
                     //nav : dojo.byId('rbLockedYes').checked ? "0" : "1",
                     nav : $('#rbLockedYes').is(':checked') ? "0" : "1",
                     tiled : isTiledMap ? "1" : "0",
@@ -370,7 +342,6 @@
         tb = new esri.toolbars.Draw(map);
         dojo.connect(tb, "onDrawEnd", addGraphic);
                //hook up the button click events 
-        
         $("#drawPoint").click(function(){
           tb.activate(esri.toolbars.Draw.POINT);
         });
@@ -445,6 +416,7 @@
         map.graphics.add(graphic);
         
         generateCode();
+        $('#btnRemoveMarker').removeAttr('disabled');
       }
       
       function undo_click(){
@@ -560,7 +532,7 @@
         identifyParams.layerIds = visible;
       }
             
-            function executeIdentifyTask(evt) {
+     function executeIdentifyTask(evt) {
         identifyParams.geometry = evt.mapPoint;
         identifyParams.mapExtent = map.extent;
 
@@ -597,8 +569,7 @@
 				}
 				else {
 					$("#paramDiv").css("display", "none");
-					$("#showhide").css("background-position", "-430px -72px");
-					
+					$("#showhide").css("background-position", "-430px -72px");	
 				}
 			}
 			
@@ -636,11 +607,11 @@
 						<!-- iframecomposer -->
 					<div id="iframecomposer">
 						<div class="editorToolsDiv">
-							<button class="btn btn-primary" id="drawPoint" title="Draw point on the map"></button>
-							<button class="btn btn-primary" id="drawPolyline" title = "Draw polyline on the map"></button>
-							<button class="btn btn-primary" id="drawExtent" title="Draw rectangle on the map"></button>
-							<button class="btn btn-primary" id="undo" disabled="true"  onclick="undoManager.undo(); undo_click();" showLabel="false" iconClass="undoIcon" title="Undo previous drawing"></button>
-							<button class="btn btn-primary" id="btnRemoveMarker" title="Clear all drawings"></button>
+							<button class="btn btn-primary tip" id="drawPoint" tip="Draw point on map"></button>
+							<button class="btn btn-primary tip" id="drawPolyline" tip = "Draw polyline on map"></button>
+							<button class="btn btn-primary tip" id="drawExtent" tip="Draw rectangle on map"></button>
+							<button class="btn btn-primary tip" id="undo" disabled="true"  onclick="undoManager.undo(); undo_click();" showLabel="false" iconClass="undoIcon" tip="Undo previous drawing"></button>
+							<button class="btn btn-primary tip" id="btnRemoveMarker" tip="Clear all drawings" disabled="disabled"></button>
 							<!-- Color picker-->
 							<input type='text' id="colorpicker" name="colorpicker" value="#ff0000" title= "Choose Color"/><!-- /. color picker-->
 						</div>
@@ -669,7 +640,7 @@
 						</div>
 						<div class="previewdiv">
 							<button class="btn btn-primary" id="btnGenerateCode">Update Code</button>
-							<button class="btn btn-primary" tooltip="Opens in new page" id="btnExamplePage">Preview</button>
+							<button class="btn btn-primary tip" tip="Opens in new page" id="btnExamplePage">Preview</button>
 						</div>
 					</div>
 				</div>
@@ -681,7 +652,7 @@
 	<script>
 $("#colorpicker").spectrum({
     color: "#ff0000",
-    showButtons: false,
+    //showButtons: false,
 });
 </script>
 	</body>
