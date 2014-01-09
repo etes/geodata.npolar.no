@@ -1,20 +1,21 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+﻿<!doctype html>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Svalbardkartet IFrame</title>
-    <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/dojo/dijit/themes/claro/claro.css">    
-	<link href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/esri/css/esri.css" rel="stylesheet" type="text/css" >
+    <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.8/js/dojo/dijit/themes/claro/claro.css">    
+	<link href="http://js.arcgis.com/3.8/js/esri/css/esri.css" rel="stylesheet" type="text/css" >
 	<link rel="stylesheet" type="text/css" href="css/main.min.css">
 	<script type="text/javascript" src="js/proj4js.min.js"></script>
 	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript">var djConfig = {parseOnLoad: true};</script>
-    <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.5"></script>
+    <script type="text/javascript">var djConfig = {parseOnLoad: true};</script>   
+	<script src="//js.arcgis.com/3.8/"></script>
     <script type="text/javascript">
       dojo.require("dijit.layout.BorderContainer");
       dojo.require("dijit.layout.ContentPane");
       dojo.require("esri.map");
-dojo.require("esri.dijit.Popup");
+      dojo.require("esri.geometry.Circle");
+      dojo.require("esri.dijit.Popup");
       var map, geometryService;
       var overlayMapService = 'http://willem3.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer';
       var layers = [{ name: 'HvalrossLiggeplasser', id: 2 }, { name: 'Røye', id: 3 }, { name: 'Sjøfugl kolonier', id: 5 }, { name: 'Alle Sjøpattdyr observasjoner', id: 27 }, { name: 'Isbjørn observasjoner', id: 37 }, { name: 'Strandrydding per år', id: 58 }, { name: 'Reinbestandområder', id: 59 }, { name: 'Biogeografiske soner', id: 60 }, { name: 'Vegetasjon (10 kasser)', id: 62}, { name: 'Geologi', id: 87 }];
@@ -24,6 +25,7 @@ dojo.require("esri.dijit.Popup");
 	  var visible = [];
 	  var visibleLayers = [];
 	  var IFpoigraphicid = 1;
+	  var coigraphicid = 1;
 	  var IFloigraphicid = 1;
 	  var IFroigraphicid = 1;
 	  var IFgraphicLayer;
@@ -179,6 +181,40 @@ if (!window.location.search)
             }
             map.addLayer(IFgraphicLayer);
             //IFgraphicLayer.show();
+		}
+		
+		if (urlParams["coi"]) {
+            	
+            for (var i = 0; i < urlParams["coi"].length; i++){
+            	var values = [];
+            	values = urlParams["coi"][i].split(',');
+			coiColor = values[0];
+			coititle = values[1].replace(/\_/g, ' ');
+			coiinfo = values[2].replace(/\_/g, ' ');
+			centerX = values[3];
+			centerY = values[4];
+			radius = values[5];
+			coiColorRGB = hexToRgb("#" + coiColor);
+			
+			if (coiColor == "") {
+				coiSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color([255, 0, 0]), 2),new dojo.Color([255, 0, 0, 0.6]));
+          	}
+            else{
+				coiSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color([255, 0, 0]), 2),new dojo.Color([255, 0, 0, 0.6]));
+          }
+			center = new esri.geometry.Point(centerX,centerY, map.spatialReference);
+			symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color("#" + coiColor), 4), new dojo.Color(coiColorRGB));
+			var circleGeometry  = new esri.geometry.Circle(new esri.geometry.Point(centerX,centerY, map.spatialReference),{radius: radius});
+			coigraphic = new esri.Graphic(circleGeometry, coiSymbol);
+	        var infoTemplate = new esri.InfoTemplate();
+	        infoTemplate.setTitle(coititle);
+	        infoTemplate.setContent(coiinfo);
+	        coigraphic.setInfoTemplate(infoTemplate);
+	        //map.graphics.add(coigraphic);
+			coigraphic[coigraphicid] = IFgraphicLayer.add(coigraphic);
+            //console.log(circleGeometry);
+            }
+            map.addLayer(IFgraphicLayer);
 		}
 		
 		if (urlParams["loi"]) {
