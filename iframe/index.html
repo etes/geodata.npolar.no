@@ -5,9 +5,9 @@
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
 		<title>Svalbardkartet IFrame Designer</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.6/js/dojo/dijit/themes/claro/claro.css">
+		<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.8/js/dojo/dijit/themes/claro/claro.css">
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
-		<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.6/js/esri/css/esri.css" />
+		<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.8/js/esri/css/esri.css" />
 		<link rel="stylesheet" type="text/css" href="modules/css/agsjs.css" />
 		<script type="text/javascript" src="js/proj4js.min.js"></script>
 		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
@@ -28,13 +28,14 @@
             };
 
 		</script>   
-		<script src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.5"></script>
+		<script src="//js.arcgis.com/3.8/"></script>
 		<script type="text/javascript">
             dojo.require("dijit.layout.BorderContainer");
             dojo.require("dijit.layout.ContentPane");
             // uncomment if want dojo widget style checkbox
             //dojo.require('dijit.form.CheckBox');
             dojo.require("esri.map");
+            dojo.require("esri.geometry.Circle");
             dojo.require("esri.dijit.Popup");
             dojo.require("esri.layers.FeatureLayer");
             dojo.require("dojox.html.entities");
@@ -183,7 +184,8 @@
         });
               
         dojo.connect(map, "onLoad", initToolbar);	
-            } //end init
+           
+} //end init
             
             
             // Iframe designer
@@ -282,7 +284,8 @@
 
             function generateCode() {
                 var checkedLayers = getCheckedLayers();
-                var ptsurl = [];
+                var ptsUrl = [];
+                var circleUrl = [];
                 var lineUrl = [];
                 var rectUrl = [];
                 for (var i=0; i<graphicOverlays.length; i++ ){
@@ -292,7 +295,16 @@
                 		pointInfo = 	graphicOverlays[i][3];
                 		pointX = Math.round(graphicOverlays[i][4]);
                 		pointY = Math.round(graphicOverlays[i][5]);
-                		ptsurl.push("&poi[]=" + pointColor + "," + pointTitle + "," + pointInfo + "," + pointX + "," + pointY);
+                		ptsUrl.push("&poi[]=" + pointColor + "," + pointTitle + "," + pointInfo + "," + pointX + "," + pointY);
+                	}
+                	if (graphicOverlays[i][0] == "circle"){
+                		circleColor = graphicOverlays[i][1];
+                		circleTitle = graphicOverlays[i][2];
+                		circleInfo = 	graphicOverlays[i][3];
+                		centerX = Math.round(graphicOverlays[i][4]);
+                		centerY = Math.round(graphicOverlays[i][5]);
+                		radius = Math.round(graphicOverlays[i][6]);
+                		circleUrl.push("&coi[]=" + circleColor + "," + circleTitle + "," + circleInfo + "," + centerX + "," + centerY + "," + radius);
                 	}
                 	if (graphicOverlays[i][0] == "polyline"){
                 		lineColor = graphicOverlays[i][1];
@@ -318,14 +330,15 @@
                 	//ptsurl.push("&poi[]=" + Math.round(points[i][0]) + "," + Math.round(points[i][1]) + "," + points[i][2] + "," + points[i][3] + "," + points[i][4]);
                 }
                 
-                var code = dojo.string.substitute('<iframe scrolling="no" src="${url}?&width=${width}&height=${height}&extent=${extent}&wkid=32633${point}${line}${rectangle}${overlay}&t=${tiled}&n=${nav}&opValue=${opValue}" width="${width}" height="${height}"></iframe>', {
+                var code = dojo.string.substitute('<iframe scrolling="no" src="${url}?&width=${width}&height=${height}&extent=${extent}&wkid=32633${point}${circle}${line}${rectangle}${overlay}&t=${tiled}&n=${nav}&opValue=${opValue}" width="${width}" height="${height}"></iframe>', {
                     url : mapletUrl,
                     //sc : dojo.byId('chkSC').checked ? "sc=0&" : "",
                     extent : Math.round(map.extent.xmin) + "," + Math.round(map.extent.ymin) + "," + Math.round(map.extent.xmax) + "," + Math.round(map.extent.ymax),
                     opValue: opacityValue,
                     width : $("#txtWidth").val(),
                     height : $("#txtHeight").val(),
-                    point : ( ptsurl ? ptsurl.join(""): ""),
+                    point : ( ptsUrl ? ptsUrl.join(""): ""),
+                    circle : ( circleUrl ? circleUrl.join(""): ""),
                     line : ( lineUrl ? lineUrl.join(""): ""),
                     rectangle : ( rectUrl ? rectUrl.join(""): ""),
                     //nav : dojo.byId('rbLockedYes').checked ? "0" : "1",
@@ -345,30 +358,15 @@
         $("#drawPoint").click(function(){
           tb.activate(esri.toolbars.Draw.POINT);
         });
-        $("#drawMultipoint").click(function(){
-          tb.activate(esri.toolbars.Draw.MULTI_POINT);
-        });
         $("#drawExtent").click(function(){
           tb.activate(esri.toolbars.Draw.EXTENT);
         });
         $("#drawPolyline").click(function(){
           tb.activate(esri.toolbars.Draw.POLYLINE);
         });
-        $("#drawFreehandPolyline").click(function(){
-          tb.activate(esri.toolbars.Draw.FREEHAND_POLYLINE);
-        });
-        $("#drawPolygon").click(function(){
-          tb.activate(esri.toolbars.Draw.POLYGON);
-        });
         $("#drawCircle").click(function(){
           tb.activate(esri.toolbars.Draw.CIRCLE);
-        });
-        $("#drawFreehandPolygon").click(function(){
-          tb.activate(esri.toolbars.Draw.FREEHAND_POLYGON);
-        });
-        $("#drawLine").click(function(){
-          tb.activate(esri.toolbars.Draw.LINE);
-        });          
+        });         
       }
           
       function addGraphic(geometry) {
@@ -396,6 +394,21 @@
         else if (type === "extent") {
           symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color(iframegraphiccolor), 2),new dojo.Color(iframegraphiccolorrgb));
           graphicOverlays.push([type, iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl,[geometry.xmin, geometry.ymin, geometry.xmax, geometry.ymax]]);
+        }
+        else if (type === "polygon") {
+          symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color(iframegraphiccolor), 2),new dojo.Color(iframegraphiccolorrgb));
+          xmin = geometry._extent.xmin;
+          ymin = geometry._extent.ymin;
+          xmax = geometry._extent.xmax;
+          ymax = geometry._extent.ymax;
+          centerX= (xmin+xmax)/2;
+          centerY= (ymin+ymax)/2;
+          radius = (xmax-xmin)/2;
+          graphicOverlays.push(["circle", iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, centerX, centerY, radius]);
+          //var circleGeometry  = new esri.geometry.Circle(new esri.geometry.Point(centerX,centerY, map.spatialReference),{radius: radius});
+          //var graphic2 = new esri.Graphic(circleGeometry, symbol);
+          //console.log(circleGeometry);
+          //map.graphics.add(graphic2);
         }
         else {
           symbol= new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color(iframegraphiccolor), 2),new dojo.Color(iframegraphiccolorrgb));
@@ -610,6 +623,7 @@
 							<button class="btn btn-primary tip" id="drawPoint" tip="Draw point on map"></button>
 							<button class="btn btn-primary tip" id="drawPolyline" tip = "Draw polyline on map"></button>
 							<button class="btn btn-primary tip" id="drawExtent" tip="Draw rectangle on map"></button>
+							<button class="btn btn-primary tip" id="drawCircle" tip="Draw circle on map"></button>
 							<button class="btn btn-primary tip" id="undo" disabled="true"  onclick="undoManager.undo(); undo_click();" showLabel="false" iconClass="undoIcon" tip="Undo previous drawing"></button>
 							<button class="btn btn-primary tip" id="btnRemoveMarker" tip="Clear all drawings" disabled="disabled"></button>
 							<!-- Color picker-->
