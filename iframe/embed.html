@@ -117,11 +117,43 @@ if (!window.location.search)
               basemap = new esri.layers.ArcGISDynamicMapServiceLayer(mapUrl);
               //basemap = new esri.layers.ArcGISTiledMapServiceLayer(mapUrl2);
           map.addLayer(basemap);
-          // set the layer opacity
+
+          // link to full map view in Svalbardkartet
+          showFullMap();
+          /*
+          dojo.connect(map, "onLoad", function() {
+          	initOverlay(map);
+          	initIdentify(map);
+          	// Disables map zooming using mouse scroll wheel.
+              if (!slider) {
+              	map.disableScrollWheelZoom();
+                  //map.disableMapNavigation();
+                  //map.hideZoomSlider();
+              }
+
+          });*/
+          map.on("load", function (){
+          	initOperational(map);
+          	initIdentify(map);
+          	// Disables map zooming using mouse scroll wheel.
+              if (!slider) {
+              	map.disableScrollWheelZoom();
+                  //map.disableMapNavigation();
+                  //map.hideZoomSlider();
+              }
+
+          });
+          map.on("onClick",updateIdentifyTask);
+          //dojo.connect(map, "onClick", updateIdentifyTask);
+          dojo.connect(map, "onExtentChange", showFullMap);
+      } //end init
+      
+      
+      function initOperational(map){
+      // set the layer opacity
           if (urlParams["opValue"]<=1 && urlParams["opValue"]>=0)
               opacity = urlParams["opValue"];	
-          	
-          if (urlParams["cl"]) {
+      if (urlParams["cl"]) {
               var overlayMap = new esri.layers.ArcGISDynamicMapServiceLayer(overlayMapService, {showAttribution: false, opacity: opacity });
               overlayMap.id = 'overlayMap';
               
@@ -131,23 +163,7 @@ if (!window.location.search)
               overlayMap.setVisibleLayers(visibleLayers);
               map.addLayer(overlayMap);
           }
-          
-          showFullMap();
-          dojo.connect(map, "onExtentChange", showFullMap);
-          dojo.connect(map, "onClick", updateIdentifyTask);
-          
-          dojo.connect(map, "onLoad", function() {
-          	initIdentify(map);
-          	// Disables map zooming using mouse scroll wheel.
-              if (!slider) {
-              	map.disableScrollWheelZoom();
-                  //map.disableMapNavigation();
-                  //map.hideZoomSlider();
-              }
-              
-
-
-
+      
             if (urlParams["poi"]) {
             	
             for (var i = 0; i < urlParams["poi"].length; i++){
@@ -278,15 +294,12 @@ if (!window.location.search)
         	infoTemplate.setContent(IFurlroiinfo);
         	IFroigraphic.setInfoTemplate(infoTemplate);
 			IFroigraphic[IFroigraphicid] = IFgraphicLayer.add(IFroigraphic);
-			
             }
+            console.log(IFroigraphic);
             map.addLayer(IFgraphicLayer);
 		}
-          });
-          
-          
-      
       }
+      
       
             function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -398,6 +411,8 @@ if (!window.location.search)
 {layerID:31,svbkID:"6,0,0,5,1,0,4,0,3,3,2,22,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
 {layerID:32,svbkID:"6,0,0,5,1,0,4,0,3,3,2,23,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
 {layerID:119,svbkID:"6,0,0,5,1,0,4,1,0,3,1,0,10,1,0,9,1,0,8,1,0,12,0,0,0,0,0,11,0,0,"}]
+      
+      // link to full map view on Svalbardkartet
       function showFullMap (){
       	visibleUrl = "";
       	for (var i = 0; i < mapLayers.length; i++) {
