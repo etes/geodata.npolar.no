@@ -21,6 +21,9 @@
       var layers = [{ name: 'HvalrossLiggeplasser', id: 2 }, { name: 'Røye', id: 3 }, { name: 'Sjøfugl kolonier', id: 5 }, { name: 'Alle Sjøpattdyr observasjoner', id: 27 }, { name: 'Isbjørn observasjoner', id: 37 }, { name: 'Strandrydding per år', id: 58 }, { name: 'Reinbestandområder', id: 59 }, { name: 'Biogeografiske soner', id: 60 }, { name: 'Vegetasjon (10 kasser)', id: 62}, { name: 'Geologi', id: 87 }];
       var geometryServiceUrl = 'http://geodata.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer';
 	  var decimalPlacesWGS84 = 6;
+	  Proj4js.defs["EPSG:32633"] = "+proj=utm +zone=33 +ellps=WGS84 +datum=WGS84 +units=m +no_defs";
+	  var w84 = new Proj4js.Proj('EPSG:4326');
+      var u33 = new Proj4js.Proj('EPSG:32633');
 	  var opacity =0.8;
 	  var visible = [];
 	  var visibleLayers = [];
@@ -118,8 +121,7 @@ if (!window.location.search)
               //basemap = new esri.layers.ArcGISTiledMapServiceLayer(mapUrl2);
           map.addLayer(basemap);
 
-          // link to full map view in Svalbardkartet
-          showFullMap();
+
           /*
           dojo.connect(map, "onLoad", function() {
           	initOverlay(map);
@@ -135,6 +137,8 @@ if (!window.location.search)
           map.on("load", function (){
           	initOperational(map);
           	initIdentify(map);
+          	// link to full map view in Svalbardkartet
+          	showFullMap();
           	// Disables map zooming using mouse scroll wheel.
               if (!slider) {
               	map.disableScrollWheelZoom();
@@ -143,8 +147,7 @@ if (!window.location.search)
               }
 
           });
-          map.on("onClick",updateIdentifyTask);
-          //dojo.connect(map, "onClick", updateIdentifyTask);
+          dojo.connect(map, "onClick", updateIdentifyTask);
           dojo.connect(map, "onExtentChange", showFullMap);
       } //end init
       
@@ -184,7 +187,7 @@ if (!window.location.search)
 				poiSymbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color("#" +IFurlpoiColor), 2), new dojo.Color("#" + IFurlpoiColor));
 			}
             	
-            IFpoiupos = new Proj4js.Point(IFurlpoilong,IFurlpoilat);
+            //IFpoiupos = new Proj4js.Point(IFurlpoilong,IFurlpoilat);
 			//Proj4js.transform(u33, w84, IFpoiupos);
 			IFpoigraphic = new esri.Graphic(new esri.geometry.Point(IFurlpoilat,IFurlpoilong, map.spatialReference), poiSymbol);
 	        var infoTemplate = new esri.InfoTemplate();
@@ -193,10 +196,7 @@ if (!window.location.search)
 	        IFpoigraphic.setInfoTemplate(infoTemplate);
 			IFpoigraphic[IFpoigraphicid] = IFgraphicLayer.add(IFpoigraphic);
 			//IFurlpart = IFurlpart.slice(IFurlpart.indexOf("poi=")+4, IFurlpart.length);
-			
             }
-            map.addLayer(IFgraphicLayer);
-            //IFgraphicLayer.show();
 		}
 		
 		if (urlParams["coi"]) {
@@ -207,30 +207,30 @@ if (!window.location.search)
 			coiColor = values[0];
 			coititle = values[1].replace(/\_/g, ' ');
 			coiinfo = values[2].replace(/\_/g, ' ');
-			centerX = values[3];
-			centerY = values[4];
-			radius = values[5];
+			centerX = parseFloat(values[3]);
+			centerY = parseFloat(values[4]);
+			radius = parseFloat(values[5]);
 			coiColorRGB = hexToRgb("#" + coiColor);
 			
 			if (coiColor == "") {
 				coiSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color([255, 0, 0]), 2),new dojo.Color([255, 0, 0, 0.6]));
           	}
             else{
-				coiSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color([255, 0, 0]), 2),new dojo.Color([255, 0, 0, 0.6]));
-          }
+				coiSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color("#" + coiColor), 2),new dojo.Color(coiColorRGB));
+				}
+			//symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color("#" + coiColor), 4), new dojo.Color(coiColorRGB));
+          	//symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color("#" + coiColor), 2),new dojo.Color(coiColorRGB));
+
 			center = new esri.geometry.Point(centerX,centerY, map.spatialReference);
-			symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color("#" + coiColor), 4), new dojo.Color(coiColorRGB));
-			var circleGeometry  = new esri.geometry.Circle(new esri.geometry.Point(centerX,centerY, map.spatialReference),{radius: radius});
+			var circleGeometry  = new esri.geometry.Circle({center:center,radius: radius});
 			coigraphic = new esri.Graphic(circleGeometry, coiSymbol);
 	        var infoTemplate = new esri.InfoTemplate();
 	        infoTemplate.setTitle(coititle);
 	        infoTemplate.setContent(coiinfo);
 	        coigraphic.setInfoTemplate(infoTemplate);
-	        //map.graphics.add(coigraphic);
 			coigraphic[coigraphicid] = IFgraphicLayer.add(coigraphic);
-            //console.log(circleGeometry);
+          	//console.log(coigraphic);
             }
-            map.addLayer(IFgraphicLayer);
 		}
 		
 		if (urlParams["loi"]) {
@@ -263,9 +263,7 @@ if (!window.location.search)
 			infoTemplate.setContent(IFurlloiinfo);
 			IFloigraphic.setInfoTemplate(infoTemplate);
 			IFloigraphic[IFloigraphicid] = IFgraphicLayer.add(IFloigraphic);
-			
             }
-           map.addLayer(IFgraphicLayer);
 		}
 		
 		if (urlParams["roi"]) {
@@ -295,9 +293,9 @@ if (!window.location.search)
         	IFroigraphic.setInfoTemplate(infoTemplate);
 			IFroigraphic[IFroigraphicid] = IFgraphicLayer.add(IFroigraphic);
             }
-            console.log(IFroigraphic);
-            map.addLayer(IFgraphicLayer);
 		}
+		//console.log(IFgraphicLayer);
+		map.addLayer(IFgraphicLayer);
       }
       
       
