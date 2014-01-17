@@ -10,11 +10,17 @@ html, body {
 	font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 	font-size: 90%;
 }
-
+.btn:focus {
+	outline:none !important;
+}
+.btn.btn-primary.active{
+	background-color: rgba(200,200,200,0.9) !important;
+}
 #rightPane {
 	width: 200px;
 	overflow: auto
 }
+
 #showhide {
 	/*-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;*/
 	-moz-border-radius: 5px;
@@ -39,40 +45,56 @@ html, body {
 	z-index: 50;
 }
 
-#btnRemoveMarker {
-	/*-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;*/
-	background-color: rgba(255,255,255,0.9);
-	background-image: url(../images/glyphicons_016_bin.png);
-	background-position: 2px 0px;
-	margin: 0px;
-	padding: 0px;
-	height: 28px;
-	width: 30px;
-}
-#btnRemoveMarker:hover {
-	background-color: rgba(240,240,240,0.9);
-}
 #drawPoint {
 	background-color: rgba(255,255,255,0.9);
 	background-image: url(../images/dot-16.png);
-	background-position: 2px 0px;
+	background-position: 0px 0px;
+	background-size:22px 22px;
 	margin: 0px;
 	padding: 0px;
-	height: 30px;
-	width: 30px;
+	height: 25px;
+	width: 25px;
 }
 #drawPoint:hover {
+	background-color: rgba(240,240,240,0.9);
+}
+#drawCircle {
+	background-color: rgba(255,255,255,0.9);
+	background-image: url(../images/draw-circle-24.png);
+	background-position: 0px 0px;
+	background-size:22px 22px;
+	margin: 0px;
+	padding: 0px;
+	height: 25px;
+	width: 25px;
+}
+#drawCircle:hover {
+
+	background-color: rgba(240,240,240,0.9);
+}
+#drawText {
+	background-color: rgba(255,255,255,0.9);
+	background-image: url(../images/draw-text-24.png);
+	background-position: 0px 0px;
+	background-size:22px 22px;
+	margin: 0px;
+	padding: 0px;
+	height: 25px;
+	width: 25px;
+}
+#drawText:hover {
 
 	background-color: rgba(240,240,240,0.9);
 }
 #drawPolyline {
 	background-color: rgba(255,255,255,0.9);
 	background-image: url(../images/draw-polyline-24.png);
-	background-position: 2px 0px;
+	background-position: 0px 0px;
+	background-size:22px 22px;
 	margin: 0px;
 	padding: 0px;
-	height: 30px;
-	width: 30px;
+	height: 25px;
+	width: 25px;
 }
 #drawPolyline:hover {
 	background-color: rgba(240,240,240,0.9);
@@ -80,28 +102,43 @@ html, body {
 #drawExtent {
 	background-color: rgba(255,255,255,0.9);
 	background-image: url(../images/draw-rectangle-24.png);
-	background-position: 2px 0px;
+	background-position: 0px 0px;
+	background-size:22px 22px;
 	margin: 0px;
 	padding: 0px;
-	height: 30px;
-	width: 30px;
+	height: 25px;
+	width: 25px;
 }
 #drawExtent:hover {
 	background-color: rgba(240,240,240,0.9);
 }
 #undo {
 	background-color: rgba(255,255,255,0.9);
-	background-image: url(../images/undo_icon.png);
+	background-image: url(../images/undo.png);
 	background-position: 0px 0px;
+	background-size:22px 22px;
 	margin: 0px;
 	padding: 0px;
-	height: 30px;
-	width: 28px;
+	height: 25px;
+	width: 25px;
 }
 #undo:hover {
 	background-color: rgba(240,240,240,0.9);
 }
-
+#btnRemoveMarker {
+	/*-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;*/
+	background-color: rgba(255,255,255,0.9);
+	background-image: url(../images/glyphicons_016_bin.png);
+	background-position: 0px 0px;
+	background-size:22px 22px;
+	margin: 0px;
+	padding: 0px;
+	height: 25px;
+	width: 25px;
+}
+#btnRemoveMarker:hover {
+	background-color: rgba(240,240,240,0.9);
+}
 #paramDiv {
 	/*-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;*/
 	-moz-border-radius: 5px;
@@ -224,20 +261,20 @@ form {
 	-o-box-shadow: 0 0 0.5em black;
 	box-shadow: 0 0 0.5em black;
 }
-
-#btnExamplePage:hover:after {
+.tip:hover:after{
+	
 	background: #333;
 	font-size: 10px;
 	background: rgba(0,0,0,.8);
-	border-radius: 5px;
-	bottom: 26px;
+	border-radius: 4px;
 	color: #fff;
-	content: attr(tooltip);
-	padding: 5px;
+	content: attr(tip);
+	padding: 1px;
 	position: absolute;
 	z-index: 98;
-	width: 100px;
+	width: 120px;
 }
+
 /* this line hide layers when out of scale for the inline TOC */
 .agsjsTOCOutOfScale {
 	/*    display: none; */
