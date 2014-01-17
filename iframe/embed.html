@@ -9,7 +9,7 @@
 	<script type="text/javascript" src="js/proj4js.min.js"></script>
 	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript">var djConfig = {parseOnLoad: true};</script>   
-	<script src="//js.arcgis.com/3.8/"></script>
+	<script src="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/init.js"></script>
     <script type="text/javascript">
       dojo.require("dijit.layout.BorderContainer");
       dojo.require("dijit.layout.ContentPane");
@@ -31,6 +31,7 @@
 	  var coigraphicid = 1;
 	  var IFloigraphicid = 1;
 	  var IFroigraphicid = 1;
+	  var IFtoigraphicid = 1;
 	  var IFgraphicLayer;
 	  var pts = [];
       var identifyTask, identifyParams, identifyHandle = 0;
@@ -292,6 +293,43 @@ if (!window.location.search)
         	infoTemplate.setContent(IFurlroiinfo);
         	IFroigraphic.setInfoTemplate(infoTemplate);
 			IFroigraphic[IFroigraphicid] = IFgraphicLayer.add(IFroigraphic);
+            }
+		}
+		if (urlParams["toi"]) {
+            	
+            for (var i = 0; i < urlParams["toi"].length; i++){
+            	//console.log(urlParams["toi"][i]);
+            	var values = [];
+            	values = urlParams["toi"][i].split(',');
+			IFurltoiColor = values[0];
+			IFurltoititle = values[1].replace(/\_/g, ' ');
+			IFurltoiinfo = values[2].replace(/\_/g, ' ');
+			IFurltoilat = values[3];
+			IFurltoilong = values[4];
+			IFurlroiColorRGB = hexToRgb("#" + IFurltoiColor);
+			
+			var font  = new esri.symbol.Font();
+			font.setSize("14pt");
+			font.setFamily("veranda, arial, helvetica, sans-serif");
+			font.setWeight(esri.symbol.Font["WEIGHT_BOLD"]);
+	        
+	     	var toiSymbol = new esri.symbol.TextSymbol();
+	     	if (IFurltoititle == ""){
+	     		toiSymbol.setText("Text");
+	     	}
+	     	else {
+	     		toiSymbol.setText(IFurltoititle);
+	     	}
+	     	toiSymbol.setColor( new dojo.Color("#" +IFurltoiColor));
+	     	toiSymbol.setFont(font);
+			IFtoigraphic = new esri.Graphic(new esri.geometry.Point(IFurltoilat,IFurltoilong, map.spatialReference), toiSymbol);
+     	  	var infoTemplate = new esri.InfoTemplate();
+	        infoTemplate.setTitle(IFurltoititle);
+	        infoTemplate.setContent(IFurltoiinfo);
+	        IFtoigraphic.setInfoTemplate(infoTemplate);
+	        //map.graphics.add(IFtoigraphic);
+			IFtoigraphic[IFtoigraphicid] = IFgraphicLayer.add(IFtoigraphic);
+			//IFurlpart = IFurlpart.slice(IFurlpart.indexOf("toi=")+4, IFurlpart.length);
             }
 		}
 		//console.log(IFgraphicLayer);
