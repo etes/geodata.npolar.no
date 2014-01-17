@@ -5,9 +5,9 @@
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
 		<title>Svalbardkartet IFrame Designer</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.8/js/dojo/dijit/themes/claro/claro.css">
+		<link rel="stylesheet" type="text/css" href="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/js/dojo/dijit/themes/claro/claro.css">
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
-		<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.8/js/esri/css/esri.css" />
+		<link rel="stylesheet" type="text/css" href="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/js/esri/css/esri.css" />
 		<link rel="stylesheet" type="text/css" href="modules/css/agsjs.css" />
 		<script type="text/javascript" src="js/proj4js.min.js"></script>
 		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
@@ -28,7 +28,7 @@
             };
 
 		</script>   
-		<script src="//js.arcgis.com/3.8/"></script>
+		<script src="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/init.js"></script>
 		<script type="text/javascript">
             dojo.require("dijit.layout.BorderContainer");
             dojo.require("dijit.layout.ContentPane");
@@ -66,7 +66,8 @@
             var visible = [];
             var identifyTask, identifyParams, identifyHandle = 0;
             var opacityValue = 0.8;
-            function init(){
+            
+      function init(){
             	
        
             // hideable panel
@@ -185,7 +186,7 @@
               
         dojo.connect(map, "onLoad", initToolbar);	
            
-} //end init
+	} //end init
             
             
             // Iframe designer
@@ -288,6 +289,7 @@
                 var circleUrl = [];
                 var lineUrl = [];
                 var rectUrl = [];
+                var textUrl = [];
                 for (var i=0; i<graphicOverlays.length; i++ ){
                 	if (graphicOverlays[i][0] == "point"){
                 		pointColor = graphicOverlays[i][1];
@@ -301,9 +303,9 @@
                 		circleColor = graphicOverlays[i][1];
                 		circleTitle = graphicOverlays[i][2];
                 		circleInfo = 	graphicOverlays[i][3];
-                		centerX = Math.round(graphicOverlays[i][4]);
-                		centerY = Math.round(graphicOverlays[i][5]);
-                		radius = Math.round(graphicOverlays[i][6]);
+                		centerX = graphicOverlays[i][4];
+                		centerY = graphicOverlays[i][5];
+                		radius = graphicOverlays[i][6];
                 		circleUrl.push("&coi[]=" + circleColor + "," + circleTitle + "," + circleInfo + "," + centerX + "," + centerY + "," + radius);
                 	}
                 	if (graphicOverlays[i][0] == "polyline"){
@@ -327,10 +329,17 @@
                 		rectYMax = Math.round(graphicOverlays[i][4][3]);
                 		rectUrl.push("&roi[]=" + rectColor + "," + rectTitle + "," + rectInfo + "," + rectXMin + "," + rectYMin + "," + rectXMax + "," + rectYMax);
                 	}
-                	//ptsurl.push("&poi[]=" + Math.round(points[i][0]) + "," + Math.round(points[i][1]) + "," + points[i][2] + "," + points[i][3] + "," + points[i][4]);
+                	if (graphicOverlays[i][0] == "text"){
+                		textColor = graphicOverlays[i][1];
+                		textTitle = graphicOverlays[i][2];
+                		textInfo = 	graphicOverlays[i][3];
+                		textX = Math.round(graphicOverlays[i][4]);
+                		textY = Math.round(graphicOverlays[i][5]);
+                		textUrl.push("&toi[]=" + textColor + "," + textTitle + "," + textInfo + "," + textX + "," + textY);
+                	}
                 }
                 
-                var code = dojo.string.substitute('<iframe scrolling="no" src="${url}?&width=${width}&height=${height}&extent=${extent}&wkid=32633${point}${circle}${line}${rectangle}${overlay}&t=${tiled}&n=${nav}&opValue=${opValue}" width="${width}" height="${height}"></iframe>', {
+                var code = dojo.string.substitute('<iframe scrolling="no" src="${url}?&width=${width}&height=${height}&extent=${extent}&wkid=32633${point}${circle}${line}${rectangle}${text}${overlay}&t=${tiled}&n=${nav}&opValue=${opValue}" width="${width}" height="${height}"></iframe>', {
                     url : mapletUrl,
                     //sc : dojo.byId('chkSC').checked ? "sc=0&" : "",
                     extent : Math.round(map.extent.xmin) + "," + Math.round(map.extent.ymin) + "," + Math.round(map.extent.xmax) + "," + Math.round(map.extent.ymax),
@@ -341,6 +350,7 @@
                     circle : ( circleUrl ? circleUrl.join(""): ""),
                     line : ( lineUrl ? lineUrl.join(""): ""),
                     rectangle : ( rectUrl ? rectUrl.join(""): ""),
+                    text: (textUrl ? textUrl.join(""): ""),
                     //nav : dojo.byId('rbLockedYes').checked ? "0" : "1",
                     nav : $('#rbLockedYes').is(':checked') ? "0" : "1",
                     tiled : isTiledMap ? "1" : "0",
@@ -352,21 +362,34 @@
             }
            
       function initToolbar(map) {
-        tb = new esri.toolbars.Draw(map);
+        tb = new esri.toolbars.Draw(map, {showTooltips: true,tooltipOffset:20});
         dojo.connect(tb, "onDrawEnd", addGraphic);
-               //hook up the button click events 
-        $("#drawPoint").click(function(){
-          tb.activate(esri.toolbars.Draw.POINT);
-        });
-        $("#drawExtent").click(function(){
-          tb.activate(esri.toolbars.Draw.EXTENT);
-        });
-        $("#drawPolyline").click(function(){
-          tb.activate(esri.toolbars.Draw.POLYLINE);
-        });
-        $("#drawCircle").click(function(){
-          tb.activate(esri.toolbars.Draw.CIRCLE);
-        });         
+               //hook up the button click events
+		$('.btn.btn-primary.btn-xs').click(function() {
+			if ($(this).hasClass("active")) {
+				$(this).removeClass("active");
+				tb.deactivate();
+			} else {
+				$(this).addClass("active");
+				$('.btn.btn-primary.btn-xs').not($(this)).removeClass("active");
+				if ($(this).is("#drawPoint")) {
+					tb.activate(esri.toolbars.Draw.POINT);
+				}
+				if ($(this).is("#drawPolyline")) {
+					tb.activate(esri.toolbars.Draw.POLYLINE);
+				}
+				if ($(this).is("#drawExtent")) {
+					tb.activate(esri.toolbars.Draw.EXTENT);
+				}
+				if ($(this).is("#drawCircle")) {
+					tb.activate(esri.toolbars.Draw.CIRCLE);
+				}
+				if ($(this).is("#drawText")) {
+					tb.activate(esri.toolbars.Draw.MULTI_POINT);
+				}
+			}
+		});
+
       }
           
       function addGraphic(geometry) {
@@ -383,7 +406,7 @@
         var type = geometry.type;
         var symbol; 
         
-        if (type === "point" || type === "multipoint") {
+        if (type === "point") {
           symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color(iframegraphiccolor), 4), new dojo.Color(iframegraphiccolor));
           graphicOverlays.push([type, iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, geometry.x, geometry.y]);
         }
@@ -401,14 +424,32 @@
           ymin = geometry._extent.ymin;
           xmax = geometry._extent.xmax;
           ymax = geometry._extent.ymax;
-          centerX= (xmin+xmax)/2;
-          centerY= (ymin+ymax)/2;
-          radius = (xmax-xmin)/2;
+          centerX= Math.round((xmin+xmax)/2);
+          centerY= Math.round((ymin+ymax)/2);
+          radius = Math.round((xmax-xmin)/2);
           graphicOverlays.push(["circle", iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, centerX, centerY, radius]);
-          //var circleGeometry  = new esri.geometry.Circle(new esri.geometry.Point(centerX,centerY, map.spatialReference),{radius: radius});
-          //var graphic2 = new esri.Graphic(circleGeometry, symbol);
-          //console.log(circleGeometry);
-          //map.graphics.add(graphic2);
+        }
+        else if (type === "multipoint") {
+        
+     	  var font  = new esri.symbol.Font();
+     	  font.setSize("14pt");
+     	  font.setFamily("veranda, arial, helvetica, sans-serif");
+     	  font.setWeight(esri.symbol.Font["WEIGHT_BOLD"]);
+          
+     	  var symbol = new esri.symbol.TextSymbol();
+     	  if (iframetitleinput == ""){
+     	  	symbol.setText("Text");
+     	  }
+     	  else {
+     	  	symbol.setText(iframetitleinput);
+     	  }
+     	  symbol.setColor( new dojo.Color(iframegraphiccolor));
+     	  symbol.setFont(font);
+     	  //symbol.setAngle(parseInt(dojo.byId("tsAngle").value));
+          positions = geometry.points;
+          for (var i=0; i<positions.length; i++ ){
+          	graphicOverlays.push(["text", iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, positions[i][0], positions[i][1]]);
+          }
         }
         else {
           symbol= new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color(iframegraphiccolor), 2),new dojo.Color(iframegraphiccolorrgb));
@@ -534,7 +575,7 @@
           visible = [-1];
           dojo.disconnect(identifyHandle);
           map.infoWindow.hide();
-          console.log('disconnected ID');
+          //console.log('disconnected ID');
         } else if ( ! identifyHandle[0] ) { 
           // There are visible layers to re-connect identify task
           // and the identify task is not connected 
@@ -620,17 +661,18 @@
 						<!-- iframecomposer -->
 					<div id="iframecomposer">
 						<div class="editorToolsDiv">
-							<button class="btn btn-primary tip" id="drawPoint" tip="Draw point on map"></button>
-							<button class="btn btn-primary tip" id="drawPolyline" tip = "Draw polyline on map"></button>
-							<button class="btn btn-primary tip" id="drawExtent" tip="Draw rectangle on map"></button>
-							<button class="btn btn-primary tip" id="drawCircle" tip="Draw circle on map"></button>
+							<button class="btn btn-primary btn-xs tip" id="drawPoint" tip="Draw point on map"></button>
+							<button class="btn btn-primary btn-xs tip" id="drawPolyline" tip = "Draw polyline on map"></button>
+							<button class="btn btn-primary btn-xs tip" id="drawExtent" tip="Draw rectangle on map"></button>
+							<button class="btn btn-primary btn-xs tip" id="drawCircle" tip="Draw circle on map"></button>
+							<button class="btn btn-primary btn-xs tip" id="drawText" tip="Double click to add text"></button>
 							<button class="btn btn-primary tip" id="undo" disabled="true"  onclick="undoManager.undo(); undo_click();" showLabel="false" iconClass="undoIcon" tip="Undo previous drawing"></button>
 							<button class="btn btn-primary tip" id="btnRemoveMarker" tip="Clear all drawings" disabled="disabled"></button>
 							<!-- Color picker-->
 							<input type='text' id="colorpicker" name="colorpicker" value="#ff0000" title= "Choose Color"/><!-- /. color picker-->
 						</div>
 						<form class="form-inline" id="iframetitlediv" name="iframetitleform">
-							<input class="input-sm" id="iframetitleinput"  name="iframetitletext" value="" placeholder="Add title to graphic" title="Title" type="text" style="width:120px; font-size: 11px;" />
+							<input class="input-sm" id="iframetitleinput"  name="iframetitletext" value="" placeholder="Text" title="Title" type="text" style="width:120px; font-size: 11px;" />
 							</form>
 						<form class="form-inline" id="iframeinfodiv" name="iframeinfoform">
 							<textarea id="iframeinfoinput" name="iframeinfotext"  value="" placeholder="Add text info to graphic here." title="Info" spellcheck="false" style="z-index:99; width:160px; font-size: 11px;"></textarea>
@@ -667,6 +709,11 @@
 $("#colorpicker").spectrum({
     color: "#ff0000",
     //showButtons: false,
+});
+$('#iframetitleinput').keypress(function(e){
+    if ( e.which == 13 ) return false;
+    //or...
+    if ( e.which == 13 ) e.preventDefault();
 });
 </script>
 	</body>
