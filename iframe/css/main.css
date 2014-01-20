@@ -275,6 +275,18 @@ form {
 	width: 120px;
 }
 
+.sp-replacer:hover:after{
+	
+	background: #333;
+	font-size: 10px;
+	background: rgba(0,0,0,.8);
+	border-radius: 4px;
+	color: #fff;
+	content: "Choose color";
+	padding: 5px;
+	position: absolute;
+	z-index: 98;
+}
 /* this line hide layers when out of scale for the inline TOC */
 .agsjsTOCOutOfScale {
 	/*    display: none; */

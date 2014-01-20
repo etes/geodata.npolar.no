@@ -322,17 +322,25 @@ if (!window.location.search)
 	     	}
 	     	toiSymbol.setColor( new dojo.Color("#" +IFurltoiColor));
 	     	toiSymbol.setFont(font);
-			IFtoigraphic = new esri.Graphic(new esri.geometry.Point(IFurltoilat,IFurltoilong, map.spatialReference), toiSymbol);
+			for (var j = 3; j < values.length; j += 2) {
+				var positionX = values[j];
+				var positionY = values[j+1];
+			IFtoigraphic = new esri.Graphic(new esri.geometry.Point(positionX,positionY, map.spatialReference), toiSymbol);
      	  	var infoTemplate = new esri.InfoTemplate();
 	        infoTemplate.setTitle(IFurltoititle);
 	        infoTemplate.setContent(IFurltoiinfo);
 	        IFtoigraphic.setInfoTemplate(infoTemplate);
-	        //map.graphics.add(IFtoigraphic);
 			IFtoigraphic[IFtoigraphicid] = IFgraphicLayer.add(IFtoigraphic);
-			//IFurlpart = IFurlpart.slice(IFurlpart.indexOf("toi=")+4, IFurlpart.length);
+			}
+			//console.log(textPositions);
+			//IFtoigraphic = new esri.Graphic(new esri.geometry.Point(IFurltoilat,IFurltoilong, map.spatialReference), toiSymbol);
+     	  	//var infoTemplate = new esri.InfoTemplate();
+	        //infoTemplate.setTitle(IFurltoititle);
+	        //infoTemplate.setContent(IFurltoiinfo);
+	        //IFtoigraphic.setInfoTemplate(infoTemplate);
+			//IFtoigraphic[IFtoigraphicid] = IFgraphicLayer.add(IFtoigraphic);
             }
 		}
-		//console.log(IFgraphicLayer);
 		map.addLayer(IFgraphicLayer);
       }
       
