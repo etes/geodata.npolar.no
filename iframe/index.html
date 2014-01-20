@@ -52,15 +52,10 @@
    	        var dynamicServiceUrl = 'http://willem3.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer';
    	        var geometryServiceUrl = 'http://geodata.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer';
    	        var isTiledMap = true;
-   	        
-   	        //var isTiledMap = false;
-   	        var decimalPlacesWGS84 = 6;
-   	        var overlayMap, point, mode, symbolCross, symbolDot, geometryService;
+   	        var overlayMap, point, mode, geometryService;
       
       
-            var map, toc, dynaLayer1, dynaLayer2, featLayer1;
-            var tb;
-            var undoManager;
+            var map, undoManager, tb, toc, dynaLayer1, dynaLayer2, featLayer1;
             var layerInfo = [];
             var graphicOverlays = [];
             var visible = [];
@@ -291,56 +286,46 @@
                 var rectUrl = [];
                 var textUrl = [];
                 for (var i=0; i<graphicOverlays.length; i++ ){
-                	if (graphicOverlays[i][0] == "point"){
-                		pointColor = graphicOverlays[i][1];
-                		pointTitle = graphicOverlays[i][2];
-                		pointInfo = 	graphicOverlays[i][3];
-                		pointX = Math.round(graphicOverlays[i][4]);
-                		pointY = Math.round(graphicOverlays[i][5]);
-                		ptsUrl.push("&poi[]=" + pointColor + "," + pointTitle + "," + pointInfo + "," + pointX + "," + pointY);
+                	
+                	var overlayParams = graphicOverlays[i];
+                	var shape = overlayParams[0];
+                	drawingColor = overlayParams[1];
+                	infoTitle = overlayParams[2];
+                	infoContent = overlayParams[3];
+                	
+                	if (shape == "point"){
+                		pointX = Math.round(overlayParams[4]);
+                		pointY = Math.round(overlayParams[5]);
+                		ptsUrl.push("&poi[]=" + drawingColor + "," + infoTitle + "," + infoContent + "," + pointX + "," + pointY);
                 	}
-                	if (graphicOverlays[i][0] == "circle"){
-                		circleColor = graphicOverlays[i][1];
-                		circleTitle = graphicOverlays[i][2];
-                		circleInfo = 	graphicOverlays[i][3];
-                		centerX = graphicOverlays[i][4];
-                		centerY = graphicOverlays[i][5];
-                		radius = graphicOverlays[i][6];
-                		circleUrl.push("&coi[]=" + circleColor + "," + circleTitle + "," + circleInfo + "," + centerX + "," + centerY + "," + radius);
+                	if (shape == "circle"){
+                		centerX = overlayParams[4];
+                		centerY = overlayParams[5];
+                		radius = overlayParams[6];
+                		circleUrl.push("&coi[]=" + drawingColor + "," + infoTitle + "," + infoContent + "," + centerX + "," + centerY + "," + radius);
                 	}
-                	if (graphicOverlays[i][0] == "polyline"){
-                		lineColor = graphicOverlays[i][1];
-                		lineTitle = graphicOverlays[i][2];
-                		lineInfo = 	graphicOverlays[i][3];
-                		var linepath = graphicOverlays[i][4];
+                	if (shape == "polyline"){
+                		var linepath = overlayParams[4];
                 		for (var j=0; j<linepath.length; j++ ){
                 			linepath[j][0] = Math.round(linepath[j][0]);
                 			linepath[j][1] = Math.round(linepath[j][1]);
                 		}
-                		lineUrl.push("&loi[]=" + lineColor + "," + lineTitle + "," + lineInfo + "," + linepath);
+                		lineUrl.push("&loi[]=" + drawingColor + "," + infoTitle + "," + infoContent + "," + linepath);
                 	}
-                	if (graphicOverlays[i][0] == "extent"){
-                		rectColor = graphicOverlays[i][1];
-                		rectTitle = graphicOverlays[i][2];
-                		rectInfo = 	graphicOverlays[i][3];
-                		rectXMin = Math.round(graphicOverlays[i][4][0]);
-                		rectYMin = Math.round(graphicOverlays[i][4][1]);
-                		rectXMax = Math.round(graphicOverlays[i][4][2]);
-                		rectYMax = Math.round(graphicOverlays[i][4][3]);
-                		rectUrl.push("&roi[]=" + rectColor + "," + rectTitle + "," + rectInfo + "," + rectXMin + "," + rectYMin + "," + rectXMax + "," + rectYMax);
+                	if (shape == "extent"){
+                		rectXMin = Math.round(overlayParams[4][0]);
+                		rectYMin = Math.round(overlayParams[4][1]);
+                		rectXMax = Math.round(overlayParams[4][2]);
+                		rectYMax = Math.round(overlayParams[4][3]);
+                		rectUrl.push("&roi[]=" + drawingColor + "," + infoTitle + "," + infoContent + "," + rectXMin + "," + rectYMin + "," + rectXMax + "," + rectYMax);
                 	}
-                	if (graphicOverlays[i][0] == "text"){
-                		textColor = graphicOverlays[i][1];
-                		textTitle = graphicOverlays[i][2];
-                		textInfo = 	graphicOverlays[i][3];
-                		var textPoints = graphicOverlays[i][4];
+                	if (shape == "text"){
+                		var textPoints = overlayParams[4];
                 		for (var j=0; j<textPoints.length; j++ ){
                 			textPoints[j][0] = Math.round(textPoints[j][0]);
                 			textPoints[j][1] = Math.round(textPoints[j][1]);
                 		}
-                		//textX = Math.round(graphicOverlays[i][4]);
-                		//textY = Math.round(graphicOverlays[i][5]);
-                		textUrl.push("&toi[]=" + textColor + "," + textTitle + "," + textInfo + "," + textPoints);
+                		textUrl.push("&toi[]=" + drawingColor + "," + infoTitle + "," + infoContent + "," + textPoints);
                 	}
                 }
                 
@@ -371,10 +356,7 @@
         dojo.connect(tb, "onDrawEnd", addGraphic);
                //hook up the button click events
 		$('.btn.btn-primary.btn-xs').click(function() {
-			if ($(this).hasClass("active")) {
-				$(this).removeClass("active");
-				tb.deactivate();
-			} else {
+			if (!$(this).hasClass("active")) {
 				$(this).addClass("active");
 				$('.btn.btn-primary.btn-xs').not($(this)).removeClass("active");
 				if ($(this).is("#drawPoint")) {
@@ -391,7 +373,18 @@
 				}
 				if ($(this).is("#drawText")) {
 					tb.activate(esri.toolbars.Draw.MULTI_POINT);
+					if(!$("#iframetitleinput").val() ) {
+						$(".alert-message").addClass("in");
+						setTimeout(function () {
+							$(".alert-message").removeClass("in");
+							}, 3000);
+						}
 				}
+			}
+			
+			else {
+				$(this).removeClass("active");
+				tb.deactivate();
 			}
 		});
 
@@ -453,9 +446,9 @@
      	  //symbol.setAngle(parseInt(dojo.byId("tsAngle").value));
           positions = geometry.points;
           graphicOverlays.push(["text", iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, positions]);
-          for (var i=0; i<positions.length; i++ ){
+          //for (var i=0; i<positions.length; i++ ){
           	//graphicOverlays.push(["text", iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, positions[i][0], positions[i][1]]);
-          }
+          //}
         }
         else {
           symbol= new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color(iframegraphiccolor), 2),new dojo.Color(iframegraphiccolorrgb));
@@ -484,23 +477,23 @@
           	generateCode();
       }
       
-       function hexToRgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-        a: 0.3
-    } : null;
-}
+      function hexToRgb(hex) {
+       	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+       	return result ? {
+       		r: parseInt(result[1], 16),
+       		g: parseInt(result[2], 16),
+       		b: parseInt(result[3], 16),
+       		a: 0.3
+       		} : null;
+       	}
 
 
 
-            function onProjectComplete(graphics) {
-                if (graphics && graphics.length == 1) {
-                    var g = graphics[0];
-                }
-            }
+      function onProjectComplete(graphics) {
+      	if (graphics && graphics.length == 1) {
+      		var g = graphics[0];
+      		}
+      }
            
             function map_extentChanged() {
                 generateCode();
@@ -677,8 +670,9 @@
 							<!-- Color picker-->
 							<input type='text' id="colorpicker" name="colorpicker" value="#ff0000" title= "Choose Color"/><!-- /. color picker-->
 						</div>
+
 						<form class="form-inline" id="iframetitlediv" name="iframetitleform">
-							<input class="input-sm" id="iframetitleinput"  name="iframetitletext" value="" placeholder="Text" title="Title" type="text" style="width:120px; font-size: 11px;" />
+							<input class="input-sm" id="iframetitleinput"  name="iframetitletext" value="" placeholder="Text" title="Title" type="text" style="width:120px; font-size: 11px;" /><span class="alert-info alert-message fade">Add text label here</span>
 							</form>
 						<form class="form-inline" id="iframeinfodiv" name="iframeinfoform">
 							<textarea id="iframeinfoinput" name="iframeinfotext"  value="" placeholder="Add text info to graphic here." title="Info" spellcheck="false" style="z-index:99; width:160px; font-size: 11px;"></textarea>
