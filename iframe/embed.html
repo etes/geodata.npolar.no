@@ -214,10 +214,10 @@ if (!window.location.search)
 			coiColorRGB = hexToRgb("#" + coiColor);
 			
 			if (coiColor == "") {
-				coiSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color([255, 0, 0]), 2),new dojo.Color([255, 0, 0, 0.6]));
+				coiSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color([255, 0, 0]), 3),new dojo.Color([255, 0, 0, 0.6]));
           	}
             else{
-				coiSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color("#" + coiColor), 2),new dojo.Color(coiColorRGB));
+				coiSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color("#" + coiColor), 3),new dojo.Color(coiColorRGB));
 				}
 			//symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color("#" + coiColor), 4), new dojo.Color(coiColorRGB));
           	//symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color("#" + coiColor), 2),new dojo.Color(coiColorRGB));
@@ -281,10 +281,10 @@ if (!window.location.search)
 			IFurlroiYMax = values[6];
 			IFurlroiColorRGB = hexToRgb("#" + IFurlroiColor);
             if (IFurlroiColor == "") {
-				roiSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color([255, 0, 0]), 2),new dojo.Color([255, 0, 0, 0.6]));
+				roiSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color([255, 0, 0]), 3),new dojo.Color([255, 0, 0, 0.6]));
           	}
 			else {
-				roiSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color("#" + IFurlroiColor), 2),new dojo.Color(IFurlroiColorRGB));
+				roiSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color("#" + IFurlroiColor), 3),new dojo.Color(IFurlroiColorRGB));
           }
 			var geometry = new esri.geometry.Extent(IFurlroiXMin, IFurlroiYMin, IFurlroiXMax, IFurlroiYMax, map.spatialReference);
 			IFroigraphic = new esri.Graphic(geometry, roiSymbol);
@@ -343,7 +343,7 @@ if (!window.location.search)
         r: parseInt(result[1], 16),
         g: parseInt(result[2], 16),
         b: parseInt(result[3], 16),
-        a: 0.6
+        a: 0.3
     } : null;
 }
 
