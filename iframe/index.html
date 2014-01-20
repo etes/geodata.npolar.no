@@ -172,7 +172,7 @@
              
             
              //specify the number of undo operations allowed using the maxOperations parameter
-        undoManager = new esri.UndoManager();
+        undoManager = new esri.UndoManager({maxOperations:100});
         
         dojo.connect(undoManager,"onChange",function(){
           //enable or disable buttons depending on current state of application
@@ -333,9 +333,14 @@
                 		textColor = graphicOverlays[i][1];
                 		textTitle = graphicOverlays[i][2];
                 		textInfo = 	graphicOverlays[i][3];
-                		textX = Math.round(graphicOverlays[i][4]);
-                		textY = Math.round(graphicOverlays[i][5]);
-                		textUrl.push("&toi[]=" + textColor + "," + textTitle + "," + textInfo + "," + textX + "," + textY);
+                		var textPoints = graphicOverlays[i][4];
+                		for (var j=0; j<textPoints.length; j++ ){
+                			textPoints[j][0] = Math.round(textPoints[j][0]);
+                			textPoints[j][1] = Math.round(textPoints[j][1]);
+                		}
+                		//textX = Math.round(graphicOverlays[i][4]);
+                		//textY = Math.round(graphicOverlays[i][5]);
+                		textUrl.push("&toi[]=" + textColor + "," + textTitle + "," + textInfo + "," + textPoints);
                 	}
                 }
                 
@@ -415,11 +420,11 @@
           graphicOverlays.push([type, iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl,geometry.paths[0]]);
         }
         else if (type === "extent") {
-          symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color(iframegraphiccolor), 2),new dojo.Color(iframegraphiccolorrgb));
+          symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color(iframegraphiccolor), 3),new dojo.Color(iframegraphiccolorrgb));
           graphicOverlays.push([type, iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl,[geometry.xmin, geometry.ymin, geometry.xmax, geometry.ymax]]);
         }
         else if (type === "polygon") {
-          symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color(iframegraphiccolor), 2),new dojo.Color(iframegraphiccolorrgb));
+          symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,new dojo.Color(iframegraphiccolor), 3),new dojo.Color(iframegraphiccolorrgb));
           xmin = geometry._extent.xmin;
           ymin = geometry._extent.ymin;
           xmax = geometry._extent.xmax;
@@ -447,8 +452,9 @@
      	  symbol.setFont(font);
      	  //symbol.setAngle(parseInt(dojo.byId("tsAngle").value));
           positions = geometry.points;
+          graphicOverlays.push(["text", iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, positions]);
           for (var i=0; i<positions.length; i++ ){
-          	graphicOverlays.push(["text", iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, positions[i][0], positions[i][1]]);
+          	//graphicOverlays.push(["text", iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, positions[i][0], positions[i][1]]);
           }
         }
         else {
@@ -484,7 +490,7 @@
         r: parseInt(result[1], 16),
         g: parseInt(result[2], 16),
         b: parseInt(result[3], 16),
-        a: 0.6
+        a: 0.3
     } : null;
 }
 
@@ -652,9 +658,9 @@
 					<div class="navigationdiv">
 						<!--Create static map (disable zooming and panning)-->
 						Enable map zooming using mouse scroll wheel.
-						<input id="rbLockedYes" name="rbLocked" type="radio" value="0"/>
+						<input id="rbLockedYes" name="rbLocked" type="radio" value="0" checked/>
 						Yes
-						<input id="rbLockedNo" name="rbLocked" type="radio" value="1" checked/>
+						<input id="rbLockedNo" name="rbLocked" type="radio" value="1"/>
 						No.
 					</div>
 					<br />
