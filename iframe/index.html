@@ -189,7 +189,6 @@
             function getCheckedLayers() {
                 var result = [];
                 getContent();
-                //console.log(layerInfo);
                 for (var i = 0; i < layerInfo.length; i++) {
                     var checkBox = dojo.byId('layercheckbox_' + i);
                     if (layerInfo[i] !== -1 && checkBox && checkBox.checked)
@@ -241,7 +240,6 @@
 
                 // show layer indexes and names
                 if (response.hasOwnProperty("layers")) {
-                    //console.log("got some layers");
 
                     layerInfo = dojo.map(response.layers, function(f) {
                         if (f.subLayerIds == null) {
@@ -329,7 +327,7 @@
                 	}
                 }
                 
-                var code = dojo.string.substitute('<iframe scrolling="no" src="${url}?&width=${width}&height=${height}&extent=${extent}&wkid=32633${point}${circle}${line}${rectangle}${text}${overlay}&t=${tiled}&n=${nav}&opValue=${opValue}" width="${width}" height="${height}"></iframe>', {
+                var code = dojo.string.substitute('<iframe scrolling="no" src="${url}?&width=${width}&height=${height}&extent=${extent}&wkid=32633${point}${circle}${line}${rectangle}${text}${overlay}&t=${tiled}&n=${nav}&opValue=${opValue}" frameborder=0 width="${width}" height="${height}"></iframe>', {
                     url : mapletUrl,
                     //sc : dojo.byId('chkSC').checked ? "sc=0&" : "",
                     extent : Math.round(map.extent.xmin) + "," + Math.round(map.extent.ymin) + "," + Math.round(map.extent.xmax) + "," + Math.round(map.extent.ymax),
