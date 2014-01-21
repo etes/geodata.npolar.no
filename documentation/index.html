@@ -395,6 +395,8 @@ function initialize() {
 					<pre class="prettyprint">//Use the ImageParameters to set the visible layers in the map service during ArcGISDynamicMapServiceLayer construction.
     var imageParameters = new esri.layers.ImageParameters();
     imageParameters.format = "png32";  //sets the image format to PNG32.
+    imageParameters.layerIds = [0]; // we want the layer with id 0 to be visible
+    imageParameters.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
     //Takes a URL to a dynamic map service.
     serviceURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Sjofuglkolonier/MapServer";
     var dynamicLayer = new esri.layers.ArcGISDynamicMapServiceLayer(serviceURL, {
@@ -528,6 +530,8 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
        
         var imageParameters = new esri.layers.ImageParameters();
         imageParameters.format = "png32"; //sets the image format to PNG32.
+	imageParameters.layerIds = [0]; // we want the layer with id 0 to be visible
+	imageParameters.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
     //Takes a URL to a dynamic map service.
     serviceURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Sjofuglkolonier/MapServer";
     var dynamicLayer = new esri.layers.ArcGISDynamicMapServiceLayer(serviceURL, {
