@@ -5,7 +5,7 @@
     <title>Svalbardkartet IFrame</title>
     <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.8/js/dojo/dijit/themes/claro/claro.css">    
 	<link href="http://js.arcgis.com/3.8/js/esri/css/esri.css" rel="stylesheet" type="text/css" >
-	<link rel="stylesheet" type="text/css" href="css/main.min.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<script type="text/javascript" src="js/proj4js.min.js"></script>
 	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript">var djConfig = {parseOnLoad: true};</script>   
@@ -17,7 +17,7 @@
       dojo.require("esri.geometry.Circle");
       dojo.require("esri.dijit.Popup");
       var map, geometryService;
-      var overlayMapService = 'http://willem3.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer';
+      var overlayMapService = 'http://geodata.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer';
       var layers = [{ name: 'HvalrossLiggeplasser', id: 2 }, { name: 'Røye', id: 3 }, { name: 'Sjøfugl kolonier', id: 5 }, { name: 'Alle Sjøpattdyr observasjoner', id: 27 }, { name: 'Isbjørn observasjoner', id: 37 }, { name: 'Strandrydding per år', id: 58 }, { name: 'Reinbestandområder', id: 59 }, { name: 'Biogeografiske soner', id: 60 }, { name: 'Vegetasjon (10 kasser)', id: 62}, { name: 'Geologi', id: 87 }];
       var geometryServiceUrl = 'http://geodata.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer';
 	  var decimalPlacesWGS84 = 6;
@@ -325,20 +325,13 @@ if (!window.location.search)
 			for (var j = 3; j < values.length; j += 2) {
 				var positionX = values[j];
 				var positionY = values[j+1];
-			IFtoigraphic = new esri.Graphic(new esri.geometry.Point(positionX,positionY, map.spatialReference), toiSymbol);
-     	  	var infoTemplate = new esri.InfoTemplate();
-	        infoTemplate.setTitle(IFurltoititle);
-	        infoTemplate.setContent(IFurltoiinfo);
-	        IFtoigraphic.setInfoTemplate(infoTemplate);
-			IFtoigraphic[IFtoigraphicid] = IFgraphicLayer.add(IFtoigraphic);
+				IFtoigraphic = new esri.Graphic(new esri.geometry.Point(positionX,positionY, map.spatialReference), toiSymbol);
+     	  		var infoTemplate = new esri.InfoTemplate();
+	        	infoTemplate.setTitle(IFurltoititle);
+	        	infoTemplate.setContent(IFurltoiinfo);
+	        	IFtoigraphic.setInfoTemplate(infoTemplate);
+				IFtoigraphic[IFtoigraphicid] = IFgraphicLayer.add(IFtoigraphic);
 			}
-			//console.log(textPositions);
-			//IFtoigraphic = new esri.Graphic(new esri.geometry.Point(IFurltoilat,IFurltoilong, map.spatialReference), toiSymbol);
-     	  	//var infoTemplate = new esri.InfoTemplate();
-	        //infoTemplate.setTitle(IFurltoititle);
-	        //infoTemplate.setContent(IFurltoiinfo);
-	        //IFtoigraphic.setInfoTemplate(infoTemplate);
-			//IFtoigraphic[IFtoigraphicid] = IFgraphicLayer.add(IFtoigraphic);
             }
 		}
 		map.addLayer(IFgraphicLayer);
@@ -368,7 +361,7 @@ if (!window.location.search)
 }
             function initIdentify(map) {
         //create identify tasks and setup parameters 
-        identifyTask = new esri.tasks.IdentifyTask("http://willem3.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer");
+        identifyTask = new esri.tasks.IdentifyTask(overlayMapService);
 
         identifyParams = new esri.tasks.IdentifyParameters();
         identifyParams.tolerance = 5;
@@ -454,7 +447,7 @@ if (!window.location.search)
 {layerID:30,svbkID:"6,0,0,5,1,0,4,0,3,3,2,21,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
 {layerID:31,svbkID:"6,0,0,5,1,0,4,0,3,3,2,22,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
 {layerID:32,svbkID:"6,0,0,5,1,0,4,0,3,3,2,23,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-{layerID:119,svbkID:"6,0,0,5,1,0,4,1,0,3,1,0,10,1,0,9,1,0,8,1,0,12,0,0,0,0,0,11,0,0,"}]
+{layerID:115,svbkID:"6,0,0,5,1,0,4,1,0,3,1,0,10,1,0,9,1,0,8,1,0,12,0,0,0,0,0,11,0,0,"}]
       
       // link to full map view on Svalbardkartet
       function showFullMap (){
