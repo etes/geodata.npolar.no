@@ -14,7 +14,7 @@
 		<script type="text/javascript" src="js/spectrum.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/spectrum.css" />
 		<script type="text/javascript">
-            var djConfig = {
+            var dojoConfig = {
                 parseOnLoad : true,
                 packages : [{
                 	"name" : "agsjs",
@@ -27,7 +27,7 @@
                 ]
             };
 
-		</script>   
+		</script> 
 		<script src="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/init.js"></script>
 		<script type="text/javascript">
             dojo.require("dijit.layout.BorderContainer");
@@ -61,6 +61,7 @@
             var visible = [];
             var identifyTask, identifyParams, identifyHandle = 0;
             var opacityValue = 0.8;
+            var toolId;
             
       function init(){
             	
@@ -318,12 +319,16 @@
                 		rectUrl.push("&roi[]=" + drawingColor + "," + infoTitle + "," + infoContent + "," + rectXMin + "," + rectYMin + "," + rectXMax + "," + rectYMax);
                 	}
                 	if (shape == "text"){
-                		var textPoints = overlayParams[4];
+                		textPositionX = Math.round(overlayParams[4]);
+                		textPositionY = Math.round(overlayParams[5]);
+                		textUrl.push("&toi[]=" + drawingColor + "," + infoTitle + "," + infoContent + "," + textPositionX + "," + textPositionY);
+                		/*var textPoints = overlayParams[4];
                 		for (var j=0; j<textPoints.length; j++ ){
                 			textPoints[j][0] = Math.round(textPoints[j][0]);
                 			textPoints[j][1] = Math.round(textPoints[j][1]);
                 		}
                 		textUrl.push("&toi[]=" + drawingColor + "," + infoTitle + "," + infoContent + "," + textPoints);
+                		*/
                 	}
                 }
                 
@@ -359,18 +364,23 @@
 				$('.btn.btn-primary.btn-xs').not($(this)).removeClass("active");
 				if ($(this).is("#drawPoint")) {
 					tb.activate(esri.toolbars.Draw.POINT);
+					toolId = "point";
 				}
 				if ($(this).is("#drawPolyline")) {
 					tb.activate(esri.toolbars.Draw.POLYLINE);
+					toolId = "polyline";
 				}
 				if ($(this).is("#drawExtent")) {
 					tb.activate(esri.toolbars.Draw.EXTENT);
+					toolId = "rectangle";
 				}
 				if ($(this).is("#drawCircle")) {
 					tb.activate(esri.toolbars.Draw.CIRCLE);
+					toolId = "circle";
 				}
 				if ($(this).is("#drawText")) {
-					tb.activate(esri.toolbars.Draw.MULTI_POINT);
+					tb.activate(esri.toolbars.Draw.POINT);
+					toolId = "text";
 					if(!$("#iframetitleinput").val() ) {
 						$(".alert-message").addClass("in");
 						setTimeout(function () {
@@ -400,9 +410,9 @@
 		iframegraphiccolorrgb = hexToRgb(iframegraphiccolor);
 
         var type = geometry.type;
-        var symbol; 
+        var symbol;
         
-        if (type === "point") {
+        if (type === "point" && toolId == "point") { 
           symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color(iframegraphiccolor), 4), new dojo.Color(iframegraphiccolor));
           graphicOverlays.push([type, iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, geometry.x, geometry.y]);
         }
@@ -425,7 +435,7 @@
           radius = Math.round((xmax-xmin)/2);
           graphicOverlays.push(["circle", iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, centerX, centerY, radius]);
         }
-        else if (type === "multipoint") {
+        else if (type === "point" && toolId == "text") {
         
      	  var font  = new esri.symbol.Font();
      	  font.setSize("14pt");
@@ -442,8 +452,9 @@
      	  symbol.setColor( new dojo.Color(iframegraphiccolor));
      	  symbol.setFont(font);
      	  //symbol.setAngle(parseInt(dojo.byId("tsAngle").value));
-          positions = geometry.points;
-          graphicOverlays.push(["text", iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, positions]);
+     	  graphicOverlays.push(["text", iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, geometry.x, geometry.y]);
+          //positions = geometry.points;
+          //graphicOverlays.push(["text", iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, positions]);
           //for (var i=0; i<positions.length; i++ ){
           	//graphicOverlays.push(["text", iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, positions[i][0], positions[i][1]]);
           //}
@@ -662,7 +673,7 @@
 							<button class="btn btn-primary btn-xs tip" id="drawPolyline" tip = "Draw polyline on map"></button>
 							<button class="btn btn-primary btn-xs tip" id="drawExtent" tip="Draw rectangle on map"></button>
 							<button class="btn btn-primary btn-xs tip" id="drawCircle" tip="Draw circle on map"></button>
-							<button class="btn btn-primary btn-xs tip" id="drawText" tip="Double click to add text"></button>
+							<button class="btn btn-primary btn-xs tip" id="drawText" tip="Add text label to map"></button>
 							<button class="btn btn-primary tip" id="undo" disabled="true"  onclick="undoManager.undo(); undo_click();" showLabel="false" iconClass="undoIcon" tip="Undo previous drawing"></button>
 							<button class="btn btn-primary tip" id="btnRemoveMarker" tip="Clear all drawings" disabled="disabled"></button>
 							<!-- Color picker-->
