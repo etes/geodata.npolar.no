@@ -21,7 +21,7 @@
                     "location" : location.pathname.replace(/\/[^/]+$/, '') + '/modules'
                 },
                 {
-                	"name": "myModules",
+                	"name": "modules",
                 	"location": location.pathname.replace(/\/[^/]+$/, "") + "/modules"
                 	}
                 ]
@@ -41,7 +41,7 @@
             dojo.require("dojox.html.entities");
             dojo.require("agsjs.dijit.TOC");
             dojo.require("dojox.layout.ExpandoPane");
-            dojo.require("myModules.customoperation");
+            dojo.require("modules.customoperation");
             dojo.require("esri.toolbars.draw");
 		        
    	        var layers = [{ name: 'HvalrossLiggeplasser', id: 2 }, { name: 'Røye', id: 3 }, { name: 'Sjøfugl kolonier', id: 5 }, { name: 'Alle Sjøpattdyr observasjoner', id: 27 }, { name: 'Isbjørn observasjoner', id: 37 }, { name: 'Strandrydding per år', id: 58 }, { name: 'Reinbestandområder', id: 59 }, { name: 'Biogeografiske soner', id: 60 }, { name: 'Vegetasjon (10 kasser)', id: 62}, { name: 'Geologi', id: 87 }];
@@ -458,7 +458,7 @@
         infoTemplate.setContent(iframeinfoinputtext);
         graphic.setInfoTemplate(infoTemplate);
         
-        var operation = new myModules.customoperation.Add({
+        var operation = new modules.customoperation.Add({
           graphicsLayer: map.graphics,
           addedGraphic: graphic
         });

@@ -1,9 +1,9 @@
-dojo.provide("myModules.customoperation");
+dojo.provide("modules.customoperation");
 
 dojo.require("esri.undoManager");
 dojo.require("esri.toolbars.navigation");
 
-dojo.declare("myModules.customoperation.Add", esri.OperationBase, {
+dojo.declare("modules.customoperation.Add", esri.OperationBase, {
   label: "Add Graphic",
   constructor: function ( /*graphicsLayer, addedGraphic*/ params) {
     params = params || {};
