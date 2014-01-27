@@ -5,10 +5,18 @@
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
 		<title>Svalbardkartet IFrame Designer</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 		<link rel="stylesheet" type="text/css" href="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/js/dojo/dijit/themes/claro/claro.css">
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 		<link rel="stylesheet" type="text/css" href="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/js/esri/css/esri.css" />
 		<link rel="stylesheet" type="text/css" href="modules/css/agsjs.css" />
+		  <style>
+  .ui-autocomplete-loading {
+    background: white url('http://jqueryui.com/resources/demos/autocomplete/images/ui-anim_basic_16x16.gif') right center no-repeat;
+  }
+  #search { width: 25em; }
+  </style>
+		</head>
 	<body class="claro">
 		<div id="content" data-dojo-type="dijit.layout.BorderContainer" design="headline" gutters="false" style="width: 100%; height: 100%; margin: 0;">
 		
@@ -21,7 +29,7 @@
 
 			<!--Parameters section
 				-->
-				
+	
     <div id="showhide" onclick="showhide();" title="Show/hide panel" onmouseover="this.style.cursor='pointer'"></div>
 				<div class="param" id="paramDiv">
 						<strong>Embed Map in Website</strong>
@@ -77,6 +85,11 @@
 							<button class="btn btn-primary" id="btnGenerateCode">Update Code</button>
 							<button class="btn btn-primary tip" tip="Opens in new page" id="btnExamplePage">Preview</button>
 						</div>
+							<div class="search input" id="search">
+							<form action="" method="get">
+							<input id="search-input" type="search" placeholder="zoom to placename..." value="" />
+							</form>
+							</div>	
 					</div>
 				</div>
 
@@ -102,19 +115,70 @@
 		</script> 
 		
 		<script type="text/javascript" src="js/proj4js.min.js"></script>
-		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="js/spectrum.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/spectrum.css" />
-	</head>
+
 		<script src="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/init.js"></script>
 		<script type="text/javascript" src="js/main.js"> </script>
 
-	<script>
+
+<script>
+    
+   $(function() {
+    function log( message ) {
+      $( "<div>" ).text( message ).prependTo( "#log" );
+      $( "#log" ).scrollTop( 0 );
+    }
+
+    $( "#search-input" ).autocomplete({
+      source: function( request, response ) {
+        $.ajax({
+          url: "http://placenames.npolar.no/stadnamn/edge/",
+          dataType: "jsonp",
+          data: {
+            q: request.term,
+            approved: true,
+            rows: 5,
+            region: "Svalbard"
+          },
+          success: function( data ) {
+            response( $.map( data, function( item ) {
+              return {
+                label: item.title + " (" + item.terrain + ")",
+                value: item.title,
+                object: item
+              };
+            }));
+          }
+        });
+      },
+      minLength: 2,
+      select: function( event, ui ) {
+           WGS84ToUTM33(ui.item.object);
+            addMarker(position);
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+  });
+
+
 $("#colorpicker").spectrum({
     color: "#ff0000",
     //showButtons: false,
 });
 $('#iframetitleinput').keypress(function(e){
+    if ( e.which == 13 ) return false;
+    //or...
+    if ( e.which == 13 ) e.preventDefault();
+});
+$('#search-input').keypress(function(e){
     if ( e.which == 13 ) return false;
     //or...
     if ( e.which == 13 ) e.preventDefault();
