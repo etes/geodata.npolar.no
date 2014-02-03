@@ -205,7 +205,15 @@ function getContent() {
 
 function requestSucceeded(response, io) {
 
+	//pad = dojo.string.pad;
+
+	// console.log("Succeeded: ", response);
+	// dojo.toJson method converts the given JavaScript object
+	// and its properties and values into simple text.
 	dojo.toJsonIndentStr = "  ";
+	//console.log("response as text:\n", dojo.toJson(response, true));
+	//dojo.byId("status").innerHTML = "";
+
 	// show layer indexes and names
 	if (response.hasOwnProperty("layers")) {
 
@@ -232,6 +240,9 @@ function btnRemoveMarker_click() {
 	graphicOverlays = [];
 	$('#btnRemoveMarker').attr("disabled", "disabled");
 	$("#undo").attr("disabled", "disabled");
+	//dojo.attr('btnRemoveMarker', 'disabled', 'disabled');
+	//dojo.attr('btnCancelMarker', 'disabled', 'disabled');
+	//dojo.removeAttr('btnPlaceMarker', 'disabled');
 	generateCode();
 }
 
@@ -408,7 +419,35 @@ function addMarker(position){
 	map.setExtent(new esri.geometry.Extent(position.x - 20000, position.y,
 			position.x + 20000, position.y, map.spatialReference));	
 }
-
+/*
+function PlacenameMarker(position, placenameGraphic){
+	this.placenameGraphic = placenameGraphic;
+	this.postion = position;
+	this.addMarker = function(){
+		var symbol = new esri.symbol.PictureMarkerSymbol(
+			{
+				"angle" : 0,
+				"xoffset" : 0,
+				"yoffset" : 10,
+				"type" : "esriPMS",
+				// "url" : "/img/BluePin1LargeB.png",
+				"url" : "http://static.arcgis.com/images/Symbols/Shapes/BluePin1LargeB.png",
+				"contentType" : "image/png",
+				"width" : 24,
+				"height" : 24
+			});
+	this.placenameGraphic = new esri.Graphic(new esri.geometry.Point(this.position.x, this.position.y),
+			symbol);
+	map.graphics.add(placenameGraphic);
+	
+	// zoom to point coordinates
+	map.setExtent(new esri.geometry.Extent(this.position.x - 20000, this.position.y,
+			this.position.x + 20000, this.position.y, map.spatialReference));
+	};
+	
+	
+}
+*/
 // END PLACENAMES SEARCH
 
 function addGraphic(geometry) {
@@ -461,7 +500,11 @@ function addGraphic(geometry) {
 		symbol.setFont(font);
 		//symbol.setAngle(parseInt(dojo.byId("tsAngle").value));
 		graphicOverlays.push(["text", iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, geometry.x, geometry.y]);
-
+		//positions = geometry.points;
+		//graphicOverlays.push(["text", iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, positions]);
+		//for (var i=0; i<positions.length; i++ ){
+		//graphicOverlays.push(["text", iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, positions[i][0], positions[i][1]]);
+		//}
 	} else {
 		symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color(iframegraphiccolor), 2), new dojo.Color(iframegraphiccolorrgb));
 	}
@@ -634,3 +677,20 @@ function showhide() {
 }
 
 dojo.ready(init);
+
+
+//COLOR PICKER: uses specturm.js
+$("#colorpicker").spectrum({
+    color: "#ff0000",
+    //showButtons: false,
+});
+$('#iframetitleinput').keypress(function(e){
+    if ( e.which == 13 ) return false;
+    //or...
+    if ( e.which == 13 ) e.preventDefault();
+});
+$('#search-input').keypress(function(e){
+    if ( e.which == 13 ) return false;
+    //or...
+    if ( e.which == 13 ) e.preventDefault();
+});
