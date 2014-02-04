@@ -103,7 +103,7 @@
                 "moduleName": "Browser",
                 "moduleType": "geocortex.essentialsHtmlViewer.mapping.modules.browser.BrowserModule",
                 "configuration": {
-                    "title": "@language-browser-title"
+                    "title": "Toktapp"
                 }
             },
             {
