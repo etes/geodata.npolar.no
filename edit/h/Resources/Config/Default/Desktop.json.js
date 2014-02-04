@@ -1295,7 +1295,7 @@
                 "moduleName": "Site",
                 "moduleType": "geocortex.essentialsHtmlViewer.mapping.modules.site.SiteModule",
                 "configuration": {
-                    "siteUri": "http://sampleserver1.geocortex.com/geocortex/essentials/rest/sites/CharlotteArcGISOnline"
+                    "siteUri": "http://willem.npolar.no/geocortex/essentials/dev/rest/sites/Toktapp"
                 },
                 "views": [
                     {
