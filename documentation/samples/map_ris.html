@@ -6,8 +6,8 @@
 <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
 <title></title>
 
-<link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/dojo/dijit/themes/tundra/tundra.css">
-<link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/esri/css/esri.css">
+<link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/dojo/dijit/themes/tundra/tundra.css">    
+<link href="http://js.arcgis.com/3.8/js/esri/css/esri.css" rel="stylesheet" type="text/css" >
 <style>
   html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
   #map { margin: 0; padding-top: 0px; width: 50%; }
@@ -41,7 +41,7 @@
 </style>
 
 <script>var dojoConfig = { parseOnLoad: true };</script>
-<script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/"></script>
+<script src="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/init.js"></script>
 <script>
   dojo.require("dijit.layout.BorderContainer");
   dojo.require("dijit.layout.ContentPane");
@@ -77,11 +77,9 @@
   <div>
   	
   	<H4 class=dtH4>Description</H4>
-  	<p style='margin-right: 0em; margin-bottom: 0.5em; margin-left: 0em; color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 12px; line-height: normal; background-color: rgb(255, 255, 255); '></p>
-  	<p style='margin-right: 0em; margin-bottom: 0.5em; margin-left: 0em; '>
   		<a href="http://geodata.npolar.no/documentation/map_risFull.html" target="_blank"><b>View sample</b></a>
-  		<br/>This sample shows how to add a KML file as a layer to an ArcGIS API for JavaScript application. Adding a KML file (.kml or .kmz) is as simple as requiring the relevant API module:</p>
-  	<p style='margin-right: 0em; margin-bottom: 0.5em; margin-left: 0em; '><font color='#000066' face='Courier New'> dojo.require(&quot;esri.layers.KMLLayer&quot;);</font></p><div><p style='margin-right: 0em; margin-bottom: 0.5em; margin-left: 0em; '>And then creating a KML layer and adding it to the map:</p>
+  		<br/>This sample shows how to add a KML file as a layer to an ArcGIS API for JavaScript application.</p>
+  	<p style='margin-right: 0em; margin-bottom: 0.5em; margin-left: 0em; '><font color='#000066' face='Courier New'> dojo.require(&quot;esri.layers.KMLLayer&quot;);</font></p><div><p style='margin-right: 0em; margin-bottom: 0.5em; margin-left: 0em; '></p>
   		<font color='#000066' face='Courier New'>var kmlUrl = 'http://umberto.npolar.no/ris15/ssfprojects.kml';</font></div><div><font color='#000066' face='Courier New'>     var kml = new esri.layers.KMLLayer(kmlUrl);</font></div><div><font face='Courier New'><font color='#000066'>     </font><span style='color: rgb(0, 0, 102); font-family: '>map.addLayer(kml);</span></font></div><div><br /></div><div>Note: The KML layer needs to be publicly accessible. </div><div><p></p></div>
   <div data-dojo-type="dijit.layout.BorderContainer" 
      data-dojo-props="design:'headline',gutters:false" 
@@ -92,9 +90,7 @@
        data-dojo-props="region:'center'"> 
     <div id="meta">
       <span id="loading"><img src="images/loading_black.gif" /></span>
-      <h3>Sample displaying a KML file </h3>
-      <br />
-      The map displays a KML file of RIS projects that is available on the RIS project portal (<a>http://ris.npolar.no/pages/RiSmap.htm</a>).
+      RIS (Research in Svalbard) projects (<a>http://ris.npolar.no/pages/RiSmap.htm</a>).
     </div>
   </div>
 </div>
