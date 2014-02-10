@@ -689,7 +689,7 @@ dojo.ready(init);
             q: request.term,
             approved: true,
             rows: 5,
-            location: "Svalbard",
+            hemisphere: "n",
           },
           success: function( data ) {
             response( $.map( data, function( item ) {
