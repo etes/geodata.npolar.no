@@ -34,7 +34,7 @@ coverage.xml
 # Translations
 *.mo
 
-# Mr Developer
+# Pydev project
 .mr.developer.cfg
 .project
 .pydevproject
