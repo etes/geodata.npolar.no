@@ -34,3 +34,14 @@ def shp_to_utf8(inDir, outDir):
     for inShp in filelist:
         outShp = outDir + "/" + os.path.basename(inShp)
         os.system('ogr2ogr ' + outShp + " " + inShp +' -lco ENCODING=UTF-8')
+
+def populate_field(shpfile, field, fieldValue):
+    dataSource = driver.Open(shp, 1)
+    layer = dataSource.GetLayer()
+    feature = layer.GetNextFeature()
+    while feature:
+        feature.SetField(field, fieldValue)
+        layer.SetFeature(feature)
+        feature = layer.GetNextFeature()
+    dataSource.Destroy()
+
