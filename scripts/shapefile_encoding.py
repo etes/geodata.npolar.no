@@ -45,3 +45,20 @@ def populate_field(shpfile, field, fieldValue):
         feature = layer.GetNextFeature()
     dataSource.Destroy()
 
+# bird species names russian
+inshp_dir = "/home/ermias/seabird"
+outshp_dir = "/home/ermias/seabirdUTF8"
+shp_to_utf8(inshp_dir, outshp_dir)
+
+bird_dict_file = '/home/ermias/Desktop/birds_dictionary.csv'
+bird_dicts = csv_to_dict(bird_dict_file, encoding='utf-8-sig', delimiter=';')
+shplist = glob.glob(outshp_dir + "/*.shp")
+driver = ogr.GetDriverByName('ESRI Shapefile')
+for shp in shplist:
+    for row in bird_dicts:
+        if row['Acronym'] == getFileName(shp):
+            populate_field(shp, 'Russian', row['Russian'])
+            print 'russian populated to %s' %getFileName(shp)
+
+
+
