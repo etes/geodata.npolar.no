@@ -9,7 +9,11 @@ Created on 23. jan. 2014
 import csv
 import os
 import glob
-import ogr
+#prefer OSGeo distro
+try:
+    from osgeo import ogr
+except:
+    import ogr
 
 def csv_to_dict(path, encoding, **kwargs):
     doc = []
