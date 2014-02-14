@@ -23,7 +23,6 @@ def csv_to_dict(path, encoding, **kwargs):
     return doc
 
 def getFileName(infile):
-    import os
     basename = os.path.basename(infile) #get filename with extension seperately
     (fileName, extension) = os.path.splitext(basename)
     return fileName
