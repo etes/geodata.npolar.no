@@ -33,8 +33,31 @@ def shp_to_utf8(inDir, outDir):
 inshp_dir = "/home/ermias/biogeografisksone"
 outshp_dir = "/home/ermias/biogeografisksone_utf8"
 shp_to_utf8(inshp_dir, outshp_dir)
+
 shp = "/home/ermias/biogeografisksone_utf8/BiogeografiSksone.shp"
 driver = ogr.GetDriverByName('ESRI Shapefile')
+dataSource = driver.Open(shp, 1)
+if dataSource is None:
+    print 'Could not open file'
+    sys.exit(1)
+layer = dataSource.GetLayer()
+feature = layer.GetNextFeature()
+while feature:
+    if feature.GetField('BGSONE') == 1:
+        feature.SetField('NAME', "Arktisk polarørken")
+        layer.SetFeature(feature)
+    elif feature.GetField('BGSONE') == 2:
+        feature.SetField('NAME', "Nordarktisk tundra")
+        layer.SetFeature(feature)
+    elif feature.GetField('BGSONE') == 3:
+        feature.SetField('NAME', "Mellomarktisk tundra")
+        layer.SetFeature(feature)
+    elif feature.GetField('BGSONE') == 4:
+        feature.SetField('NAME', "Indre fjordsone")
+        layer.SetFeature(feature)
+    feature = layer.GetNextFeature()
+
+dataSource.Destroy()
 
 
 
