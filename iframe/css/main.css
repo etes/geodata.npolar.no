@@ -44,107 +44,12 @@ html, body {
 	width: 20px;
 	z-index: 50;
 }
-
-#drawPoint {
-	background-color: rgba(255,255,255,0.9);
-	background-image: url(../images/dot-16.png);
-	background-position: 0px 0px;
-	background-size:22px 22px;
-	margin: 0px;
-	padding: 0px;
-	height: 25px;
-	width: 25px;
-}
-#drawPoint:hover {
-	background-color: rgba(240,240,240,0.9);
-}
-#drawCircle {
-	background-color: rgba(255,255,255,0.9);
-	background-image: url(../images/draw-circle-24.png);
-	background-position: 0px 0px;
-	background-size:22px 22px;
-	margin: 0px;
-	padding: 0px;
-	height: 25px;
-	width: 25px;
-}
-#drawCircle:hover {
-
-	background-color: rgba(240,240,240,0.9);
-}
-#drawText {
-	background-color: rgba(255,255,255,0.9);
-	background-image: url(../images/draw-text-24.png);
-	background-position: 0px 0px;
-	background-size:22px 22px;
-	margin: 0px;
-	padding: 0px;
-	height: 25px;
-	width: 25px;
-}
-#drawText:hover {
-
-	background-color: rgba(240,240,240,0.9);
-}
-#drawPolyline {
-	background-color: rgba(255,255,255,0.9);
-	background-image: url(../images/draw-polyline-24.png);
-	background-position: 0px 0px;
-	background-size:22px 22px;
-	margin: 0px;
-	padding: 0px;
-	height: 25px;
-	width: 25px;
-}
-#drawPolyline:hover {
-	background-color: rgba(240,240,240,0.9);
-}
-#drawExtent {
-	background-color: rgba(255,255,255,0.9);
-	background-image: url(../images/draw-rectangle-24.png);
-	background-position: 0px 0px;
-	background-size:22px 22px;
-	margin: 0px;
-	padding: 0px;
-	height: 25px;
-	width: 25px;
-}
-#drawExtent:hover {
-	background-color: rgba(240,240,240,0.9);
-}
-#undo {
-	background-color: rgba(255,255,255,0.9);
-	background-image: url(../images/undo.png);
-	background-position: 0px 0px;
-	background-size:22px 22px;
-	margin: 0px;
-	padding: 0px;
-	height: 25px;
-	width: 25px;
-}
-#undo:hover {
-	background-color: rgba(240,240,240,0.9);
-}
-#btnRemoveMarker {
+#rightpanel {
 	/*-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;*/
-	background-color: rgba(255,255,255,0.9);
-	background-image: url(../images/glyphicons_016_bin.png);
-	background-position: 0px 0px;
-	background-size:22px 22px;
-	margin: 0px;
-	padding: 0px;
-	height: 25px;
-	width: 25px;
-}
-#btnRemoveMarker:hover {
-	background-color: rgba(240,240,240,0.9);
-}
-#paramDiv {
-	/*-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;*/
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-o-border-radius: 5px;
-	border-radius: 5px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
 	-moz-box-shadow: 0 0 0.5em black;
 	-webkit-box-shadow: 0 0 0.5em black;
 	-o-box-shadow: 0 0 0.5em black;
@@ -161,14 +66,13 @@ html, body {
 	z-index: 40;
 }
 
-#iframecomposer {
-	/*-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;*/
-	-moz-border-radius: 4px;
+#draw-toolbar-section {
+	/*-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	-o-border-radius: 4px;
 	border-radius: 4px;
-	/*-moz-box-shadow: 0 0 0.5em black; -webkit-box-shadow: 0 0 0.5em black; -o-box-shadow: 0 0 0.5em black; box-shadow: 0 0 0.5em black;*/
-	border: solid 1px #ccc;
+	border: solid 1px #ccc;*/
+	border-radius: 4px;
 	margin: 0px;
 	padding: 5px;
 	width: auto;
@@ -176,31 +80,52 @@ html, body {
 	height: auto;
 }
 
-.undoButtons {
-	width: 50%;
-	margin-left: auto;
-	margin-right: auto;
-	padding-top: 4px;
+.button{
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	background-size:22px 22px;
+	margin: 0px;
+	padding: 0px;
+	height: 25px;
+	width: 25px;
 }
-.undoIcon {
-	background-image: url(images/undo.png);
-	width: 16px;
-	height: 16px;
+#draw-tools-toggle{	
+	background-image: url(../images/glyphicons_150_edit.png);
+	float: left;
+	cursor: pointer;
+	margin-top: 5px;
+	z-index: 999;
 }
-.redoIcon {
-	background-image: url(images/redo.png);
-	width: 16px;
-	height: 16px;
+.button:hover{
+	background-color: rgba(240,240,240,0.9);
 }
-.undoGrayIcon {
-	background-image: url(images/undo_gray.png);
-	width: 16px;
-	height: 16px;
+.button.active{
+	background-color: rgba(240,240,240,0.9) !important;
 }
-.redoGrayIcon {
-	background-image: url(images/redo_gray.png);
-	width: 16px;
-	height: 16px;
+#drawPoint {
+	background-image: url(../images/dot-16.png);	
+}
+#drawCircle {
+	background-image: url(../images/draw-circle-24.png);
+}
+#drawText {
+	background-image: url(../images/draw-text-24.png);
+}
+#drawPolyline {
+	background-image: url(../images/draw-polyline-24.png);
+}
+#drawPolyline:hover {
+	background-color: rgba(240,240,240,0.9);
+}
+#drawExtent {
+	background-image: url(../images/draw-rectangle-24.png);
+}
+#undo {
+	background-image: url(../images/undo.png);
+}
+#btnRemoveMarker {
+	background-image: url(../images/glyphicons_016_bin.png);
 }
 
 form {
@@ -261,29 +186,33 @@ form {
 	-o-box-shadow: 0 0 0.5em black;
 	box-shadow: 0 0 0.5em black;
 }
-.tip:hover:after{
-	
+.tip:hover:after{	
 	background: #333;
 	font-size: 10px;
 	background: rgba(0,0,0,.8);
-	border-radius: 4px;
+	border-radius: 3px;
 	color: #fff;
 	content: attr(tip);
-	padding: 1px;
+	margin-top: 30px;
+	padding: 0px 5px 0px 5px;
 	position: absolute;
 	z-index: 98;
-	width: 120px;
 }
-
-.sp-replacer:hover:after{
+.alert-info{
 	
+	font-size: 10px;
+	border-radius: 4px;
+	padding: 5px;
+}
+.sp-replacer:hover:after{	
 	background: #333;
 	font-size: 10px;
 	background: rgba(0,0,0,.8);
 	border-radius: 4px;
 	color: #fff;
 	content: "Choose color";
-	padding: 5px;
+	margin-top: 30px;
+	padding: 0px 5px 0px 5px;
 	position: absolute;
 	z-index: 98;
 }
@@ -304,7 +233,7 @@ form {
 	background-color: rgba(0, 0, 0, 0.2);
 }
 
-/*Esri zoom silder*/
+/*Customize Esri zoom silder*/
 .esriSimpleSlider {
 	top: 5px;
 	left: 8px;
@@ -326,20 +255,20 @@ form {
 }
 .esriSimpleSliderVertical .esriSimpleSliderIncrementButton, .esriSimpleSliderVertical .esriSimpleSliderDecrementButton {
 	background: #858585;
-	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzVkYWRkZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMTdiYzIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	/*background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzVkYWRkZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMTdiYzIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
 	background: -moz-linear-gradient(top, #858585 0%, #242424 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #858585), color-stop(100%, #242424));
 	background: -webkit-linear-gradient(top, #858585 0%, #242424 100%);
 	background: -o-linear-gradient(top, #858585 0%, #242424 100%);
 	background: -ms-linear-gradient(top, #858585 0%, #242424 100%);
 	background: linear-gradient(top, #858585 0%, #242424 100%);
+	box-shadow: 0 0 0.25em #BBB;*/
 	border: solid 1px #545454;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	box-shadow: 0 0 0.25em #BBB;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px !important;
 }
-
+/* end zoom slider*/
 .dojoxExpandoPane {
 	overflow-x: hidden;
 	overflow-y: visible;
@@ -536,3 +465,8 @@ form {
 .dojoxExpandoClosed .dojoxExpandoIconTop {
 	background-position: -15px 0
 }
+
+/* set title font properties */
+      .infowindow .window .top .right .user .titlebar .title { font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:14pt; }
+      /* set content font properties */
+      .infowindow .window .top .right .user .content { font-style:italic;font-weight:bold; font-size:10pt; }
