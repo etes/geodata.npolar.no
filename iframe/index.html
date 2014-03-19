@@ -27,11 +27,11 @@
 				<div id="copyright">© <a href="http://npolar.no" target="_blank">Norsk Polarinstitutt</a></div>
 			</div>
 
-			<!--Parameters section
+			<!--right panel section
 				-->
 	
     <div id="showhide" onclick="showhide();" title="Show/hide panel" onmouseover="this.style.cursor='pointer'"></div>
-				<div class="param" id="paramDiv">
+				<div class="param" id="rightpanel">
 						<strong>Embed Map in Website</strong>
 						<p>Select a layers to overlay and navigate to the desired map section.</p>
 
@@ -44,29 +44,30 @@
 						No.
 					</div>
 					<br />
-						<!-- iframecomposer -->
-					<div id="iframecomposer">
-						<div class="editorToolsDiv">
-							<button class="btn btn-primary btn-xs tip" id="drawPoint" tip="Draw point on map"></button>
-							<button class="btn btn-primary btn-xs tip" id="drawPolyline" tip = "Draw polyline on map"></button>
-							<button class="btn btn-primary btn-xs tip" id="drawExtent" tip="Draw rectangle on map"></button>
-							<button class="btn btn-primary btn-xs tip" id="drawCircle" tip="Draw circle on map"></button>
-							<button class="btn btn-primary btn-xs tip" id="drawText" tip="Add text label to map"></button>
-							<button class="btn btn-primary tip" id="undo" disabled="true"  onclick="undoManager.undo(); undo_click();" showLabel="false" iconClass="undoIcon" tip="Undo previous drawing"></button>
-							<button class="btn btn-primary tip" id="btnRemoveMarker" tip="Clear all drawings" disabled="disabled"></button>
+						<!-- draw tools section -->	
+					<div id="draw-toolbar-section">
+						<a class="button tip" id="draw-tools-toggle" onclick="toggle_draw_toolbar();" tip="draw on map"></a>
+						<div class="draw-toolbar" style="display: none">
+							<a class="button tip draw-tool" href="#" id="drawPoint" tip="Draw marker"></a>
+							<a class="button tip draw-tool" href="#" id="drawPolyline" tip = "Draw a polyline"></a>
+							<a class="button tip draw-tool" href="#" id="drawExtent" tip="Draw a rectangle"></a>
+							<a class="button tip draw-tool" href="#" id="drawCircle" tip="Draw a circle"></a>
+							<a class="button tip draw-tool" href="#" id="drawText" tip="Place text"></a>
+							<a class="button tip" href="#" id="undo" disabled="true"  onclick="undoManager.undo(); undo_click();" showLabel="false" iconClass="undoIcon" tip="Undo previous drawing"></a>
+							<a class="button tip" href="#" id="btnRemoveMarker" tip="Delete all drawings" disabled="disabled"></a>
 							<!-- Color picker-->
 							<input type='text' id="colorpicker" name="colorpicker" value="#ff0000" title= "Choose Color"/><!-- /. color picker-->
-						</div>
-
 						<form class="form-inline" id="iframetitlediv" name="iframetitleform">
 							<input class="input-sm" id="iframetitleinput"  name="iframetitletext" value="" placeholder="Text" title="Title" type="text" style="width:120px; font-size: 11px;" /><span class="alert-info alert-message fade">Add text label here</span>
 							</form>
 						<form class="form-inline" id="iframeinfodiv" name="iframeinfoform">
 							<textarea id="iframeinfoinput" name="iframeinfotext"  value="" placeholder="Add text info to graphic here." title="Info" spellcheck="false" style="z-index:99; width:160px; font-size: 11px;"></textarea>
 						</form>
-						<div class="pointcoordinates"><div id="utm33Ncoords"></div><div id="wgs84coords"></div>
-					</div>
-				</div> <!-- /.iframecomposer -->
+						</div>
+
+						
+				</div> <!-- /.draw tools section -->
+					<br />
 					<br />
 					<div id="embedSize-box">
 						<div class="widthdiv input-prepend input-append">
@@ -94,7 +95,7 @@
 				</div>
 
 			</div>
-			<!--end parameters section
+			<!--end right panel section
 		</div>
 		-->
 
@@ -121,68 +122,9 @@
 		<link rel="stylesheet" type="text/css" href="css/spectrum.css" />
 
 		<script src="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/init.js"></script>
-		<script type="text/javascript" src="js/main.js"> </script>
+		<script type="text/javascript" src="js/iframe-main.js"> </script>
 
 
-<script>
-    
-   $(function() {
-    function log( message ) {
-      $( "<div>" ).text( message ).prependTo( "#log" );
-      $( "#log" ).scrollTop( 0 );
-    }
 
-    $( "#search-input" ).autocomplete({
-      source: function( request, response ) {
-        $.ajax({
-          url: "http://placenames.npolar.no/stadnamn/edge/",
-          dataType: "jsonp",
-          data: {
-            q: request.term,
-            approved: true,
-            rows: 5,
-            region: "Svalbard"
-          },
-          success: function( data ) {
-            response( $.map( data, function( item ) {
-              return {
-                label: item.title + " (" + item.terrain + ")",
-                value: item.title,
-                object: item
-              };
-            }));
-          }
-        });
-      },
-      minLength: 2,
-      select: function( event, ui ) {
-           WGS84ToUTM33(ui.item.object);
-            addMarker(position);
-      },
-      open: function() {
-        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-      },
-      close: function() {
-        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-      }
-    });
-  });
-
-
-$("#colorpicker").spectrum({
-    color: "#ff0000",
-    //showButtons: false,
-});
-$('#iframetitleinput').keypress(function(e){
-    if ( e.which == 13 ) return false;
-    //or...
-    if ( e.which == 13 ) e.preventDefault();
-});
-$('#search-input').keypress(function(e){
-    if ( e.which == 13 ) return false;
-    //or...
-    if ( e.which == 13 ) e.preventDefault();
-});
-</script>
 	</body>
 </html>
