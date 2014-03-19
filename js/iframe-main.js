@@ -336,10 +336,10 @@ function initToolbar(map) {
 	});
 	dojo.connect(tb, "onDrawEnd", addGraphic);
 	//hook up the button click events
-	$('.btn.btn-primary.btn-xs').click(function() {
+	$('.draw-tool').click(function() {
 		if (!$(this).hasClass("active")) {
 			$(this).addClass("active");
-			$('.btn.btn-primary.btn-xs').not($(this)).removeClass("active");
+			$('.draw-tool').not($(this)).removeClass("active");
 			if ($(this).is("#drawPoint")) {
 				tb.activate(esri.toolbars.Draw.POINT);
 				toolId = "point";
@@ -419,35 +419,7 @@ function addMarker(position){
 	map.setExtent(new esri.geometry.Extent(position.x - 20000, position.y,
 			position.x + 20000, position.y, map.spatialReference));	
 }
-/*
-function PlacenameMarker(position, placenameGraphic){
-	this.placenameGraphic = placenameGraphic;
-	this.postion = position;
-	this.addMarker = function(){
-		var symbol = new esri.symbol.PictureMarkerSymbol(
-			{
-				"angle" : 0,
-				"xoffset" : 0,
-				"yoffset" : 10,
-				"type" : "esriPMS",
-				// "url" : "/img/BluePin1LargeB.png",
-				"url" : "http://static.arcgis.com/images/Symbols/Shapes/BluePin1LargeB.png",
-				"contentType" : "image/png",
-				"width" : 24,
-				"height" : 24
-			});
-	this.placenameGraphic = new esri.Graphic(new esri.geometry.Point(this.position.x, this.position.y),
-			symbol);
-	map.graphics.add(placenameGraphic);
-	
-	// zoom to point coordinates
-	map.setExtent(new esri.geometry.Extent(this.position.x - 20000, this.position.y,
-			this.position.x + 20000, this.position.y, map.spatialReference));
-	};
-	
-	
-}
-*/
+
 // END PLACENAMES SEARCH
 
 function addGraphic(geometry) {
@@ -667,16 +639,27 @@ function executeIdentifyTask(evt) {
 
 //show hide menu
 function showhide() {
-	if ($("#paramDiv").css("display") == "none") {
-		$("#paramDiv").css("display", "block");
+	if ($("#rightpanel").css("display") == "none") {
+		$("#rightpanel").css("display", "block");
 		$("#showhide").css("background-position", "-448px  -72px");
 	} else {
-		$("#paramDiv").css("display", "none");
+		$("#rightpanel").css("display", "none");
 		$("#showhide").css("background-position", "-430px -72px");
 	}
 }
 
+function toggle_draw_toolbar() {
+	if ($(".draw-toolbar").css("display") == "none") {
+		$(".draw-toolbar").css("display", "block");
+		$("#draw-toolbar-section").css({"border": "solid 1px #ccc", "border-radius": "4px"});
+	} else {
+		$(".draw-toolbar").css("display", "none");
+		$("#draw-toolbar-section").css({"border": "0px"});
+	}
+}
 dojo.ready(init);
+
+
 
 //placenames search using jquery autocomplete
    $(function() {
@@ -705,7 +688,7 @@ dojo.ready(init);
       minLength: 2,
       select: function( event, ui ) {
            WGS84ToUTM33(ui.item.object);
-            addMarker(position);
+           addMarker(position);
       },
       open: function() {
         $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
