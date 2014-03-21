@@ -27,7 +27,11 @@ def w84_to_etrs89 (indir, outdir):
     arcpy.BatchProject_management(input_features, out_workspace, out_cs, "#","#")
     print "projecting: ", input_features
 
+shp_dir = "W:/NP/SvalbardTema/Miljo/SjopattedyrObservasjon"
+out_dir = "E:/Data/NP/SvalbardTema/etrs89/miljo"
+
+w84_to_etrs89 (shp_dir, out_dir)
 # export feature classess to postgis
-env.workspace = "E:/Data/NP/SvalbardTema/etrs89/cryoclim/Glaciers.gdb"
+env.workspace = out_dir + "/" + os.path.basename(shp_dir).lower() + ".gdb"
 input_features =  arcpy.ListFeatureClasses()
 arcpy.FeatureClassToGeodatabase_conversion(input_features,dbConn)
