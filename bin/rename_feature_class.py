@@ -9,7 +9,7 @@ import arcpy
 from arcpy import env
 
 env.workspace = "E:/Data/SMS/20130925/Svalbardplan_Versjon45_2014.gdb/Svalbardplan"
-chars = {u'\xe5':'aa', u'\xc5': 'aa', u'\xf8':'oe'}
+chars = {u'\xe5':'aa', u'\xc5': 'AA', u'\xf8':'oe', u'\xd8': 'OE'}
 fcs = arcpy.ListFeatureClasses()
 for fc in fcs:
     out_data = fc
@@ -19,6 +19,7 @@ for fc in fcs:
             arcpy.Rename_management(fc, out_data, "FeatureClass")
     print out_data
 
+fcs = arcpy.ListFeatureClasses()
 fieldNames = [f.name for f in arcpy.ListFields(fc)]
 
 # replace non-ascii characters from field names
