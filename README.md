@@ -3,7 +3,7 @@
 
 http://geodata.npolar.no
 
-This is the repository for building the main page of Norwegian Polar Spatial Data Infrastractures and documentation on available map services and APIs of Norwegian Polar Institute
+This is the repository for building the main page of Norwegian Polar Spatial Data Infrastractures and documentation on available map services and mapping APIs of Norwegian Polar Institute
 
 ### Documentation
 
