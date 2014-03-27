@@ -9,6 +9,8 @@ import arcpy
 from arcpy import env
 
 env.workspace = "E:/Data/SMS/20130925/Svalbardplan_Versjon45_2014.gdb/Svalbardplan"
+
+# @TODO add all non-ascii characters and other invalid characters
 chars = {u'\xe5':'aa', u'\xc5': 'AA', u'\xf8':'oe', u'\xd8': 'OE'}
 fcs = arcpy.ListFeatureClasses()
 for fc in fcs:
