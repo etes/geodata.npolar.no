@@ -20,7 +20,7 @@ html, body {
 
 .header .headerLogo {
     float: left;
-    left: 30px;
+    left: 10px;
     position: relative;
     top: 8px;
 }
@@ -28,9 +28,9 @@ html, body {
 .header .headerTitle {
     color: #FFFFFF;
     float: left;
-    font-size: 16pt;
+    font-size: 12pt;
     font-weight: bold;
-    left: 60px;
+    left: 20px;
     top: 15px;
     position: relative;
 }
@@ -38,12 +38,12 @@ html, body {
 .header .subHeaderTitle {
     color: #CFCFCF;
     font-size: small;
-    padding-left: 20px;
+    padding-left: 10px;
 }
 
 .header .search {
     float: left;
-    left: 80px;
+    left: 30px;
     position: relative;
     top: 18px;
 }
@@ -65,6 +65,33 @@ html, body {
 }
 .btn.btn-primary.active{
 	background-color: rgba(200,200,200,0.9) !important;
+}
+#search-input {
+    background-image: url(../images/icon-search.png);
+    background-position: 5px center;
+    background-repeat: no-repeat;
+    border: 1px solid #ccc;
+    
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    
+    padding: 5px 5px;
+    text-indent: 20px;
+    
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 2s;
+    transition: all 0.2s;
+    
+    width: 150px;
+}
+
+#search-input:focus {
+    background-position: -20px center;
+    text-indent: 0;
+    width: 50%;
 }
 #rightPane {
 	width: 200px;
