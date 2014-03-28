@@ -10,6 +10,56 @@ html, body {
 	font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
 	font-size: 90%;
 }
+.header {
+    background: url("../images/linen.jpg") repeat-x scroll left top transparent;
+    height: 70px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.header .headerLogo {
+    float: left;
+    left: 30px;
+    position: relative;
+    top: 8px;
+}
+
+.header .headerTitle {
+    color: #FFFFFF;
+    float: left;
+    font-size: 16pt;
+    font-weight: bold;
+    left: 60px;
+    top: 15px;
+    position: relative;
+}
+
+.header .subHeaderTitle {
+    color: #CFCFCF;
+    font-size: small;
+    padding-left: 20px;
+}
+
+.header .search {
+    float: left;
+    left: 80px;
+    position: relative;
+    top: 18px;
+}
+
+.header .headerLinks {
+    float: right;
+    color: #FFFFFF;
+    position: relative;
+    top: 27px;
+    right: 10px;
+}
+
+.header .headerLinks a {
+    color: #FFFFFF;
+}
+
 .btn:focus {
 	outline:none !important;
 }
@@ -39,7 +89,7 @@ html, body {
 	padding: 0px;
 	height: 20px;
 	position: fixed;
-	top: 5px;
+	/*top: 5px;*/
 	right: 5px;
 	width: 20px;
 	z-index: 50;
@@ -62,16 +112,11 @@ html, body {
 	position: fixed;
 	height: auto;
 	right: 5px;
-	top: 5px;
+	/*top: 5px;*/
 	z-index: 40;
 }
 
 #draw-toolbar-section {
-	/*-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	-o-border-radius: 4px;
-	border-radius: 4px;
-	border: solid 1px #ccc;*/
 	border-radius: 4px;
 	margin: 0px;
 	padding: 5px;
