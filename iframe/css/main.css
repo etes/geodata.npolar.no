@@ -40,12 +40,18 @@ html, body {
     font-size: small;
     padding-left: 10px;
 }
-
+.header .identify {
+    float: left;
+    left: 40px;
+    position: relative;
+    top: 25px;
+}
 .header .search {
     float: left;
-    left: 30px;
+    left: 60px;
     position: relative;
     top: 18px;
+    width: 25em;
 }
 
 .header .headerLinks {
@@ -60,12 +66,8 @@ html, body {
     color: #FFFFFF;
 }
 
-.btn:focus {
-	outline:none !important;
-}
-.btn.btn-primary.active{
-	background-color: rgba(200,200,200,0.9) !important;
-}
+
+
 #search-input {
     background-image: url(../images/icon-search.png);
     background-position: 5px center;
@@ -83,8 +85,7 @@ html, body {
     
     -webkit-transition: all 0.2s;
     -moz-transition: all 2s;
-    transition: all 0.2s;
-    
+    transition: all 0.2s;  
     width: 150px;
 }
 
@@ -151,9 +152,19 @@ html, body {
 	line-height: 15px;
 	height: auto;
 }
+.btn:focus {
+	outline:none !important;
+}
+.btn.btn-primary.active{
+	background-color: rgba(200,200,200,0.9) !important;
+}
 
 .button{
 	display: inline-block;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
 	background-repeat: no-repeat;
 	background-position: 0px 0px;
 	background-size:22px 22px;
@@ -175,6 +186,9 @@ html, body {
 .button.active{
 	background-color: rgba(240,240,240,0.9) !important;
 }
+#point-identify {
+	background-image: url(../images/info25x30.png);	
+}
 #drawPoint {
 	background-image: url(../images/dot-16.png);	
 }
@@ -186,9 +200,6 @@ html, body {
 }
 #drawPolyline {
 	background-image: url(../images/draw-polyline-24.png);
-}
-#drawPolyline:hover {
-	background-color: rgba(240,240,240,0.9);
 }
 #drawExtent {
 	background-image: url(../images/draw-rectangle-24.png);
