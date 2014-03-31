@@ -35,8 +35,6 @@ var toolId;
 function init() {
 
 	// hideable panel
-	//$("#paramDiv").css("display", "block");
-	//$("#showhide").css("display", "block");
 
 	geometryService = new esri.tasks.GeometryService(geometryServiceUrl);
 	//dojo.connect(geometryService, "onProjectComplete", onProjectComplete);
@@ -125,7 +123,7 @@ function init() {
 	//dojo.connect(dojo.byId('btnExamplePage'), "onclick", btnExamplePage_click);
 	//dojo.connect(dojo.byId('txtWidth'), "onchange", generateCode);
 	dojo.connect(dynaLayer1, "onOpacityChange", generateCode);
-	dojo.connect(map, "onClick", updateIdentifyTask);
+	dojo.connect(map, "onClick", updateIdentifyTask);;;
 	dojo.connect(map, "onExtentChange", map_extentChanged);
 
 	//resize the map when the browser resizes - view the 'Resizing and repositioning the map' section in
@@ -204,15 +202,7 @@ function getContent() {
 }
 
 function requestSucceeded(response, io) {
-
-	//pad = dojo.string.pad;
-
-	// console.log("Succeeded: ", response);
-	// dojo.toJson method converts the given JavaScript object
-	// and its properties and values into simple text.
 	dojo.toJsonIndentStr = "  ";
-	//console.log("response as text:\n", dojo.toJson(response, true));
-	//dojo.byId("status").innerHTML = "";
 
 	// show layer indexes and names
 	if (response.hasOwnProperty("layers")) {
@@ -240,9 +230,6 @@ function btnRemoveMarker_click() {
 	graphicOverlays = [];
 	$('#btnRemoveMarker').attr("disabled", "disabled");
 	$("#undo").attr("disabled", "disabled");
-	//dojo.attr('btnRemoveMarker', 'disabled', 'disabled');
-	//dojo.attr('btnCancelMarker', 'disabled', 'disabled');
-	//dojo.removeAttr('btnPlaceMarker', 'disabled');
 	generateCode();
 }
 
@@ -339,7 +326,7 @@ function initToolbar(map) {
 	$('.draw-tool').click(function() {
 		if (!$(this).hasClass("active")) {
 			$(this).addClass("active");
-			$('.draw-tool').not($(this)).removeClass("active");
+			$('.button').not($(this)).removeClass("active");
 			if ($(this).is("#drawPoint")) {
 				tb.activate(esri.toolbars.Draw.POINT);
 				toolId = "point";
@@ -369,6 +356,17 @@ function initToolbar(map) {
 		} else {
 			$(this).removeClass("active");
 			tb.deactivate();
+		}
+	});
+	
+	$('.identify').click(function() {
+		if (!$(this).hasClass("active")) {
+			$(this).addClass("active");
+			$('.button').not($(this)).removeClass("active");
+			tb.deactivate();
+		}
+		else {
+			$(this).removeClass("active");
 		}
 	});
 
@@ -633,8 +631,14 @@ function executeIdentifyTask(evt) {
 		});
 	});
 
-	map.infoWindow.setFeatures([deferred]);
-	map.infoWindow.show(evt.mapPoint);
+	//map.infoWindow.setFeatures([deferred]);
+	//map.infoWindow.show(evt.mapPoint);
+	
+	//show info window only if identify tool is active
+	if ($('.identify').hasClass("active")) {
+		map.infoWindow.show(evt.mapPoint);
+		map.infoWindow.setFeatures([deferred]);
+	}
 }
 
 //show hide menu
@@ -647,7 +651,7 @@ function showhide() {
 		$("#showhide").css("background-position", "-430px -72px");
 	}
 }
-
+// show hide draw toolbar
 function toggle_draw_toolbar() {
 	if ($(".draw-toolbar").css("display") == "none") {
 		$(".draw-toolbar").css("display", "block");
