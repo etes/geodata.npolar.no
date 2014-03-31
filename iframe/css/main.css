@@ -187,7 +187,7 @@ html, body {
 	background-color: rgba(240,240,240,0.9) !important;
 }
 #point-identify {
-	background-image: url(../images/info25x30.png);	
+	background-image: url(../images/info_25x30.png);	
 }
 #drawPoint {
 	background-image: url(../images/dot-16.png);	
