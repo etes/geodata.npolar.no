@@ -675,13 +675,13 @@ dojo.ready(init);
           data: {
             q: request.term,
             approved: true,
-            rows: 5,
+            rows: 8,
             hemisphere: "n",
           },
           success: function( data ) {
             response( $.map( data, function( item ) {
               return {
-                label: item.title + " (" + item.terrain + ")",
+                label: __highlight(item.title, request.term) + " (" + item.terrain + ")",
                 value: item.title,
                 object: item
               };
@@ -700,8 +700,20 @@ dojo.ready(init);
       close: function() {
         $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
       }
-    });
+    }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+           // only change here was to replace .text() with .html()
+           return $( "<li></li>" )
+              .data( "ui-autocomplete-item", item )
+              .append( $( "<a></a>" ).html(item.label) )
+              .appendTo( ul );
+          };
   });
+
+function __highlight(s, t) {
+  var matcher = new RegExp("("+$.ui.autocomplete.escapeRegex(t)+")", "ig" );
+  return s.replace(matcher, "<strong>$1</strong>");
+}
+
 
 //COLOR PICKER: uses specturm.js
 $("#colorpicker").spectrum({
