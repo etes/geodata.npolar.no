@@ -681,7 +681,7 @@ dojo.ready(init);
           success: function( data ) {
             response( $.map( data, function( item ) {
               return {
-                label: __highlight(item.title, request.term) + " (" + item.terrain + ")",
+                label: item.title + " (" + item.terrain + ")",
                 value: item.title,
                 object: item
               };
@@ -689,7 +689,7 @@ dojo.ready(init);
           }
         });
       },
-      minLength: 2,
+      minLength: 1,
       select: function( event, ui ) {
            WGS84ToUTM33(ui.item.object);
            addMarker(position);
@@ -701,18 +701,14 @@ dojo.ready(init);
         $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
       }
     }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-           // only change here was to replace .text() with .html()
+           var re = new RegExp("("+$.ui.autocomplete.escapeRegex(this.term)+")", "gi" );
+           item.label = item.label.replace(re,"<strong>$1</strong>");
            return $( "<li></li>" )
               .data( "ui-autocomplete-item", item )
               .append( $( "<a></a>" ).html(item.label) )
               .appendTo( ul );
           };
   });
-
-function __highlight(s, t) {
-  var matcher = new RegExp("("+$.ui.autocomplete.escapeRegex(t)+")", "ig" );
-  return s.replace(matcher, "<strong>$1</strong>");
-}
 
 
 //COLOR PICKER: uses specturm.js
