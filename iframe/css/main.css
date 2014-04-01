@@ -94,6 +94,9 @@ html, body {
     text-indent: 0;
     width: 50%;
 }
+.ui-widget{
+	font-size: 85%;	
+}
 #rightPane {
 	width: 200px;
 	overflow: auto
