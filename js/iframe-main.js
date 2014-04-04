@@ -617,7 +617,7 @@ dojo.ready(init);
 
 
 // PLACENAMES SEARCH
-// Create projection definition of UTM33
+// Create projection definitions
 //Proj4js.defs["EPSG:4326"] = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs";
 Proj4js.defs["EPSG:32633"] = "+proj=utm +zone=33 +ellps=WGS84 +datum=WGS84 +units=m +no_defs";
 
@@ -631,7 +631,6 @@ function WGS84ToUTM33(event) {
 
 	east = event.east;
 	position = new Proj4js.Point(east, north);
-	// transform to UTM33
 	Proj4js.transform(wgs84, utm33, position);
 }
 
@@ -648,7 +647,6 @@ function addMarker(position){
 				"xoffset" : 0,
 				"yoffset" : 10,
 				"type" : "esriPMS",
-				// "url" : "/img/BluePin1LargeB.png",
 				"url" : "http://static.arcgis.com/images/Symbols/Shapes/BluePin1LargeB.png",
 				"contentType" : "image/png",
 				"width" : 24,
@@ -668,6 +666,7 @@ function addMarker(position){
     $( "#search-input" ).autocomplete({
       source: function( request, response ) {
         $.ajax({
+          // @ TODO use api.npolar.no
           url: "http://placenames.npolar.no/stadnamn/edge/",
           dataType: "jsonp",
           data: {
