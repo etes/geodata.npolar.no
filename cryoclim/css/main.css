@@ -1,0 +1,159 @@
+body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    /*font-family: Tahoma;
+    font-size: 14px;*/
+}
+
+.appHeader {
+    background: url("../images/linen.jpg") repeat-x scroll left top transparent;
+    height: 70px;
+    border-bottom: 2px solid #08d;
+    z-index: 40;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.appHeader .headerLogo {
+    float: left;
+    left: 30px;
+    position: relative;
+    top: 8px;
+}
+
+.appHeader .headerTitle {
+    color: #08d;
+    float: left;
+    font-family: Tahoma;
+    font-size: 16pt;
+    font-weight: bold;
+    left: 60px;
+    top: 15px;
+    position: relative;
+}
+
+.appHeader .subHeaderTitle {
+    color: #CFCFCF;
+    font-size: small;
+    padding-left: 20px;
+}
+/*@TODO: show identify tool once setting the identify module*/
+.appHeader .identify {
+    float: left;
+    left: -100px;
+    position: absolute;
+    top: 25px;
+}
+.appHeader .search {
+    float: left;
+    left: 160px;
+    position: relative;
+    top: 18px;
+}
+
+.appHeader .headerLinks {
+    float: right;
+    color: #FFFFFF;
+    position: relative;
+    top: 27px;
+    right: 10px;
+}
+
+.appHeader .headerLinks a {
+    color: #FFFFFF;
+}
+
+.button{
+	display: inline-block;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	background-size:22px 22px;
+	margin: 0px;
+	padding: 0px;
+	height: 25px;
+	width: 25px;
+}
+/*#point-identify {
+	background-image: url(../images/identify-24.png);	
+}*/
+.lightblue{
+color: #1D77A8;
+}
+
+.ui-widget{
+	font-size: 85%;	
+}
+
+.ui-helper-hidden-accessible{display:none;}
+.ui-autocomplete-loading {
+    background: white url('http://jqueryui.com/resources/demos/autocomplete/images/ui-anim_basic_16x16.gif') right center no-repeat;
+}
+
+#borderContainer {
+    position: absolute;
+    top: 70px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #FFFFFF
+}
+
+#sidebar {
+    width: 334px;
+    padding: 4px;
+    margin: 0;
+    overflow: auto;
+    overflow-x: hidden;
+    border-right: 1px solid #B5BCC7;
+}
+
+#map {
+    padding: 0;
+    overflow: hidden;
+}
+
+.titlePaneBottomFix {
+    margin-bottom: -1px;
+}
+
+.titlePaneRightFix {
+    margin-right: -1px;
+}
+
+.sidebarCollapseButton {
+    width: 20px;
+    height: 25px;
+    position: absolute;
+    /*top: 220px;*/
+    border-top: 1px solid #B5BCC7;
+    border-right: 1px solid #B5BCC7;
+    border-bottom: 1px solid #B5BCC7;
+    z-index: 40;
+    background-color: white;
+    border-radius: 0 5px 5px 0;
+    background-position: 2px 4px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.sidebarCollapseButton.close {
+    left: 342px;
+    background-image: url("../images/close.png");
+}
+
+.sidebarCollapseButton.open {
+    background-image: url("../images/open.png");
+    left: 0;
+}
+
+/*dbootstrap overrides*/
+.dbootstrap .dijitToolbar .dijitButtonContents {
+    padding: 1px !important;
+}
