@@ -33,28 +33,29 @@ define(['dojo/_base/declare', 'dijit/_WidgetBase', 'dijit/_TemplatedMixin', 'dij
 			Proj4js.transform(wgs84, utm33, position);
 		};
 		themap = this.map;
+		//@TODO make function reusable
 		function add_marker(position) {
-
-		themap.graphics.remove(placenameGraphic);
-		// uses Esri picture marker symbol
-		var symbol = new esri.symbol.PictureMarkerSymbol({
-			"angle" : 0,
-			"xoffset" : 0,
-			"yoffset" : 10,
-			"type" : "esriPMS",
-			"url" : "http://static.arcgis.com/images/Symbols/Shapes/BluePin1LargeB.png",
-			"contentType" : "image/png",
-			"width" : 24,
-			"height" : 24
-		});
-		placenameGraphic = new esri.Graphic(new esri.geometry.Point(position.x, position.y), symbol);
-		themap.graphics.add(placenameGraphic);
-
-		// zoom to point coordinates
+			themap.graphics.remove(placenameGraphic);
+			// uses Esri picture marker symbol
+			var symbol = new esri.symbol.PictureMarkerSymbol({
+				"angle" : 0,
+				"xoffset" : 0,
+				"yoffset" : 10,
+				"type" : "esriPMS",
+				"url" : "http://static.arcgis.com/images/Symbols/Shapes/BluePin1LargeB.png",
+				"contentType" : "image/png",
+				"width" : 24,
+				"height" : 24
+			});
+			placenameGraphic = new esri.Graphic(new esri.geometry.Point(position.x, position.y), symbol);
+			themap.graphics.add(placenameGraphic);
+			
+			// zoom to point coordinates
+			
+			themap.setExtent(new esri.geometry.Extent(position.x - 20000, position.y, position.x + 20000, position.y, themap.spatialReference));
+		};
 		
-		themap.setExtent(new esri.geometry.Extent(position.x - 20000, position.y, position.x + 20000, position.y, themap.spatialReference));
-	};
-			$("#search-input").autocomplete({
+		$("#search-input").autocomplete({
 			source : function(request, response) {
 				$.ajax({
 					// @ TODO use api.npolar.no
@@ -93,8 +94,13 @@ define(['dojo/_base/declare', 'dijit/_WidgetBase', 'dijit/_TemplatedMixin', 'dij
 			item.label = item.label.replace(re, "<strong>$1</strong>");
 			return $("<li></li>").data("ui-autocomplete-item", item).append($("<a></a>").html(item.label)).appendTo(ul);
 		};
+		// disable enter key in input boxes
+		$('#search-input').keypress(function(e){
+			if ( e.which == 13 ) return false;
+			//or...
+			if ( e.which == 13 ) e.preventDefault();
+			});
 		},
-	//placenames search using jquery autocomplete
 	add_search: function() {
 
 	}
