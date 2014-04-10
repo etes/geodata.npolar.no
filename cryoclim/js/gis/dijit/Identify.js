@@ -1,6 +1,7 @@
 define([
     'dojo/_base/declare',
     'dijit/_WidgetBase',
+    'dijit/form/Button',
     'dojo/_base/lang',
     'dojo/_base/array',
     'esri/lang',
@@ -10,7 +11,7 @@ define([
     'dojo/on',
     'dojo/promise/all',
     './Identify/config'
-], function(declare, _WidgetBase, lang, array, esriLang, IdentifyTask, IdentifyParameters, PopupTemplate, on, all, config) {
+], function(declare, _WidgetBase, Button, lang, array, esriLang, IdentifyTask, IdentifyParameters, PopupTemplate, on, all, config) {
 
     var Identify = declare([_WidgetBase], {
         declaredClass: 'gis.dijit.Identify',
@@ -31,32 +32,37 @@ define([
         executeIdentifyTask: function(evt) {
             this.map.infoWindow.hide();
             this.map.infoWindow.clearFeatures();
-            this.map.infoWindow.setTitle('Identifing...');
-            this.map.infoWindow.setContent('<img src="images/loading.gif" style="height:20px;width:20px;margin-top:5px"></img>');
-            this.map.infoWindow.show(evt.mapPoint);
-
-            var identifyParams = new IdentifyParameters();
-            identifyParams.tolerance = this.identifyTolerance;
-            identifyParams.returnGeometry = true;
-            identifyParams.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
-            identifyParams.geometry = evt.mapPoint;
-            identifyParams.mapExtent = this.map.extent;
-            identifyParams.width = this.map.width;
-            identifyParams.height = this.map.height;
-
-            var identifies = [];
-
-            array.forEach(this.layers, function(layer) {
-                if (layer.ref.visibleLayers.length !== 0 || layer.ref.visibleLayers[0] === -1) {
-                    var params = lang.clone(identifyParams);
-                    params.layerIds = layer.ref.visibleLayers;
-                    identifies.push(layer.identifyTask.execute(params))
-                }
-            });
-
-            all(identifies).then(lang.hitch(this, 'identifyCallback'), function(err) {
-                console.log('identify tasks error: ', err);
-            });
+            
+            //show info window only if identify tool is active
+            if ($('.identify').hasClass("active")) {
+	            this.map.infoWindow.setTitle('Identifing...');
+	            this.map.infoWindow.setContent('<img src="images/loading.gif" style="height:20px;width:20px;margin-top:5px"></img>');
+	            this.map.infoWindow.show(evt.mapPoint);
+	            
+	
+	            var identifyParams = new IdentifyParameters();
+	            identifyParams.tolerance = this.identifyTolerance;
+	            identifyParams.returnGeometry = true;
+	            identifyParams.layerOption = IdentifyParameters.LAYER_OPTION_VISIBLE;
+	            identifyParams.geometry = evt.mapPoint;
+	            identifyParams.mapExtent = this.map.extent;
+	            identifyParams.width = this.map.width;
+	            identifyParams.height = this.map.height;
+	
+	            var identifies = [];
+	
+	            array.forEach(this.layers, function(layer) {
+	                if (layer.ref.visibleLayers.length !== 0 || layer.ref.visibleLayers[0] === -1) {
+	                    var params = lang.clone(identifyParams);
+	                    params.layerIds = layer.ref.visibleLayers;
+	                    identifies.push(layer.identifyTask.execute(params));
+	                }
+	            });
+	
+	            all(identifies).then(lang.hitch(this, 'identifyCallback'), function(err) {
+	                console.log('identify tasks error: ', err);
+	            });
+            }
         },
         identifyCallback: function(responseArray) {
             var fSet = [];
