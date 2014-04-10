@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.8/js/dojo/dojo/resources/dojo.css">
         <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.8/js/esri/css/esri.css">
-        <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css" />
+        <!--<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css" />-->
         <link rel="stylesheet" type="text/css" href="css/main.css">
     </head>
     <body class="dbootstrap">
@@ -22,22 +22,16 @@
             </div>
             
             <div class="identify-tools">
-            <a class="button tip lightblue identify icon-info-sign icon-large" title="Point identify" href="#" id="point-identify" tip="identify"></a>
+            <a class="button tip identify inactive" title="Identify features by clicking on them" href="#" id="point-identify" tip="identify features by clicking on them"></a>
             </div>
             <div class="search">
-                <!--<div id='geocodeDijit'>
-                </div>
-                <div id="placenameDijit"></div>-->
-                
                 <div id="placenameDijit">
                 </div>
-                <!--<form action="" method="get">
-				<input id="search-input" type="search" placeholder="placename coming..." value="" rel="search"/>
-				</form>-->
             </div>
             <div class="headerLinks">
                 <div style="text-align:right;">
-                    <!--<a id="helpA" href="#">Help</a>-->
+                	<a id="about" href="http://www.cryoclim.net" target="_blank">About Cryoclim</a>
+                    <a id="helpA" href="#">Help</a>
                 </div>
             </div>
         </div>
@@ -70,70 +64,5 @@
                 Controller.startup();
             });
         </script>
-        <!--
-        <script>
-        // PLACENAMES SEARCH
-// Create projection definitions
-//Proj4js.defs["EPSG:4326"] = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs";
-Proj4js.defs["EPSG:32633"] = "+proj=utm +zone=33 +ellps=WGS84 +datum=WGS84 +units=m +no_defs";
-
-var wgs84 = new Proj4js.Proj('EPSG:4326');
-var utm33 = new Proj4js.Proj('EPSG:32633');
-var position, graphic;
-// transform placename coordinates from wgs84 to utm 33
-
-
-var placenameGraphic;
-// Add point marker to map and zoom to that position
-
-
-//placenames search using jquery autocomplete
-   $(function() {
-    $( "#search-input" ).autocomplete({
-      source: function( request, response ) {
-        $.ajax({
-          // @ TODO use api.npolar.no
-          url: "http://placenames.npolar.no/stadnamn/edge/",
-          dataType: "jsonp",
-          data: {
-            q: request.term,
-            approved: true,
-            rows: 8,
-            hemisphere: "n",
-          },
-          success: function( data ) {
-            response( $.map( data, function( item ) {
-              return {
-                label: item.title + " (" + item.terrain + ")",
-                value: item.title,
-                object: item
-              };
-            }));
-          }
-        });
-      },
-      minLength: 1,
-      select: function( event, ui ) {
-           WGS84ToUTM33(ui.item.object);
-           addMarker(position);
-      },
-      open: function() {
-        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-      },
-      close: function() {
-        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-      }
-    }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-           var re = new RegExp("("+$.ui.autocomplete.escapeRegex(this.term)+")", "gi" );
-           item.label = item.label.replace(re,"<strong>$1</strong>");
-           return $( "<li></li>" )
-              .data( "ui-autocomplete-item", item )
-              .append( $( "<a></a>" ).html(item.label) )
-              .appendTo( ul );
-          };
-  });
-
-// END PLACENAMES SEARCH
-        </script>-->
     </body>
 </html>
