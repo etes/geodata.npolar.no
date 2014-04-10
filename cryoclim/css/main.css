@@ -94,6 +94,11 @@ body, html {
 #point-identify {
 	background-image: url(../images/info-icon.png);	
 }
+#metadata-link{
+	/*background-image: url(../images/question-icon.png);*/	
+	font-size: 10px;
+	vertical-align: super;
+}
 .lightblue{
 color: #1D77A8;
 }

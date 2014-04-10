@@ -180,13 +180,12 @@ define([
       
       if (metadata === '') {
         // we do not want to show the first level, typically in the case of a single map service
-        esri.hide(this.rowNode);
-        rootLayer.show();
-        this.rootLayerTOC._currentIndent--;
+        metadata = '';
       } else if (metadata === undefined) {
         // no metadata is set, try to find default
         metadata = rootLayer.url;
       }
+      
       rootLayer.collapsed = this.rootLayerTOC.config.collapsed;
       if (this.rootLayerTOC.config.slider) {
         this.sliderNode = domConstruct.create('div', {
@@ -250,7 +249,7 @@ define([
         // no legend means no need for plus/minus sign
         domStyle.set(this.iconNode, 'visibility', 'hidden');
       }
-      this.labelNode.innerHTML = title;
+      this.labelNode.innerHTML = title + '  <a id="metadata-link" target="_blank" title="metadata" href=' + metadata + '>Metadata</a>';
       //dojo .attr(this.rowNode, 'title', title);
       domAttr.set(this.rowNode, 'title', title);
     },

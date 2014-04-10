@@ -111,6 +111,7 @@ define([
                 this.legendLayerInfos.push({
                     layer: l,
                     title: layer.title || null,
+                    metadata: layer.metadata || null,
                     slider: true,
                     noLegend: false,
                     collapsed: false
