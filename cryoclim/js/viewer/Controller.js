@@ -61,7 +61,9 @@ define([
             this.outer.startup();
             this.initMap();
 
-            //on(dom.byId('helpA'), 'click', lang.hitch(this, 'showHelp'));
+            on(dom.byId('helpA'), 'click', lang.hitch(this, 'showHelp'));
+            this.identifyToggle = dom.byId('point-identify');
+            on(this.identifyToggle, 'click', lang.hitch(this, 'toggleIdentify'));
             this.sideBarToggle = dom.byId('sidebarCollapseButton');
             on(this.sideBarToggle, 'click', lang.hitch(this, 'toggleSidebar'));
             Style.set(this.sideBarToggle, 'display', 'block');
@@ -130,7 +132,6 @@ define([
             	
             }, "placenameDijit");
             this.placename.startup();
-            
 
             this.geocoder = new esri.dijit.Geocoder({
                 map: this.map,
@@ -146,7 +147,6 @@ define([
                 map: this.map
             });
             
-
             if (config.widgets.scalebar && config.widgets.scalebar.include) {
                 require(['esri/dijit/Scalebar'], lang.hitch(this, function(Scalebar) {
                     this.scalebar = new Scalebar({
@@ -262,6 +262,15 @@ define([
                 this.outer.addChild(this.sidebar);
                 domClass.remove(this.sideBarToggle, 'open');
                 domClass.add(this.sideBarToggle, 'close');
+            }
+        },
+        toggleIdentify: function() {
+            if (domClass.contains(this.identifyToggle, 'inactive')) {
+                domClass.remove(this.identifyToggle, 'inactive');
+                domClass.add(this.identifyToggle, 'active');
+            } else {
+                domClass.remove(this.identifyToggle, 'active');
+                domClass.add(this.identifyToggle, 'inactive');
             }
         },
         _createTitlePane: function(title, position, open) {
