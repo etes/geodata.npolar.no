@@ -15,12 +15,10 @@ define([
 		basemapMode: "custom",
 		//basemapMode: "agol",
 		// defaultBasemap: valid options for "agol" mode: "streets", "satellite", "hybrid", "topo", "gray", "oceans", "national-geographic", "osm"
-		//mapStartBasemap: "lightGray",
-		mapStartBasemap: "lightGray",
+		mapStartBasemap: "lightGray", //topographic map Nordområde
 		//basemapsToShow: basemaps to show in menu. If "agol" mode use valid values from above, if "custom" mode then define in basmaps dijit and refrence by name here
 		basemapsToShow: ["topo", "lightGray", "satellite"],
 		//basemapsToShow: ["topography", "satellite", "hybrid", "satTrans", "lightGray"],
-		//basemapsToShow: ["streets", "satellite", "hybrid", "topo", "gray", "oceans", "national-geographic", "osm"],
 		// initialExtent: extent the the map starts at. Helper tool: http://www.arcgis.com/home/item.html?id=dd1091f33a3e4ecb8cd77adf3e585c8a
 		initialExtent: {
 			xmin: 520492.686,
@@ -40,14 +38,14 @@ define([
 		// 3 'mode' options: MODE_SNAPSHOT = 0, MODE_ONDEMAND = 1, MODE_SELECTION = 2
 		operationalLayers: [/*{
 			type: "feature",
-			url: "http://services1.arcgis.com/g2TonOxuRkIqSOFx/arcgis/rest/services/MeetUpHomeTowns/FeatureServer/0",
+			url: "http://geodata.npolar.no/arcgis/rest/services/Svalbard/glaciers/FeatureServer/0",
 			title: "Features",
 			options: {
-				id: "meetupHometowns",
+				id: "glaceriersFS",
 				opacity: 1.0,
 				visible: true,
 				outFields: ["*"],
-				infoTemplate: new InfoTemplate("Hometown", "${*}"),
+				infoTemplate: new InfoTemplate("Name", "${*}"),
 				mode: 0
 			},
 			editorLayerInfos: {
