@@ -279,7 +279,6 @@ define([
                 title: title,
                 open: open
             }).placeAt(this.sidebar, position);
-            //domClass.add(tp.domNode, 'titlePaneBottomFix titlePaneRightFix');
             tp.startup();
             return tp;
         },
