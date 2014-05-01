@@ -9,6 +9,3 @@ This is the repository for building the main page of Norwegian Polar Spatial Dat
 
 http://geodata.npolar.no/documentation
 
-### Samples
-
-http://geodata.npolar.no/documentation/samples
