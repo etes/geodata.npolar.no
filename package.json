@@ -1,0 +1,51 @@
+{
+  "name": "geodata.npolar.no",
+  "version": "0.2.0",
+  "description": "Norwegian Polar Maps and services",
+  "homepage": "https://github.com/bevry/twitter-bootstrap.docpad",
+  "keywords": [
+    "docpad-skeleton",
+    "docpad",
+    "website",
+    "bootstrap",
+    "twitter bootstrap"
+  ],
+  "author": "ermias <ermias@npolar.no>",
+  "maintainers": [
+    "Ermias Beyene Tesfamariam <ermias@npolar.no> https://github.com/etes"
+  ],
+  "contributors": [
+    "Ermias Beyene Tesfamariam <ermias@npolar.no> https://github.com/etes"
+  ],
+  "bugs": {
+    "url": "https://github.com/npolar/geodata.npolar.no/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/npolar/geodata.npolar.no.git"
+  },
+  "engines": {
+    "node": "0.10",
+    "npm": "1.2"
+  },
+  "dependencies": {
+    "docpad": "~6.63.3",
+    "docpad-plugin-downloader": "~2.1.4",
+    "docpad-plugin-cleanurls": "~2.6.2",
+    "docpad-plugin-coffeescript": "~2.2.3",
+    "docpad-plugin-eco": "~2.0.3",
+    "docpad-plugin-less": "~2.4.1",
+    "docpad-plugin-marked": "~2.2.0",
+    "docpad-plugin-partials": "~2.8.1",
+    "docpad-plugin-related": "~2.2.2",
+    "docpad-plugin-stylus": "~2.5.0",
+    "docpad-plugin-text": "~2.3.2"
+  },
+  "devDependencies": {
+    "docpad-plugin-livereload": "~2.5.6"
+  },
+  "main": "node_modules/docpad/bin/docpad-server",
+  "scripts": {
+    "start": "node_modules/docpad/bin/docpad-server"
+  }
+}
