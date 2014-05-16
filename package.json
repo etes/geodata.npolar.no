@@ -4,11 +4,12 @@
   "description": "Norwegian Polar Maps and services",
   "homepage": "https://github.com/bevry/twitter-bootstrap.docpad",
   "keywords": [
-    "docpad-skeleton",
-    "docpad",
-    "website",
-    "bootstrap",
-    "twitter bootstrap"
+    "Norwegian Polar Institute",
+    "Norsk Polarinstitutt",
+    "Maps",
+    "Map Services",
+    "Documentation",
+    "docpad"
   ],
   "author": "ermias <ermias@npolar.no>",
   "maintainers": [
