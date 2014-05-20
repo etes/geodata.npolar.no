@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Meta -->
+	<meta charset="utf-8" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+	<!-- Use the .htaccess and remove these lines to avoid edge case issues.
+		 More info: h5bp.com/i/378 -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<!-- Our site title and description -->
+	<title><%= @getPreparedTitle() %></title>
+	<meta name="description" content="<%= @getPreparedDescription() %>" />
+	<meta name="keywords" content="<%= @getPreparedKeywords() %>" />
+	<meta name="author" content="<%= @site.author or '' %>" />
+
+	<!-- Output DocPad produced meta elements -->
+	<%- @getBlock('meta').toHTML() %>
+
+	<!-- Mobile viewport optimized: h5bp.com/viewport -->
+	<meta name="viewport" content="width=device-width" />
+
+	<!-- Icons -->
+		<link rel="shortcut icon" href="/public/images/favicon.ico">
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/images/favicon.ico">
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/public/images/favicon.ico">
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/public/images/favicon.ico">
+		<link rel="apple-touch-icon-precomposed" href="/public/images/favicon.ico">
+
+	<!-- Shims: IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+		<script async src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Styles -->
+	<%- @getBlock('styles').add(@site.styles).toHTML() %>
+</head>
+<body>
+	<!-- Menu -->
+	<div class="banner row-fluid">
+
+				<a class="brand" id="identity" href="/"><img src="/public/images/logo.png" alt="Norwegian Polar Institute" />
+					<span id= "identity-text">Norwegian Polar Institute</span>
+				</a>
+
+	</div>
+	<div class="navbar navbar-inverse row-fluid">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">Geospatial data and services</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<% for document in @getCollection('pages').toJSON(): %>
+						<li
+							typeof="sioc:Page"
+							about="<%= document.url %>"
+							class="<%= 'active'	if @document.url is document.url %>"
+						>
+							<a href="<%= document.url %>" property="dc:title">
+								<%= document.title %>
+							</a>
+						</li>
+					<% end %>
+					<li><a href="http://geodata.npolar.no/arcgis/rest/services" target="_blank">ArcGIS Services Directory</a></li>
+				</ul>
+			</div><!--/.navbar-collapse -->
+		</div>
+	</div>
+
+	<!-- Content -->
+	<div class="container">
+		<!-- Content -->
+		<section id="content" class="content">
+			<%- @content %>
+		</section>
+
+		<!-- Footer -->
+		<footer>
+			<p class="pull-left">&copy; Norwegian Polar Institute <%- (new Date()).getFullYear() %></p>
+			<p class="pull-right">
+				Last updated: <%= @site.date.toISOString() %>
+			</p>
+		</footer>
+	</div><!-- /container -->
+
+	<!-- Scripts -->
+	<%- @getBlock('scripts').add(@site.scripts).toHTML() %>
+</body>
+</html>
