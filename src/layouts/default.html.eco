@@ -9,7 +9,7 @@
 		 More info: h5bp.com/i/378 -->
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<!-- Our site title and description -->
+	<!-- Site title and description -->
 	<title><%= @getPreparedTitle() %></title>
 	<meta name="description" content="<%= @getPreparedDescription() %>" />
 	<meta name="keywords" content="<%= @getPreparedKeywords() %>" />
@@ -36,7 +36,7 @@
 	<!-- Styles -->
 	<%- @getBlock('styles').add(@site.styles).toHTML() %>
 </head>
-<body>
+<body data-spy="scroll">
 	<!-- Menu -->
 	<div class="banner row-fluid">
 
@@ -53,7 +53,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/">Geospatial data and services</a>
+				<a class="navbar-brand" href="/">Maps and services</a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
@@ -70,16 +70,27 @@
 					<% end %>
 					<li><a href="http://geodata.npolar.no/arcgis/rest/services" target="_blank">ArcGIS Services Directory</a></li>
 				</ul>
+				<!-- Render feedback partial -->
+				<ul class="nav navbar-nav pull-right">
+					<li class="pull-right">
+						<a href="mailto:data@npolar.no"><i class="icon-envelope icon-white"></i> Feedback</a>
+					</li>
+				</ul>
+
 			</div><!--/.navbar-collapse -->
 		</div>
 	</div>
 
 	<!-- Content -->
 	<div class="container">
-		<!-- Content -->
-		<section id="content" class="content">
-			<%- @content %>
-		</section>
+		<div class="row">
+			<%- @partial('nav', @)%>
+		<div class="col-md-9">
+			<section id="content" class="content">
+				<%- @content %>
+			</section>
+		</div>
+	</div>
 
 		<!-- Footer -->
 		<footer>
