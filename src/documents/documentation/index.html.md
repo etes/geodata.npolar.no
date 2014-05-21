@@ -4,10 +4,22 @@ layout: page
 header: 
 tags: ['intro','page']
 pageOrder: 1
+
+sections:
+    - 'getting-started'
+    - 'setting-the-map'
+    - 'geocoding-service-search-place-name-'
+    - 'map-overlays'
+    - 'map-service-layers'
+
+labels:
+    getting-started: 'Getting Started'
+    setting-the-map: "Setting The Map"
+    geocoding-service-search-place-name-: "Geocoding Service"
+    map-overlays: "Map Overlays"
+    map-service-layers: "Maps Service Layers"
+
 ```
-
-<link rel="stylesheet" href="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/js/esri/css/esri.css"/>
-
 
 Norwegian Polar Institute Maps API - Javascript
 ----------------------------------------------
@@ -41,7 +53,7 @@ Maps). It's also desirable if you make yourself familiar with Esri's
 Javascript](http://help.arcgis.com/en/webapi/javascript/arcgis/) to take
 full advantage of the mapping API.
 
-### Setting the map
+### Setting The Map
 
 The easiest way to setup a map of Svalbard using ArcGIS API for
 JavaScript is to see a simple example. The following html page displays
