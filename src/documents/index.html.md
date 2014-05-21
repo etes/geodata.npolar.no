@@ -1,6 +1,18 @@
 ---
-layout: 'default'
 title: 'Home'
+layout: default
+sections:
+    - 'carousel'
+    - 'basemaps'
+    - 'thematic-map-services'
+    - 'terms-of-use'
+
+
+labels:
+    carousel: 'Map Viewers'
+    basemaps: 'Basemaps'
+    thematic-map-services: 'Thematic Map Services'
+    terms-of-use: 'Terms of Use'
 ---
 
 Norwegian Polar Institute Maps and Services
