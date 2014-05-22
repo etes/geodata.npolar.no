@@ -73,7 +73,7 @@
 				<!-- Render feedback partial -->
 				<ul class="nav navbar-nav pull-right">
 					<li class="pull-right">
-						<a href="mailto:data@npolar.no"><i class="icon-envelope icon-white"></i> Feedback</a>
+						<a href="mailto:data@npolar.no"><span class="glyphicon glyphicon-envelope" title= "Feedback"></span> Feedback</a>
 					</li>
 				</ul>
 
