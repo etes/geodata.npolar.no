@@ -1,11 +1,28 @@
 # Norwegian Polar Spatial Data and Services
 ========================
 
-http://geodata.npolar.no. [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/npolar/geodata.npolar.no)
+Source code for http://geodata.npolar.no, built with [Docpad](https://github.com/bevry/docpad). [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/npolar/geodata.npolar.no)
 
 This is the repository for building the main page of Norwegian Polar Spatial Data Infrastractures and documentation on available map services and mapping APIs of Norwegian Polar Institute
 
-### Documentation
+## Requirements
+* [Node.js](http://nodejs.org)
+* [Docpad](https://github.com/bevry/docpad)
 
-http://geodata.npolar.no/documentation
+## Install
+
+1. [Install DocPad](https://github.com/bevry/docpad)
+
+2. Clone the project and run the server
+
+	``` bash
+	git clone git://github.com/npolar/geodata.npolar.no.git
+	cd geodata.npolar.no
+	npm install
+	docpad run
+	```
+
+3. [Open http://localhost:9778/](http://localhost:9778/)
+
+
 
