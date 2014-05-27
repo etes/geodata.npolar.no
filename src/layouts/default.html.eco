@@ -36,7 +36,7 @@
 	<!-- Styles -->
 	<%- @getBlock('styles').add(@site.styles).toHTML() %>
 </head>
-<body data-spy="scroll">
+<body onload="prettyPrint();">
 	<!-- Menu -->
 	<div class="banner row-fluid">
 
@@ -73,7 +73,7 @@
 				<!-- Render feedback partial -->
 				<ul class="nav navbar-nav pull-right">
 					<li class="pull-right">
-						<a href="mailto:data@npolar.no"><span class="glyphicon glyphicon-envelope" title= "Feedback"></span> Feedback</a>
+						<a href="mailto:data@npolar.no"><span class="glyphicon glyphicon-envelope" title= "Contact Us"></span></a>
 					</li>
 				</ul>
 

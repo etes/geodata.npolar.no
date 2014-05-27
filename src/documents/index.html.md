@@ -1,4 +1,4 @@
----
+```
 title: 'Home'
 layout: default
 sections:
@@ -13,20 +13,20 @@ labels:
     basemaps: 'Basemaps'
     thematic-map-services: 'Thematic Map Services'
     terms-of-use: 'Terms of Use'
----
+```
 
 Norwegian Polar Institute Maps and Services
--------------------------------------------
+==========================================
 
-
+<br/>
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
+            <ul class="carousel-indicators">
                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                 <li data-target="#myCarousel" data-slide-to="1" class></li>
                 <li data-target="#myCarousel" data-slide-to="2" class></li>
                 <li data-target="#myCarousel" data-slide-to="3" class></li>
                 <li data-target="#myCarousel" data-slide-to="4" class></li>
-            </ol>
+            </ul>
             <div class="carousel-inner">
                 <div class="item active">
                     <a class="block" id="mapItem0" href="http://svalbardkartet.npolar.no" target="_blank"><img src="/public/images/svalbardkartet_thumbnail.png" alt=""></a>
@@ -113,6 +113,7 @@ applications with those basemaps.
 | [NP_Basiskart_JanMayen_WMTS_25829](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_JanMayen_WMTS_25829/MapServer?f=jsapi) | Jan Mayen topography | ETRS 89 UTM 29 (EPSG:25829) | [ArcGIS Rest](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_JanMayen_WMTS_25829/MapServer) | [WMTS](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_JanMayen_WMTS_25829/MapServer/WMTS/1.0.0/WMTSCapabilities.xml); [WMS](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_JanMayen_WMTS_25829/MapServer/WMSServer?request=GetCapabilities&service=WMS) |
 | [NP_Basiskart_JanMayen_WMTS_25833](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_JanMayen_WMTS_25833/MapServer?f=jsapi)| Jan Mayen topography | ETRS 89 UTM 33 (EPSG:25833) | [ArcGIS Rest](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_JanMayen_WMTS_25833/MapServer) | [WMTS](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_JanMayen_WMTS_25833/MapServer/WMTS/1.0.0/WMTSCapabilities.xml); [WMS](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_JanMayen_WMTS_25833/MapServer/WMSServer?request=GetCapabilities&service=WMS) |
 
+
 #### Zoom levels and scales
 
 To easily combine cache from different services in the same map window,
@@ -125,8 +126,8 @@ The table shows the zoom level used when creating cache at Norwegian
 Polar Institute which is similar to Norwegian Mapping Authority's [cache
 standard](http://www.kartverket.no/Kart/Kartverksted/Visningstjenester/Cache-tjenester/).
 
-#### Overview of zoom levels, scales and resolution
 
+#### Overview of zoom levels, scales and resolution
 
 |Zoom Level|Scale|Resolution|
 |----------|-----|----------|
@@ -156,6 +157,8 @@ Services are available in two image formats:
 Tile size for jpeg is about 1/3 of the png so it must be considered what
 is important, speed or support for transparency. The image tiles have a
 resolution of 96 dpi with a size of (256x256 pixels).
+
+------------------------
 
 ## Thematic Map Services
 
@@ -192,7 +195,9 @@ with many options, such as:
 -   Obtaining basic information about objects on the map from attributes
     (feature info) etc
 
-Checkout also the list of map services available on NPI's **[map services directory](http://geodata.npolar.no/arcgis/rest/services/inspire3)**.
+All services are published on NPI's **[map services directory](http://geodata.npolar.no/arcgis/rest/services/inspire3)**.
+
+------------------------
 
 ## Terms of Use
 

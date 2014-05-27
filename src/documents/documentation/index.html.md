@@ -22,7 +22,7 @@ labels:
 ```
 
 Norwegian Polar Institute Maps API - Javascript
-----------------------------------------------
+===============================================
 
 
 ### Getting Started
