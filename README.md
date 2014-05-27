@@ -1,5 +1,4 @@
 # Norwegian Polar Spatial Data and Services
-========================
 
 Source code for http://geodata.npolar.no, built with [Docpad](https://github.com/bevry/docpad). [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/npolar/geodata.npolar.no)
 
@@ -11,14 +10,14 @@ This is the repository for building the main page of Norwegian Polar Spatial Dat
 
 ## Install
 
-1. [Install DocPad](https://github.com/bevry/docpad)
+1. [Install DocPad](http://docpad.org/docs/install)
 
 2. Clone the project and run the server
 
 	``` bash
 	git clone git://github.com/npolar/geodata.npolar.no.git
 	cd geodata.npolar.no
-	npm install
+	npm install #install project dependencies
 	docpad run
 	```
 
