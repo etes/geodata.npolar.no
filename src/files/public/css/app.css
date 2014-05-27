@@ -1,0 +1,343 @@
+html, body{
+  height: 100%;
+}
+
+/*
+.wrap {
+  min-height: 100%;
+}
+
+.main {
+  overflow: auto;
+}
+*/
+
+/* Header */
+
+.layout-header {
+  width: 100%;
+  border-width: 1px;
+  top: 50px;
+  margin-bottom: 20px auto;
+  vertical-align: middle;
+  background-color: #EEEEEE;
+  border-color: #E5E5E5;
+  border-style: solid;
+  border-bottom-width: 2px;
+  /*position: fixed;*/
+}
+
+/* Footer Style */
+
+/*
+.footer {
+  position: relative;
+  margin-top: -300px;
+  height: 150px;
+  clear: both;
+  padding-top: 20px;
+}
+*/
+
+.footer-block {
+  float: left;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.footer-block-right {
+  float: right;
+}
+
+/* Navigation */
+
+.main-menu {
+  position: fixed;
+}
+
+
+.sidebar-nav-fixed {
+     position:fixed;
+     min-width:180px;
+ }
+
+ @media (max-width: 767px) {
+     .sidebar-nav-fixed {
+         position:static;
+         width:auto;
+     }
+ }
+
+ @media (max-width: 979px) {
+     .sidebar-nav-fixed {
+        width: auto;
+     }
+ }
+
+/* Search */
+
+.global-search {
+  padding-top: 25px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.global-search input {  
+  width: 60%;
+}
+
+/* Inputs */
+
+.input-xlarge {
+  width: 80%;
+}
+
+/* TextArea */
+
+/* padding for in-page bookmarks and fixed navbar */
+section {
+  padding-top: 30px;
+}
+
+textarea {
+  width: 80%;
+  height: 100px;
+}
+
+/* Selects */
+
+.edit-select {
+  width: 40%;
+}
+
+/* Tables */
+
+.table-borderless td {
+  border: hidden;
+}
+
+td{
+	font-size: 12px;
+}
+
+/* Make tables spaced out a bit more */
+h2 + table,
+h3 + table,
+h4 + table,
+h2 + .row {
+  margin-top: 5px;
+}
+/*Codes*/
+#strongCode {
+font-weight: bold;
+color: rgb(14, 61, 247); 	
+}
+
+/*Esri zoom silder*/
+.esriSimpleSlider {
+	top: 5px;
+	left: 8px;
+	border: none !important;
+	background-color: transparent !important;
+	color: white !important;
+	box-shadow: none !important;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+}
+
+.esriSimpleSlider div {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	width: 26px;
+	height: 26px;
+	font-size: 18px;
+}
+	.esriSimpleSliderVertical .esriSimpleSliderIncrementButton,
+	.esriSimpleSliderVertical .esriSimpleSliderDecrementButton {
+	background: #858585;
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzVkYWRkZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMTdiYzIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top, #858585 0%, #242424 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #858585), color-stop(100%, #242424));
+	background: -webkit-linear-gradient(top, #858585 0%, #242424 100%);
+	background: -o-linear-gradient(top, #858585 0%, #242424 100%);
+	background: -ms-linear-gradient(top, #858585 0%, #242424 100%);
+	background: linear-gradient(top, #858585 0%, #242424 100%);	
+	border: solid 1px #545454;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	box-shadow: 0 0 0.25em #BBB;
+}
+
+/* YUI autocomplete */
+
+.yui3-aclist-list {
+  text-align: left;
+}
+
+.yui3-skin-sam .yui3-aclist-content {
+  border-radius: 10px;
+}
+
+.yui3-skin-sam .yui3-aclist-item-active {
+  border-radius: 10px;
+}
+
+.yui3-skin-sam .yui3-aclist-item-hover {
+  border-radius: 10px;
+}
+
+/* Page Logo */
+
+.page-logo {  
+  text-align: center;
+  padding: 10px;
+  min-width: 150px;
+}
+
+/* Front Page Carousel */
+
+#frontpageCarousel{
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: solid;
+  border-width: 1px;
+  padding: 0px;
+  z-index: -10;
+}
+
+/* Icons */
+
+i[class^="icon-"] {
+  opacity: .25;
+}
+
+/* Anchor padding fix */
+
+.tab-pane:before{
+  display: block; 
+  content: " "; 
+  margin-top: -250px; 
+  height: 250px; 
+  visibility: hidden; 
+}
+
+/* Responsive Design */
+
+@media (max-width: 979px) {
+  
+  body{
+    padding-top: 0px;
+  }
+  
+  .global-search {
+    margin-top: 60px;
+  }
+  
+  .navbar .span2 {
+    display: none;
+  }
+
+  .layout-header {
+    position: relative;
+    top: -20px;
+    background-color: transparent;
+    border: none;
+  }
+  
+  .global-search {
+    margin-top: 0px;    
+  }
+  
+  .footer {
+    position: relative;
+    margin-top: -60px;
+    height: 150px;
+    clear: both;
+    padding-top: 20px;
+  }
+  
+  .navbar-fixed-top .navbar-inner, .navbar-fixed-bottom .navbar-inner { 
+    padding: 0px;
+  }
+}
+
+@media (min-width: 979px) {
+  body {
+    padding-top: 50px;
+  }
+}
+
+/*-------------------------------------------------- */
+/* MAPS LIST */
+/*-------------------------------------------------- */
+.mapsList {
+	margin:20px 0;
+	list-style:none;
+	padding:0;
+}
+.mapsList .item {
+	background:#fff;
+	margin-bottom:10px;
+	padding:3px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: 0px 0px 6px #ccc;
+	-webkit-box-shadow: 0px 0px 6px #ccc;
+	box-shadow: 0px 0px 6px #ccc;
+}
+.mapsList .item .block {
+	display:block;
+}
+.mapsList .item {
+	height:180px;
+	width: 98%;
+}
+.mapsList .item a {
+	display:inline-block;
+	border:0;
+	outline:0;
+	color:#404040;
+	text-decoration:none;
+}
+.mapsList .item a:hover {
+	color:#999;
+	text-decoration:none;
+}
+#featuredMaps .mapsList .item p {
+	margin:0 0 5px 0;
+	font-size: 12px;
+}
+.mapsList .item .title {
+	padding:5px 0;
+}
+.mapsList .item .viewMap .arrow {
+	width:11px;
+	height:11px;
+	display:inline-block;
+	margin-left:5px;
+	background:url(../img/uiSprite.png) no-repeat -36px -0px;
+	_background:url(../img/uiSprite.gif) no-repeat -36px -0px;
+}
+.mapsList .item img {
+	width:260px;
+	height:180px;
+	overflow:hidden;
+	opacity:0.75;
+	zoom: 1;
+	background:url(../img/ajax-loader.gif) no-repeat center center;
+	filter:alpha(opacity=75);
+	float:left;
+	margin-right:10px;
+}
+.mapsList img:hover {
+	zoom: 1;
+	opacity:1;
+	filter:alpha(opacity=100);
+	-webkit-transition:opacity 0.5s ease-in;
+	-moz-transition:opacity 0.5s ease-in;
+	-o-transition:opacity 0.5s ease-in;
+	transition:opacity 0.5s ease-in;
+}

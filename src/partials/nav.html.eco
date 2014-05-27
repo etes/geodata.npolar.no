@@ -1,8 +1,8 @@
 <div class="col-md-3">
-				<div class="bs-sidebar hidden-print affix" role="complimentary">
+				<div class="bs-docs-sidebar hidden-print affix-top" role="complimentary">
 				<!--<div class="bs-sidebar hidden-print affix well" role="complimentary">
 					<ul class="nav nav-tabs nav-stacked sidebar-nav-fixed">-->
-					<ul class="nav bs-sidenav">
+					<ul class="nav bs-docs-sidenav">
 					<% for section in @document.sections : %>
 						<li
 							typeof="sioc:Page"
