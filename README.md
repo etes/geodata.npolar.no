@@ -21,7 +21,7 @@ This is the repository for building the main page of Norwegian Polar Spatial Dat
 	docpad run
 	```
 
-3. [Open http://localhost:9778/](http://localhost:9778/)
+3. Open [http://localhost:9778/](http://localhost:9778/)
 
 
 
