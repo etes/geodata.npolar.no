@@ -12,7 +12,7 @@ html, body {
 }
 .header {
     background: url("../images/linen.jpg") repeat-x scroll left top transparent;
-    height: 70px;
+    height: 60px;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -20,17 +20,20 @@ html, body {
 
 .header .headerLogo {
     float: left;
-    left: 10px;
+    left: 20px;
     position: relative;
-    top: 8px;
+    top: 0px;
 }
-
+#nplogo {
+	left: 0px;
+	z-index: 999;
+}
 .header .headerTitle {
-    color: #FFFFFF;
+    color: #000000;
     float: left;
     font-size: 12pt;
     font-weight: bold;
-    left: 20px;
+    left: 40px;
     top: 15px;
     position: relative;
 }
@@ -100,9 +103,18 @@ html, body {
 .ui-autocomplete-loading {
     background: white url('http://jqueryui.com/resources/demos/autocomplete/images/ui-anim_basic_16x16.gif') right center no-repeat;
 }
+
+#content {
+	position: absolute;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	margin: 0;
+}
 #rightPane {
 	width: 200px;
-	overflow: auto
+	overflow: auto;
 }
 
 #showhide {
@@ -193,7 +205,7 @@ html, body {
 	background-color: rgba(240,240,240,0.9) !important;
 }
 #point-identify {
-	background-image: url(../images/info_25x30.png);	
+	background-image: url(../images/info-icon.png);	
 }
 #drawPoint {
 	background-image: url(../images/dot-16.png);	
@@ -220,12 +232,7 @@ html, body {
 form {
 	margin: 0 0 5px;
 }
-#nplogo {
-	position: absolute;
-	bottom: 10px;
-	left: 0px;
-	z-index: 80;
-}
+
 #backgroundbottom {
 	position: absolute;
 	background-color: rgba(255,255,255,0.8);
