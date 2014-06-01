@@ -1,5 +1,8 @@
 #!/bin/sh
 
+set -o nounset
+set -o errexit
+
 DIR=~/backup/psql
 [ ! $DIR ] && mkdir -p $DIR || :
 LIST=$(psql -l | awk '{ print $1}' | grep -vE '^-|^List|^Name|template[0|1]')
