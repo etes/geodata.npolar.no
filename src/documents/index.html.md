@@ -2,14 +2,14 @@
 title: 'Home'
 layout: default
 sections:
-    - 'carousel'
+    - 'viewers'
     - 'basemaps'
     - 'thematic-map-services'
     - 'terms-of-use'
 
 
 labels:
-    carousel: 'Map Viewers'
+    viewers: 'Map Viewers'
     basemaps: 'Basemaps'
     thematic-map-services: 'Thematic Map Services'
     terms-of-use: 'Terms of Use'
@@ -19,13 +19,13 @@ Norwegian Polar Institute Maps and Services
 ==========================================
 
 <br/>
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
+<div id="viewers" class="carousel slide" data-ride="carousel">
             <ul class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1" class></li>
-                <li data-target="#myCarousel" data-slide-to="2" class></li>
-                <li data-target="#myCarousel" data-slide-to="3" class></li>
-                <li data-target="#myCarousel" data-slide-to="4" class></li>
+                <li data-target="#viewers" data-slide-to="0" class="active"></li>
+                <li data-target="#viewers" data-slide-to="1" class></li>
+                <li data-target="#viewers" data-slide-to="2" class></li>
+                <li data-target="#viewers" data-slide-to="3" class></li>
+                <li data-target="#viewers" data-slide-to="4" class></li>
             </ul>
             <div class="carousel-inner">
                 <div class="item active">
@@ -85,8 +85,8 @@ Norwegian Polar Institute Maps and Services
                     </div>
                 </div>
             </div>
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev"><!--&lsaquo;--></a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next"><!--&rsaquo;--></a>
+            <a class="left carousel-control" href="#viewers" data-slide="prev"><!--&lsaquo;--></a>
+            <a class="right carousel-control" href="#viewers" data-slide="next"><!--&rsaquo;--></a>
 </div>
 
 
@@ -207,9 +207,9 @@ use](http://geodata.npolar.no/bruksvilkar).
 * * * * *
 
 **Norwegian Polar Data**
- 
+
  Norwegian Polar Institute
- 
+
  9296 Tromsø
- 
+
  Norway
