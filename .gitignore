@@ -47,6 +47,7 @@ coverage.xml
 .mr.developer.cfg
 .project
 .pydevproject
+.settings
 
 # Rope
 .ropeproject
