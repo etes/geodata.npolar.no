@@ -2,15 +2,15 @@
  * A JavaScript library for interactive maps of Norwegian Polar Institute. Based on Proj4js library and Esri Javascript API
 
  * @requires proj4js-compressed.js
- * @requires ArcGIS API for Javascript http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.4
+ * @requires ArcGIS API for Javascript
  */
 
 // Create projection definition of UTM33
 //Proj4js.defs["EPSG:4326"] = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs";
-Proj4js.defs["EPSG:32633"] = "+proj=utm +zone=33 +ellps=WGS84 +datum=WGS84 +units=m +no_defs";
+Proj4js.defs["EPSG:25833"] = "+proj=utm +zone=33 +ellps=GRS80 +units=m +no_defs";
 
 var wgs84 = new Proj4js.Proj('EPSG:4326');
-var utm33 = new Proj4js.Proj('EPSG:32633');
+var utm33 = new Proj4js.Proj('EPSG:25833');
 var position, graphic;
 // transform placename coordinates from wgs84 to utm 33
 function WGS84ToUTM33(event) {

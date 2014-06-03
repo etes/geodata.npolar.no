@@ -79,11 +79,11 @@ a map of Svalbard centered around Longyearbyen:
         "ymin":8663685.98,
         "xmax":553624.05,
         "ymax":8714486.09,
-        "spatialReference":{"wkid":32633}
+        "spatialReference":{"wkid":25833}
         });
     // create map instance and add a basemap
     map = new esri.Map("map", {extent: initialExtent, logo : false});
-    basemapURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer"
+    basemapURL = "http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_Svalbard_WMTS_25833/MapServer"
     map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));
     }
 
@@ -127,7 +127,7 @@ application:
     function initialize() {
         // create map instance and add a basemap
         var map = new esri.Map("map");
-        basemapURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer"
+        basemapURL = "http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_Svalbard_WMTS_25833/MapServerin"
         map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));
         }
 
@@ -136,7 +136,7 @@ application:
 ```
 
 
-   Add a topographic basemap of Svalbard to the map by providing the cached [map service REST URI](http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer).
+   Add a topographic basemap of Svalbard to the map by providing the cached [map service REST URI](http://geodata.npolar.no/ArcGIS/rest/services/Basisdata/NP_Basiskart_Svalbard_WMTS_25833/MapServer).
 
    Finally, instruct the API to only execute the `initialize()` function after dependencies are fully loaded and the DOM is read, by passing `dojo.ready()`.
 
@@ -162,7 +162,7 @@ in JSON.
         "Ymin": 8663685.98,
         "Xmax": 553624.05,
         "Ymax": 8714486.09,
-        "spatialReference": {"wkid":32633}
+        "spatialReference": {"wkid":25833}
         });
     // create map instance and add a basemap
     var map = new esri.Map("map" {extent: initialExtent});
@@ -315,7 +315,7 @@ geometry in this sample are in UTM33.
     function initialize() {
         // create map instance and add a basemap
         var map = new esri.Map("map", {logo : false});
-        basemapURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer"
+        basemapURL = "http://geodata.npolar.no/ArcGIS/rest/services/Basisdata/NP_Basiskart_Svalbard_WMTS_25833/MapServer"
         map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));
         
         dojo.connect(map, 'onLoad', function() {
@@ -441,12 +441,12 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
 
     function initialize() {
     	
-      	var initialExtent = new esri.geometry.Extent({"xmin": 477423.89,"ymin":8663685.98,"xmax":553624.05,"ymax":8714486.09,"spatialReference":{"wkid":32633}});
+      	var initialExtent = new esri.geometry.Extent({"xmin": 477423.89,"ymin":8663685.98,"xmax":553624.05,"ymax":8714486.09,"spatialReference":{"wkid":25833}});
       	// create map instance and add a basemap
       	// Geocoding Service (Search placename map)
         map = new esri.Map("map", {extent: initialExtent, logo : false});
         
-        basemapURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer"
+        basemapURL = "http://geodata.npolar.no/ArcGIS/rest/services/Basisdata/NP_Basiskart_Svalbard_WMTS_25833/MapServer"
 		map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));
 
         //add marker for place names search result to map
@@ -464,7 +464,7 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
         
         dojo.connect(map2, 'onLoad', function() {       	
         	var symbol = new esri.symbol.SimpleMarkerSymbol().setColor(new dojo.Color([255, 0, 0]));
-        	var graphic = new esri.Graphic(new esri.geometry.Point(514589.2466, 8682916.3628,{"wkid":32633}), symbol);
+        	var graphic = new esri.Graphic(new esri.geometry.Point(514589.2466, 8682916.3628,{"wkid":25833}), symbol);
         	map2.graphics.add(graphic);
         	});
        //Drawing tool map
