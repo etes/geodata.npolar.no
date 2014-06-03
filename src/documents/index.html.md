@@ -91,11 +91,9 @@ Norwegian Polar Institute Maps and Services
 
 
 ## Basemaps
-Norwegian Polar Institute provides access to a wide range of basemap and
-thematic map services for the Norwegian polar regions which can be
-consumed to create interactive web mapping applications.
 
-NPI offers a selection of basemap services that are cached services.
+Norwegian Polar Institute offers a selection of cached basemap services which can be
+consumed to create interactive web mapping applications.
 [Tiled (cached) map
 service](http://webhelp.esri.com/arcgisserver/9.2/dotnet/manager/publishing/static_map_svcs.htm)
 is a regular map service that has been predrawn by the server at defined
@@ -162,7 +160,7 @@ resolution of 96 dpi with a size of (256x256 pixels).
 
 ## Thematic Map Services
 
-Polar institute delivers a wealth of thematic maps as dynamic map
+NPI delivers a wealth of thematic maps as dynamic map
 services. Dynamic map service is a service where a server request to
 send map section in the form of raster files back to the user, either
 directly in the browser, a web application or a desktop application.
