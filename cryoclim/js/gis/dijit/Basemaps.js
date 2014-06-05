@@ -63,7 +63,7 @@ define([
                 id: "lightGray",
                 layers: [new BasemapLayer({
                     url: "http://geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Nordomraadene_WMTS_25833/MapServer",
-					showAttribution: false
+					showAttribution: true
                 })]
             })
         }
