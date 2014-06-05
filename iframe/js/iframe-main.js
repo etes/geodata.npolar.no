@@ -17,7 +17,7 @@ var mapletUrl = root + "/iframe/embed.html";
 // Relative path to Iframe page, should be absolute path when deployed, for example http://svalbardkartet.npolar.no/iframe.html
 var previewURL = 'preview.html';
 // Relative path, should be absolute path when deployed.
-var basemapServiceUrl = 'http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer';
+var basemapServiceUrl = 'http://geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Nordomraadene_WMTS_25833/MapServer';
 var dynamicServiceUrl = 'http://geodata.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer';
 var geometryServiceUrl = 'http://geodata.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer';
 var isTiledMap = true;
@@ -50,7 +50,7 @@ function init() {
 		"xmax" : 886026.044,
 		"ymax" : 8989694.055,
 		"spatialReference" : {
-			"wkid" : 32633
+			"wkid" : 25833
 		}
 	});
 	map = new esri.Map("map", {
@@ -294,7 +294,7 @@ function generateCode() {
 		}
 	}
 
-	var code = dojo.string.substitute('<iframe scrolling="no" src="${url}?&width=${width}&height=${height}&extent=${extent}&wkid=32633${point}${circle}${line}${rectangle}${text}${overlay}&t=${tiled}&n=${nav}&opValue=${opValue}" frameborder=0 width="${width}" height="${height}"></iframe>', {
+	var code = dojo.string.substitute('<iframe scrolling="no" src="${url}?&width=${width}&height=${height}&extent=${extent}&wkid=25833${point}${circle}${line}${rectangle}${text}${overlay}&t=${tiled}&n=${nav}&opValue=${opValue}" frameborder=0 width="${width}" height="${height}"></iframe>', {
 		url : mapletUrl,
 		//sc : dojo.byId('chkSC').checked ? "sc=0&" : "",
 		extent : Math.round(map.extent.xmin) + "," + Math.round(map.extent.ymin) + "," + Math.round(map.extent.xmax) + "," + Math.round(map.extent.ymax),
@@ -619,10 +619,10 @@ dojo.ready(init);
 // PLACENAMES SEARCH
 // Create projection definitions
 //Proj4js.defs["EPSG:4326"] = "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs";
-Proj4js.defs["EPSG:32633"] = "+proj=utm +zone=33 +ellps=WGS84 +datum=WGS84 +units=m +no_defs";
+Proj4js.defs["EPSG:25833"] = "+proj=utm +zone=33 +ellps=GRS80 +units=m +no_defs";
 
 var wgs84 = new Proj4js.Proj('EPSG:4326');
-var utm33 = new Proj4js.Proj('EPSG:32633');
+var utm33 = new Proj4js.Proj('EPSG:25833');
 var position, graphic;
 // transform placename coordinates from wgs84 to utm 33
 function WGS84ToUTM33(event) {
