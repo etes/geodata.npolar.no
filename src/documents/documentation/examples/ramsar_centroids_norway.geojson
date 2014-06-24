@@ -1,0 +1,956 @@
+{
+    "type": "FeatureCollection",
+    "crs": {
+        "type": "name",
+        "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+    },
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "13, Åkersvika",
+                "Description": "<b>3NO001</b><br> country: Norway<br> coordinates: 60°48'00^N 011°07'00^E<br> <hr> Åkersvika. 09/07/74; Hedmark; 424 ha; 60°50'N 011°08'E. Nature Reserve. A freshwater embayment of an artificially regulated lake and lower river reaches. Principal habitats are open water, exposed mudflats, wet grassland, and Alnus/Salix scrub, with shoreline vegetation dominated by moss. The site harbors numerous nationally red-listed species of flora and fauna. It is an important feeding and resting area for migratory waterbirds and a total of 218 bird species has been recorded. The site also offers habitat to various fish, bat and invertebrate species. It is important for sediment trapping and flood control, and human activities include recreation and environmental education. The site is surrounded by urban, industrial and agricultural land and crossed by roads and railway lines. Highway expansion plans threaten the site. Subject of Ramsar Advisory Missions in 1989 and 2010. Ramsar site no. 13. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO001\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_13/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.1166666667,
+                    60.8,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "2155, Anda",
+                "Description": "<b>3NO053</b><br> country: Norway<br> coordinates: 69°04'00^N 15°10'00^E<br> <hr> Anda. 27/05/2013; Nordland; 53 ha; 69°04’N 015°10’E. Nature Reserve, Important Bird Area. A small rocky island situated on the underwater plateau in the northward extension of Øksnes peninsula. At higher altitudes the island is covered by a thin layer of peat and guano spread by seabirds, thus creating favourable conditions for vegetation growth. The site constitutes one of the few bird mountains for pelagic seabirds in Norway, and it is an important breeding ground for Atlantic puffin Fratercula arctica, Black-legged kittiwake Rissa tridactyla and Black Guillemot Cepphus grylle. These bird colonies feed on local populations of Lesser Sand Eel Ammodytes marinus in the Andfjorden fjord. Within the nature reserve, collecting eggs from some gull species such as Larus argentatus, Larus marinus and Larus canus is permitted. During the nesting season the island is closed to tourism. Potential threats to the site’s ecological character are overfishing and invasive species such as mink. Ramsar site no. 2155. Most recent RIS information: 2013.  <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO053\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    15.166666666667,
+                    69.066666666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1955, Atnsjømyrene",
+                "Description": "<b>3NO044</b><br> country: Norway<br> coordinates: 61°55'00^N 10°02'00^E<br> <hr> Atnsjømyrene. 12/11/2010; Folldal and Stor-Elvdal municipalities, Hedmark County and Sør-Fron municipality, Oppland County. 550 ha; 61°55´N 010°02´E; Nature Reserve. Atnsjømyrene is a large mire-complex dominated by flat fens, which also includes pools, ponds and parts of the lake Atnsjøen. Characteristic for the site is the nutrient-poor vegetation. Willow Salix and Birch Betula forests are common vegetation types along watercourses and edges of mires. The mixture of different wetland types makes the site a valuable breeding area for water birds, especially for ducks and waders, including Common Teal Anas crecca, Common Goldeneye Bucephala clangula, Common Snipe Gallinago gallinago, and Red-necked Phalarope Phalaropus lobatus. Yellow Wagtail Motacilla flava, Meadow Pipit Anthus pratensis and Reed Bunting Emberiza schoeniclus also breed on the large open mires. The mires act as important water reservoirs and offer flood protection during periods of snow melt and heavy precipitation. The site is used for hunting, sports fishing, berry picking and sheep grazing. Ramsar Site no. 1955. Most recent RIS information: 2011. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO044\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.0333333333,
+                    61.9166666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1186, Balsfjord Wetland System",
+                "Description": "<b>3NO024</b><br> country: Norway<br> coordinates: 69°21'00''N 019°03'00''E<br> <hr> Balsfjord Wetland System. 06/08/02; Troms; 1,915 ha; 69°21'N 019°03'E. Nature Reserves. Comprises two large marine tidal areas in the inner part of the fjord, which at low tide reveal large areas of mud- and sandflats. Wet meadows fringe the areas between the areas of the Ramsar site and the cultivated areas outside it, and gallery forests outline the site in some areas. Several rivers and streams discharge into the fjord through the tidal flats. The site is one of only two in northern Norway for large numbers of spring migrant Knots Calidris canutus islandica; both the Knot and the Slavonian Grebe are present in internationally important numbers. Some grazing and gravel digging is practiced by local people, but the site enjoys low traffic and little human impact. Ramsar site no. 1186. Most recent RIS information: 2002. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO024\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_1186/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    19.05,
+                    69.35,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1966, Bear Island (Bjørnøya)",
+                "Description": "<b>3NO049</b><br> country: Norway<br> coordinates: 74°25'45^N 19°01'06^E<br> <hr> Bear Island (Bjørnøya). 12/11/2010; 298,300 ha (280,500 ha of sea). 74°25'N 019°2'E. Nature Reserve. An isolated island situated between the Svalbard archipelago and the Norwegian mainland; approx. 250 km from Svalbard and 450 km from the mainland. While the Northern and Western parts are covered with lakes and small ponds, covering 10% of the area of the island, the South and East are dominated by tall mountain formations partly with steep cliffs. High primary production makes this site an important foraging area. 126 different species of birds have been observed on the island, of which 33 breed here, including species listed on the Norwegian (Svalbard) Red List such as Common Guillemot Uria aalge (VU) and Razorbill Alca torda (EN). The seabird colonies in the southern parts of Bjørnøya are among the largest in the Northern Hemisphere. It is estimated that over one million seabirds gather here during the breeding season. The site fulfills the 1% criterion for Black-legged kittiwake Rissa tridactyla with approx. 125,000 breeding pairs. It is also an important resting and foraging site for migrating birds such as Pink-footed geese Anser branchyrhynchus, Barnacle geese Branta leucopsis and Brent geese Branta bernicla hrota. The marine area surrounding Bjørnøya is important as nursery ground for e.g. cod, haddock and Greenland halibut. In total there are 24 fish species and most of the Arctic whale and seal species have been observed. Bjørnøya is included in The National Monitoring Programme for Seabirds and there is a weather station of the Meteorological Institute on the island. A Management Plan has been provided to the Secretariat. Ramsar Site no. 1966. Most recent RIS information: 2011. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO049\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    19.0183333333,
+                    74.4291666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1187, Bliksvaer",
+                "Description": "<b>3NO025</b><br> country: Norway<br> coordinates: 67°17'00^N 014°00'00^E<br> <hr> Bliksvær. 06/08/02; Nordland; 4,316 ha; 67°17'N 014°00'E. Nature Reserve. A complex of 8 separate areas along the northwestern coast, comprising numerous skerries and islets and a larger island, with shallow marine waters, rocky shores, and some sandy beaches. Wet meadows, dunes and dune slacks, as well as brackish marshes, are typical for the biogeographic region. The site is a breeding area for a number of seabird species, two pairs of White-tailed Eagle (Haliaetus albicilla) as well as Harbour Porpoise Phoca vitulina. It is also a wintering area for Great Northern Diver or Loon Gavia immer and White-billed Diver Gavia adamsii. Human uses include recreational activities, fishing and sheep grazing. The abandonment of traditional practices threatens the ecological character of the site, but plans exist to revive the traditional exploitation of breeding Common Eider Somateria mollissima for down and egg collection. (The site was extended from 4,000 ha in 2012.) Ramsar Site no. 1187. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO025\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_1187/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    14,
+                    67.2833333333,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1188, Dokkadelta",
+                "Description": "<b>3NO026</b><br> country: Norway<br> coordinates: 60°48'00^N 010°08'00^E<br> <hr> Dokkadelta. 06/08/02; Oppland; 375 ha; 60°48'N 010°08'E. Nature Reserve. The second largest inland delta in southern Norway, where the rivers Etna and Dokka flow into lake Randsfjorden, including large shallow areas, mud banks, numerous channels, bogs, meadows and islets dominated by shrubs and alder/shrub gallery forest. As one of the few unspoilt estuaries remaining in the region, the site is highly important for biodiversity preservation, supporting numerous nationally red-listed species and a rich invertebrate fauna. It also has an important function as a staging area for several migratory bird species and as a spawning site for many species of fish. The site is valuable in terms of sediment trapping, nutrient fixing and flood control. The regulation of Dokka river and Randsfjorden lake for hydropower production negatively affects the site by reducing water transport through the delta by 50 %. The site is used for birdwatching, fishing and conservation education. The construction of a wetland center is planned. Ramsar Site no. 1188. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO026\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_1188/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.1333333333,
+                    60.8,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "314, Dunoyane",
+                "Description": "<b>3NO011</b><br> country: Norway<br> coordinates: 77°04'00^N 015°00'00^E<br> <hr> Dunøyane. 24/07/85; 1,191 ha; 77º04'N 015º00'E. Nature Reserve, National Park. Three islands covered with rich arctic vegetation, several freshwater ponds, and a number of barren and rocky skerries (small, rocky islets). The surrounding sea area is shallow and nutrient rich. The site is one of Spitsbergen's most important breeding and molting grounds for Barnacle Goose Branta leucopsis and Common Eider Somateria mollissima and supports several other species of breeding waterbirds such as Glacous Gull Larus hyperboreus. The Polar Bear Ursus maritimus regularly visits the site. Some research and biodiversity monitoring has been conducted in the area. Ramsar Site no. 314. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO011\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    15,
+                    77.0666666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1949, Evenes wetland system",
+                "Description": "<b>3NO038</b><br> country: Norway<br> coordinates: 68°30'00^N 16°42'00^E<br> <hr> Evenes wetland system. 12/11/2010; Skånland municipality, Troms County and Evenes municipality, Nordland County. 434 ha; 68°30'N 016°42'E. Nature Reserves. The site includes the sub-sites of Nautå, Sommervatnet, Kjerkvatnet, Tennvatn, Myrvatn. The wetland system is considered to be one of the few naturally rich nutrient systems in the northernmost parts of the world. It mainly includes bogs, lakes, ponds, rivers, forests, agricultural land as well as some coastal habitats. The site supports nationally threatened plant species such as Opposite Stonewort Chara contraria (VU), Sheathed Pondweed Stuckenia (Potamogeton) vaginata (VU), Water Starwort Callitriche hermaphroditica (VU) and Rugged Stonewort Chara rudis (EN). It is also breeding site for Garganey Anas querquedula (EN), Greater Scaup Aythya marila (VU) and Smew Mergus albellus (VU). In addition, it is an important staging, feeding and moulting site for several species of migratory birds. A dense population of the internationally threatened Pearl Mussel Margaritifera margartifera (VU; IUCN Red List) is also found here. The water system delivers drinking water to approximately 3,000 people and the mires are an important carbon reservoir. The area is used for different outdoor activities like hiking, canoeing, bird watching, hunting and sports fishing. Potential threats to the ecosystem include drainage as well as eutrophication and pollution caused by runoff from the surrounding agricultural areas and Evenes Airport. Ramsar Site no. 1949. Most recent RIS information: 2011. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO038\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    16.7,
+                    68.5,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "2156, Fiskumvannet Nature Reserve",
+                "Description": "<b>3NO054</b><br> country: Norway<br> coordinates: 59°42'30^N 09°49'11^E<br> <hr> Fiskumvannet Nature Reserve. 27/05/2013. Buskerud; 119 ha; 59°42’30”N 009°49’11”E. Nature Reserve. Fiskumvannet is a representative agricultural landscape lake below sea level, the western part of which, with the adjacent land areas, is protected as a nature reserve. The vegetation belt and swamp areas constitute excellent breeding sites for a number of vulnerable, endangered and critically endangered species listed on the Norwegian Red List (2010), such as Garganey Anas querquedula, Greater Scaup Aythya marila, and Smew Mergellus albellus. More than 1 % of the Svalbard population of Pink-footed Goose Anser brachyrhynchus rests regularly at the site during migration. The main hydrological values of the site are sediment trapping and shoreline stabilization. Throughout the years, cessation of mowing and grazing in combination with ditching and fertilization from the surrounding areas has resulted in high water eutrophication and vegetational succession. The site is used for bird watching tourism, environmental education, and transport. The management plan for the nature reserve has been updated in 2009. Ramsar Site no. 2156. Most recent RIS information: 2013. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO054\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.819722222222,
+                    59.708333333333,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1189, Fokstumyra",
+                "Description": "<b>3NO027</b><br> country: Norway<br> coordinates: 62°08'00^N 009°15'00^E<br> <hr> Fokstumyra. 06/08/02; Oppland; 1,799 ha; 62°08'N 009°15'E. Nature Reserve, Biogenetic Reserve (Council of Europe). Norway's first large protected area (1923). Comprising vast wet mires on flat ground and drier mires on slopes, divided by moraine ridges with mainly open upland birch forest and with some shallow nutrient-rich pools. The site offers breeding habitat to large populations of ducks, waders and raptors. It is probably the most important breeding site for Hen Harrier Circus cyaneus in Norway. Several threatened species of flora and fauna occur. The large mire areas are important water reservoirs, especially during droughts, and play a critical role in flood protection during periods of high precipitation and snow melt. The site is used for leisure activities such as walking, birdwatching and fishing. The planning of additional visitor facilities needs to be carried out carefully so as not to further increase the disturbance of breeding birds. (The site was extended from 785 ha in 2012.) Ramsar Site no. 1189. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO027\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_1189/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.25,
+                    62.1333333333,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "313, Forlandsoyane",
+                "Description": "<b>3NO010</b><br> country: Norway<br> coordinates: 78°20'00^N 011°36'00^E<br> <hr> Forlandsøyane. 24/07/85; 540 ha; 78º20'N 011º36'E. Bird Sanctuary, Nature Reserve, National Park, IBA. The site includes three islands and a number of skerries (small, rocky islets). One of the islands is completely bare, while the others are grass-covered with small ponds. The shorelines are formed by cliffs and sandy beaches. The surrounding sea is shallow and nutrient rich. The site supports breeding colonies of all three goose species nesting in Svalbard, along with various other species of breeding waterbirds as well as a population of Harbour Seal Phoca vitulina. The traditional collection of eider down is permitted occasionally. Ramsar Site no. 313. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO010\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.6,
+                    78.3333333333,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "809, Froan Nature Reserve and Landscape Protection Area",
+                "Description": "<b>3NO022</b><br> country: Norway<br> coordinates: 64°00'00''N 009°10'00''E<br> <hr> Froan Nature Reserve & Landscape Protection Area. 19/03/96; Sør-Trøndelag; 48,400 ha; 64°00'N 009°10'E. Nature Reserve, Landscape Protection Area. The extreme outermost coastal zone of shallow marine waters, hundreds of islands and skerries (small, rocky islets), beaches, bogs, and meadows. The large production of marine invertebrates and fish, combined with extensive seaweed beds, sustain a rich animal life. Internationally important numbers of seabirds breed at the site, and large numbers of migrating, molting, breeding and wintering waterbirds of numerous species occur. The site provides important habitat for half the Norwegian population of the seal Phoca vitulina. Human activities include nature conservation, fishing, grazing, and some boating activity. Ramsar site no. 809. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO022\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_809/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.166666666667,
+                    64,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "317, Gåsoyane",
+                "Description": "<b>3NO014</b><br> country: Norway<br> coordinates: 78°28'00^N 016°15'00^E<br> <hr> Gasøyane. 24/07/85; 236 ha; 78º28'N 016º15'E. Nature Reserve, National Park. Three small, partially vegetated islands with a few freshwater ponds and cliffs suitable for nesting seabirds. The area is important for several species of breeding waterbirds, especially Eider Somateria mollissima (800-900 pairs), due to the absence of Polar Fox Alopex lagopus. In the past, and sporadically still today, this site has been used for the collection of Eider eggs and down. Some research and biodiversity monitoring have been conducted in the area, but due to its remoteness the site is rarely visited. Ramsar site no. 317. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO014\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    16.25,
+                    78.4666666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "805, Giske Wetlands System",
+                "Description": "<b>3NO018</b><br> country: Norway<br> coordinates: 62°33'00^N 006°05'00^E<br> <hr> Giske Wetlands System. 19/03/96; Møre og Romsdal; 553 ha; 62º33'N 006º05'E. Nature Reserves, Bird Sanctuaries. Situated on two islands on the outermost part of the coast, the site consists of six subsites: Roaldsand, Rørvikvågen, Rørvikvatnet, Synesvågen, Giske and Blindheimsvik. The area is characterized by a flat landscape formed by glaciers and quarternary deposits. The system of shallow bays, extensive tidal seaweed zones, sand and mudflats, wet meadows, fossil shorelines, marshes and mires provide rich feeding areas for birds. The complex is an important area for high numbers of breeding, wintering and migrating waterbirds and waders, with several rare species occurring. Human activities include nature conservation, education, recreation, camping, hunting, airport activity, and livestock grazing. Some of these activities as well as changes in agricultural practices and fertilizer run-off have contributed to the decrease in the site's biological value during recent years. There is a bird observatory and Norway's oldest ringing station at the site. An information booklet is available. Ramsar site no. 805. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO018\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_805/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.08333333333,
+                    62.55,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1954, Glomådeltaet",
+                "Description": "<b>3NO043</b><br> country: Norway<br> coordinates: 66°25'00^N 13°56'00^E<br> <hr> Glomådeltaet. 12/11/2010; Rana municipality, Nordland county; 606 ha; 66°25'N 013°56'E. Landscape Protected Area. The site is among the most important and natural deltas in Norway with small lakes, mires, oxbow lakes, channels, newly developing sand islands and river courses. The vegetation in the area is diverse, from sandbanks with pioneer vegetation, sloughs with reed vegetation, wet and flooded alder forests, to deciduous and coniferous forests. There are also smaller areas with agricultural land inside the site. It is an important inland breeding site for waterbirds such as Spotted crake Porzana porzana (EN), Greater scaup Aythya marila (VU) and Water rail Rallus aquaticus (VU), which are listed as threatened on the Norwegian Red List. The site plays a key role for migrating birds, especially as staging area during spring migration. The numerous river branches are particularly important for ducks. The swamps and mires are most important for waders. All in all 150 bird species have been registered. About 20 species of mammals occur in the site, including Eurasian Otter Lutra lutra (VU) and Lynx Lynx lynx (VU). The area has a groundwater recharge function due to the abundance of caves and underground rivers. The site is used for recreation activities such as sports fishing, birdwatching, canoeing and hunting. Ramsar Site no. 1954. Most recent RIS information: 2011. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO043\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.9333333333,
+                    66.4166666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "2147, Grunnfjorden",
+                "Description": "<b>3NO052</b><br> country: Norway<br> coordinates: 068°57'00^N 15°012'00^E<br> <hr> Grunnfjorden. 27/05/2013; Nordland; 1,472 ha; 68°57’N 015°12’E. Nature Reserve. A complex of large mires dominated by Sphagnum spp with small rivers, pools and lakes, shallow beach areas with islets, skerries, large intertidal flats and a lagoon system with brackish water. Along the shoreline are different vegetation communities from grass-rich slopes to mudflats. Some of the small ponds have belts of Water Horsetail Equisetum fluviatile and Bottle Sedge Carex rostrata. On the extensive shallow water areas there are large meadows of eelgrass Zostera spp. Because of the high food production combined with its location in key migration routes of waterbirds, the site is an internationally important area for many species during spring and autumn migration, and nationally threatened species as Atlantic Puffin Fratecula arctica, Greater Scaup Aythya marila and Ruff Philomachus pugnax breed in the site. The site is also important for shoreline stabilization. Archeological/historical features are registered in the area. Main human activities within the site are agriculture, cattle grazing, fishing, hunting, tourism, and cloudberries gathering. Most of these habitat types have been cultivated or damaged by draining. Ramsar Site no. 2147. Most recent RIS information: 2013. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO052\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    15.2,
+                    68.95,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "806, Haroya Wetlands System",
+                "Description": "<b>3NO019</b><br> country: Norway<br> coordinates: 62°46'00^N 006°28'00^E<br> <hr> Haroya Wetlands System. 19/03/96; Møre og Romsdal; 190 ha; 62º46'N 006º28'E. Nature Reserve, Bird Protection Area. A wetland system consisting of four subsites: Selvikvågen, Lomstjønna, Malesanden og Huse and Lyngholman. Habitat types include shallow bays, extensive tidal, mud and sandflats with seaweed zones, sand dune systems, mires as well as freshwater and salt marshes. Large quantities of seaweed accumulate, creating rich waterbird feeding areas and making the site important for high numbers of breeding, migrating and wintering bird species. The site also offers habitat to the threatened Otter Lutra lutra, Harbour Seal Phoca vitulina, and several species of nationally threatened species of flora. The rocky shores are important for shoreline stabilization. Threats to the site include changes in agricultural practices and related overgrowing of bird habitats. Human activities include nature conservation, fishing, livestock grazing, bird watching and other recreational activities. A bird observation tower exists and information booklets are available. Ramsar site no. 806. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO019\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_806/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.46666666667,
+                    62.7666666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1190, Havmyran",
+                "Description": "<b>3NO028</b><br> country: Norway<br> coordinates: 63°30'00^N 008°37'00^E<br> <hr> Havmyran. 06/08/02; Sør-Trøndelag; 3,872 ha; 63°30'N 008°37'E. Nature Reserve, IBA. An unspoilt characteristic coastal Atlantic mire and lake system that serves as an important breeding site for several bird species, most notably Southern Dunlin (Calidris alpina spp schinzii). The pine Pinus sylvestris is found on the peripheries, partly of old growth character. Human uses include low-impact fishing and bird watching. A monitoring programme exists for endangered Freshwater pearl mussel Margaritifera margaritifera, and another study is observing possible increased levels of nitrogen in precipitation originating from a newly-opened gas refinery some 4 km away. Ramsar Site no. 1190. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO028\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_1190/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.61666666667,
+                    63.5,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1951, Hedmarksvidda Wetland System",
+                "Description": "<b>3NO040</b><br> country: Norway<br> coordinates: 61°02'00^N 11°07'00^E<br> <hr> Hedmarksvidda Wetland System. 12/11/2010; Løten, Hamar, Ringsaker and Vang municipalities in Hedmark County. 4,543 ha; 61°2'N 011°7'E. Nature Reserves. Includes the sub-sites of Endelausmyrene, Harasjømyrene, Brumundsjøen and Lavsjømyrene-Målikjølen. The site is a mosaic of different kinds of fens, mires, small pools, ponds and lakes interspersed with ridges of bedrock or moraine on which pine forests dominate. Birch Betula pubescens is also common, especially along watercourses and edges of mires. The Wetland System supports nationally threatened bird species such as Ruff Philomachus pugnax (VU), Common Tern Sterna hirundo (VU) and the Sky Lark Alauda arvensis (VU). The mires play an important role as water reservoirs and in flood protection during periods of snow melt and heavy precipitation. The site is used for hunting, sports fishing, berry picking and sheep grazing. Ramsar Site no. 1951. Most recent RIS information: 2011. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO040\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.1166666667,
+                    61.0333333333,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1957, Hopen",
+                "Description": "<b>3NO046</b><br> country: Norway<br> coordinates: 76°30'00^N 25°01'00^E<br> <hr> Hopen. 12/11/2010; Island in the Svalbard Archipelago; 325,400 ha (4,600 ha land); 76°30'N 25°01'E. Nature Reserve, Important Bird Area. Hopen is an arctic island, mostly covered by rocks and continuous permafrost, with only a very narrow beach from which the landscape rises. In the North of the island there are steep cliffs with horizontal shelves, which are ideal for breeding seabird species. Some of these species are listed on the Norwegian (Svalbard) Red List and include the Black-legged Kittiwake Rissa tridactyla (EN), which fulfills the 1% criterion with 40,000 breeding pairs. Moreover, Brünnich's guillemot Uria lomvia (VU; ca. 170,000 birds in breeding season), Black Guillemot Cepphus grille (VU; ca. 1,000 breeding pairs), and Atlantic puffin Fratercula arctica (VU) can be observed here. Other bird species on the island include the Arctic Skua, Great Skua and Purple Sandpiper. Hopen is also an important migration and denning area for polar bears. The South of the island is a traditional resting place for walrus. In terms of flora, the island supports the nationally red-listed Svalbard poppy Papaver dahlianum (VU). Five trapper huts from the 19th century are protected as cultural heritage sites and there is a meteorological station on the island. A Management Plan, implemented in 2007, has been provided to the Secretariat. Ramsar Site no. 1957. Most recent RIS information: 2011. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO046\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    25.0166666667,
+                    76.5,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "2157, Horsvaer",
+                "Description": "<b>3NO055</b><br> country: Norway<br> coordinates: 065°19'00^N 011°37'00^E<br> <hr> Horsvær. 27/05/2013; Nordland; 17,036 ha; 65°19’N 011°37’E. Nature Reserve, Bird Protection Areas. A representative North-European coast marine archipelago formed by 360 islands and islets with shallow marine waters, providing an important breeding location for large numbers of seabirds and waterfowls. The site supports such nationally endangered and vulnerable species as Common Tern Sterna hirundo, Black Guillemot Cepphus grylle, and Common Guillemot Uria aalge, and there are also five colonies of Great Cormorant Phalacrocorax carbo and a large breeding population of European Shag Phalacrocorax aristotelis. Other species that regularly use the site are the Eurasian Otter Lutra lutra and the Harbor seal Phoca Vitulina. On the main islands the vegetation has been shaped by traditional grazing activities and harvesting grounds, and the ceasing of these activities is very likely to trigger vegetational succession. Recreation, tourism and egg collection are some of the main human activities within the site. Ramsar site no. 2157. Most recent RIS information: 2013.  <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO055\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.616666666667,
+                    65.316666666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "2158, Horta",
+                "Description": "<b>3NO056</b><br> country: Norway<br> coordinates: 065°12'00^N 011°28'00^E<br> <hr> Horta. 27/05/2013; Nord-Trøndelag; 3,158 ha; 65°12’N 011°28’E. Nature Reserve, Bird Protection Area. A small marine archipelago ca. 11 km northwest of Leka Island, consisting consists of small islands, long fjords, skerries and islets with shallow marine waters in the coastal zone. The landscape is dominated by remnant infield areas, narrow mires, bogs, coastal heathlands, and islets with vegetation influenced by natural seabird fertilization. The site is an important breeding area for vulnerable, endangered and critically endangered species such as Black Guillemot Cepphus grylle and Arctic Tern Sterna paradisaea. Moreover, it also contains stable populations of Eurasian Otter Lutra lutra, Common Seal Phoca vitulina, Atlantic Puffin Fratercula arctica, and Common Guillemot Uria aalge. More rarely the False Killer Whale Pseudorca crassidens visits the archipelago. The vegetation has been shaped through many years of grazing and harvesting. The site is currently used by scientists for seabird monitoring and geological research and as a vacation site for private landowners. Fishing activities take place in the surrounding areas. Ramsar Site no. 2158. Most recent RIS information: 2013. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO056\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.466666666667,
+                    65.2,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1191, Hynna",
+                "Description": "<b>3NO029</b><br> country: Norway<br> coordinates: 61°13'00^N 009°55'00^E<br> <hr> Hynna. 06/08/02; Oppland; 6,442 ha; 61°13'N 009°55'E. Nature Reserve. A large mire complex with a number of large and smaller pools, as well as solid ground with open upland birch woodland and Norway spruce Picea abies. The mire complex is characterised by a variation of string-mires (shifting dry and wet strings) and dryer mires on shallow slopes. It is an important area for several threatened breeding waterbirds, in particular ducks and waders. The large mire areas store carbon, function as a water reservoir during droughts, and contribute to flood control during periods of high precipitation. Human uses are limited to leisure activities, including sport fishing and hunting. (The site was considerably extended from 1,547 ha in 2012.) Ramsar Site no. 1191. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO029\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_1191/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.91666666667,
+                    61.2166666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "308, Ilene and Presterodkilen Wetland System",
+                "Description": "<b>3NO005</b><br> country: Norway<br> coordinates: 59°16'00^N 010°25'00^E<br> <hr> Ilene & Presterødkilen Wetland System. 24/07/85; Vestfold; 177 ha; 59°16'N 010°25'E. Nature Reserve. A complex of shallow marine bays and mudflats surrounded by a mosaic of reedbeds, meadows, pasture and forest. One of the most important parts of Oslofjorden for various species of migratory waterbirds, especially ducks and waders. The area is also important for wintering and breeding bird species, several of them nationally threatened. It functions as a sediment trap and offers habitat to Sea Trout Salmo trutta. The site is used for grazing, bird watching and other recreational activities. An information center and a bird viewing tower exist. Threats to the site include infrastructure development and noise disturbance. Ramsar site no. 308. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO005\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_308/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.4166666667,
+                    59.2666666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "2159, Innherred Freshwater System",
+                "Description": "<b>3NO057</b><br> country: Norway<br> coordinates: 063°49'00^N 011°37'00^E<br> <hr> Innherred Freshwater System. 27/05/2013; Nord-Trøndelag; 182 ha; 63°49'N 011°37'E. Nature Reserves, Bird Protection Area. The site comprises three rich and productive subsites, Hammervatnet, Lundselvoset and Lyngås-Lysgård, characterized by shallow freshwater areas, inland deltas and lakes. These sites are important for several nationally red-listed species like Ruff Philomachus pugnax, Common Tern Sterna hirundo, Otter Lutra lutra and Eel Anguilla Anguilla. During spring and autumn migrations more than 1,000 individuals of Pink-footed Geese Anser brachyrhynchus use the subsite Lyngås-Lysgård, and up to 3,000 individuals use the subsite Lundselvoset. Moreover, the complex plays an important role for flood mitigation and water supply. Within the nature reserves human activities are controlled by detailed regulations specific for each protected area. The main activities within the site are cattle grazing, fishing and bird watching tourism. The main threat to the ecological character derives from eutrophication caused by agricultural activities. Ramsar Site no. 2159. Most recent RIS information: 2013. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO057\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.616666666667,
+                    63.816666666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "316, Isoyane",
+                "Description": "<b>3NO013</b><br> country: Norway<br> coordinates: 77°08'00^N 014°48'00^E<br> <hr> Isøyane. 24/07/85; 230 ha; 77º08'N 014º48'E. Nature Reserve, National Park. The site includes two islands. The northern one is covered with rich, grassy vegetation, and small freshwater ponds. The southern island supports less well-developed vegetation. The area is among the more important localities on Spitsbergen for nesting Barnacle Geese Branta leucopsis and Common Eider Somateria mollissima. Polar Bear Ursus maritimus regularly visits the site. Apart from the occasionally permitted traditional collection of eider down and eggs, human activities are restricted to research and monitoring. Ramsar Site no. 316. Most recent RIS information: 2012.  <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO013\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    14.8,
+                    77.1333333333,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "309, Jaeren wetland system",
+                "Description": "<b>3NO006</b><br> country: Norway<br> coordinates: 58°50'00''N 005°34'00''E<br> <hr> Jæren wetland system. 24/07/85; Rogaland; 3,256 ha; 58°50'N 005°34'E. Nature Reserves. An extension of 18 wetlands units to the existing 4, expanding the 1985 Ramsar site from 400 to 3,256 ha. The system lies in an agriculture-dominated area of southwestern Norway with formerly extensive wetlands - coastal sites remain largely intact, but freshwater sites have been drained on a large scale. Marine areas are dominated by sand, mud, pebble, and stone shores, with large areas of dune systems. Freshwater areas are characterized by shallow water and extensive stands of Phragmites communis, and three smaller mire systems have also been included in the site. The newly-extended site is said to be incomparably the single most important area for wetland-related birds in Norway, especially as a staging and wintering area. Given strong agriculture influences and high levels of nitrogen pollution in the area, the importance of the remaining wetlands in the lowland is extraordinarily high in terms of their function as sediment traps and in water purification. Along the shorelines one can find the densest collection of archaeological sites in Norway, with grave mounds dating back a thousand years or more. Action plans to decrease agricultural runoff are showing promise, and buffer zones are being contemplated. Tourism (walking, sunbathing, birdwatching) is fairly heavy in the area. Extended from 400 to 3,256 hectares in 2002. Ramsar site no. 309. Most recent RIS information: 2002. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO006\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_309/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.566666666667,
+                    58.833333333333,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1192, Karlsoyvaer",
+                "Description": "<b>3NO030</b><br> country: Norway<br> coordinates: 67°34'00^N 014°40'00^E<br> <hr> Karlsøyvær. 06/08/02; Nordland; 4.936 ha; 67°34'N 014°40'E. Nature Reserve. A marine archipelago with shallow waters dotted with numerous islets and islands, typical of the North European coast, with wet meadows, dunes and dune slacks, and brackish marshes in some parts. The site is one of several important areas along the coast for staging, breeding, moulting and wintering seabirds from large parts of the Arctic coasts. Threatened species such as Black Guillemot Cepphus grylle and Otter Lutra lutra have stable populations within the site. The area is important for shoreline stabilization. Traditionally the site was used for down and egg collection from breeding Common Eider Somateria mollissima, but except for the sporadic collection of eggs this practice has ceased. Other human uses include recreational activities, fishing, and sheep grazing. Ramsar Site no. 1192. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO030\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_1192/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    14.6666666667,
+                    67.5666666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "315, Kongsfjorden",
+                "Description": "<b>3NO012</b><br> country: Norway<br> coordinates: 78°55'00^N 012°10'00^E<br> <hr> Kongsfjorden. 24/07/85; 710 ha; 78º55'N 012º10'E. Bird Sanctuary, Nature Reserve, IBA. A number of small islands covered with rich, grassy vegetation and small freshwater ponds. The area usually supports a large number of nesting Common Eider Somateria mollissima as well as various other species of breeding waterbirds such as Barnacle Goose Branta leucopsis and Pink-footed Goose Anser brachyrhynchus. The site is used as a study area and a small visitor centre informs about ongoing research activities. Ramsar Site no. 315. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO012\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.1666666667,
+                    78.9166666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "306, Kurefjorden",
+                "Description": "<b>3NO003</b><br> country: Norway<br> coordinates: 59°20'00^N 010°44'30^E<br> <hr> Kurefjorden. 24/07/85; Østfold; 392 ha; 59°20'00\"N 010°44'30\"E. Nature Reserve. One of the most important wetlands in the region for staging migratory waterbirds, especially for ducks and waders. The area is also important as a breeding, moulting, feeding and overwintering site and supports several nationally red-listed bird species. Habitats include a shallow marine bay surrounded by agricultural land, open water, extensive beds of submerged vegetation, mudflats and wet grassland. Saltmarshes also offer habitat to a few nationally threatened plant species, and the site is of importantce for the internationally critically endangered European Eel Anguilla anguilla. Commercial fishing is practiced. The site is very popular for bird watching and an observation tower exists. Ramsar site no. 306. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO003\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_306/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.7416666667,
+                    59.3333333333,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1193, Kvisleflået",
+                "Description": "<b>3NO031</b><br> country: Norway<br> coordinates: 61°48'00^N 012°05'00^E<br> <hr> Kvisleflået. 06/08/02; Hedmark; 5,682 ha; 61°48'N 012°05'E. Nature Reserve. A large, flat-mire landscape, with big deposits of moraine, which creates a mosaic of dry and wet areas interspersed with ponds and lakes. It is an important breeding and staging area for numerous bird species, many of them threatened. The site is the only regular breeding site for Jack Snipe Lymnocryptes minimus in southern Norway. The mosaic landscape is ideal habitat for Greenshank Tringa nebularis and Whimbrel Numenius phaeopus. The site is important for flood control during periods of heavy precipitation and snow melt and acts as a water reservoir during droughts. Forestry is among the main sources of income in the area, and the site itself is used for low-impact hunting and fishing activities, with some sheep and cattle grazing. The site is a potential transboundary site with Sweden and first efforts to coordinate the cross-border management have been made. (The site was extended from 3,300 ha in 2012.) Ramsar Site no. 1193. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO031\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_1193/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.0833333333,
+                    61.8,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "2160, Laukvikoyene",
+                "Description": "<b>3NO058</b><br> country: Norway<br> coordinates: 068°21'00^N 14°23'00^E<br> <hr> Laukvikøyene. 27/05/2013; Nordland; 1,084 ha; 68°21'N 014°23'E. Nature Reserve. The site represents a diverse wetland area on the west coast of Lofoten, the southwestern part of which contains large areas of permanent shallow marine waters with Zostera marina, intertidal flats, islands and islets. The northeast part of the site belongs to the main island Austvågøya and contains extended areas of mires and freshwater ponds. The site is internationally important for conservation of both flora and fauna. Many seabirds and waterfowls as Black Guillemot Cepphus grylle, Ruff Philomachus pugnax, Velvet Scoter Melanitta fusca and Northern Pintail Anas acuta breed in Laukvikøyene and use the site for resting during migration. There are large areas of sublittoral vegetation with different types of representative flora. The area is occasionally visited by birdwatchers and traditionally used by local residents for collecting seabird eggs. Potential factors adversely affecting the site are overgrazing and bird disturbance caused by a quarry situated close to the border of the Nature Reserve. Ramsar site no. 2160. Most recent RIS information: 2013. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO058\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    14.383333333333,
+                    68.35,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "804, Lista Wetlands System",
+                "Description": "<b>3NO017</b><br> country: Norway<br> coordinates: 58°05'00''N 006°41'00''E<br> <hr> Lista Wetlands System. 19/03/96; Vest-Agder; 724 ha; 58°13'N 006°45'E. Plant And Bird Protection Area, Nature Reserve, Bird Protection Area, Landscape Protection Area, Freshwater Reservoirs of Scientific Interest. A wetland system of shallow bays, sand, shingle and rocky beaches, dune systems, and lakes. Large quantities of seaweed accumulate, creating rich feeding areas for waterbirds. An internationally important area for staging and wintering waterbirds and for breeding Larus fuscus intermedius. Large numbers of various species of ducks, waders and passerines also use the site. Numerous nationally rare plant species occur in the area. Human activities include nature conservation, recreation, fishing and hunting. The area is noted for numerous archaeological finds of national importance. There is a bird observatory at the site. Ramsar site no. 804. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO017\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_804/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.68333333333,
+                    58.0833333333,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "2161, Lovund-Lundeura",
+                "Description": "<b>3NO059</b><br> country: Norway<br> coordinates: 066°21'00^N 012°19'00^E<br> <hr> Lovunda/Lundeura. 27/05/2013; Nordland; 153 ha; 66°21’N 012°19’E. Nature Reserve, Important Bird Area (IBA). The site consists of shallow marine waters, rocky shores and marine subtidal aquatic beds covering approximately ¼ of the Lovund Island and also the Alkøya Island. Lundeura is a scree mountain with large boulders unique due its location close to the birds’ feeding grounds and its steep topography providing the necessary protection for nesting. The site is internationally important for the seabird populations in the North Atlantic Ocean. Large colonies of nationally endangered and vulnerable bird species such as Atlantic Puffin Fratercula arctica, Black-legged Kittiwake Rissa tridactyla, Common Tern Sterna hirundo and Black Guillemot Cepphus grylle breed in the site. The birds foraging in the ocean bring nutrients to the bird cliffs and surrounding area by the spreading of guano, which provides nutrient-rich growing conditions generating the diverse vegetation on the island. Grey Seal Halichoerus grypus and Otter Lutra lutra are occasionally observed. The main land use within the site consists of grazing, and there is a fishing village Lovund with 3-400 inhabitants. Locals use the ocean outside the nature reserve for fishing and aquaculture. Ramsar Site no. 2061. Most recent RIS Information: 2013. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO059\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.316666666667,
+                    66.35,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1956, Målselvutløpet",
+                "Description": "<b>3NO045</b><br> country: Norway<br> coordinates: 69°16'00^N 18°31'00^E<br> <hr> Målselvutløpet. 12/11/2010; Målselv and Lenvik municipalities, Troms County; 1,288 ha. 69Ú16'N 018Ú31'E. Nature Reserve. Målselvutløpet is an active delta with sandy substrate, shore vegetation and small forested islands, some of which contain inundated birch and willow forest habitats. The delta is formed at the outlet of river Målselva into the fjord Malangen. Botanically, this site demonstrates the succession of pioneer associations to stable plant communities. The site also fulfills Ramsar criterion 6 as it is visited by more than 1% of the population of Common Merganser Mergus merganser (8,000 individuals). It is moreoverimportant for birds of passage and for several other water bird species. An important stock of Atlantic Salmon Salmo salar, Arctic Char Salvelinus alpinus and Brown Trout Salmo trutta migrate through the site. The area is used for sports fishing and several other types of outdoor recreation. Ramsar Site no. 1956. Most recent RIS information: 2011. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO045\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    18.5166666667,
+                    69.2666666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "2162, Mastadfjellet",
+                "Description": "<b>3NO060</b><br> country: Norway<br> coordinates: 067°38'00^N 12°34'00^E<br> <hr> Måstadfjellet. 27/05/2013;. Nordland; 802 ha; 67°38’N 012°34’E. Protected Landscape, Nature Reserve. An important breeding site for pelagic seabirds situated on the southern part of Værøy Island between Lofotodden peninsula and Røst Island. The site supports large colonies of nationally red-listed species such as Atlantic Puffin Fratercula arctica and Black-legged Kittiwake Rissa tridactyla. The western part of the Måstadfjellet is a steep area from the sea up to a relatively flat mountain plateau at 400m covered by rich vegetation as a result of the large colonies of sea birds which bring nutrients to the cliffs and surrounding area. The site also contains a characteristic system of sand dunes with unique botanical values. Harbour seal Phoca vitulina and Otter Lutra lutra occasionally use the site. Collection of eggs and down from some species is permitted by the regulations within the protected landscape area but forbidden within the nature reserve. Ramsar Site no. 2162. Most recent RIS information: 2013. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO060\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    12.566666666667,
+                    67.633333333333,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "808, Mellandsvågen",
+                "Description": "<b>3NO021</b><br> country: Norway<br> coordinates: 63°21'00^N 008°30'00^E<br> <hr> Mellandsvågen. 19/03/96; Møre og Romsdal; 96 ha; 63º21'N 008º30'E. Nature Reserve. A system of intertidal shallow waters, extensive mudflats, wet meadows, and mires, mixed with rocky outcrops bordering a 1,000 ha wildlife protection area. The site includes intertidal shores with mussel and seaweed beds, and salt marshes. The geographic position of the area makes it an important link for migrating birds, in particular geese, ducks and waders that feed, rest, moult or winter at the site. Various nationally threatened species of birds as well as Otter Lutra lutra and Yellow Rattle Rhinanthus minor occur in the site. Human activities include recreation, birdwatching and fishing. Ramsar Site no. 808. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO021\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_808/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.5,
+                    63.35,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "803, Mosvasstangen Landscape Protection Area",
+                "Description": "<b>3NO016</b><br> country: Norway<br> coordinates: 59°49'00^N 008°11'00^E<br> <hr> Møsvasstangen. 19/03/96; Telemark; 1,441 ha; 59º49'N 008º11'E. Landscape Protection Area, Bird Sanctuary. One of the largest string-mires in southern Norway, the area exhibits inland and alpine characteristics and includes small lakes, meadows and birch forest. Large quaternary deposits have formed drumlins, eskers and kames. A total of 87 bird species has been recorded and for many northern and alpine bird species this is their southernmost breeding site. During the calving period, the site is important for Reindeer Rangifer tarandus. Human activities include nature conservation, fishing, livestock grazing, recreation, and tourism. More than 100 archaeological sites dating to the Iiron A-age are present. Ramsar Site no. 803. Most recent RIS information: 2011. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO016\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_803/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.18333333333,
+                    59.8166666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1968, Nordenskiöldkysten",
+                "Description": "<b>3NO051</b><br> country: Norway<br> coordinates: 77°51'00^N 13°50'00^E<br> <hr> Nordenskiöldkysten. 12/11/2010; Western Svalbard, Central coast of Spitsbergen; 31,750 ha; 77°51'N 013°50'E; National Park, Important Bird Area. The site consists in a coastal plain with many freshwater pools. Ingeborgfjellet, a mountain with steep cliffs harbouring seabird breeding colonies, is situated in the south-eastern part of the site. During the breeding season approximately 55,000 Little Auk Alle alle, 21,600 Brunnich`s Guillemot Uria lomvia and 4,600 pairs of Kittiwake Rissa tridactyla nest here. The site is also an important staging, moulting, feeding and resting area during the migration seasons. Species listed on the Norwegian Red List include the Red Knot Calidris canutus (EN) and the Sanderling Calidris alba (VU). The site supports more than 1% (400 individuals) of the Svalbard population of Barnacle Goose Branta leucopsis. The site is also important for mammals like Svalbard reindeer Rangifer tarandus platyrhynchus and Arctic Fox Vulpes lagopus and is visited by Polar Bear Ursus maritimus, Harbour Seals Phoca vitulina and Walrus Odobenus rosmarus. Noteworthy flora includes lime-demanding species such as the Purplish Braya Braya glabella ssp purpurascens (VU). The site plays an important role in carbon and methane storage due to its level of permafrost of 10-40 m. There is traditional trapping activity in the area, and a trapping station is situated on Akseløya, southeast of the site. Ramsar Site no. 1968. Most recent RIS information: 2011. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO051\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.8333333333,
+                    77.85,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "307, Nordre Oyeren",
+                "Description": "<b>3NO004</b><br> country: Norway<br> coordinates: 59°53'00^N 011°09'00^E<br> <hr> Nordre Øyeren. 24/07/85; Akerhus; 6,256 ha; 59º53'N 011º09'E. Nature Reserve, IBA. The largest inland delta in Norway includes low islands and land giving way to Lake Øyeren. Vegetation includes deciduous forest, scrub, grassland, and cultivated land. The lake is one of the most important areas in southern Norway for resting migratory waterbirds. Large numbers of various ducks occur during both spring and autumn migrations including over 5,000 individuals of Common Teal Anas crecca. Several nationally threatened species of plants and birds occur as well as Great Crested Newt Triturus cristatus. The site has the greatest diversity of fish species in Norwegian freshwaters. It functions as a sediment trap, is important in nutrient fixation, and is used for fishing, recreation, and agriculture. Two bird watching towers and a nature information centre exist. Planned infrastructure developments and the abandonment of traditional management practices threaten the site. Ramsar site no. 307. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO004\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_307/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.15,
+                    59.8833333333,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "802, Nordre Tyrifjord Wetland System",
+                "Description": "<b>3NO015</b><br> country: Norway<br> coordinates: 60°07'00^N 010°12'00^E<br> <hr> Nordre Tyrifjord Wetlands System. 19/03/96; Buskerud; 322 ha; 60°07'N 010°12'E. Nature Reserves. A system of oxbow lakes, bays dotted with islets, small dams and mires consisting of five sub-sites: Juveren, Synneren, Karlsrudtangen, Averøya and Lamyra. Wetland types include flooded marshland, seasonally flooded deciduous forests, mud and sand flats. A number of rare plants, fungi and mosses are present, and the site is an important inland locality for migrating and wintering waterbirds and waders in southern Norway, such as the nationally threatened Smew Mergellus albellus. Several species of waterbirds feed, and numerous nationally rare species breed at the site, including Pink-Footed Geese Anser brachyrhynchus. The site is also important as spawning ground for numerous species of fish like Trout Salmo trutta. It is valuable in terms of flood reduction, sediment trapping and fixing of nutrients. Human activities include nature conservation, recreation, fishing, bird-watching, irrigation and grazing. Watercourse regulation and the spread of Canadian Pondweed threaten the site. Ramsar site no. 802. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO015\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_802/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.2,
+                    60.1166666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "305, Ora",
+                "Description": "<b>3NO002</b><br> country: Norway<br> coordinates: 59°10'00^N 011°00'00^E<br> <hr> Øra. 24/07/85; Østfold; 1,676 ha; 59°10'N 011°00'E. Nature Reserve. An extensive estuarine area at the mouth of Norway's largest river, Glomma, that includes intertidal zones, rocky islands and reedbeds. The site is an important area for nesting, passage, moulting and wintering waterbirds, including swans and large numbers of ducks in autumn. It supports nationally threatened bird as well as plant species and contains a high diversity of fish, both freshwater and saltwater, with 41 species recorded. The rare Tentacled Lagoon Worm Alkmaria romijni has not been recorded elsewhere in Norway. The site is used for grazing and recreational purposes. A bird viewing tower exists. Regulations prevent construction, hunting, drainage, and access to resting areas during sensitive periods. (The site was extended in 2012 from 1,560 ha.) Ramsar Site no. 305. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO002\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_305/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11,
+                    59.1666666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "310, Orland Wetland System",
+                "Description": "<b>3NO007</b><br> country: Norway<br> coordinates: 63°42'00^N 009°35'00^E<br> <hr> Ørland Wetland System. 24/07/85; Sør-Trøndelag; 3,168 ha; 63°42'N 009°35'E. Bird Sanctuary, Nature Reserve, IBA. A complex of four separate sites, Grandefjæra, Hovsfjæra, Innstrandfjæra and Kråkvågsvaet, forming part of a large area of shallow marine waters, intertidal zones and mudflats. The intertidal area is vegetated by salt-tolerant species, and some nationally endangered species like Northern Marsh Orchid Dactylorhiza purpurella are present. It is the most important wetland system in central Norway for resting and feeding migratory waterbirds, especially ducks and waders. Harbour Porpoise Phocoena phocoena and nationally threatened Harbour Seal Phoca vitulina regularly visit the site. Human activities have included drainage for agricultural purposes, but strict regulations prevent construction, hunting, and drainage today. The site is presently used for fishing, bird-watching, sheep grazing and small-scale seaweed cutting and has some value in shoreline stabilization. The creation of a wetland information centre is planned. Ramsar site no. 310. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO007\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_310/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    9.58333333333,
+                    63.7,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1194, Ovre Forra",
+                "Description": "<b>3NO032</b><br> country: Norway<br> coordinates: 63°36'00^N 011°36'00^E<br> <hr> Øvre Forra. 06/08/02; Nord-Trøndelag; 10,254 ha; 63°36'N 011°36'E; Nature Reserve. A huge intact peat mire system at higher elevation, partly forested with notably Picea abies, interspersed with several smaller lakes and a meandering river, protected against hydropower development. The landscape is undulating and mires also exist on sloping terrain (due to high precipitation); some smaller peaks and areas with drier vegetation exist. The site supports 132 different bird species, of which 78 are regular breeders. More than 328 species of vascular plants and 370 species of fungi have been found in the area, some of them nationally threatened. Globally endangered Freshwater Pearl Mussel Margaritifera margaritifera and Otter Lutra lutra are present. The area is valuable in terms of flood control and is used for grazing, hunting, fishing, recreational activities and berry picking. Over 1,000 years ago the site was used to produce steel from bog iron. Ramsar Site no. 1194. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO032\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_1194/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.6,
+                    63.6,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "810, Pasvik Nature Reserve",
+                "Description": "<b>3NO023</b><br> country: Norway<br> coordinates: 69°10'00^N 029°15'00^E<br> <hr> Pasvik. 19/03/96; Finnmark; 1,910 ha; 69º10'N 029º15'E. Nature Reserve, EUROPARC Transboundary Park, IBA. Situated along the Russian border in the northern boreal forest, the reserve includes part of the (regulated) Pasvik River, characterized by many bays, lakes and islets. Of particular interest are well-developed permafrost structures (palsamires) and permanently frozen mire areas. The area includes Pinus sylvestris forests and extensive mires. Due to very early ice break-up, the area is especially important for staging migratory waterbirds. Numerous threatened species of waterbirds breed at the site. The site also has a stable population of nationally threatened Brown bear Ursus arctos and Otter Lutra lutra. The area is important for flood regulation and sediment transport. Principal human activities include nature protection, recreation, fishing and some reindeer husbandry. Archeological findings document habitation of the area by Saami people up to 8,000 years ago. The greater trilateral Pasvik area was featured as a Ramsar case study on transboundary wetland ecosystems in the 2nd Assessment of Transboundary Rivers and Lakes (UNECE 2011). Ramsar site no. 810. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO023\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_810/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    29.25,
+                    69.1666666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1958, Reisautløpet",
+                "Description": "<b>3NO047</b><br> country: Norway<br> coordinates: 69°47'00^N 21°00'00^E<br> <hr> Reisautløpet. 12/11/2010; Nordreisa municipality, Troms County; 600 ha (500 ha water); 69Ú47' N, 21Ú00' E. Nature Reserve. The site comprises a delta ecosystem which is formed through the discharge of a large sub arctic river into a fjord. This Ramsar Site is composed of large marine tidal areas of mud and sand flats as well as wet coastal meadows along the shore exhibiting subarctic features. Northern and Southern plant communities coexist in this site, some of which are nationally rare such as Slender-leaved Pondweed Potamogeton filiformis puddle and Seaside Arrow Grass Triglochin shore. It is a staging area for migratory birds like Ruff Philomachus pugnax (VU), Black Guillemot Cepphus grylle (VU) as well as Common Merganser Mergus merganser and Red-breasted Merganser Mergus serrator. It is also a feeding area for ducks and wading birds and important river stocks of Atlantic Salmon Salmo salar, anadromous Arctic Char Salvelinus alpinus and Brown Trout Salmo trutta migrate through the site. Sørkjosen Airport is situated close to this Ramsar site and may affect the site both with noise and runoff. Ramsar Site no. 1958. Most recent RIS information: 2011. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO047\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    21,
+                    69.7833333333,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "2163, Risøysundet",
+                "Description": "<b>3NO061</b><br> country: Norway<br> coordinates: 068°59'00^N 015°40'00^E<br> <hr> Risøysundet. 27/05/2013; Nordland; 504 ha; 68°59’N 015°40’E. Nature Reserve. The site consists of shallow marine areas within a complex of flat grassy islets, lagoons and brackish swamps, supporting communities of Zostera, Potamogeton and Salicornia. In the west there is a 15ha lake surrounded by a large beach meadow complex. There are also exposed bays, isolated freshwater ponds, sheltered salt marshes and exposed seaweed meadows important for shoreline stabilization. The site supports one of the few, intact larger mud flats/sand flats in northern Norway. The area contains a broad range of regionally rare species of sublittoral vegetation. The reserve is an internationally important breeding site for such waterbirds as Merganser Mergus serrator, Long-tailed Duck Clangula hyemalis, and Common Ringed Plover Charadrius hiaticula which depend upon the high biological production of this wetland for feeding and resting during migration. The site also regularly supports a stable population of European Otter Lutra lutra. Archaeological/historical features are registered in the area. The main land use is dedicated to grazing, tourism, fishing and birdwatching. Ramsar Site no. 2163. Most recent RIS information: 2013. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO061\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    15.666666666667,
+                    68.983333333333,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1950, Røstøyan ",
+                "Description": "<b>3NO039</b><br> country: Norway<br> coordinates: 67°27'00^N 11°56'00^E<br> <hr> Røstøyan. 12/11/2010; Røst municipality, Nordland County; 6,986 ha (6,693 ha of sea); 67°27'N 011°56'E; Landscape Protected Area, Nature Reserve. Røstøyan is a large archipelago with hundreds of islands and islets surrounded by shallow marine waters. Vedøya and Storfjellet are the two largest islands. The site is the most important breeding area for seabirds in Nordland County. Bird cliffs are located on several islands which harbour nationally red-listed breeding populations of Puffin Fratercula arctica (VU) (430,000 breeding pairs; 1% criterion), Black-legged Kittiwake Rissa tridactyla (EN) (13,000 breeding pairs; 1% criterion), Razorbill Alca torda (VU), and Common Guillemot Uria aalge (CR). On the skerries there are breeding colonies of Great Cormorant Phalacrocorax carbo, Common Shag Phalacrocorax aristotelis and Black Guillemot Cepphus grille (VU). The White-tailed Eagle Haliaeetus albicilla also breeds in the area. The site has a stable population of European Otter Lutra lutra (VU), Common Seal Phoca vitulina (VU), and Grey Seal Halichoerus grypus (LC). It is popular for sports fishing and boat tours. The area has three protected archaeological and cultural heritage sites such as Skomvær lighthouse. A long-term research project led by the Norwegian Institute for Nature Research on seabirds has been ongoing for 40 years. Ramsar Site no. 1950. Most recent RIS information: 2011. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO039\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.9333333333,
+                    67.45,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1952, Rott-Håstein-Kjør",
+                "Description": "<b>3NO041</b><br> country: Norway<br> coordinates: 58°55'00^N 005°28'00^E<br> <hr> Rott-Håstein-Kjør. 12/11/2010; Sola municipality, Rogaland County; 10,722 ha; 58º 55´N 005º28´E. Landscape Protected Area, Nature Reserve. This site is characterised by a large number of small islands, skerries and islets surrounded by shallow marine water. Several islands have shallow ponds and lakes with saltwater influence and the vegetation cover is mostly sparse. The highly diverse marine ecosystems harbour extensive areas of shell sand and kelp Laminaria hyperborean. The site is important as staging, moulting and breeding area for a large number of seabirds, including the highest national population of breeding European Shag Phalacrocorax aristotelis with about 4,500 pairs, in addition to moulting Common Eider Somateria mollissima and several nationally red-listed bird species such as Puffin Fratercula arctica (VU), Black guillemot Cepphus grylle (VU) and Common guillemot Uria aalge (CR). Common seal Phoca vitulina and Grey Seal Halichoerus grypus also occur within the site. In terms of flora, the site supports nationally rare herb and lichen species such as Adder's Tongue Ophioglossum vulgatum, Powdered Ruffle Parmotrema chinense, and Felt Lichen Degelia atlantica. Nutrient rich meadows species of flowering plants like Sea Thrift Armeria maritime andRed Campion Silene dioica have been detected on this site. The site (and adjacent Jæren mainland) is the earliest prehistoric settlement area in Norway (about 10  12,000 B.C.) and represents a still actively managed, cultural landscape. The high numbers of islands have a storm protection function for the adjacent sand dune coast of the Ramsar Site Jæren wetlandsystem. Ramsar Site no. 1952. Most recent RIS information: 2011. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO041\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.46666666667,
+                    58.9166666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "2164, Runde",
+                "Description": "<b>3NO062</b><br> country: Norway<br> coordinates: 062°24'00^N 005°60'00^E<br> <hr> Runde. 27/05/2013; Møre og Romsdal; 1,351 ha; 62°24'N 005°40'E. Nature Reserve, Bird Protection Areas, Important Bird Area (IBA). Runde is an island on the northwest coast of Norway that includes four bird protection areas and one nature reserve supporting nationally endangered bird species such as Black-legged Kittiwake Rissa tridactyla and Common Guillemot Uria aalge. Cliff-nesting birds dominate the wildlife on the island, and Runde regularly supports more than 120,000 breeding pairs. The vegetation on the hillsides and the plateau of the island is dominated by open heathland, small freshwater ponds, and grassland, as well as mires that are very important for carbon storage. There are no humans living inside the protected areas, but the area is used for tourism, sheep grazing, scientific research, and seabird monitoring projects as SEAPOP (http://www.seapop.no/en/index.html). Ramsar Site no. 2164. Most recent RIS information: 2013 <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO062\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6,
+                    62.4,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "807, Sandblåst-/Gaustadvågen Nature Reserve",
+                "Description": "<b>3NO020</b><br> country: Norway<br> coordinates: 62°59'00^N 007°17'00^E<br> <hr> Sandblåst/Gaustadvågen. 19/03/96; Møre og Romsdal; 245 ha; 62°59'N 007°17'E. Nature Reserve. Three small rivers converge, forming a system of sheltered brackish lagoons and extensive intertidal mudflats with wet meadows. Salinity varies from freshwater to brackish and finally salt water. Two nationally threatened species of algae cannot be found anywhere else in Norway. The high biological production, extensive beds of aquatic vegetation, and invertebrates support large numbers of migrating birds and numerous wintering swans, geese, ducks and waders. Several waterbird species as well as Otter Lutra lutra breed at the site. Human activities include agriculture, recreation and research. A bird watching facility exists. The further expansion of agricultural activities, abandonment of traditional management practices and infrastructural development pose potential threats to the site. Ramsar site no. 807. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO020\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_807/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.28333333333,
+                    62.9833333333,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1953, Sklinna",
+                "Description": "<b>3NO042</b><br> country: Norway<br> coordinates: 65°12'00^N 10°59'00^E<br> <hr> Sklinna. 12/11/2010; Leka municipality, Nord-Trøndelag County; 589 ha (106 ha of land); 65°12'N 10°59'E; Nature Reserve. Sklinna is a small archipelago which consists of several islets and some small islands with rock and stone dominated shores, divided by shallow water. The main island in the archipelago is Heimøya. The archipelago as a whole is an important site for seabirds, especially in early summer when the bird numbers amount to 20-25,000 individuals. The most numerous bird species are Atlantic Puffin Fratercula arctica (3,500 pairs) (VU), European Shag Phalacrocorax aristotelis (3,200 pairs; 1% criterion) and Great Cormorant Phalacrocorax carbo (1,100 pairs; 1% criterion). Furthermore, it is a breeding area for nationally red-listed bird species such as Common Guillemot Uria aalge (CR) and Kittiwake Rissa tridactyla (EN) as well as for wintering seabirds. The site is regularly visited by the Grey Seal Halichoerus grypus and the Common Seal Phoca vitulina. Less frequently the False Killer Whale Pseudorca crassidens and the Otter Lutra lutra (VU) come to this Ramsar Site. In terms of flora, Red Campion Silene dioica is one of the most common species. However, in gull and cormorant colonies the droppings offer nitrous substrate which benefits plants such as Common Scurvy Weed Cochlearia officinalis and Common Sorrel Rumex acetosa. Sklinna has a long history of traditional fishing. Moreover, the site is part of a long-term monitoring and mapping programme for Norwegian seabirds since its establishment as a SEAbird POPulations (SEAPOP) key site in 2007. Ramsar Site no. 1953. Most recent RIS information: 2011. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO042\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.9833333333,
+                    65.2,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1195, Skogvoll",
+                "Description": "<b>3NO033</b><br> country: Norway<br> coordinates: 69°10'00^N 015°50'00^E<br> <hr> Skogvoll. 06/08/02; Nordland; 5,544 ha; 69°10'N 015°50'E. Nature Reserve, Biogenetic reserve (Council of Europe), IBA. The mire area is one of the most extensive lowland Atlantic mire complexes in Norway, dotted with numerous ponds and lakes. The other half of the area consists of shallow marine waters, with islets and skerries, tidal zones and a lagoon system with brackish as well as fresh water and associated with rare flora. Wet salt-influenced meadows fringe the shorelines. The marine part of the site is important as a staging, moulting and wintering area for several threatened species of waterbirds. A large population of Harbour Porpoise Phoca vitulina breeds on the skerries and the site is also an important spawning area for Salmon Salmo salar and Sea trout Salmo trutta. Human impact upon the site is very low and uses include fishing, birdwatching and cloudberry picking. Ramsar Site no. 1195. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO033\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_1195/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    15.8333333333,
+                    69.1666666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1196, Slettnes",
+                "Description": "<b>3NO034</b><br> country: Norway<br> coordinates: 71°05'00^N 028°12'00^E<br> <hr> Slettnes. 06/08/02; Finnmark; 1,230 ha; 71°05'N 028°12'E. Nature Reserve. Treeless coastal meadows with mires and numerous ponds and lakes on the arctic shores of northernmost Norway. A number of \"fossil\" and elevated shorelines (several kilometers long) characterize the landscape. The site acts as a breeding and resting area for numerous bird species, many of them threatened. Some bird species occur in unusually high densities, with for example colonies of some 300 pairs of Arctic Skua Stercorarius parasiticus. Otter Lutra lutra breeds inside the site. The site is used for research and tourism. The latter may cause some disturbance for breeding birds. A nature trail and information boards exist. Ramsar Site no. 1196. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO034\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_1196/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    28.2,
+                    71.083333333333,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1965, Sørkapp",
+                "Description": "<b>3NO048</b><br> country: Norway<br> coordinates: 76°34'00^N 16°40'00^E<br> <hr> Sørkapp. 12/11/2010; Sørkappøya island, Svalbard; 39,710 ha; 76º34'N 016º40'E; Nature Reserve, National Park. The site includes shallow and nutrient rich sea areas, islands, numerous ponds and lakes, streams, small rivers and further inland ice covered mountain ridges. It is characterised by permafrost and erosion from wind, ice and the sea and mainly covered by spotted grass vegetation. Svalbard Rock Ptarmigan Lagopus muta hyperborea is the only bird species wintering on land. A few bird species like Long-tailed Duck Clangula hyemalis and gulls and auks might occasionally overwinter in areas free of sea ice, but most bird species are migratory. Waders, goose species and seabirds are the dominant groups. Some of these breeding species are listed on the Norwegian (and Svalbard) Red List including Red Knot Calidris canutus (EN) and Sanderling Calidris alba (VU). 19 species of marine mammals can be observed in the area, including Svalbard Reindeer Rangifer tarandus platyrhynchus and Arctic Fox Vulpes lagopus, and Polar Bear Ursus maritimus. Permafrost areas and mires represent important carbon reservoirs. There are several cultural heritage sites relating to Russian (17th century) and Norwegian (19th century) wintering including graves, huts and hunting traps. Ramsar Site no. 1965. Most recent RIS information: 2011. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO048\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    16.6666666667,
+                    76.5666666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "312, Stabbursneset",
+                "Description": "<b>3NO009</b><br> country: Norway<br> coordinates: 070°10'00^N 024°57'00^E<br> <hr> Stabbursneset. 24/07/85; Finnmark; 1,620 ha; 70º10^N 024º57^E. Nature Reserve. Part of a river delta including shallow marine waters, sand banks exposed at low tide, saltmarsh and wet mires. An important area for resting and molting migratory waterbirds. A significant proportion of the Norwegian breeding population of the globally vulnerable goose Anser erythropus stages in the area. The most numerous bird species occurring at the site are Red Knot Calidris canutus (up to 30,000 ind.) and Common Eider Somateria mollissima (up to 10,000 ind.). The river Stabburselva is important for Atlantic salmon Salmo salar and is being used for sport fishing. There is an information center close to the site and strict regulations prevent hunting and camping during sensitive times. Ramsar Site no. 312. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO009\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_312/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    24.95,
+                    70.1666666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1197, Tanamunningen",
+                "Description": "<b>3NO035</b><br> country: Norway<br> coordinates: 70°30'00^N 028°25'00^E<br> <hr> Tanamunningen. 06/08/02; Finnmark; 3,409 ha; 070°30'N 028°25'E. Nature Reserve, IBA. The Tana is one of the largest rivers in Norway and the most important for wild salmon Salmo salar. The mouth of the river has created a shallow estuary, partly brackish, and huge underwater deposits of gravel. Some sandy islands are situated in the middle of the site. An unspoilt river estuary of this size is rare in Europe. The site is particularly important for Goosander Mergus merganser, with 21,000 individuals registered in October 2010. The River Tana plays a significant role in flood protection and sediment transport and is extremely important for the local Sami culture, both as a traditional means of transport and as a source of salmon. Possible threats to the site include the introduction of invasive species through the unloading of ballast water, potential oil spills and plans for the development of a new quarry on the western side of the site. Ramsar Site no. 1197. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO035\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_1197/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    28.416666666667,
+                    70.5,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "311, Tautra & Svaet",
+                "Description": "<b>3NO008</b><br> country: Norway<br> coordinates: 63°35'00''N 010°37'00''E<br> <hr> Tautra & Svaet. 24/07/85; Nord-Trøndelag; 2,054 ha; 63°35'N 010°37'E. Nature Reserve, Bird Sanctuary. An island surrounded by shallow marine waters. The northern part is dominated by farms, houses and roads, while the southern point is dominated by Picea forest and Juniperus scrub. The area is important for breeding and resting numerous species of waterbirds. Ramsar site no. 311. Most recent RIS information: 1992. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO008\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_311/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.616666666667,
+                    63.583333333333,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1198, Trondheimfjord wetland system",
+                "Description": "<b>3NO036</b><br> country: Norway<br> coordinates: 63°34'00''N 010°51'00''E<br> <hr> Trondheimfiord wetland system. 06/08/02; Sør- and Nord-Trøndelag; 670 ha; 63°34'N 010°51'E. Nature Reserves. Four separate wetland units - Eidsbotn, Gaulosen, Ørin, and Rinnleiret - consisting of sheltered tidal marine areas and two river estuaries, important for migratory birds, in particular ducks and waders. The site includes the Gaula, one of the very few unspoilt large-river estuaries in southern Norway, and provides immense flood control functions. The site is used by tourists and residents for walking, fishing, and birdwatching. Ramsar site no. 1198. Most recent RIS information: 2002. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO036\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_1198/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.85,
+                    63.566666666667,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1199, Tufsingdeltaet",
+                "Description": "<b>3NO037</b><br> country: Norway<br> coordinates: 62°12'00^N 011°49'00^E<br> <hr> Tufsingdeltaet. 06/08/02; Hedmark; 895 ha; 62°12'N 011°49'E. Nature Reserve. A wetland with mires and the river Tufsinga's delta into Lake Femund, with a very high number of wetland types, including mires, flowing watercourses, lakes and ponds, and shrub/gallery forests. The formation of mires into the lake through overgrowing of ponds is considered to be remarkable. Areas of impenetrable floating mires exist both on land and in the lake. Several nationally threatened bird species use the site for feeding, breeding and during migration. Human uses include sport fishing, berry-picking, hunting and canoeing, but human impacts are very low. The site is valuable in terms of flood reduction, sediment trapping and nutrient fixation. Ramsar site no. 1199. Most recent RIS information: 2012. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO037\">More site information from the Ramsar database</a><br> <br><br> Available products:<br> <a href=\"http://sites.wetlands.org/reports/Country_maps/KML/NORWAY_1199/doc.kml\">Ramsar site boundary (kml)</a><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    11.8166666667,
+                    62.2,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "1967, Ulendeltaet",
+                "Description": "<b>3NO050</b><br> country: Norway<br> coordinates: 64°09'00^N  13°49'00^E<br> <hr> Ulendeltaet. 12/11/2010; Lierne municipality, Nord-Trøndelag County; 280 ha; 64°09'N 013° 49'E; Nature Reserve. Ulendeltaet is an undisturbed freshwater delta and includes stretches of a meandering river, marshes, islands, oxbow lakes and pools. Moist spruce and birch forests line the riverbank and vast and well developed Salix scrubs are important breeding areas for different passerines such as the Yellow Wagtail Motacilla flava thunbergi, the Willow Warbler Phylloscopus trochilus and Brambling Fringilla montifringilla. The delta as well as Lake Ulen harbour large numbers of Brown Trout Salmo trutta, Arctic Char Salvelinus alpines, Burbot Lota lota and Common Minnow Phoxinus phoxinus. Furthermore, the area has a stable population of beaver Castor fiber and moose Alces alces. The area functions as a sediment trap and is important for nutrient fixing as well as flood reduction. The site is mainly used for fishing and moose hunting, but also for canoe trips and bird watching activities. A National Park Centre is located in the vicinity of the site. Ramsar Site no. 1967. Most recent RIS information: 2011. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO050\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    13.8166666667,
+                    64.15,
+                    0
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "Name": "2165, West-Vikna Archipelago ",
+                "Description": "<b>3NO063</b><br> country: Norway<br> coordinates: 064°58'34^N 010°49'39^E<br> <hr> West-Vikna archipelago. 27/05/2013; Nord-Trøndelag; 13,592 ha; 64°58’34”N 010°49’40”E. Nature Reserves, Animal Protected Areas. An archipelago of several larger islands and numerous islets in shallow marine waters. The landscape has a mosaic pattern including rocky shores, narrow mires/bogs, and sparse vegetation influenced by seabird guano. Some of the islands are covered by a nationally endangered heathland mosaic with bogs and ponds. The large mires constitute important water reservoirs during dry periods and play an important role for flood control during periods of heavy precipitation. The wetland supports breeding, staging and wintering populations of many nationally threatened species such as Black Guillemot Cepphus grylle, Atlantic Puffin Fratercula arctica, and Black-legged Kittiwake Rissa tridactyla. The islets hold populations of Grey Seal Halichoerus grypus and Harbour Seal Phoca vitulina. More rarely, False Killer Whale Pseudorca crassidens, and Eurasian Otter Lutra lutra visit the archipelago. European Roe Deer Capreolus capreolus is common on some of the islands. Land use within the site includes fishing, agriculture, grazing and collection of eggs. Ramsar site no. 2165. Most recent RIS information: 2013. <br><hr> <a href=\"http://sites.wetlands.org/reports/index.cfm?siteref=3NO063\">More site information from the Ramsar database</a><br> <br><br>"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.8275,
+                    64.976111111111,
+                    0
+                ]
+            }
+        }
+    ]
+}
