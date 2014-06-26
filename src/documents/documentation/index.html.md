@@ -64,13 +64,13 @@ a map of Svalbard centered around Longyearbyen:
 <html>
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/esri/css/esri.css"/>
+    <link rel="stylesheet" href="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/js/esri/css/esri.css"/>
     <style type="text/css">
       html { height: 100% }
       body { height: 100%; margin: 0; padding: 0 }
       #map { height: 100% }
     </style>
-    <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/"></script>
+    <script src="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/init.js"></script>
     <script type="text/javascript">
       dojo.require("esri.map");
       function initialize() {
@@ -91,7 +91,7 @@ a map of Svalbard centered around Longyearbyen:
     </script>
   </head>
   <body>
-    <div id="map" style="width:100%; height:100%;"/>
+    <div id="map" style="width:100%; height:100%;"></div>
   </body>
 </html>
 ```
@@ -103,12 +103,12 @@ application:
     section of the document to have styles and various widgets for the
     map.
 
-        <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/esri/css/esri.css"/>
+        <link rel="stylesheet" href="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/js/esri/css/esri.css"/>
 
 2.  Add reference to the ArcGIS API for Javascript which loads all
     symbols and definitions needed for using the API.
 
-        <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/"></script>
+        <script src="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/init.js"></script>
 
 3.  Create a `div` element with a certain id to hold the map. The size
     of the map is specified in the style attribute of the div.
