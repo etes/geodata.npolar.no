@@ -49,9 +49,8 @@ editing.
 This documentation is designed with the assumption that you are familiar
 with basic JavaScript programming and mapping concepts (such as Google
 Maps). It's also desirable if you make yourself familiar with Esri's
-[ArcGIS API for
-Javascript](http://help.arcgis.com/en/webapi/javascript/arcgis/) to take
-full advantage of the mapping API.
+[ArcGIS API for Javascript](https://developers.arcgis.com/javascript) 
+to take full advantage of the mapping API.
 
 ### Setting The Map
 
@@ -334,9 +333,8 @@ Similar method can be used to create lines, polylines, and polygons.
 #### Drawing on map
 
 If you would like the users to draw a points, lines, or polygons on the
-screen and capture that geometry, the easiest is to use
-[Draw](http://developers.arcgis.com/en/javascript/jsapi/draw.html)
-toolbar of ArCGIS API for Javascript.
+screen and capture that geometry, the easiest is to use Draw toolbar of ArCGIS API for Javascript - 
+see [Esri documentation](https://developers.arcgis.com/javascript/jssamples/graphics_add.html) for details.
 
 <div id="info" style="margin:5px 0 0 25%; position: absolute; z-index: 2;">
 			<button class="btn btn-primary" id="drawPoint">Point</button>
