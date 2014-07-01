@@ -118,8 +118,19 @@ function init() {
 	$("#btnGenerateCode").click(generateCode);
 	$("#txtWidth").change(generateCode);
 	$("#txtHeight").change(generateCode);
-	$("#rbLockedYes").change(generateCode);
-	$("#rbLockedNo").change(generateCode);
+	// scroll wheel zooming handler
+	$('#scroll-zoom').click(function() {
+		if (!$(this).hasClass("selected")) {
+			$(this).addClass("selected");
+			$(this).attr("tip", "Disable scroll wheel zooming");
+			generateCode();
+		}
+		else {
+			$(this).removeClass("selected");
+			$(this).attr("tip", "Enable scroll wheel zooming");
+			generateCode();
+		}
+	});
 	//dojo.connect(dojo.byId('btnExamplePage'), "onclick", btnExamplePage_click);
 	//dojo.connect(dojo.byId('txtWidth'), "onchange", generateCode);
 	dojo.connect(dynaLayer1, "onOpacityChange", generateCode);
@@ -208,14 +219,15 @@ function requestSucceeded(response, io) {
 	if (response.hasOwnProperty("layers")) {
 
 		layerInfo = dojo.map(response.layers, function(f) {
-			if (f.subLayerIds == null) {
+			if (f.subLayerIds === null) {
 				return f.id;
 			} else {
 				return -1;
 			}
 		});
 		// console.log(layerInfo);
-	} else {
+	}
+	else {
 		// console.log ("no layers");
 	}
 }
@@ -223,6 +235,7 @@ function requestSucceeded(response, io) {
 function requestFailed(error, io) {
 	console.log("Failed: ", error);
 }
+
 
 function btnRemoveMarker_click() {
 	mode = "default";
@@ -254,18 +267,18 @@ function generateCode() {
 		infoTitle = overlayParams[2];
 		infoContent = overlayParams[3];
 
-		if (shape == "point") {
+		if (shape === "point") {
 			pointX = Math.round(overlayParams[4]);
 			pointY = Math.round(overlayParams[5]);
 			ptsUrl.push("&poi[]=" + drawingColor + "," + infoTitle + "," + infoContent + "," + pointX + "," + pointY);
 		}
-		if (shape == "circle") {
+		if (shape === "circle") {
 			centerX = overlayParams[4];
 			centerY = overlayParams[5];
 			radius = overlayParams[6];
 			circleUrl.push("&coi[]=" + drawingColor + "," + infoTitle + "," + infoContent + "," + centerX + "," + centerY + "," + radius);
 		}
-		if (shape == "polyline") {
+		if (shape === "polyline") {
 			var linepath = overlayParams[4];
 			for (var j = 0; j < linepath.length; j++) {
 				linepath[j][0] = Math.round(linepath[j][0]);
@@ -273,14 +286,14 @@ function generateCode() {
 			}
 			lineUrl.push("&loi[]=" + drawingColor + "," + infoTitle + "," + infoContent + "," + linepath);
 		}
-		if (shape == "extent") {
+		if (shape === "extent") {
 			rectXMin = Math.round(overlayParams[4][0]);
 			rectYMin = Math.round(overlayParams[4][1]);
 			rectXMax = Math.round(overlayParams[4][2]);
 			rectYMax = Math.round(overlayParams[4][3]);
 			rectUrl.push("&roi[]=" + drawingColor + "," + infoTitle + "," + infoContent + "," + rectXMin + "," + rectYMin + "," + rectXMax + "," + rectYMax);
 		}
-		if (shape == "text") {
+		if (shape === "text") {
 			textPositionX = Math.round(overlayParams[4]);
 			textPositionY = Math.round(overlayParams[5]);
 			textUrl.push("&toi[]=" + drawingColor + "," + infoTitle + "," + infoContent + "," + textPositionX + "," + textPositionY);
@@ -294,7 +307,7 @@ function generateCode() {
 		}
 	}
 
-	var code = dojo.string.substitute('<iframe scrolling="no" src="${url}?&width=${width}&height=${height}&extent=${extent}&wkid=25833${point}${circle}${line}${rectangle}${text}${overlay}&t=${tiled}&n=${nav}&opValue=${opValue}" frameborder=0 width="${width}" height="${height}"></iframe>', {
+	var code = dojo.string.substitute('<iframe scrolling="no" src="${url}?&width=${width}&height=${height}&extent=${extent}&wkid=25833${point}${circle}${line}${rectangle}${text}${overlay}&t=${tiled}&nav=${nav}&opValue=${opValue}" frameborder=0 width="${width}" height="${height}"></iframe>', {
 		url : mapletUrl,
 		//sc : dojo.byId('chkSC').checked ? "sc=0&" : "",
 		extent : Math.round(map.extent.xmin) + "," + Math.round(map.extent.ymin) + "," + Math.round(map.extent.xmax) + "," + Math.round(map.extent.ymax),
@@ -306,11 +319,10 @@ function generateCode() {
 		line : ( lineUrl ? lineUrl.join("") : ""),
 		rectangle : ( rectUrl ? rectUrl.join("") : ""),
 		text : ( textUrl ? textUrl.join("") : ""),
-		//nav : dojo.byId('rbLockedYes').checked ? "0" : "1",
-		nav : $('#rbLockedYes').is(':checked') ? "0" : "1",
+		nav : $('#scroll-zoom').hasClass('selected') ? "0" : "1",
 		tiled : isTiledMap ? "1" : "0",
 		//mapUrl : encodeURIComponent(basemapServiceUrl),
-		overlay : checkedLayers.length == 0 ? "" : "&cl=" + checkedLayers.join(";")
+		overlay : checkedLayers.length === 0 ? "" : "&cl=" + checkedLayers.join(";")
 	});
 	$("#divCode").html(dojox.html.entities.encode(code));
 	return code;
@@ -369,7 +381,7 @@ function initToolbar(map) {
 			$(this).removeClass("active");
 		}
 	});
-
+	
 }
 
 function addGraphic(geometry) {
@@ -386,7 +398,7 @@ function addGraphic(geometry) {
 	var type = geometry.type;
 	var symbol;
 
-	if (type === "point" && toolId == "point") {
+	if (type === "point" && toolId === "point") {
 		symbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 10, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color(iframegraphiccolor), 4), new dojo.Color(iframegraphiccolor));
 		graphicOverlays.push([type, iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, geometry.x, geometry.y]);
 	} else if (type === "line" || type === "polyline") {
@@ -405,7 +417,7 @@ function addGraphic(geometry) {
 		centerY = Math.round((ymin + ymax) / 2);
 		radius = Math.round((xmax - xmin) / 2);
 		graphicOverlays.push(["circle", iframegraphiccolorurl, iframetitleinputtexturl, iframeinfoinputtexturl, centerX, centerY, radius]);
-	} else if (type === "point" && toolId == "text") {
+	} else if (type === "point" && toolId === "text") {
 
 		var font = new esri.symbol.Font();
 		font.setSize("14pt");
@@ -413,7 +425,7 @@ function addGraphic(geometry) {
 		font.setWeight(esri.symbol.Font["WEIGHT_BOLD"]);
 
 		var symbol = new esri.symbol.TextSymbol();
-		if (iframetitleinput == "") {
+		if (iframetitleinput === "") {
 			symbol.setText("Text");
 		} else {
 			symbol.setText(iframetitleinput);
@@ -465,7 +477,7 @@ function hexToRgb(hex) {
 }
 
 function onProjectComplete(graphics) {
-	if (graphics && graphics.length == 1) {
+	if (graphics && graphics.length === 1) {
 		var g = graphics[0];
 	}
 }
@@ -494,7 +506,7 @@ function testSetVisibleLayersProgramatically() {
 }
 
 function testInsertNewLayer() {
-	if (dynaLayer2 == null) {
+	if (dynaLayer2 === null) {
 		dynaLayer2 = new esri.layers.ArcGISDynamicMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Miljo/MapServer", {
 			opacity : 0.8
 		});
@@ -595,7 +607,7 @@ function executeIdentifyTask(evt) {
 
 //show hide menu
 function showhide() {
-	if ($("#rightpanel").css("display") == "none") {
+	if ($("#rightpanel").css("display") === "none") {
 		$("#rightpanel").css("display", "block");
 		$("#showhide").css("background-position", "-448px  -72px");
 	} else {
@@ -605,7 +617,7 @@ function showhide() {
 }
 // show hide draw toolbar
 function toggle_draw_toolbar() {
-	if ($(".draw-toolbar").css("display") == "none") {
+	if ($(".draw-toolbar").css("display") === "none") {
 		$(".draw-toolbar").css("display", "block");
 		$("#draw-toolbar-section").css({"border": "solid 1px #ccc", "border-radius": "4px"});
 	} else {
@@ -716,14 +728,14 @@ $("#colorpicker").spectrum({
 });
 // disable enter key in input boxes
 $('#iframetitleinput').keypress(function(e){
-    if ( e.which == 13 ) return false;
+    if ( e.which === 13 ) return false;
     //or...
-    if ( e.which == 13 ) e.preventDefault();
+    if ( e.which === 13 ) e.preventDefault();
 });
 $('#search-input').keypress(function(e){
-    if ( e.which == 13 ) return false;
+    if ( e.which === 13 ) return false;
     //or...
-    if ( e.which == 13 ) e.preventDefault();
+    if ( e.which === 13 ) e.preventDefault();
 });
 
 //ingen GIS data ble skadet i utviklingen av disse kartene.
