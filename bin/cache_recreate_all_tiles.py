@@ -1,3 +1,4 @@
+# Script reacreates all tiles of a cached map service
 # Empty quotes take the default value.
 # To accept arguments from the command line replace values of variables to
 # "sys.argv[]"
