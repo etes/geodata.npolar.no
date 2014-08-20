@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!--The viewport meta tag is used to improve the presentation and behavior of the
+    samples on iOS devices-->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <title>Add WMTS Layer - Resource Info</title>
+
+    <style>
+      html, body { height: 100%; width: 100%; margin: 0; padding: 5px; } 
+
+    </style>
+    <link rel="stylesheet" href="http://js.arcgis.com/3.10/js/esri/css/esri.css">
+
+    <script src="http://js.arcgis.com/3.10compact/"></script>
+    <script>
+      var map, wmtsLayer;
+      require([
+        "esri/map", "esri/layers/WMTSLayer", "esri/layers/WMTSLayerInfo",
+        "esri/geometry/Extent", "esri/layers/TileInfo", "esri/SpatialReference",
+        "dojo/parser",
+        
+        "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dojo/domReady!"
+      ], function(
+        Map, WMTSLayer, WMTSLayerInfo,
+        Extent, TileInfo, SpatialReference,
+        parser
+      ) {
+        parser.parse();
+
+        var bounds = new Extent({
+          xmin: 518992.2803403936,
+		  ymin: 8731908.028649315,
+		  xmax: 538984.2369909736,
+		  ymax: 8738395.62495784,
+          "spatialReference": { "wkid": 25833 }
+        });
+        map = new Map("map", {
+          extent: bounds,
+          logo: false
+        });
+		
+		
+		var tileInfo = new TileInfo( {
+          "dpi": 96,
+          "format": "Mixed",
+          "compressionQuality": 90,
+		  origin: {
+			x: -5120900,
+			y: 9998100
+			},
+          "spatialReference": new SpatialReference({
+            "wkid": 25833
+          }),
+		rows: 256,
+		cols: 256,	
+		lods: [
+		{
+		level: 0,
+		resolution: 21674.7100160867,
+		scale: 81920000
+		},
+		{
+		level: 1,
+		resolution: 10837.35500804335,
+		scale: 40960000
+		},
+		{
+		level: 2,
+		resolution: 5418.677504021675,
+		scale: 20480000
+		},
+		{
+		level: 3,
+		resolution: 2709.3387520108377,
+		scale: 10240000
+		},
+		{
+		level: 4,
+		resolution: 1354.6693760054188,
+		scale: 5120000
+		},
+		{
+		level: 5,
+		resolution: 677.3346880027094,
+		scale: 2560000
+		},
+		{
+		level: 6,
+		resolution: 338.6673440013547,
+		scale: 1280000
+		},
+		{
+		level: 7,
+		resolution: 169.33367200067735,
+		scale: 640000
+		},
+		{
+		level: 8,
+		resolution: 84.66683600033868,
+		scale: 320000
+		},
+		{
+		level: 9,
+		resolution: 42.33341800016934,
+		scale: 160000
+		},
+		{
+		level: 10,
+		resolution: 21.16670900008467,
+		scale: 80000
+		},
+		{
+		level: 11,
+		resolution: 10.583354500042335,
+		scale: 40000
+		},
+		{
+		level: 12,
+		resolution: 5.291677250021167,
+		scale: 20000
+		},
+		{
+		level: 13,
+		resolution: 2.6458386250105836,
+		scale: 10000
+		},
+		{
+		level: 14,
+		resolution: 1.3229193125052918,
+		scale: 5000
+		},
+		{
+		level: 15,
+		resolution: 0.6614596562526459,
+		scale: 2500
+		},
+		{
+		level: 16,
+		resolution: 0.33072982812632296,
+		scale: 1250
+		},
+		{
+		level: 17,
+		resolution: 0.16536491406316148,
+		scale: 625
+		}
+		]
+		}
+		);
+		
+  
+		var tileExtent = new Extent (369976.3899489096, 8221306.539890718, 878234.7199568129, 9010718.76990194, new SpatialReference({
+			wkid: 25833
+			}));
+		
+        
+        var layerInfo = new WMTSLayerInfo({
+          tileInfo: tileInfo,
+          fullExtent: tileExtent,
+          initialExtent: tileExtent,
+          tileMatrixSet: "EPSG:25833",
+          format: "png",
+          style: "_null"
+        });
+
+
+        var resourceInfo = {
+          version: "1.0.0",
+          layerInfos: [layerInfo],
+          copyright: "open layer"
+        };
+
+        var options = {
+          serviceMode: "KVP",
+          resourceInfo: resourceInfo,
+          layerInfo: layerInfo
+        };
+
+        wmtsLayer = new WMTSLayer("http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_Svalbard_WMTS_25833/MapServer/WMTS", options);
+        map.addLayer(wmtsLayer);
+      });
+
+    </script>
+  </head>
+  
+  <body>
+    <div data-dojo-type="dijit/layout/BorderContainer" 
+         data-dojo-props="design:'headline', gutters:false" 
+         style="width: 100%; height: 100%; margin: 0;">
+
+      <div id="map" 
+           data-dojo-type="dijit/layout/ContentPane" 
+           data-dojo-props="region:'center'">
+      </div>
+
+    </div>
+  </body>
+</html>
