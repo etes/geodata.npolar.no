@@ -1,3 +1,8 @@
+<!-- BADGES/ -->
+
+[![Build Status](https://travis-ci.org/npolar/geodata.npolar.no.svg?branch=master)](https://travis-ci.org/npolar/geodata.npolar.no "Check this project's build status on TravisCI")
+
+
 # Norwegian Polar Spatial Data and Services
 
 Source code for http://geodata.npolar.no, built with [Docpad](https://github.com/bevry/docpad). [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/npolar/geodata.npolar.no)
@@ -22,6 +27,3 @@ This is the repository for building the main page of Norwegian Polar Spatial Dat
 	```
 
 3. Open [http://localhost:9778/](http://localhost:9778/)
-
-
-
