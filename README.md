@@ -7,6 +7,7 @@
 # Norwegian Polar Spatial Data and Services
 
 Source code for http://geodata.npolar.no, built with [Docpad](https://github.com/bevry/docpad).
+
 This is the repository for building the main page of Norwegian Polar Spatial Data Infrastractures and documentation on available map services and mapping APIs of Norwegian Polar Institute
 
 ## Requirements
