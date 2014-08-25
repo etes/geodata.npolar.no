@@ -1,12 +1,12 @@
 <!-- BADGES/ -->
 
 [![Build Status](https://travis-ci.org/npolar/geodata.npolar.no.svg?branch=master)](https://travis-ci.org/npolar/geodata.npolar.no "Check this project's build status on TravisCI")
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/npolar/geodata.npolar.no)
 
 
 # Norwegian Polar Spatial Data and Services
 
-Source code for http://geodata.npolar.no, built with [Docpad](https://github.com/bevry/docpad). [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/npolar/geodata.npolar.no)
-
+Source code for http://geodata.npolar.no, built with [Docpad](https://github.com/bevry/docpad).
 This is the repository for building the main page of Norwegian Polar Spatial Data Infrastractures and documentation on available map services and mapping APIs of Norwegian Polar Institute
 
 ## Requirements
