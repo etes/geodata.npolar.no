@@ -7,7 +7,7 @@ var express = require('express');
 var app = express();
 
 // all environments
-app.use(express.favicon());
+//app.use(express.favicon());
 app.use(express.static("viewer"));
 var port = process.argv[2];
 if (!port){
