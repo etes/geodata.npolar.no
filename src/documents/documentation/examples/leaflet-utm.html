@@ -27,10 +27,9 @@
   </head>
   <body>
     <div id="map"></div>
-    <a href="https://github.com/esri/esri-leaflet"><img style="z-index: 1000; position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
     <script>
       // create new Proj4Leaflet CRS
-      var crs = new L.Proj.CRS('EPSG:25833', 
+      var crs = new L.Proj.CRS('EPSG:25833',
         '+proj=utm +zone=33 +ellps=GRS80 +units=m +no_defs',
         {
           transformation: new L.Transformation(1, 5120900, -1, 9998100),
@@ -51,16 +50,15 @@
                         0.16536491406316148]
         }
       );
-
-      // pass crs into map constructor
+ 
       var map = new L.Map('map', {
         crs: crs
       });
-
-      // create new TiledMapLayer from esri-leaflet
-      var url = 'http://geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Nordomraadene_WMTS_25833/MapServer';
-      var tLayer = new L.esri.TiledMapLayer(url, {
-        maxZoom: 14,
+ 
+      // create new TiledMapLayer using esri-leaflet
+      var tiledLayer = new L.esri.TiledMapLayer('http://geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Nordomraadene_WMTS_25833/MapServer',
+      {
+        maxZoom: 10,
         minZoom: 0,
         continuousWorld: true
       });
