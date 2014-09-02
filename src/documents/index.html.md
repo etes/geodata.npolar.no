@@ -92,7 +92,7 @@ Norwegian Polar Institute Maps and Services
 
 ## Basemaps
 
-Norwegian Polar Institute offers a selection of cached basemap services which can be
+Norwegian Polar Institute offers a selection of cached and dynamic basemap services which can be
 consumed to create interactive web mapping applications.
 [Tiled (cached) map
 service](http://webhelp.esri.com/arcgisserver/9.2/dotnet/manager/publishing/static_map_svcs.htm)
@@ -111,6 +111,12 @@ applications with those basemaps.
 | [NP_Basiskart_JanMayen_WMTS_25829](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_JanMayen_WMTS_25829/MapServer?f=jsapi) | Jan Mayen topography | ETRS 89 UTM 29 (EPSG:25829) | [ArcGIS Rest](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_JanMayen_WMTS_25829/MapServer) | [WMTS](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_JanMayen_WMTS_25829/MapServer/WMTS/1.0.0/WMTSCapabilities.xml); [WMS](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_JanMayen_WMTS_25829/MapServer/WMSServer?request=GetCapabilities&service=WMS) |
 | [NP_Basiskart_JanMayen_WMTS_25833](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_JanMayen_WMTS_25833/MapServer?f=jsapi)| Jan Mayen topography | ETRS 89 UTM 33 (EPSG:25833) | [ArcGIS Rest](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_JanMayen_WMTS_25833/MapServer) | [WMTS](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_JanMayen_WMTS_25833/MapServer/WMTS/1.0.0/WMTSCapabilities.xml); [WMS](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_JanMayen_WMTS_25833/MapServer/WMSServer?request=GetCapabilities&service=WMS) |
 
+#### Dynamic basemap services:
+
+| Service Name | Layers  | Service URL | Capabilities |
+| ------------ | ------- | ----------- | ------------ |
+| [NP_Basiskart_Svalbard_WMS](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_Svalbard_WMS/MapServer?f=jsapi) | Svalbard topography | [ArcGIS Rest](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_Svalbard_WMS/MapServer) | [WMS](http://geodata.npolar.no/arcgis/services/Basisdata/NP_Basiskart_Svalbard_WMS/MapServer/WMSServer?request=GetCapabilities&service=WMS) |
+| [NP_Basiskart_JanMayen_WMS](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_JanMayen_WMS/MapServer?f=jsapi) | Jan Mayen topography | [ArcGIS Rest](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_JanMayen_WMTS/MapServer) | [WMS](http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_JanMayen_WMTS_25829/MapServer/WMSServer?request=GetCapabilities&service=WMS) |
 
 #### Zoom levels and scales
 
