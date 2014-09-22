@@ -57,11 +57,11 @@
       zoom: 5
     });
     
-	var basemap = new esri.layers.ArcGISTiledMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer");
+	var basemap = new esri.layers.ArcGISTiledMapServiceLayer("http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Basiskart_Svalbard_WMTS_25833/MapServer");
     map.addLayer(basemap);
     var kmlUrl = "http://umberto.npolar.no/ris15/ssfprojects.kml";
     var kml = new esri.layers.KMLLayer(kmlUrl, { 
-      outSR: new esri.SpatialReference({ wkid: 32633 }) 
+      outSR: new esri.SpatialReference({ wkid: 25833 }) 
 	}); 
     map.addLayer(kml);
     dojo.connect(kml, "onLoad", function() {
