@@ -26,5 +26,9 @@
     "grunt-open" : "0.2.x",
     "grunt-contrib-compress" : "0.10.x"
   },
-  "engine" : "node >= 0.10"
+  "engine" : "node >= 0.10",
+  "devDependencies" : {
+    "grunt-browserify" : "^3.0.1"
+  }
+
 }
