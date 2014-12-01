@@ -26,15 +26,15 @@
     "url": "https://github.com/npolar/geodata.npolar.no.git"
   },
   "engines": {
-    "node": "0.10",
-    "npm": "1.2"
+    "node": ">=0.6.0",
+    "npm": ">=1.1.0"
   },
   "dependencies": {
-    "docpad": "~6.63.3",
+    "docpad": "~6.69.x",
     "docpad-plugin-cleanurls": "~2.6.2",
     "docpad-plugin-coffeescript": "~2.2.3",
     "docpad-plugin-downloader": "~2.1.4",
-    "docpad-plugin-eco": "~2.0.3",
+    "docpad-plugin-eco": "~2.1.0",
     "docpad-plugin-highlightjs": "~2.2.1",
     "docpad-plugin-less": "~2.4.1",
     "docpad-plugin-marked": "~2.2.0",
