@@ -30,5 +30,5 @@ def reclassRaster(inraster):
 if __name__ == '__main__':
     pool = Pool(processes=10)              # start 10 worker processes
     filelist = glob.glob('filelist = glob.glob("E:\\data\\Barentsportal\\Ocean\\seaice\\maxkonig\\EPSG32637\\*.tif")')
-    inputs = filelist
-    pool.map(reclassRaster,inputs)
+    pool.map(reclassRaster,filelist)
+
