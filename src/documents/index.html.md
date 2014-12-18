@@ -92,26 +92,26 @@ Norwegian Polar Institute Map Data and Services
 </div>
 
 ## Basemap Data
-From 1 January 2015, Norwegian Polar Institute offers downloads of the official topographical base map datasets for Norwegian Polar areas, under these Terms of Use [http://geodata.npolar.no/bruksvilkar](http://geodata.npolar.no/bruksvilkar). The data are either scale independent or created for best visual appearance when printed at selected map scales (see description column). The data are provided in the most commonly used GIS file formats, to be used e.g. to create custom maps or to do analyses. Click the links below to go to data product page.
+From 1 January 2015, Norwegian Polar Institute offers downloads of the official topographical base map datasets for Norwegian Polar areas, under these [Terms of Use](http://geodata.npolar.no/bruksvilkar). The data are either scale independent or created for best visual appearance when printed at selected map scales (see description column). The data are provided in the most commonly used GIS file formats, to be used e.g. to create custom maps or to do analyses. Click the links below to go to data product page.
 
 #### Jan Mayen
 
-| Data Product | Description | Data type | Metadata |
-| ------------ | ----------- | --------- | -------- |
-| J1000 Kartdata |	Jan Mayen 1:1 000 000 base map themes |	Vector	| [d4b774f2-77b3-4ac2-9f16-520905aecfe8](https://data.npolar.no/dataset/d4b774f2-77b3-4ac2-9f16-520905aecfe8) |
-| J100 Kartdata | Jan Mayen 1:100 000 base map themes | Vector	| [f16ab884-a66e-453e-be30-70f480da6691](https://data.npolar.no/dataset/f16ab884-a66e-453e-be30-70f480da6691) |
-| J0 Stedsnavn	| Jan Mayen place names	| Vector	| [3534b12b-cdbb-469e-90ba-b50b797ded36](https://data.npolar.no/dataset/3534b12b-cdbb-469e-90ba-b50b797ded36) |
-| J0 Terrengmodell | Jan Mayen digital elevation models	| Raster	| [e2b2417e-9926-4519-b6a9-7eefb3bb1012](https://data.npolar.no/dataset/e2b2417e-9926-4519-b6a9-7eefb3bb1012) |
+| Data Product | Description | Data type |
+| ------------ | ----------- | --------- |
+| [J1000 Kartdata](https://data.npolar.no/dataset/d4b774f2-77b3-4ac2-9f16-520905aecfe8) |	Jan Mayen 1:1 000 000 base map themes |	Vector	|
+| [J100 Kartdata](https://data.npolar.no/dataset/f16ab884-a66e-453e-be30-70f480da6691)  | Jan Mayen 1:100 000 base map themes | Vector	|
+| [J0 Stedsnavn](https://data.npolar.no/dataset/3534b12b-cdbb-469e-90ba-b50b797ded36)	| Jan Mayen place names	| Vector	|
+| [J0 Terrengmodell](https://data.npolar.no/dataset/e2b2417e-9926-4519-b6a9-7eefb3bb1012) | Jan Mayen digital elevation models	| Raster	|
 
 #### Svalbard
 
-| Data Product | Description | Data type | Metadata |
-| ------------ | ----------- | --------- | -------- |
-| S1000 Kartdata |	Svalbard 1:1 000 000 base map themes  | Vector	| [63730e2e-b7a6-4d14-b341-c661ccdc5254](https://data.npolar.no/dataset/63730e2e-b7a6-4d14-b341-c661ccdc5254) |
-| S250 Kartdata	| Svalbard 1:250 000 base map themes  | Vector	| [a23acc28-288b-49ba-ac6d-025d1fdee246](https://data.npolar.no/dataset/a23acc28-288b-49ba-ac6d-025d1fdee246) |
-| S100 Kartdata	| Svalbard 1:100 000 base map themes  | Vector	| [645336c7-adfe-4d5a-978d-9426fe788ee3](https://data.npolar.no/dataset/645336c7-adfe-4d5a-978d-9426fe788ee3) |
-| S0 Stedsnavn	| Svalbard place names  | Vector	| [f8e14c1b-a91b-45db-9a27-7ec652a801c9](https://data.npolar.no/dataset/f8e14c1b-a91b-45db-9a27-7ec652a801c9) |
-| S0 Terrengmodell	| Svalbard digital elevation models	| Raster	| [dce53a47-c726-4845-85c3-a65b46fe2fea](https://data.npolar.no/dataset/dce53a47-c726-4845-85c3-a65b46fe2fea) |
+| Data Product | Description | Data type |
+| ------------ | ----------- | --------- |
+| [S1000 Kartdata](https://data.npolar.no/dataset/63730e2e-b7a6-4d14-b341-c661ccdc5254) |	Svalbard 1:1 000 000 base map themes  | Vector	|
+| [S250 Kartdata](https://data.npolar.no/dataset/a23acc28-288b-49ba-ac6d-025d1fdee246) | Svalbard 1:250 000 base map themes  | Vector	|
+| [S100 Kartdata](https://data.npolar.no/dataset/645336c7-adfe-4d5a-978d-9426fe788ee3) | Svalbard 1:100 000 base map themes  | Vector	|
+| [S0 Stedsnavn](https://data.npolar.no/dataset/f8e14c1b-a91b-45db-9a27-7ec652a801c9) | Svalbard place names  | Vector	|
+| [S0 Terrengmodell](https://data.npolar.no/dataset/dce53a47-c726-4845-85c3-a65b46fe2fea) | Svalbard digital elevation models	| Raster	|
 
 
 ## Basemap Services
