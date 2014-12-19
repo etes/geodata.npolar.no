@@ -92,7 +92,7 @@ Norwegian Polar Institute Map Data and Services
 </div>
 
 ## Basemap Data
-From 1 January 2015, Norwegian Polar Institute offers downloads of the official topographical base map datasets for Norwegian Polar areas, under these [Terms of Use](http://geodata.npolar.no/bruksvilkar). The data are either scale independent or created for best visual appearance when printed at selected map scales (see description column). The data are provided in the most commonly used GIS file formats, to be used e.g. to create custom maps or to do analyses. Click the links below to go to data product page.
+Norwegian Polar Institute offers downloads of the official topographical base map datasets for Norwegian Polar areas, under these [Terms of Use](http://geodata.npolar.no/bruksvilkar). The data are either scale independent or created for best visual appearance when printed at selected map scales (see description column). The data are provided in the most commonly used GIS file formats, to be used e.g. to create custom maps or to do analyses. Click the links below to go to data product page.
 
 #### Jan Mayen
 
