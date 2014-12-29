@@ -94,15 +94,6 @@ Norwegian Polar Institute Map Data and Services
 ## Basemap Data
 Norwegian Polar Institute offers downloads of the official topographical base map datasets for Norwegian Polar areas, under these [Terms of Use](http://geodata.npolar.no/bruksvilkar). The data are either scale independent or created for best visual appearance when printed at selected map scales (see description column). The data are provided in the most commonly used GIS file formats, to be used e.g. to create custom maps or to do analyses. Click the links below to go to data product page.
 
-#### Jan Mayen
-
-| Data Product | Description | Data type |
-| ------------ | ----------- | --------- |
-| [J1000 Kartdata](https://data.npolar.no/dataset/d4b774f2-77b3-4ac2-9f16-520905aecfe8) |	Jan Mayen 1:1 000 000 base map themes |	Vector	|
-| [J100 Kartdata](https://data.npolar.no/dataset/f16ab884-a66e-453e-be30-70f480da6691)  | Jan Mayen 1:100 000 base map themes | Vector	|
-| [J0 Stedsnavn](https://data.npolar.no/dataset/3534b12b-cdbb-469e-90ba-b50b797ded36)	| Jan Mayen place names	| Vector	|
-| [J0 Terrengmodell](https://data.npolar.no/dataset/e2b2417e-9926-4519-b6a9-7eefb3bb1012) | Jan Mayen digital elevation models	| Raster	|
-
 #### Svalbard
 
 | Data Product | Description | Data type |
@@ -112,6 +103,15 @@ Norwegian Polar Institute offers downloads of the official topographical base ma
 | [S100 Kartdata](https://data.npolar.no/dataset/645336c7-adfe-4d5a-978d-9426fe788ee3) | Svalbard 1:100 000 base map themes  | Vector	|
 | [S0 Stedsnavn](https://data.npolar.no/dataset/f8e14c1b-a91b-45db-9a27-7ec652a801c9) | Svalbard place names  | Vector	|
 | [S0 Terrengmodell](https://data.npolar.no/dataset/dce53a47-c726-4845-85c3-a65b46fe2fea) | Svalbard digital elevation models	| Raster	|
+
+#### Jan Mayen
+
+| Data Product | Description | Data type |
+| ------------ | ----------- | --------- |
+| [J1000 Kartdata](https://data.npolar.no/dataset/d4b774f2-77b3-4ac2-9f16-520905aecfe8) |	Jan Mayen 1:1 000 000 base map themes |	Vector	|
+| [J100 Kartdata](https://data.npolar.no/dataset/f16ab884-a66e-453e-be30-70f480da6691)  | Jan Mayen 1:100 000 base map themes | Vector	|
+| [J0 Stedsnavn](https://data.npolar.no/dataset/3534b12b-cdbb-469e-90ba-b50b797ded36)	| Jan Mayen place names	| Vector	|
+| [J0 Terrengmodell](https://data.npolar.no/dataset/e2b2417e-9926-4519-b6a9-7eefb3bb1012) | Jan Mayen digital elevation models	| Raster	|
 
 
 ## Basemap Services
