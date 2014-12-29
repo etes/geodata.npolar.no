@@ -171,6 +171,10 @@ standard](http://www.kartverket.no/Kart/Kartverksted/Visningstjenester/Cache-tje
 |11|1:40000|10.5833545000423|
 |12|1:20000|5.29167725002117|
 |13|1:10000|2.64583862501058|
+|14 (orthophoto)|1:5 000|1.3229193125052918|
+|15 (orthophoto)|1:2 500|0.6614596562526459|
+|16 (orthophoto)|1:1 250|0.33072982812632296|
+|17 (orthophoto)|1:625|0.16536491406316148|
 
 
 #### Image formats and coordinate systems
