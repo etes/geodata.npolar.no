@@ -117,24 +117,24 @@ Norwegian Polar Institute offers downloads of the official topographical base ma
 
 | Data Product | Description | Data type |
 | ------------ | ----------- | --------- |
-| D250 Kartdata |	Dronning Maud Land 1:250 000 basemap themes |	Vector|
-| D0 Stedsnavn |	Dronning Maud Land place names |	Vector|
+| [D250 Kartdata](https://data.npolar.no/dataset/d45274ca-9ab7-43e0-8da5-d59cd7744d37) |	Dronning Maud Land 1:250 000 basemap themes |	Vector|
+| [D0 Stedsnavn](https://data.npolar.no/dataset/f41c15a8-da37-417e-b10d-d1b5f6eb1c7c) |	Dronning Maud Land place names |	Vector|
 
 #### Bouvetøya
 
 | Data Product | Description | Data type |
 | ------------ | ----------- | --------- |
-| B20 Kartdata	| Bouvetøya 1:20 000 basemap themes	| Vector|
-| B0 Stedsnavn	| Bouvetøya place names	| Vector|
-| B0 Terrengmodell	| Bouvetøya digital elevation model	| Raster|
+| [B20 Kartdata](https://data.npolar.no/dataset/19700322-beab-40e7-b867-c3f0c2756071)	| Bouvetøya 1:20 000 basemap themes	| Vector|
+| [B0 Stedsnavn](https://data.npolar.no/dataset/baeb9929-cd30-4520-8d5e-2b731f82d351)	| Bouvetøya place names	| Vector|
+| [B0 Terrengmodell](https://data.npolar.no/dataset/63eaa452-c264-4bd8-8ebd-97e09e1a5a1a)	| Bouvetøya digital elevation model	| Raster|
 
 #### Peter I Øy
 
 | Data Product | Description | Data type |
 | ------------ | ----------- | --------- |
-| P50 Kartdata | Peter I Øy 1:50 000 basemap themes | Vector |
-| P0 Stedsnavn | Peter I Øy place names	| Vector |
-| P0 Terrengmodell | Peter I Øy digital elevation model	| Raster |
+| [P50 Kartdata](https://data.npolar.no/dataset/29105abc-5309-498e-b3fd-e69de6814122) | Peter I Øy 1:50 000 basemap themes | Vector |
+| [P0 Stedsnavn](https://data.npolar.no/dataset/fa895997-74d8-490f-ab1d-01349b221b16) | Peter I Øy place names	| Vector |
+| [P0 Terrengmodell](https://data.npolar.no/dataset/e4ae1d26-191a-481c-9f6a-c3fbeb752f34) | Peter I Øy digital elevation model	| Raster |
 
 
 ## Basemap Services
