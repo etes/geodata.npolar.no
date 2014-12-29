@@ -120,6 +120,23 @@ Norwegian Polar Institute offers downloads of the official topographical base ma
 | D250 Kartdata |	Dronning Maud Land 1:250 000 basemap themes |	Vector|
 | D0 Stedsnavn |	Dronning Maud Land place names |	Vector|
 
+#### Bouvetøya
+
+| Data Product | Description | Data type |
+| ------------ | ----------- | --------- |
+| B20 Kartdata	| Bouvetøya 1:20 000 basemap themes	| Vector|
+| B0 Stedsnavn	| Bouvetøya place names	| Vector|
+| B0 Terrengmodell	| Bouvetøya digital elevation model	| Raster|
+
+#### Peter I Øy
+
+| Data Product | Description | Data type |
+| ------------ | ----------- | --------- |
+| P50 Kartdata | Peter I Øy 1:50 000 basemap themes | Vector |
+| P0 Stedsnavn | Peter I Øy place names	| Vector |
+| P0 Terrengmodell | Peter I Øy digital elevation model	| Raster |
+
+
 ## Basemap Services
 
 Norwegian Polar Institute offers a selection of cached basemap services which can be consumed to create interactive web mapping applications.
