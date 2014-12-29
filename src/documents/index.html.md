@@ -136,6 +136,7 @@ Norwegian Polar Institute offers downloads of the official topographical base ma
 | [P0 Stedsnavn](https://data.npolar.no/dataset/fa895997-74d8-490f-ab1d-01349b221b16) | Peter I Øy place names	| Vector |
 | [P0 Terrengmodell](https://data.npolar.no/dataset/e4ae1d26-191a-481c-9f6a-c3fbeb752f34) | Peter I Øy digital elevation model	| Raster |
 
+------------------------
 
 ## Basemap Services
 
