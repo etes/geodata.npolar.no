@@ -196,6 +196,7 @@ Tile size for jpeg is about 1/3 of the png so it must be considered what
 is important, speed or support for transparency. The image tiles have a
 resolution of 96 dpi with a size of (256x256 pixels).
 
+
 #### Dynamic basemap services
 
 | Service Name and Preview | Layers  | Service URL | Capabilities |
@@ -213,7 +214,7 @@ send map section in the form of raster files back to the user, either
 directly in the browser, a web application or a desktop application.
 
 
-|Service URL|Name|Show on Svalbardkartet|WMS Capabilities|Owner|
+|Service URL|Layers|Show on Svalbardkartet|WMS Capabilities|Owner|
 |-----------|----|----------------------|----------------|-----|
 |[Glaciers](http://geodata.npolar.no/ArcGIS/rest/services/CryoClim/glaciers/MapServer)|Svalbard Glacier Area Outlines|[Isbreer](http://svalbardkartet.npolar.no/en/Viewer.html?Viewer=Svalbardkartet&showAdvancedTools=True&showDataFrame=True&extent=453925.632753013,8669122.04466099,615847.099861399,8764021.49848276&showOverviewMap=False&layers=6,0,0,5,1,0,4,1,0,3,1,0,10,1,0,9,0,3,0,1,2,8,0,0,0,0,0,11,0,0,)|[GetCapabilities](http://geodata.npolar.no/ArcGIS/services/CryoClim/glaciers/MapServer/WMSServer?request=GetCapabilities&service=WMS)|Norwegian Polar Institute|
 |[Geologi-S750](http://geodata.npolar.no/ArcGIS/rest/services/inspire2/Geologi_S750/MapServer)|Geological Map of Svalbard 1:750000|[Geologi 1:750000](http://svalbardkartet.npolar.no/en/Viewer.html?Viewer=Svalbardkartet&showAdvancedTools=True&showDataFrame=True&extent=365645.670692461,8609882.48352378,689488.604909234,8799681.39116732&showOverviewMap=False&layers=6,0,0,5,1,0,4,1,0,3,1,0,10,1,0,9,1,0,8,1,0,0,1,0,11,1,0,&)|[GetCapabilities](http://geodata.npolar.no/ArcGIS/services/inspire2/Geologi_S750/MapServer/WMSServer?request=GetCapabilities&service=WMS)|Norwegian Polar Institute|
