@@ -113,6 +113,12 @@ Norwegian Polar Institute offers downloads of the official topographical base ma
 | [J0 Stedsnavn](https://data.npolar.no/dataset/3534b12b-cdbb-469e-90ba-b50b797ded36)	| Jan Mayen place names	| Vector	|
 | [J0 Terrengmodell](https://data.npolar.no/dataset/e2b2417e-9926-4519-b6a9-7eefb3bb1012) | Jan Mayen digital elevation models	| Raster	|
 
+#### Dronning Maud Land
+
+| Data Product | Description | Data type |
+| ------------ | ----------- | --------- |
+| D250 Kartdata |	Dronning Maud Land 1:250 000 basemap themes |	Vector|
+| D0 Stedsnavn |	Dronning Maud Land place names |	Vector|
 
 ## Basemap Services
 
