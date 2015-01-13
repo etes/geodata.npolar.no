@@ -1,7 +1,7 @@
 ```
 title: Documentation
 layout: page
-header: 
+header:
 tags: ['intro','page']
 pageOrder: 1
 
@@ -49,7 +49,7 @@ editing.
 This documentation is designed with the assumption that you are familiar
 with basic JavaScript programming and mapping concepts (such as Google
 Maps). It's also desirable if you make yourself familiar with Esri's
-[ArcGIS API for Javascript](https://developers.arcgis.com/javascript) 
+[ArcGIS API for Javascript](https://developers.arcgis.com/javascript)
 to take full advantage of the mapping API.
 
 ### Setting The Map
@@ -86,7 +86,7 @@ a map of Svalbard centered around Longyearbyen:
     map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));
     }
 
-    dojo.ready(initialize); 
+    dojo.ready(initialize);
     </script>
   </head>
   <body>
@@ -130,7 +130,7 @@ application:
         map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));
         }
 
-        dojo.ready(initialize); 
+        dojo.ready(initialize);
     </script>
 ```
 
@@ -243,7 +243,7 @@ that are approved and within Svalbard:
         // Add the yui3-skin-sam class to the body so the default
         // AutoComplete widget CSS skin will be applied to the form element.
         Y.one('form').addClass('yui3-skin-sam'); //Autocomplete css
-        
+
         var geoname_base = "http://placenames.npolar.no:80";
         // Geoname service URI (JSONP service)
         // Use GET parameters ?location= and ?approved=true|false to change service URI
@@ -256,16 +256,16 @@ that are approved and within Svalbard:
             resultTextLocator : 'title',
             source : geoname_service
         });
-        
-        // zoom and add marker to the map when the user selects a place name from result 
+
+        // zoom and add marker to the map when the user selects a place name from result
         geoname_autocomplete.ac.on('select', function(e) {
             //console.log(e.result.raw);
-            WGS84ToUTM33(e);
+            wgs84ToUtm(e);
             addMarker(position);
         })
-    }); 
+    });
     </script>
-    
+
 ```
 
 The last function zooms and adds a graphic marker to the map when a user
@@ -316,14 +316,14 @@ geometry in this sample are in UTM33.
         var map = new esri.Map("map", {logo : false});
         basemapURL = "http://geodata.npolar.no/ArcGIS/rest/services/Basisdata/NP_Basiskart_Svalbard_WMTS_25833/MapServer"
         map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));
-        
+
         dojo.connect(map, 'onLoad', function() {
             var symbol = new esri.symbol.SimpleMarkerSymbol().setColor(new dojo.Color([255, 0, 0, 0.5]));
             var graphic = new esri.Graphic(new esri.geometry.Point(514589.2466, 8682916.3628), symbol);
             map.graphics.add(graphic);
-            }); 
+            });
         }
-        dojo.ready(initialize); 
+        dojo.ready(initialize);
     </script>
 ```
 <div id="map2" style="width:100%; height:256px;"></div>
@@ -333,7 +333,7 @@ Similar method can be used to create lines, polylines, and polygons.
 #### Drawing on map
 
 If you would like the users to draw a points, lines, or polygons on the
-screen and capture that geometry, the easiest is to use Draw toolbar of ArCGIS API for Javascript - 
+screen and capture that geometry, the easiest is to use Draw toolbar of ArCGIS API for Javascript -
 see [Esri documentation](https://developers.arcgis.com/javascript/jssamples/graphics_add.html) for details.
 
 <div id="info" style="margin:5px 0 0 25%; position: absolute; z-index: 2;">
@@ -370,9 +370,9 @@ URL of service's REST endpoint (e.g.
     //Takes a URL to a dynamic map service.
     serviceURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Sjofuglkolonier/MapServer";
     var dynamicLayer = new esri.layers.ArcGISDynamicMapServiceLayer(serviceURL, {
-          "opacity":0.75, 
+          "opacity":0.75,
           "imageParameters":imageParameters
-        });              
+        });
     map.addLayer(dynamicLayer);
 ```
 
@@ -393,11 +393,11 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
 * * * * *
 
 **Norwegian Polar Data**
- 
+
  Norwegian Polar Institute
- 
+
  9296 Tromsø,
- 
+
  Norway
 
 
@@ -409,27 +409,7 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
 <script src="/public/js/npmaps.js" type="text/javascript"></script>
 
 <script>
-    YUI().use("autocomplete", "autocomplete-highlighters", function(Y) {
-        Y.one('form').addClass('yui3-skin-sam');
-        //Autocomplete css
-        var geoname_base = "http://placenames.npolar.no:80";
-        // Geoname service URI (JSONP service)
-        var geoname_service = geoname_base + "/stadnamn/edge/{query}?callback={callback}&rows=5" + "&approved=true&location=Svalbard&lang=nn";
-        var geoname_autocomplete = Y.one('#geoname_autocomplete');
-        geoname_autocomplete.plug(Y.Plugin.AutoComplete, {
-            resultHighlighter : 'phraseMatch',
-            //resultFormatter: simple_geoname_formatter,
-            resultTextLocator : 'title',
-            source : geoname_service
-        });
-        
-        // zoom and add marker to the place name when the user selects from result 
-        geoname_autocomplete.ac.on('select', function(e) {
-        	//console.log(e.result.raw);
-            WGS84ToUTM33(e);
-            addMarker(position);
-        })
-    }); 
+
 </script>
 <script type="text/javascript">
     dojo.require("esri.map");
@@ -438,42 +418,42 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
     var map;
 
     function initialize() {
-    	
+
       	var initialExtent = new esri.geometry.Extent({"xmin": 477423.89,"ymin":8663685.98,"xmax":553624.05,"ymax":8714486.09,"spatialReference":{"wkid":25833}});
       	// create map instance and add a basemap
       	// Geocoding Service (Search placename map)
         map = new esri.Map("map", {extent: initialExtent, logo : false});
-        
+
         basemapURL = "http://geodata.npolar.no/ArcGIS/rest/services/Basisdata/NP_Basiskart_Svalbard_WMTS_25833/MapServer"
 		map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));
 
         //add marker for place names search result to map
         graphicLayer = new esri.layers.GraphicsLayer();
-        map.addLayer(graphicLayer);       
+        map.addLayer(graphicLayer);
         graphicLayer.show();
 
         // Setting the map
         var map1 = new esri.Map("map1", {extent: initialExtent, logo : false});
         map1.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));
-        
+
         // Adding graphics map
         var map2 = new esri.Map("map2", {extent: initialExtent, logo : false});
         map2.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));
-        
-        dojo.connect(map2, 'onLoad', function() {       	
+
+        dojo.connect(map2, 'onLoad', function() {
         	var symbol = new esri.symbol.SimpleMarkerSymbol().setColor(new dojo.Color([255, 0, 0]));
         	var graphic = new esri.Graphic(new esri.geometry.Point(514589.2466, 8682916.3628,{"wkid":25833}), symbol);
         	map2.graphics.add(graphic);
         	});
        //Drawing tool map
        map3 = new esri.Map("map3", {extent : initialExtent,logo : false});
-       map3.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));                
+       map3.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));
        dojo.connect(map, "onLoad", initToolbar);
-       
+
        //Dynamic Map Service Layers
        map4 = new esri.Map("map4", {extent : initialExtent,logo : false});
        map4.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));
-       
+
         var imageParameters = new esri.layers.ImageParameters();
         imageParameters.format = "png32"; //sets the image format to PNG32.
 	imageParameters.layerIds = [0]; // we want the layer with id 0 to be visible
@@ -481,15 +461,41 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
     //Takes a URL to a dynamic map service.
     serviceURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Sjofuglkolonier/MapServer";
     var dynamicLayer = new esri.layers.ArcGISDynamicMapServiceLayer(serviceURL, {
-          "opacity":0.75, 
+          "opacity":0.75,
           "imageParameters":imageParameters, showAttribution: false
         });
-        
+
     map4.addLayer(dynamicLayer);
-       
+
+    var npmaps = new Npmaps({map:this.map});
+
+    YUI().use("autocomplete", "autocomplete-highlighters", function(Y) {
+      Y.one('form').addClass('yui3-skin-sam');
+      //Autocomplete css
+      var geoname_base = "http://placenames.npolar.no:80";
+      // Geoname service URI (JSONP service)
+      var geoname_service = geoname_base + "/stadnamn/edge/{query}?callback={callback}&rows=5" + "&approved=true&location=Svalbard&lang=nn";
+      var geoname_autocomplete = Y.one('#geoname_autocomplete');
+      geoname_autocomplete.plug(Y.Plugin.AutoComplete, {
+        resultHighlighter : 'phraseMatch',
+        //resultFormatter: simple_geoname_formatter,
+        resultTextLocator : 'title',
+        source : geoname_service
+        });
+
+        // zoom and add marker to the place name when the user selects from result
+        geoname_autocomplete.ac.on('select', function(e) {
+          //console.log(e.result.raw);
+          npmaps.wgs84ToUtm(e);
+          npmaps.addMarker(position);
+          })
+          });
+
 
     }
-    
+
+
+
      function initToolbar() {
                 tb = new esri.toolbars.Draw(map3);
                 dojo.connect(tb, "onDrawEnd", addGraphic);
@@ -514,7 +520,7 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
                     map3.graphics.clear();
                 });
             }
-            
+
      function addGraphic(geometry) {
                 //deactivate the toolbar and clear existing graphics
                 //tb.deactivate();
@@ -524,7 +530,7 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
                 var r = Math.floor(Math.random() * 250);
                 var g = Math.floor(Math.random() * 100);
                 var b = Math.floor(Math.random() * 100);
-                
+
                 //Marker symbol used for point created using svg path. See this site for more examples
                 // http://raphaeljs.com/icons/#talkq. You could also create marker symbols using the SimpleMarkerSymbol class
                 //to define color, size, style or the PictureMarkerSymbol class to specify an image to use for the symbol.
@@ -547,6 +553,6 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
 
                 //Add the graphic to the map
                 map3.graphics.add(new esri.Graphic(geometry, symbol));
-            }       
-    dojo.ready(initialize); 
+            }
+    dojo.ready(initialize);
 </script>
