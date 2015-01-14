@@ -92,7 +92,7 @@ Norwegian Polar Institute Map Data and Services
 </div>
 
 ## Basemap Data
-Norwegian Polar Institute offers downloads of the official topographical base map datasets for Norwegian Polar areas, under these [Terms of Use](http://geodata.npolar.no/bruksvilkar). The data are either scale independent or created for best visual appearance when printed at selected map scales (see description column). The data are provided in the most commonly used GIS file formats, to be used e.g. to create custom maps or to do analyses. Click the links below to go to data product page.
+The Norwegian Polar Institute offers downloads of the official topographical basemap datasets for Norwegian polar land areas, under these **[terms of Use](http://geodata.npolar.no/bruksvilkar)**. The data are either scale independent or created for best visual appearance when printed at selected map scales (see description column). The data are provided in the most commonly used GIS file formats, to be used e.g. to create custom maps or to do analyses. NOTE: The downloads are not maps, but rather map data which can be used to create maps from scratch in GIS software. Click the links below to go to data product page for metadata and data downloads.
 
 #### Svalbard
 
@@ -140,7 +140,7 @@ Norwegian Polar Institute offers downloads of the official topographical base ma
 
 ## Basemap Services
 
-The Norwegian Polar Institute offers a selection of cached and dynamic basemap services which can be consumed to create interactive web mapping applications or as layers in desktop GIS, under these **[terms of use](http://geodata.npolar.no/bruksvilkar)**. The cached services are [tiled map service](http://webhelp.esri.com/arcgisserver/9.2/dotnet/manager/publishing/static_map_svcs.htm), which are maps that have been predrawn by the server at defined scales (zoom levels) and stored as graphic files to serve maps fast. The dynamic services are [WMS services](http://webhelp.esri.com/arcgisserver/9.3/Java/index.htm#wms_service.htm), which return map images as requested by the user, consisting of the active map layers, map extent and zoom level at the client side.
+The Norwegian Polar Institute offers a selection of cached and dynamic basemap services which can be consumed to create interactive web mapping applications or as layers in desktop GIS, under these **[terms of use](http://geodata.npolar.no/bruksvilkar)**. The cached services are [tiled map services](http://webhelp.esri.com/arcgisserver/9.2/dotnet/manager/publishing/static_map_svcs.htm), which are maps that have been predrawn by the server at defined scales (zoom levels) and stored as graphic files to serve maps fast. The dynamic services are [WMS services](http://webhelp.esri.com/arcgisserver/9.3/Java/index.htm#wms_service.htm), which return map images as requested by the user, consisting of the active map layers, map extent and zoom level at the client side.
 
 The cached services can be used in clients with support for ArcGIS Server tiles such as OpenLayers, Google Maps or Esri's JavaScript API in the same way as Google Maps or Esri Maps is built up. Read the **[developer's guide](documentation)** on how to create web applications with those basemaps.
 
@@ -249,7 +249,7 @@ All services are published on NPI's **[map services directory](http://geodata.np
 
 ## Terms of Use
 
-By using the map services and base map datasets, you agree with the [terms of use](http://geodata.npolar.no/bruksvilkar).
+By using the map services and base map datasets, you agree with the **[terms of use](http://geodata.npolar.no/bruksvilkar)**.
 
 * * * * *
 
