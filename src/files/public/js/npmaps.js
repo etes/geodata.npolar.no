@@ -21,14 +21,15 @@ var Npmaps = function(options) {
 		document.getElementsByTagName('head')[0].appendChild(script);
 	}
 
+	// Create projection definition if not known projection
+	try {
+		proj4('EPSG:' + this.projection);
+	} catch (e) {
+		this._fetch(this.projection);
+	}
+	
 	// transform placename coordinates from wgs84 to utm
 	this.wgs84ToUtm = function(event) {
-		// Create projection definition if not known projection
-		try {
-			proj4('EPSG:' + this.projection);
-		} catch (e) {
-			this._fetch(this.projection);
-		}
 
 		var wgs84 = new proj4('EPSG:4326');
 		var utm = new proj4('EPSG:' + this.projection);
