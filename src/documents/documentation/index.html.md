@@ -404,13 +404,9 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
 
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,700' rel='stylesheet' type='text/css'>
 <script src="http://yui.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
-<script src="/public/js/proj4js.min.js" type="text/javascript"></script>
+<script src="/public/js/proj4.js" type="text/javascript"></script>
 <script type="text/javascript" src="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/init.js"></script>
 <script src="/public/js/npmaps.js" type="text/javascript"></script>
-
-<script>
-
-</script>
 <script type="text/javascript">
     dojo.require("esri.map");
     dojo.require("esri.toolbars.draw");
@@ -467,7 +463,7 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
 
     map4.addLayer(dynamicLayer);
 
-    var npmaps = new Npmaps({map:this.map});
+    var npmaps = new Npmaps({map:this.map, projection:'25833'});
 
     YUI().use("autocomplete", "autocomplete-highlighters", function(Y) {
       Y.one('form').addClass('yui3-skin-sam');
@@ -487,7 +483,7 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
         geoname_autocomplete.ac.on('select', function(e) {
           //console.log(e.result.raw);
           npmaps.wgs84ToUtm(e);
-          npmaps.addMarker(position);
+          npmaps.addMarker(npmaps.position);
           })
           });
 
