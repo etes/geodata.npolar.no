@@ -482,10 +482,10 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
         // zoom and add marker to the place name when the user selects from result
         geoname_autocomplete.ac.on('select', function(e) {
           //console.log(e.result.raw);
-          npmaps.wgs84ToUtm(e);
-          npmaps.addMarker(npmaps.position);
+          var position = npmaps.wgs84ToUtm(e);
+          npmaps.addMarker(map, position);
           })
-          });
+      });
 
 
     }
@@ -494,7 +494,12 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
 
      function initToolbar() {
                 tb = new esri.toolbars.Draw(map3);
-                dojo.connect(tb, "onDrawEnd", addGraphic);
+                dojo.connect(tb, "onDrawEnd", function(geometry)
+                {
+                  var npmaps = new Npmaps();
+                  npmaps.addGraphic(geometry, map3);
+
+                  });
 
                 //hook up the button click events
                 dojo.connect(dojo.byId("drawPoint"), "click", function() {
@@ -517,38 +522,5 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
                 });
             }
 
-     function addGraphic(geometry) {
-                //deactivate the toolbar and clear existing graphics
-                //tb.deactivate();
-                //map.graphics.clear();
-
-                //create a random color for the symbols
-                var r = Math.floor(Math.random() * 250);
-                var g = Math.floor(Math.random() * 100);
-                var b = Math.floor(Math.random() * 100);
-
-                //Marker symbol used for point created using svg path. See this site for more examples
-                // http://raphaeljs.com/icons/#talkq. You could also create marker symbols using the SimpleMarkerSymbol class
-                //to define color, size, style or the PictureMarkerSymbol class to specify an image to use for the symbol.
-                var markerSymbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 20, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([r, g, b, 0.5]), 10), new dojo.Color([r, g, b, 0.9]));
-
-                //line symbol used for polyline.
-                var lineSymbol = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([r, g, b, 0.85]), 6);
-
-                //a simple fill symbol used for extent, polygon and freehand polygon.
-                var fillSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([r, g, b]), 2), new dojo.Color([r, g, b, 0.3]));
-
-                var type = geometry.type, symbol;
-                if (type === "point") {
-                    symbol = markerSymbol;
-                } else if (type === "polyline") {
-                    symbol = lineSymbol;
-                } else {
-                    symbol = fillSymbol;
-                }
-
-                //Add the graphic to the map
-                map3.graphics.add(new esri.Graphic(geometry, symbol));
-            }
     dojo.ready(initialize);
 </script>
