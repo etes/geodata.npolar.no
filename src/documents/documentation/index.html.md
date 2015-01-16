@@ -497,7 +497,7 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
                 dojo.connect(tb, "onDrawEnd", function(geometry)
                 {
                   var npmaps = new Npmaps();
-                  npmaps.addGraphic(geometry, map3);
+                  npmaps.addGraphic(map3, geometry);
 
                   });
 

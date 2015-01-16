@@ -64,7 +64,7 @@ var Npmaps = function(options) {
 				xy[0] + 20000, xy[1], map.spatialReference));
 		}
 
-		this.addGraphics = function (map, geometry) {
+		this.addGraphic = function (map, geometry) {
 
 			//create a random color for the symbols
 			var r = Math.floor(Math.random() * 250);
