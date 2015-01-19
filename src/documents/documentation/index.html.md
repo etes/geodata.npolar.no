@@ -490,8 +490,6 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
 
     }
 
-
-
      function initToolbar() {
                 tb = new esri.toolbars.Draw(map3);
                 dojo.connect(tb, "onDrawEnd", function(geometry)
