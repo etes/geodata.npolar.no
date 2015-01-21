@@ -8,7 +8,7 @@ body, html {
 }
 
 .appHeader {
-    background: url("../images/linen.jpg") repeat-x scroll left top transparent;
+    background: url("../images/cryoclim/linen.jpg") repeat-x scroll left top transparent;
     height: 65px;
     border-bottom: 2px solid #08d;
     z-index: 40;
@@ -92,11 +92,11 @@ body, html {
 }
 
 #point-identify {
-	/*background-image: url(../images/info-icon.png);*/
-  background-image: url(../images/info_25x30.png);
+	/*background-image: url(../images/cryoclim/info-icon.png);*/
+  background-image: url(../images/cryoclim/info_25x30.png);
 }
 #metadata-link{
-	/*background-image: url(../images/question-icon.png);*/
+	/*background-image: url(../images/cryoclim/question-icon.png);*/
 	font-size: 10px;
 	vertical-align: super;
 }
@@ -162,11 +162,11 @@ color: #1D77A8;
 
 .sidebarCollapseButton.close {
     left: 342px;
-    background-image: url("../images/close.png");
+    background-image: url("../images/cryoclim/close.png");
 }
 
 .sidebarCollapseButton.open {
-    background-image: url("../images/open.png");
+    background-image: url("../images/cryoclim/open.png");
     left: 0;
 }
 
