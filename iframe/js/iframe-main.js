@@ -390,11 +390,9 @@ function initToolbar(map) {
 
 function addGraphic(geometry) {
 	iframetitleinput = $("#iframetitleinput").val();
-	iframetitleinputtext = iframetitleinput.replace(/\'/g, '��');
 	iframeinfoinput = $("#iframeinfoinput").val();
-	iframeinfoinputtext = iframeinfoinput.replace(/\'/g, '��');
-	iframeinfoinputtexturl = iframeinfoinputtext.replace(/ /g, "_");
-	iframetitleinputtexturl = iframetitleinputtext.replace(/ /g, "_");
+	iframeinfoinputtexturl = encodeURIComponent(iframeinfoinput);
+	iframetitleinputtexturl = encodeURIComponent(iframetitleinput);
 	iframegraphiccolor = $("#colorpicker").val();
 	iframegraphiccolorurl = iframegraphiccolor.replace(/#/g, "");
 	iframegraphiccolorrgb = hexToRgb(iframegraphiccolor);
@@ -449,8 +447,8 @@ function addGraphic(geometry) {
 
 	var graphic = new esri.Graphic(geometry, symbol);
 	var infoTemplate = new esri.InfoTemplate();
-	infoTemplate.setTitle(iframetitleinputtext);
-	infoTemplate.setContent(iframeinfoinputtext);
+	infoTemplate.setTitle(iframetitleinput);
+	infoTemplate.setContent(iframeinfoinput);
 	graphic.setInfoTemplate(infoTemplate);
 
 	var operation = new modules.customoperation.Add({
