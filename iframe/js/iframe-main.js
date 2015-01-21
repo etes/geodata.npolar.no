@@ -1,3 +1,7 @@
+/**
+* Norsk Polarinstutt 2013
+*/
+
 dojo.require("dijit.layout.BorderContainer");
 dojo.require("dijit.layout.ContentPane");
 // uncomment if want dojo widget style checkbox
@@ -370,7 +374,7 @@ function initToolbar(map) {
 			tb.deactivate();
 		}
 	});
-	
+
 	$('.identify').click(function() {
 		if (!$(this).hasClass("active")) {
 			$(this).addClass("active");
@@ -381,14 +385,14 @@ function initToolbar(map) {
 			$(this).removeClass("active");
 		}
 	});
-	
+
 }
 
 function addGraphic(geometry) {
 	iframetitleinput = $("#iframetitleinput").val();
-	iframetitleinputtext = iframetitleinput.replace(/\'/g, '¤¤');
+	iframetitleinputtext = iframetitleinput.replace(/\'/g, 'ï¿½ï¿½');
 	iframeinfoinput = $("#iframeinfoinput").val();
-	iframeinfoinputtext = iframeinfoinput.replace(/\'/g, '¤¤');
+	iframeinfoinputtext = iframeinfoinput.replace(/\'/g, 'ï¿½ï¿½');
 	iframeinfoinputtexturl = iframeinfoinputtext.replace(/ /g, "_");
 	iframetitleinputtexturl = iframetitleinputtext.replace(/ /g, "_");
 	iframegraphiccolor = $("#colorpicker").val();
@@ -597,7 +601,7 @@ function executeIdentifyTask(evt) {
 
 	//map.infoWindow.setFeatures([deferred]);
 	//map.infoWindow.show(evt.mapPoint);
-	
+
 	//show info window only if identify tool is active
 	if ($('.identify').hasClass("active")) {
 		map.infoWindow.show(evt.mapPoint);
@@ -649,9 +653,9 @@ function WGS84ToUTM33(event) {
 var placenameGraphic;
 // Add point marker to map and zoom to that position
 function addMarker(position){
-	
+
 	map.graphics.remove(placenameGraphic);
-	
+
 	// uses Esri picture marker symbol
 	var symbol = new esri.symbol.PictureMarkerSymbol(
 			{
@@ -667,10 +671,10 @@ function addMarker(position){
 	placenameGraphic = new esri.Graphic(new esri.geometry.Point(position.x, position.y),
 			symbol);
 	map.graphics.add(placenameGraphic);
-	
+
 	// zoom to point coordinates
 	map.setExtent(new esri.geometry.Extent(position.x - 20000, position.y,
-			position.x + 20000, position.y, map.spatialReference));	
+			position.x + 20000, position.y, map.spatialReference));
 }
 
 //placenames search using jquery autocomplete
@@ -738,4 +742,4 @@ $('#search-input').keypress(function(e){
     if ( e.which === 13 ) e.preventDefault();
 });
 
-//ingen GIS data ble skadet i utviklingen av disse kartene.
+//ingen GIS data ble skadet i utviklingen av disse kartene :).

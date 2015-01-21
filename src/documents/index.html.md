@@ -185,7 +185,7 @@ The table below shows the zoom levels, scales and resolutions for the cached ser
 |17 (orthophoto)|1:625|0.16536491406316148|
 
 
-##### **Image formats and coordinate systems**
+##### **Image formats**
 
 Services are available in two image formats:
 
