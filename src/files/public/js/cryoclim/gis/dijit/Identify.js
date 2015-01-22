@@ -36,7 +36,7 @@ define([
             //show info window only if identify tool is active
             if ($('.identify').hasClass("active")) {
 	            this.map.infoWindow.setTitle('Identifing...');
-              //@ Use CSS3 animation instead of loading gif
+              //@TODO Use CSS3 animation instead of loading gif
 	            this.map.infoWindow.setContent('<img src="/public/images/cryoclim/loading.gif" style="height:20px;width:20px;margin-top:5px"></img>');
 	            this.map.infoWindow.show(evt.mapPoint);
 
