@@ -1,0 +1,38 @@
+#search-input {
+    
+    background-image: url(../images/icon-search.png);
+    background-position: 5px center;
+    background-repeat: no-repeat;
+    border: 1px solid #ccc;
+    
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+    border-radius: 3px;
+    
+    padding: 5px 5px;
+    text-indent: 20px;
+    
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 2s;
+    transition: all 0.2s;  
+    width: 200px;
+}
+
+.gis_placename_Dijit  #search-input:focus {
+    background-position: -20px center;
+    text-indent: 0;
+    width: 95%;
+}
+
+.gis_placename_Dijit .placenameIcon {
+    background-image: url("../images/location.png");
+    width: 16px;
+    height: 16px;
+}
+
+.gis_placename_Dijit .placenameInput .dijitButtonNode {
+    border: none;
+}
+
