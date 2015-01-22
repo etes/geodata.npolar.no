@@ -32,14 +32,15 @@ define([
         executeIdentifyTask: function(evt) {
             this.map.infoWindow.hide();
             this.map.infoWindow.clearFeatures();
-            
+
             //show info window only if identify tool is active
             if ($('.identify').hasClass("active")) {
 	            this.map.infoWindow.setTitle('Identifing...');
-	            this.map.infoWindow.setContent('<img src="images/loading.gif" style="height:20px;width:20px;margin-top:5px"></img>');
+              //@ Use CSS3 animation instead of loading gif
+	            this.map.infoWindow.setContent('<img src="/public/images/cryoclim/loading.gif" style="height:20px;width:20px;margin-top:5px"></img>');
 	            this.map.infoWindow.show(evt.mapPoint);
-	            
-	
+
+
 	            var identifyParams = new IdentifyParameters();
 	            identifyParams.tolerance = this.identifyTolerance;
 	            identifyParams.returnGeometry = true;
@@ -48,9 +49,9 @@ define([
 	            identifyParams.mapExtent = this.map.extent;
 	            identifyParams.width = this.map.width;
 	            identifyParams.height = this.map.height;
-	
+
 	            var identifies = [];
-	
+
 	            array.forEach(this.layers, function(layer) {
 	                if (layer.ref.visibleLayers.length !== 0 && layer.ref.visibleLayers[0] !== -1) {
 	                    var params = lang.clone(identifyParams);
@@ -58,7 +59,7 @@ define([
 	                    identifies.push(layer.identifyTask.execute(params));
 	                }
 	            });
-	
+
 	            all(identifies).then(lang.hitch(this, 'identifyCallback'), function(err) {
 	                console.log('identify tasks error: ', err);
 	            });
