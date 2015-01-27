@@ -114,44 +114,6 @@ define([
 				open: false,
 				position: 4
 			},
-			bookmarks: {
-				include: false,
-				title: "Bookmarks",
-				open: false,
-				position: 5
-			},
-			directions: {
-				include: false,
-				title: "Directions",
-				open: false,
-				position: 6,
-				options: {
-					routeTaskUrl: "http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Network/USA/NAServer/Route",
-					routeParams: {
-						directionsLanguage: "en-US",
-						directionsLengthUnits: "esriMiles"
-					}
-				}
-			},
-			editor: {
-				include: false,
-				title: "Editor",
-				open: false,
-				position: 7,
-				settings: {
-					toolbarVisible: true,
-					showAttributesOnClick: true,
-					enableUndoRedo: true,
-					createOptions: {
-						polygonDrawTools: ["freehandpolygon", "autocomplete"]
-					},
-					toolbarOptions: {
-						reshapeVisible: true,
-						cutVisible: true,
-						mergeVisible: true
-					}
-				}
-			},
 			scalebar: {
 				include: true,
 				options: {

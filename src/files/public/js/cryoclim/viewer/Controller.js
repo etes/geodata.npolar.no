@@ -127,10 +127,10 @@ define([
                 growler: this.growler
             }, "geoLocationDijit");
             this.geoLocation.startup();
-            
+
             this.placename = new placename({
             	map: this.map
-            	
+
             }, "placenameDijit");
             this.placename.startup();
 
@@ -147,7 +147,7 @@ define([
                 identifyTolerance: config.identifyTolerance,
                 map: this.map
             });
-            
+
             if (config.widgets.scalebar && config.widgets.scalebar.include) {
                 require(['esri/dijit/Scalebar'], lang.hitch(this, function(Scalebar) {
                     this.scalebar = new Scalebar({
@@ -158,7 +158,7 @@ define([
                     });
                 }));
             }
-            
+
             if (config.widgets.TOC && config.widgets.TOC.include) {
                 var TOCTP = this._createTitlePane(config.widgets.TOC.title, config.widgets.TOC.position, config.widgets.TOC.open);
                 require(['gis/dijit/TOC'], lang.hitch(this, function(TOC) {
@@ -197,7 +197,7 @@ define([
                     this.measure.startup();
                 }));
             }
-            
+
             if (config.widgets.legend && config.widgets.legend.include) {
                 var legendTP = this._createTitlePane(config.widgets.legend.title, config.widgets.legend.position, config.widgets.legend.open);
                 require(['esri/dijit/Legend'], lang.hitch(this, function(Legend) {
@@ -215,42 +215,6 @@ define([
                         map: this.map
                     }, domConstruct.create("div")).placeAt(drawTP.containerNode);
                     this.drawWidget.startup();
-                }));
-            }
-
-            if (config.widgets.bookmarks && config.widgets.bookmarks.include) {
-                var bookmarksTP = this._createTitlePane(config.widgets.bookmarks.title, config.widgets.bookmarks.position, config.widgets.bookmarks.open);
-                require(['gis/dijit/Bookmarks'], lang.hitch(this, function(Bookmarks) {
-                    this.bookmarks = new Bookmarks({
-                        map: this.map,
-                        editable: true
-                    }, domConstruct.create("div")).placeAt(bookmarksTP.containerNode);
-                    this.bookmarks.startup();
-                }));
-            }
-
-            if (config.widgets.directions && config.widgets.directions.include) {
-                var directionsTP = this._createTitlePane(config.widgets.directions.title, config.widgets.directions.position, config.widgets.directions.open);
-                require(['gis/dijit/Directions'], lang.hitch(this, function(Directions) {
-                    this.directionsWidget = new Directions({
-                        map: this.map,
-                        options: config.widgets.directions.options,
-                        titlePane: directionsTP
-                    }, domConstruct.create("div")).placeAt(directionsTP.containerNode);
-                    this.directionsWidget.startup();
-                }));
-            }
-
-            if (config.widgets.editor && config.widgets.editor.include) {
-                var editorTP = this._createTitlePane(config.widgets.editor.title, config.widgets.editor.position, config.widgets.editor.open);
-                require(['gis/dijit/Editor'], lang.hitch(this, function(Editor) {
-                    this.editor = new Editor({
-                        map: this.map,
-                        layerInfos: this.editorLayerInfos,
-                        settings: config.widgets.editor.settings,
-                        titlePane: editorTP
-                    }, domConstruct.create("div")).placeAt(editorTP.containerNode);
-                    this.editor.startup();
                 }));
             }
         },
@@ -290,6 +254,6 @@ define([
                 this.help.show();
             }
         },
-        
+
     };
 });
