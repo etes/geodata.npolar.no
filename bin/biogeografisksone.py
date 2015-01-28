@@ -3,7 +3,7 @@
 '''
 Created on 13. 03. 2014
 
-@author: ermias
+@author: Norwegian Polar Institute
 '''
 
 __version__ = "0.0.1"

@@ -3,7 +3,7 @@
 '''
 Created on 23. jan. 2014
 
-@author: ermias
+@author: Norwegian Polar Institute
 '''
 
 import csv

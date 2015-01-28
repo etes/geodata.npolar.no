@@ -1,7 +1,7 @@
 '''
 Created on 14. feb. 2014
 
-@author: ermias
+@author: Norwegian Polar Institute
 '''
 
 import ogr

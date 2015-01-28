@@ -1,7 +1,7 @@
 '''
 Created on 3. des. 2014
 
-@author: ermias
+@author: Norwegian Polar Institute
 '''
 import arcpy
 import glob, os, sys

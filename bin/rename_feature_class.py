@@ -1,7 +1,7 @@
 '''
 Created on 24. mars 2014
 
-@author: ermias
+@author: Norwegian Polar Institute
 '''
 
 import os

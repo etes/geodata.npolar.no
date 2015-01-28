@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------------------
 # recplassPolarbear.py
 # Created on: 2013-09-03 10:33:09.00000
-# author: ermias
+# author: Norwegian Polar Institute
 # Description: reclass polar bear kernel density map
 # ---------------------------------------------------------------------------
 import arcpy

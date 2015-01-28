@@ -2,7 +2,7 @@
 '''
 Created on 14. okt. 2013
 
-@author: ermias
+@author: Norwegian Polar Institute
 '''
 
 '''

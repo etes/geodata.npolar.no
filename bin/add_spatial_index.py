@@ -1,7 +1,7 @@
 '''
 Created on 19. mars 2013
 
-@author: ermias
+@author: Norwegian Polar Institute
 '''
 
 import sys, arcpy, getopt

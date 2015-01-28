@@ -2,7 +2,7 @@
 '''
 Created on 10. feb. 2014
 
-@author: ermias
+@author: Norwegian Polar Institute
 '''
 import os
 import arcpy
