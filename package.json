@@ -7,16 +7,17 @@
     "Norwegian Polar Institute",
     "Norsk Polarinstitutt",
     "Maps",
+    "Cryoclim",
     "Map Services",
     "Documentation",
     "docpad"
   ],
   "author": "ermias <ermias@npolar.no>",
   "maintainers": [
-    "Ermias Beyene Tesfamariam <ermias@npolar.no> https://github.com/etes"
+    "Norwegian Polar Institute <data@npolar.no> https://github.com/npolar"
   ],
   "contributors": [
-    "Ermias Beyene Tesfamariam <ermias@npolar.no> https://github.com/etes"
+    "Norwegian Polar Institute <data@npolar.no> https://github.com/npolar"
   ],
   "bugs": {
     "url": "https://github.com/npolar/geodata.npolar.no/issues"
