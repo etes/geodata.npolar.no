@@ -18,7 +18,7 @@
       function init() {
       	var initialExtent = new esri.geometry.Extent({"xmin":-1246168.82567099,"ymin":7646808.89682435,"xmax":2246168.82567098,"ymax":9592114.12076814,"spatialReference":{"wkid":32633}});
         var map = new esri.Map("map", {extent: initialExtent, logo:false});        
-        map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer"));
+        map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer("//geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer"));
         dojo.connect(map, "onExtentChange", showExtent);
       }
 

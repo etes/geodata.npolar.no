@@ -11,7 +11,7 @@
             function initialize() {
                 // create map instance and add a basemap
                 var map = new esri.Map("map", {logo : false});
-                basemapURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer"
+                basemapURL = "//geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer"
                 map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer(basemapURL));
             }
 

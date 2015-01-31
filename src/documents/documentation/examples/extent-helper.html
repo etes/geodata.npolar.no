@@ -85,13 +85,13 @@
                 switch (prj) {
                     case 'utm33':
                         map = new esri.Map("map", {logo: false});
-                        var basemap = new esri.layers.ArcGISTiledMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer");
+                        var basemap = new esri.layers.ArcGISTiledMapServiceLayer("//geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer");
                         map.addLayer(basemap);
                         connectMap();
                         break;
                     case 'utm37':
                         map = new esri.Map("map", {logo: false});
-                        var basemap = new esri.layers.ArcGISTiledMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer");
+                        var basemap = new esri.layers.ArcGISTiledMapServiceLayer("//geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer");
                         map.addLayer(basemap);
                         connectMap();
                         break;

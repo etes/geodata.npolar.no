@@ -368,7 +368,7 @@ URL of service's REST endpoint (e.g.
     imageParameters.layerIds = [0]; // we want the layer with id 0 to be visible
     imageParameters.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
     //Takes a URL to a dynamic map service.
-    serviceURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Sjofuglkolonier/MapServer";
+    serviceURL = "//geodata.npolar.no/ArcGIS/rest/services/inspire3/Sjofuglkolonier/MapServer";
     var dynamicLayer = new esri.layers.ArcGISDynamicMapServiceLayer(serviceURL, {
           "opacity":0.75,
           "imageParameters":imageParameters
@@ -455,7 +455,7 @@ Finally, you need to add that dynamic layer on top of the basemap by calling the
 	imageParameters.layerIds = [0]; // we want the layer with id 0 to be visible
 	imageParameters.layerOption = esri.layers.ImageParameters.LAYER_OPTION_SHOW;
     //Takes a URL to a dynamic map service.
-    serviceURL = "http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Sjofuglkolonier/MapServer";
+    serviceURL = "//geodata.npolar.no/ArcGIS/rest/services/inspire3/Sjofuglkolonier/MapServer";
     var dynamicLayer = new esri.layers.ArcGISDynamicMapServiceLayer(serviceURL, {
           "opacity":0.75,
           "imageParameters":imageParameters, showAttribution: false

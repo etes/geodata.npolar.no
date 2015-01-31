@@ -10,11 +10,11 @@
     <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
 
     <!-- Load Esri Leaflet -->
-    <script src="http://geodata.npolar.no/public/js/lib/esri-leaflet/esri-leaflet.js"></script>
+    <script src="//geodata.npolar.no/public/js/lib/esri-leaflet/esri-leaflet.js"></script>
  
     <!-- Load proj4js and associated leaflet plugin -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/proj4js/2.0.0/proj4.js"></script>
-    <script src="http://geodata.npolar.no/public/js/lib/proj4leaflet/proj4leaflet.js"></script>
+    <script src="//geodata.npolar.no/public/js/lib/proj4leaflet/proj4leaflet.js"></script>
 
     <!-- Make the map fill the entire page -->
     <style>
@@ -56,7 +56,7 @@
       });
  
       // create new TiledMapLayer using esri-leaflet
-      var tiledLayer = new L.esri.TiledMapLayer('http://geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Nordomraadene_WMTS_25833/MapServer',
+      var tiledLayer = new L.esri.TiledMapLayer('//geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Nordomraadene_WMTS_25833/MapServer',
       {
         maxZoom: 10,
         minZoom: 0,
