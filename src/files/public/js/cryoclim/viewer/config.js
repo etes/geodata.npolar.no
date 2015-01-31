@@ -9,7 +9,7 @@ define([
 		},
 		// url to your geometry server.
 		geometryService: {
-			url: "http://geodata.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer"
+			url: "//geodata.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer"
 		},
 		// basemapMode: must be either "agol" or "custom"
 		basemapMode: "custom",
@@ -38,7 +38,7 @@ define([
 		// 3 'mode' options: MODE_SNAPSHOT = 0, MODE_ONDEMAND = 1, MODE_SELECTION = 2
 		operationalLayers: [/*{
 			type: "feature",
-			url: "http://geodata.npolar.no/arcgis/rest/services/Svalbard/glaciers/FeatureServer/0",
+			url: "//geodata.npolar.no/arcgis/rest/services/Svalbard/glaciers/FeatureServer/0",
 			title: "Features",
 			options: {
 				id: "glaceriersFS",
@@ -53,7 +53,7 @@ define([
 			}
 		},*/ {
 			type: "dynamic",
-			url: "http://geodata.npolar.no/arcgis/rest/services/Svalbard/glaciersurfacetypes/MapServer",
+			url: "//geodata.npolar.no/arcgis/rest/services/Svalbard/glaciersurfacetypes/MapServer",
 			title: "Glacier Surface Types",
 			metadata: "https://data.npolar.no/dataset/d756f766-de33-11e2-8993-005056ad0004",
 			options: {
@@ -64,7 +64,7 @@ define([
 			}
 		}, {
 			type: "dynamic",
-			url: "http://geodata.npolar.no/arcgis/rest/services/Svalbard/glaciers/MapServer",
+			url: "//geodata.npolar.no/arcgis/rest/services/Svalbard/glaciers/MapServer",
 			title: "Glaciers Outlines",
 			metadata: "https://data.npolar.no/dataset/89f430f8-862f-11e2-8036-005056ad0004",
 			options: {
@@ -87,7 +87,7 @@ define([
 				title: "Print",
 				open: false,
 				position: 1,
-				serviceURL: "http://geodata.npolar.no/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
+				serviceURL: "//geodata.npolar.no/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
 				copyrightText: "Copyright Norsk Polarinstitutt 2014",
 				authorText: "Norwegian Polar Institute",
 				defaultTitle: 'Cryoclim',

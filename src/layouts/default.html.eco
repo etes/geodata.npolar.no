@@ -68,7 +68,7 @@
 							</a>
 						</li>
 					<% end %>
-					<li><a href="http://geodata.npolar.no/arcgis/rest/services" target="_blank">Map Services Directory</a></li>
+					<li><a href="//geodata.npolar.no/arcgis/rest/services" target="_blank">Map Services Directory</a></li>
 					<li><a href="http://svalbardkartet.npolar.no" target="_blank">Svalbardkartet</a></li>
 				</ul>
 				<!-- Render feedback partial -->

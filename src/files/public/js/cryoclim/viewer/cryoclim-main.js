@@ -47,10 +47,10 @@ var visible = [];
 var visibleLayers = [];
 var symbol;
 var layer2results, layer3results, layer4results;
-var basemapServiceUrl = "http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer";
-var overlayMapService = "http://geodata.npolar.no/ArcGIS/rest/services/CryoClim/glaciers/MapServer";
-var overlayMapService2 = "http://geodata.npolar.no/ArcGIS/rest/services/CryoClim/glaciersurfacetypes/MapServer";
-var geometryServiceUrl = 'http://geodata.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer';
+var basemapServiceUrl = "//geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer";
+var overlayMapService = "//geodata.npolar.no/ArcGIS/rest/services/CryoClim/glaciers/MapServer";
+var overlayMapService2 = "//geodata.npolar.no/ArcGIS/rest/services/CryoClim/glaciersurfacetypes/MapServer";
+var geometryServiceUrl = '//geodata.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer';
 function init() {
 
 	esri.config.defaults.geometryService = new esri.tasks.GeometryService(geometryServiceUrl);

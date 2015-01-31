@@ -35,7 +35,7 @@ define([
             basemap: new Basemap({
                 id: "topo",
                 layers: [new BasemapLayer({
-                    url: "http://geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Nordomraadene_WMTS_25833/MapServer",
+                    url: "//geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Nordomraadene_WMTS_25833/MapServer",
                     showAttribution: false
                 })]
             })
@@ -45,12 +45,12 @@ define([
             basemap: new Basemap({
                 id: "satellite",
                 layers: [new BasemapLayer({
-                    url: "http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Satellitt_Svalbard_WMTS_25833/MapServer",
+                    url: "//geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Satellitt_Svalbard_WMTS_25833/MapServer",
 					showAttribution: false/*,
                     isReference: true/*,
                     displayLevels: [0, 1, 2, 3, 4, 5, 6, 7]*/
                 }), new BasemapLayer({
-                    url: "http://geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Ortofoto_Svalbard_WMTS_25833/MapServer",
+                    url: "//geodata.npolar.no/arcgis/rest/services/Basisdata/NP_Ortofoto_Svalbard_WMTS_25833/MapServer",
 					showAttribution: false/*,
                     isReference: true,
                     displayLevels: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]*/
@@ -62,7 +62,7 @@ define([
             basemap: new Basemap({
                 id: "lightGray",
                 layers: [new BasemapLayer({
-                    url: "http://geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Nordomraadene_WMTS_25833/MapServer",
+                    url: "//geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Nordomraadene_WMTS_25833/MapServer",
 					showAttribution: true
                 })]
             })

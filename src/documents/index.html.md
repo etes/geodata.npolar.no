@@ -65,21 +65,21 @@ Norwegian Polar Institute Map Data and Services
                     </div>
                 </div>
                 <div class="item">
-                    <a class="block" id="mapItem3" href="http://geodata.npolar.no/barentsportal" target="_blank"><img src="/public/images/barentsportal_thumbnail.png" alt=""></a>
+                    <a class="block" id="mapItem3" href="//geodata.npolar.no/barentsportal" target="_blank"><img src="/public/images/barentsportal_thumbnail.png" alt=""></a>
                     <div class="container">
                         <div class="carousel-caption">
-                            <h5 class="caption-headline"><a class="caption-link" href="http://geodata.npolar.no/barentsportal" target="_blank">Barentsportal</a></h5>
+                            <h5 class="caption-headline"><a class="caption-link" href="//geodata.npolar.no/barentsportal" target="_blank">Barentsportal</a></h5>
                             <p class="caption-text">
-                                 Interactive thematic atlas of the joint Norwegian-Russian environmental status report for the barents sea... <a class="caption-link" href="http://geodata.npolar.no/barentsportal" target="_blank">check out the new features</a>
+                                 Interactive thematic atlas of the joint Norwegian-Russian environmental status report for the barents sea... <a class="caption-link" href="//geodata.npolar.no/barentsportal" target="_blank">check out the new features</a>
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="item">
-                    <a class="block" id="mapItem4" href="http://geodata.npolar.no/cryoclim" target="_blank"><img src="/public/images/cryoclim_thumbnail.png" alt=""></a>
+                    <a class="block" id="mapItem4" href="//geodata.npolar.no/cryoclim" target="_blank"><img src="/public/images/cryoclim_thumbnail.png" alt=""></a>
                     <div class="container">
                         <div class="carousel-caption">
-                            <h5 class="caption-headline"><a class="caption-link" href="http://geodata.npolar.no/cryoclim" target="_blank">Svalbard Glaciers (Cryoclim)</a></h5>
+                            <h5 class="caption-headline"><a class="caption-link" href="//geodata.npolar.no/cryoclim" target="_blank">Svalbard Glaciers (Cryoclim)</a></h5>
                             <p class="caption-text">
                                 Svalbard Glaciers portal is an interactive map portal presenting dynamic maps of surface types and area outlines of glaciers of Svalbard...
                             </p>
