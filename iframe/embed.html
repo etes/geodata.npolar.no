@@ -9,7 +9,7 @@
 	<script type="text/javascript" src="js/proj4js.min.js"></script>
 	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript">var djConfig = {parseOnLoad: true};</script>   
-	<script src="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/init.js"></script>
+	<script src="//geodata.npolar.no/arcgis_js_api/library/3.8/3.8/init.js"></script>
     <script type="text/javascript">
       dojo.require("dijit.layout.BorderContainer");
       dojo.require("dijit.layout.ContentPane");
@@ -17,9 +17,9 @@
       dojo.require("esri.geometry.Circle");
       dojo.require("esri.dijit.Popup");
       var map, geometryService;
-      var overlayMapService = 'http://geodata.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer';
+      var overlayMapService = '//geodata.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer';
       var layers = [{ name: 'HvalrossLiggeplasser', id: 2 }, { name: 'Røye', id: 3 }, { name: 'Sjøfugl kolonier', id: 5 }, { name: 'Alle Sjøpattdyr observasjoner', id: 27 }, { name: 'Isbjørn observasjoner', id: 37 }, { name: 'Strandrydding per år', id: 58 }, { name: 'Reinbestandområder', id: 59 }, { name: 'Biogeografiske soner', id: 60 }, { name: 'Vegetasjon (10 kasser)', id: 62}, { name: 'Geologi', id: 87 }];
-      var geometryServiceUrl = 'http://geodata.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer';
+      var geometryServiceUrl = '//geodata.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer';
 	  var decimalPlacesWGS84 = 6;
 	  Proj4js.defs["EPSG:32633"] = "+proj=utm +zone=33 +ellps=WGS84 +datum=WGS84 +units=m +no_defs";
 	  var w84 = new Proj4js.Proj('EPSG:4326');
@@ -112,8 +112,8 @@ if (!window.location.search)
           }
           
           var basemap = null;
-          var mapUrl = "http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer";
-          //var mapUrl2 = "http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHX/MapServer";
+          var mapUrl = "//geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer";
+          //var mapUrl2 = "//geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHX/MapServer";
           //var mapUrl = decodeURIComponent(urlParams["mapUrl"]);
           if (urlParams["t"] && urlParams["t"] == "1")
               basemap = new esri.layers.ArcGISTiledMapServiceLayer(mapUrl);

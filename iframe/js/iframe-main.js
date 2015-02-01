@@ -21,9 +21,9 @@ var mapletUrl = root + "/iframe/embed.html";
 // Relative path to Iframe page, should be absolute path when deployed, for example http://svalbardkartet.npolar.no/iframe.html
 var previewURL = 'preview.html';
 // Relative path, should be absolute path when deployed.
-var basemapServiceUrl = 'http://geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Nordomraadene_WMTS_25833/MapServer';
-var dynamicServiceUrl = 'http://geodata.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer';
-var geometryServiceUrl = 'http://geodata.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer';
+var basemapServiceUrl = '//geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Nordomraadene_WMTS_25833/MapServer';
+var dynamicServiceUrl = '//geodata.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer';
+var geometryServiceUrl = '//geodata.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer';
 var isTiledMap = true;
 var overlayMap, point, mode, geometryService;
 
@@ -75,7 +75,7 @@ function init() {
 		opacity : 0.8
 	});
 
-	featLayer1 = new esri.layers.FeatureLayer("http://geodata.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer/9", {
+	featLayer1 = new esri.layers.FeatureLayer("//geodata.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer/9", {
 		mode : esri.layers.FeatureLayer.MODE_SNAPSHOT,
 		outFields : ["Navn"]//,
 	});
@@ -509,7 +509,7 @@ function testSetVisibleLayersProgramatically() {
 
 function testInsertNewLayer() {
 	if (dynaLayer2 === null) {
-		dynaLayer2 = new esri.layers.ArcGISDynamicMapServiceLayer("http://geodata.npolar.no/ArcGIS/rest/services/inspire3/Miljo/MapServer", {
+		dynaLayer2 = new esri.layers.ArcGISDynamicMapServiceLayer("//geodata.npolar.no/ArcGIS/rest/services/inspire3/Miljo/MapServer", {
 			opacity : 0.8
 		});
 		var h = dojo.connect(map, 'onLayerAddResult', function(result) {
@@ -538,7 +538,7 @@ function testFindNodeByLayer() {
 
 function initIdentify(map) {
 	//create identify tasks and setup parameters
-	identifyTask = new esri.tasks.IdentifyTask("http://geodata.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer");
+	identifyTask = new esri.tasks.IdentifyTask("//geodata.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer");
 
 	identifyParams = new esri.tasks.IdentifyParameters();
 	identifyParams.tolerance = 5;
