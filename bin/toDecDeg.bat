@@ -1,0 +1,1 @@
+Import-csv latlong.csv | Select @{n='Lat'; e={[int[]]$p = $_.Lat.Split(' '); $res = $p[0] + ($p[1]/60) + ($p[2]/3600); return "{0:N6}" -f $res}}, @{n='Long'; e={[int[]]$p = $_.Long.Split(' '); $res = $p[0] + ($p[1]/60) + ($p[2]/3600); return "{0:N6}" -f $res}} > out.txt
