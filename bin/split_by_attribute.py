@@ -1,44 +1,44 @@
-import arcpy, re
+# -*- coding: utf-8 -*-
+print "Importing required modules... "
+import arcpy
+import os
+import sys
+from arcpy import env
 
-arcpy.env.overwriteOutput = True
+env.overwriteOutput = True
 
-Input = arcpy.GetParameterAsText(0)
-Flds = "%s" % (arcpy.GetParameterAsText(1))
-OutWorkspace = arcpy.GetParameterAsText(2)
+in_shp = arcpy.GetParameterAsText(0)
+out_dir = os.path.normpath(arcpy.GetParameterAsText(1)) # Normalize the pathname
+field_name = arcpy.GetParameterAsText(2)
 
+if not os.path.exists(out_dir):
+    print "Creating output directory: " + out_dir
+    os.mkdir(out_dir)
 
-myre = re.compile(";")
-FldsSplit = myre.split(Flds)
+try:
+    rows = arcpy.SearchCursor(in_shp)
+except Exception, e:
+    print >> sys.stderr, "Error reading shapefile"
+    print >> sys.stderr, "Exception: %s" % repr(e)
+    sys.exit(1)
 
-sort = "%s A" % (FldsSplit[0])
-rows = arcpy.SearchCursor(Input, "", "", Flds, sort)
+try:
+    # Create a list of unique attributes from a shapefile field
+    row = rows.next()
+    attributes = set([])
+    while row:
+        attributes.add(row.getValue(field_name))
+        row = rows.next()
+except Exception, e:
+    print >> sys.stderr, "Field does not exist in shapefile"
+    print >> sys.stderr, "Exception: %s" % repr(e)
+    sys.exit(1)
 
-for row in rows:
-    var = []
-    for r in range(len(FldsSplit)):
-        var.append(row.getValue(FldsSplit[r]))
-    Query = ''
-    Name = ''
-    for x in range(len(var)):
-        if x == 0:
-            fildz = FldsSplit[x]
-            Name = var[x] + "_"
-            Query += (""" "%s" = '%s'""" % (fildz, var[x]))
-        if x > 0:
-            fildz = FldsSplit[x]
-            Name += var[x] + "_"
-            Query += (""" AND "%s" = '%s' """ % (fildz, var[x]))
-    OutputShp = OutWorkspace + r"\%s.shp" % (Name)
-    arcpy.Select_analysis(Input, OutputShp, Query)
+# Create a Shapefile from a subset of features based on unique attribute value
+for attribute in attributes:
+    out_shp = out_dir + "\\" + attribute + ".shp"
+    where_clause = field_name + " = '" + attribute + "'"
+    arcpy.Select_analysis(in_shp, out_shp, where_clause)
+    print out_shp.encode("utf8")
 
-
-fc = "E:/Data/NP/SvalbardTema/etrs89/miljo/sjopattedyrobservasjoner/sjopattedyrObservasjoner.shp"
-
-# Create a list of string fields
-# field_names = [f.name for f in arcpy.ListFields(fc)]
-field = arcpy.ListFields(fc, 'Art')[0]
-fieldvalues = []
-rows = arcpy.SearchCursor(fc)
-for row in rows:
-    if not row.getValue(field.name) in fieldvalues:
-        fieldvalues.append(row.getValue(field.name))
+del row, rows, attributes
