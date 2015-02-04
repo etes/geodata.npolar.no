@@ -2,6 +2,11 @@
 Created on 8. aug. 2014
 
 @author: Norwegian Polar Institute
+
+This script fixes the url attribute of the Skuterbegrensning data from Sysselmannen.
+Part of the data had two URLs in a single field separated by a comma, which produces an invalid
+hyperlink when published as a map service.
+The script separates the URLs in add them into two separate fields (Lenke and Lenke2)
 '''
 import os
 import arcpy
