@@ -8,19 +8,19 @@
     <title>Add WMTS Layer - Resource Info</title>
 
     <style>
-      html, body { height: 100%; width: 100%; margin: 0; padding: 5px; } 
+      html, body { height: 100%; width: 100%; margin: 0; padding: 5px; }
 
     </style>
-    <link rel="stylesheet" href="http://js.arcgis.com/3.10/js/esri/css/esri.css">
+    <link rel="stylesheet" href="//js.arcgis.com/3.10/js/esri/css/esri.css">
 
-    <script src="http://js.arcgis.com/3.10compact/"></script>
+    <script src="//js.arcgis.com/3.10compact/"></script>
     <script>
       var map, wmtsLayer;
       require([
         "esri/map", "esri/layers/WMTSLayer", "esri/layers/WMTSLayerInfo",
         "esri/geometry/Extent", "esri/layers/TileInfo", "esri/SpatialReference",
         "dojo/parser",
-        
+
         "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dojo/domReady!"
       ], function(
         Map, WMTSLayer, WMTSLayerInfo,
@@ -40,8 +40,8 @@
           extent: bounds,
           logo: false
         });
-		
-		
+
+
 		var tileInfo = new TileInfo( {
           "dpi": 96,
           "format": "Mixed",
@@ -54,7 +54,7 @@
             "wkid": 25833
           }),
 		rows: 256,
-		cols: 256,	
+		cols: 256,
 		lods: [
 		{
 		level: 0,
@@ -149,13 +149,13 @@
 		]
 		}
 		);
-		
-  
+
+
 		var tileExtent = new Extent (369976.3899489096, 8221306.539890718, 878234.7199568129, 9010718.76990194, new SpatialReference({
 			wkid: 25833
 			}));
-		
-        
+
+
         var layerInfo = new WMTSLayerInfo({
           tileInfo: tileInfo,
           fullExtent: tileExtent,
@@ -184,14 +184,14 @@
 
     </script>
   </head>
-  
+
   <body>
-    <div data-dojo-type="dijit/layout/BorderContainer" 
-         data-dojo-props="design:'headline', gutters:false" 
+    <div data-dojo-type="dijit/layout/BorderContainer"
+         data-dojo-props="design:'headline', gutters:false"
          style="width: 100%; height: 100%; margin: 0;">
 
-      <div id="map" 
-           data-dojo-type="dijit/layout/ContentPane" 
+      <div id="map"
+           data-dojo-type="dijit/layout/ContentPane"
            data-dojo-props="region:'center'">
       </div>
 

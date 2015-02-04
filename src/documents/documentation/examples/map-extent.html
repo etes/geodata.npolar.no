@@ -3,21 +3,21 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=7, IE=9, IE=10">
-    <!--The viewport meta tag is used to improve the presentation and behavior of the samples 
+    <!--The viewport meta tag is used to improve the presentation and behavior of the samples
       on iOS devices-->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
     <title>Create Map</title>
 
-    <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/esri/css/esri.css">
+    <link rel="stylesheet" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/esri/css/esri.css">
 
-    <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/"></script>
+    <script src="//serverapi.arcgisonline.com/jsapi/arcgis/3.4/"></script>
     <script>
       dojo.require("esri.map");
 
-      
+
       function init() {
       	var initialExtent = new esri.geometry.Extent({"xmin":-1246168.82567099,"ymin":7646808.89682435,"xmax":2246168.82567098,"ymax":9592114.12076814,"spatialReference":{"wkid":32633}});
-        var map = new esri.Map("map", {extent: initialExtent, logo:false});        
+        var map = new esri.Map("map", {extent: initialExtent, logo:false});
         map.addLayer(new esri.layers.ArcGISTiledMapServiceLayer("//geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer"));
         dojo.connect(map, "onExtentChange", showExtent);
       }
@@ -29,23 +29,23 @@
            +"YMin: " + extent.ymin.toFixed(2) + " "
            +"XMax: " + extent.xmax.toFixed(2) + " "
            +"YMax: " + extent.ymax.toFixed(2);
-        dojo.byId("info").innerHTML = extent1;        
+        dojo.byId("info").innerHTML = extent1;
         console.log(extent1);
       }
 
       function projectToLatLong() {
-      	//var minpt = [XMin, Ymin]; 
+      	//var minpt = [XMin, Ymin];
         var outSR = new esri.SpatialReference({ wkid: 4326});
         var params = new esri.tasks.ProjectParameters();
         params.geometries = [pt];
         params.outSR = outSR;
-        
+
         gsvc.project(params, function(projectedPoints) {
           pt = projectedPoints[0];
           dojo.byId("latlong").innerHTML = " Latitude = " + pt.y + "<br/> Longitude = " + pt.x;
         });
       }
-      
+
       dojo.ready(init);
     </script>
   </head>
@@ -54,6 +54,6 @@
     <div id="info" style="padding:5px; margin:5px; background-color:#eee;"></div>
     Creates a map and adds an ArcGISTiledMapServiceLayer.  On map onExtentChanged event you should see the extent printed below the map.<br />
     Map navigation using mouse:
-    
+
   </body>
 </html>

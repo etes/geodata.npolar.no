@@ -3,15 +3,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-    <!--The viewport meta tag is used to improve the presentation and behavior of the samples 
+    <!--The viewport meta tag is used to improve the presentation and behavior of the samples
       on iOS devices-->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
     <title>Shapes and Symbols</title>
-    
+
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/dojo/dijit/themes/nihilo/nihilo.css">
-    <link rel="stylesheet" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/esri/css/esri.css">
+    <link rel="stylesheet" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/dojo/dijit/themes/nihilo/nihilo.css">
+    <link rel="stylesheet" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/esri/css/esri.css">
 
     <style>
       #info {
@@ -37,7 +37,7 @@
 
     </style>
 
-    <script src="http://serverapi.arcgisonline.com/jsapi/arcgis/3.5/"></script>
+    <script src="//serverapi.arcgisonline.com/jsapi/arcgis/3.5/"></script>
     <script>
       dojo.require("esri.map");
       dojo.require("esri.layers.agstiled");
@@ -49,10 +49,10 @@
 
         var initialExtent = new esri.geometry.Extent({"xmin": 477423.89,"ymin":8663685.98,"xmax":553624.05,"ymax":8714486.09,"spatialReference":{"wkid":32633}});
                 map = new esri.Map("mapDiv", {extent: initialExtent, logo: false});
-                gsvc = new esri.tasks.GeometryService("http://willem3.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer");
+                gsvc = new esri.tasks.GeometryService("//willem3.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer");
                 var basemap = new esri.layers.ArcGISTiledMapServiceLayer("//geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoSvalbard_U33_CHL/MapServer");
                 map.addLayer(basemap);
-        
+
         dojo.connect(map, "onLoad", initToolbar);
       }
 
@@ -60,7 +60,7 @@
         tb = new esri.toolbars.Draw(map);
         dojo.connect(tb, "onDrawEnd", addGraphic);
 
-        //hook up the button click events 
+        //hook up the button click events
         dojo.connect(dojo.byId("drawPoint"),"click", function(){
           tb.activate(esri.toolbars.Draw.POINT);
         });
@@ -107,15 +107,15 @@
               break;
             default:
               utils.setMessage("Click a button to start");
-            clearAddGraphics();  
+            clearAddGraphics();
           }
        */
 
 
 
       function addGraphic(geometry) {
-        //deactivate the toolbar and clear existing graphics 
-        tb.deactivate(); 
+        //deactivate the toolbar and clear existing graphics
+        tb.deactivate();
         map.graphics.clear();
 
 		//create a random color for the symbols
@@ -123,8 +123,8 @@
         var g = Math.floor(Math.random() * 100);
         var b = Math.floor(Math.random() * 100);
         //Marker symbol used for point and multipoint created using svg path. See this site for more examples
-        // http://raphaeljs.com/icons/#talkq. You could also create marker symbols using the SimpleMarkerSymbol class
-        //to define color, size, style or the PictureMarkerSymbol class to specify an image to use for the symbol. 
+        // //raphaeljs.com/icons/#talkq. You could also create marker symbols using the SimpleMarkerSymbol class
+        //to define color, size, style or the PictureMarkerSymbol class to specify an image to use for the symbol.
         var markerSymbol = new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE, 20, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([r, g, b, 0.5]), 10), new dojo.Color([r, g, b, 0.9]));
 
 
@@ -133,14 +133,14 @@
         //for JOIN try JOIN_BEVEL or JOIN_MITER or JOIN_ROUND
         var lineSymbol = new esri.symbol.CartographicLineSymbol(
           esri.symbol.CartographicLineSymbol.STYLE_SOLID,
-          new dojo.Color([255,0,0]), 10, 
+          new dojo.Color([255,0,0]), 10,
           esri.symbol.CartographicLineSymbol.CAP_ROUND,
           esri.symbol.CartographicLineSymbol.JOIN_MITER, 5
         );
 
         //a simple fill symbol used for extent, polygon and freehand polygon.
-        var fillSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, 
-        	new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, 
+        var fillSymbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,
+        	new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT,
         		new dojo.Color([255,0,0]), 2),new dojo.Color([255,255,0,0.25]));
 
 
@@ -155,11 +155,11 @@
           symbol = fillSymbol;
         }
 
-      //Add the graphic to the map 
+      //Add the graphic to the map
        map.graphics.add(new esri.Graphic(geometry, symbol));
       }
 
-     
+
 
       dojo.ready(init);
     </script>

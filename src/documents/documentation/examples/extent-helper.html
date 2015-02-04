@@ -1,12 +1,12 @@
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "//www.w3.org/TR/html4/strict.dtd">
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>JS Extent Helper</title>
-        <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/2.5/js/dojo/dojo/resources/dojo.css"/>
-        <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/dojo/dijit/themes/claro/claro.css"/>
-        <link rel="stylesheet" type="text/css" href="http://serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/esri/css/esri.css"/>
+        <link rel="stylesheet" type="text/css" href="//serverapi.arcgisonline.com/jsapi/arcgis/2.5/js/dojo/dojo/resources/dojo.css"/>
+        <link rel="stylesheet" type="text/css" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/dojo/dijit/themes/claro/claro.css"/>
+        <link rel="stylesheet" type="text/css" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/esri/css/esri.css"/>
         <style type="text/css">
             html, body {
                 height: 100%;
@@ -20,7 +20,7 @@
                 parseOnLoad: true
             };
         </script>
-        <script type="text/javascript" src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=3.4">
+        <script type="text/javascript" src="//serverapi.arcgisonline.com/jsapi/arcgis/?v=3.4">
         </script>
         <script type="text/javascript">
             dojo.require("dijit.layout.BorderContainer");
@@ -29,18 +29,18 @@
             dojo.require("dijit.form.CheckBox");
             dojo.require("dijit.form.Form");
             dojo.require("esri.map");
-            
+
             var map, drawToolbar, resizeTimer, infoTemplate;
-            
+
             function init(){
                 createMap('utm33');
             }
-            
+
             function createToolbar(map){
                 drawToolbar = new esri.toolbars.Draw(map);
                 dojo.connect(drawToolbar, "onDrawEnd", addToMap);
             }
-            
+
             function addToMap(geometry){
                 var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_DASHDOT, new dojo.Color([255, 0, 0]), 2), new dojo.Color([255, 255, 0, 0.25]));
                 var graphic = new esri.Graphic(geometry, symbol, {
@@ -53,7 +53,7 @@
                 dojo.byId("extentOutput").innerHTML = "Graphic extent json: " + dojo.toJson(geometry.toJson()) + "<br/>Graphic extent compact: " + geometry.xmin + "," + geometry.ymin + "," + geometry.xmax + "," + geometry.ymax;
                 dijit.byId("extentInfo").show();
             }
-            
+
             function createExtentGraphic(extentString){
                 extentValues = extentString.split(",");
                 if (extentValues.length === 4) {
@@ -69,18 +69,18 @@
                 dijit.byId('createExtent').hide();
                 dojo.byId('extentCoords').value = "";
             }
-            
+
             function mapExtent(){
                 dojo.byId("extentOutput").innerHTML = "Map extent json: " + dojo.toJson(map.extent.toJson()) + "<br/>Map extent compact: " + map.extent.xmin + "," + map.extent.ymin + "," + map.extent.xmax + "," + map.extent.ymax;
                 dijit.byId("extentInfo").show();
             }
-            
+
             function changeProjection(){
                 var switchTo = dijit.byId('projectionForm').getValues();
                 map.destroy();
                 createMap(switchTo.prj);
             }
-            
+
             function createMap(prj){
                 switch (prj) {
                     case 'utm33':
@@ -97,7 +97,7 @@
                         break;
                 }
             }
-            
+
             function connectMap(){
                 dojo.connect(map, "onLoad", createToolbar);
                 dojo.connect(map, 'onLoad', function(theMap){
@@ -112,7 +112,7 @@
                 infoTemplate = new esri.InfoTemplate("Extent", "JSON:${extentjson}<br/><BR/>Compact:${extent}");
                 map.infoWindow.resize(600, 130);
             }
-            
+
             dojo.addOnLoad(init);
         </script>
     </head>
