@@ -1,4 +1,4 @@
-ï»¿<!doctype html>
+<!doctype html>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -9,7 +9,7 @@
 	<script type="text/javascript" src="js/proj4js.min.js"></script>
 	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript">var djConfig = {parseOnLoad: true};</script>   
-	<script src="//geodata.npolar.no/arcgis_js_api/library/3.8/3.8/init.js"></script>
+	<script src="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/init.js"></script>
     <script type="text/javascript">
       dojo.require("dijit.layout.BorderContainer");
       dojo.require("dijit.layout.ContentPane");
@@ -17,13 +17,13 @@
       dojo.require("esri.geometry.Circle");
       dojo.require("esri.dijit.Popup");
       var map, geometryService;
-      var overlayMapService = '//geodata.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer';
-      var layers = [{ name: 'HvalrossLiggeplasser', id: 2 }, { name: 'RÃ¸ye', id: 3 }, { name: 'SjÃ¸fugl kolonier', id: 5 }, { name: 'Alle SjÃ¸pattdyr observasjoner', id: 27 }, { name: 'IsbjÃ¸rn observasjoner', id: 37 }, { name: 'Strandrydding per Ã¥r', id: 58 }, { name: 'ReinbestandomrÃ¥der', id: 59 }, { name: 'Biogeografiske soner', id: 60 }, { name: 'Vegetasjon (10 kasser)', id: 62}, { name: 'Geologi', id: 87 }];
-      var geometryServiceUrl = '//geodata.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer';
+      var overlayMapService = 'http://geodata.npolar.no/arcgis/rest/services/Svalbard/embed/MapServer';
+      var layers = [{ name: 'HvalrossLiggeplasser', id: 2 }, { name: 'Røye', id: 3 }, { name: 'Sjøfugl kolonier', id: 5 }, { name: 'Alle Sjøpattdyr observasjoner', id: 27 }, { name: 'Isbjørn observasjoner', id: 37 }, { name: 'Strandrydding per år', id: 58 }, { name: 'Reinbestandområder', id: 59 }, { name: 'Biogeografiske soner', id: 60 }, { name: 'Vegetasjon (10 kasser)', id: 62}, { name: 'Geologi', id: 87 }];
+      var geometryServiceUrl = 'http://geodata.npolar.no/arcgis/rest/services/Utilities/Geometry/GeometryServer';
 	  var decimalPlacesWGS84 = 6;
-	  Proj4js.defs["EPSG:32633"] = "+proj=utm +zone=33 +ellps=WGS84 +datum=WGS84 +units=m +no_defs";
+	  Proj4js.defs["EPSG:25833"] = "+proj=utm +zone=33 +ellps=GRS80 +units=m +no_defs";
 	  var w84 = new Proj4js.Proj('EPSG:4326');
-      var u33 = new Proj4js.Proj('EPSG:32633');
+      var u33 = new Proj4js.Proj('EPSG:25833');
 	  var opacity =0.8;
 	  var visible = [];
 	  var visibleLayers = [];
@@ -101,9 +101,9 @@ if (!window.location.search)
           if (urlParams["extent"]) {
               var extent = urlParams["extent"].split(',');
               //dojo.byId('fullmap').innerHTML = '<a id="fullmaplink" href="http://svalbardkartet.npolar.no/Viewer.html?Viewer=Svalbardkartet&extent='+ extent + '" target="_blank">Vis i Svalbardkartet</a>';
-              var wkid = "32633";
+              var wkid = "25833";
               if (urlParams["wkid"]) wkid = urlParams["wkid"];
-              var initExtent = new esri.geometry.Extent({ "xmin": extent[0] * 1, "ymin": extent[1] * 1, "xmax": extent[2] * 1, "ymax": extent[3] * 1, "spatialReference": { "wkid": 32633} });
+              var initExtent = new esri.geometry.Extent({ "xmin": extent[0] * 1, "ymin": extent[1] * 1, "xmax": extent[2] * 1, "ymax": extent[3] * 1, "spatialReference": { "wkid": 25833} });
               //var initExtent = new esri.geometry.Extent({ "xmin": -13635568, "ymin": 4541606, "xmax": -13625430, "ymax": 4547310, "spatialReference": { "wkid": 102100} });
               map = new esri.Map("map", {extent: initExtent, logo: false });
           }
@@ -112,8 +112,8 @@ if (!window.location.search)
           }
           
           var basemap = null;
-          var mapUrl = "//geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHL/MapServer";
-          //var mapUrl2 = "//geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHX/MapServer";
+          var mapUrl = "http://geodata.npolar.no/arcgis/rest/services/Basisdata_Intern/NP_Nordomraadene_WMTS_25833/MapServer";
+          //var mapUrl2 = "http://geodata.npolar.no/ArcGIS/rest/services/inspire1/NP_TopoNordomr_U33_CHX/MapServer";
           //var mapUrl = decodeURIComponent(urlParams["mapUrl"]);
           if (urlParams["t"] && urlParams["t"] == "1")
               basemap = new esri.layers.ArcGISTiledMapServiceLayer(mapUrl);
@@ -350,12 +350,12 @@ if (!window.location.search)
 
               // Identify Task (PopUp)
             function IFpoigraphicpointf(evt) {
-	map.infoWindow.setTitle((evt.graphic.attributes.Title).replace(/Â¤Â¤/g, '\''));
+	map.infoWindow.setTitle((evt.graphic.attributes.Title).replace(/¤¤/g, '\''));
 	IFinfo = evt.graphic.attributes.Info;
 	if (IFinfo.slice(0,1)=="\'") {IFinfo=IFinfo.slice(1);}
 	if (IFinfo.slice(-1)==";") {IFinfo=IFinfo.slice(0,-1);}
 	if (IFinfo.slice(-1)=="\'") {IFinfo=IFinfo.slice(0,-1);}
-	map.infoWindow.setContent(IFinfo.replace(/Â¤Â¤/g, '\''));
+	map.infoWindow.setContent(IFinfo.replace(/¤¤/g, '\''));
 	map.infoWindow.show(evt.screenPoint,map.getInfoWindowAnchor(evt.screenPoint));
 	IFpl = new esri.geometry.Point(evt.mapPoint.x,evt.mapPoint.y);
 }
@@ -447,7 +447,35 @@ if (!window.location.search)
 {layerID:30,svbkID:"6,0,0,5,1,0,4,0,3,3,2,21,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
 {layerID:31,svbkID:"6,0,0,5,1,0,4,0,3,3,2,22,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
 {layerID:32,svbkID:"6,0,0,5,1,0,4,0,3,3,2,23,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
-{layerID:115,svbkID:"6,0,0,5,1,0,4,1,0,3,1,0,10,1,0,9,1,0,8,1,0,12,0,0,0,0,0,11,0,0,"}]
+{layerID:34,svbkID:"6,0,0,5,1,0,4,0,3,3,24,25,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:35,svbkID:"6,0,0,5,1,0,4,0,3,3,24,26,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:36,svbkID:"6,0,0,5,1,0,4,0,3,3,24,27,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:37,svbkID:"6,0,0,5,1,0,4,0,3,3,24,28,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:38,svbkID:"6,0,0,5,1,0,4,0,3,3,24,29,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:39,svbkID:"6,0,0,5,1,0,4,0,3,3,24,30,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:40,svbkID:"6,0,0,5,1,0,4,0,3,3,24,31,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:41,svbkID:"6,0,0,5,1,0,4,0,3,3,24,32,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:42,svbkID:"6,0,0,5,1,0,4,0,3,3,24,33,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:43,svbkID:"6,0,0,5,1,0,4,0,3,3,24,34,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:44,svbkID:"6,0,0,5,1,0,4,0,3,3,24,35,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:45,svbkID:"6,0,0,5,1,0,4,0,3,3,24,36,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:46,svbkID:"6,0,0,5,1,0,4,0,3,3,24,37,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:47,svbkID:"6,0,0,5,1,0,4,0,3,3,24,38,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:48,svbkID:"6,0,0,5,1,0,4,0,3,3,24,39,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:49,svbkID:"6,0,0,5,1,0,4,0,3,3,24,40,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:50,svbkID:"6,0,0,5,1,0,4,0,3,3,24,41,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:51,svbkID:"6,0,0,5,1,0,4,0,3,3,24,42,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:52,svbkID:"6,0,0,5,1,0,4,0,3,3,24,43,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:53,svbkID:"6,0,0,5,1,0,4,0,3,3,24,44,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:54,svbkID:"6,0,0,5,1,0,4,0,3,3,24,45,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:55,svbkID:"6,0,0,5,1,0,4,0,3,3,24,46,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:56,svbkID:"6,0,0,5,1,0,4,0,3,3,24,47,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:57,svbkID:"6,0,0,5,1,0,4,0,3,3,24,48,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:58,svbkID:"6,0,0,5,1,0,4,0,3,3,24,49,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:59,svbkID:"6,0,0,5,1,0,4,0,3,3,24,50,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:60,svbkID:"6,0,0,5,1,0,4,0,3,3,24,51,3,1,0,10,1,0,9,1,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:63,svbkID:"6,0,0,5,1,0,4,0,3,3,24,52,3,0,0,10,0,0,9,0,0,8,0,0,12,0,0,0,0,0,11,0,0,"},
+{layerID:167,svbkID:"6,0,0,5,1,0,4,1,0,3,1,0,10,1,0,9,1,0,8,1,0,12,0,0,0,0,0,11,0,0,"}]
       
       // link to full map view on Svalbardkartet
       function showFullMap (){
@@ -477,10 +505,10 @@ if (!window.location.search)
   
   <body class="claro">
     <div id="map">
-    	<div id="nplogo"><img src="images/iframe_nplogo.png" /></div>
+    	<div id="nplogo"><img src="images/np-logo-blue.png" /></div>
     	<div id="backgroundbottom">
     		<div id="fullmap"><a id="fullmaplink"  href="http://svalbardkartet.npolar.no/Viewer.html?Viewer=Svalbardkartet" target="_blank">Vis i Svalbardkartet</a></div>
-    		<div id="copyright" title="Norsk Polarinstitutts forside">Â© <a href="http://npolar.no" target="_blank">Norsk Polarinstitutt</a></div>
+    		<div id="copyright" title="Norsk Polarinstitutts forside">© <a href="http://npolar.no" target="_blank">Norsk Polarinstitutt</a></div>
     	</div>
     	
     </div>

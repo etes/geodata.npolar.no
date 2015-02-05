@@ -5,34 +5,26 @@
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
 		<title>Svalbardkartet IFrame Designer</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-		<link rel="stylesheet" type="text/css" href="//geodata.npolar.no/arcgis_js_api/library/3.8/3.8/js/dojo/dijit/themes/claro/claro.css">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+		<link rel="stylesheet" type="text/css" href="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/js/dojo/dijit/themes/claro/claro.css">
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
-		<link rel="stylesheet" type="text/css" href="//geodata.npolar.no/arcgis_js_api/library/3.8/3.8/js/esri/css/esri.css" />
+		<link rel="stylesheet" type="text/css" href="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/js/esri/css/esri.css" />
 		<link rel="stylesheet" type="text/css" href="modules/css/agsjs.css" />
 		  <style>
-  .ui-autocomplete-loading {
-    background: white url('//jqueryui.com/resources/demos/autocomplete/images/ui-anim_basic_16x16.gif') right center no-repeat;
-  }
   </style>
 		</head>
 	<body class="claro">
 		<div class="header">
             <div class="headerLogo">
-                <img src="../public/images/np-logo.png"/>
+                <img src="images/np-logo.png"/>
             </div>
             <div class="headerTitle">
                 Embed Map in Website
-                <div class="subHeaderTitle">
-                    Select a layers to overlay and navigate to the desired map section.
-                </div>
             </div>
-            <div class="identify-tools">
+            <div class="main-tools">
             <a class="button tip identify" href="#" id="point-identify" tip="identify"></a>
             </div>
             <div class="search input" id="search">
-                <div id='geocodeDijit'>
-                </div>
                 <form action="" method="get">
 				<input id="search-input" type="search" placeholder="Search placename..." value="" rel="search"/>
 				</form>
@@ -43,29 +35,20 @@
                 </div>
             </div>
         </div>
-		<div id="content" data-dojo-type="dijit.layout.BorderContainer" design="headline" gutters="false" style="width: 100%; height: 100%; margin: 0;">
-
+		<div id="content" data-dojo-type="dijit.layout.BorderContainer" design="headline" gutters="false">
+		
 			<div data-dojo-type="dojox.layout.ExpandoPane" title = "Map Layers" data-dojo-props="duration:300, region:'left', maxWidth:'280px'" style="width:280px;" splitter="true">
 				<div id="tocDiv"></div>
 			</div>
 			<div id="map" data-dojo-type="dijit.layout.ContentPane" region="center" style="padding:0px">
-				<div id="copyright">© <a href="http://npolar.no" target="_blank">Norsk Polarinstitutt</a></div>
+				<div id="copyright">&copy; <a href="http://npolar.no" title="Norsk Polarinstitutts forside" target="_blank">Norsk Polarinstitutt</a></div>
 			</div>
 
 			<!--right panel section
 				-->
     <div id="showhide" onclick="showhide();" title="Show/hide panel" onmouseover="this.style.cursor='pointer'"></div>
 				<div class="param" id="rightpanel">
-					<div class="navigationdiv">
-						<!--Create static map (disable zooming and panning)-->
-						Enable map zooming using mouse scroll wheel.
-						<input id="rbLockedYes" name="rbLocked" type="radio" value="0" checked/>
-						Yes
-						<input id="rbLockedNo" name="rbLocked" type="radio" value="1"/>
-						No.
-					</div>
-					<br />
-						<!-- draw tools section -->
+						<!-- draw tools section -->	
 					<div id="draw-toolbar-section">
 						<a class="button tip" id="draw-tools-toggle" onclick="toggle_draw_toolbar();" tip="draw on map"></a>
 						<div class="draw-toolbar" style="display: none">
@@ -85,18 +68,20 @@
 							<textarea id="iframeinfoinput" name="iframeinfotext"  value="" placeholder="Add text info to graphic here." title="Info" spellcheck="false" style="z-index:99; width:160px; font-size: 11px;"></textarea>
 						</form>
 						</div>
-
-
+					
 				</div> <!-- /.draw tools section -->
 					<br />
 					<br />
 					<div id="embedSize-box">
 						<div class="widthdiv input-prepend input-append">
-							<span class="add-on"> Width:</span><input id="txtWidth" type="text" class="input-mini textright" placeholder="width" value="500" /><span class="add-on">px</span>
+							<span class="add-on"> Width:</span><input id="txtWidth" type="text" class="input-mini textright" placeholder="width" value="700" /><span class="add-on">px</span>
 							</div>
 						<div class="heightdiv input-prepend input-append">
 							<span class="add-on"> Height:</span><input id="txtHeight" type="text" class="input-mini textright" placeholder="height" value="500" /><span class="add-on">px</span>
 							</div>
+						<span>
+							<a class="button tip selected" href="#" id="scroll-zoom" tip="Disable scroll wheel zooming"></a>
+						</span>
 					</div>
 					<div id="codeDiv">
 						<div class="code" id="divCode"></div>
@@ -129,15 +114,15 @@
                 ]
             };
 
-		</script>
-
-		<script type="text/javascript" src="../public/js/proj4js.min.js"></script>
+		</script> 
+		
+		<script type="text/javascript" src="js/proj4js.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="js/spectrum.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/spectrum.css" />
 
-		<script src="//geodata.npolar.no/arcgis_js_api/library/3.8/3.8/init.js"></script>
+		<script src="http://geodata.npolar.no/arcgis_js_api/library/3.8/3.8/init.js"></script>
 		<script type="text/javascript" src="js/iframe-main.js"> </script>
 	</body>
 </html>
