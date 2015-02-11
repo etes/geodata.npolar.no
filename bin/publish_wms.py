@@ -20,17 +20,21 @@ curl -u username:password -XPUT -H 'Content-type: text/xml' -d '<layer><defaultS
 
 username = "admin"
 password = "password"
-geoserver_rest = 'http://liv.npolar.no:8080/geoserver/rest'
+geoserver_rest = 'http://localhost:8080/geoserver/rest'
 cat = Catalog(geoserver_rest, username, password)
 
-in_rast = "E:/Data/Barentsportal/Biodiversity/Polarbear/PolarbearOptimalHabitat/Monthly/PolarBearOptimalHabitat_Montly_April_1992-1996.tif"
+shapefile_plus_sidecars = geoserver.util.shapefile_and_friends("data/sjopattedyrobservasjoner")
+svalbardkartet = cat.get_workspace("svalbardkartet")
+
+ft = cat.create_featurestore("sjopattedyrobservasjoner", shapefile_plus_sidecars, svalbardkartet)
+in_raster = "E:/Data/Barentsportal/Biodiversity/Polarbear/PolarbearOptimalHabitat/Monthly/PolarBearOptimalHabitat_Montly_April_1992-1996.tif"
+
 file_name = os.path.splitext(os.path.basename(in_raster))[0]
 workspace= "barentsportal"
 cat.create_coveragestore(file_name, in_raster, workspace)
 
 cat = Catalog("http://liv.npolar.no:8080/geoserver/rest", username, password)
-while cat:
-    layer = cat.get_layer(file_name)
+layer = cat.get_layer(file_name)
 layer_style = cat.get_style('pboh_monthly_april')
 layer.default_style = layer_style
 cat.save(layer)
