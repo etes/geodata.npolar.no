@@ -9,7 +9,7 @@ password = "geoserver"
 geoserver_rest = 'http://localhost:8080/geoserver/rest'
 
 curlcmd = 'curl -u username:password -XPUT -H "Content-type: text/xml" -d "<layer><defaultStyle><name>pboh_monthly_april</name></defaultStyle></layer>"\
- http://localhost:8080/geoserver/rest/layers/barentsportal:PolarBearOptimalHabitat_Montly_April_1992-1996'
+ http://localhost:8080/geoserver/rest/layers/barentsportal:PolarBearOptimalHabitat_Monthly_April_1992-1996'
 def publish_raster(geoserver_rest, username,password, in_raster, workspace):
     file_name = os.path.splitext(os.path.basename(in_raster))[0]
     dest= '/'.join([geoserver_rest, 'workspaces', workspace, 'coveragestores', file_name, 'file.geotiff'])
@@ -45,15 +45,29 @@ if not "expedition" in [w.name for w in workspaces]:
 expedition = cat.get_workspace("expedition")
 
 #ft = cat.create_featurestore("n-ice2015", shapefile_plus_sidecars, expedition)
-in_raster = "E:/Data/Barentsportal/Biodiversity/Polarbear/PolarbearOptimalHabitat/Monthly/PolarBearOptimalHabitat_Montly_April_1992-1996.tif"
+in_raster = "/home/ermias/data/barentsportal/polarbear/PolarbearOptimalHabitat/Monthly/PolarBearOptimalHabitat_Montly_April_1992-1996.tif"
 
 file_name = os.path.splitext(os.path.basename(in_raster))[0]
+workspaces = cat.get_workspaces()
 workspace= "barentsportal"
-#cat.create_coveragestore(file_name, in_raster, workspace)
+if not workspace in [w.name for w in workspaces]:
+    cat.create_workspace(workspace, "geodata.npolar.no/barentsportal")
+layers = cat.get_layers()
+if not file_name in [l.name for l in layers]:
+    print "Creating new layer: %s" %file_name
+    cat.create_coveragestore(file_name, in_raster, workspace)
 
 cat = Catalog("http://liv.npolar.no:8080/geoserver/rest", username, password)
-layer = cat.get_layer("n-ce2015")
-#layer_style = cat.get_style('polarbearbOH_monthly_april')
-#layer.default_style = layer_style
-#cat.save(layer)
-#cat.reload()
+styles = cat.get_styles()
+style_file = "polarbearOH_monthly.sld"
+style_name = os.path.splitext(os.path.basename(style_file))[0]
+if not os.path.basename(style_file) in [s.filename for s in styles]:
+    print "Creating style: %s" %style_file
+    cat.create_style(style_name, open(style_file).read())
+
+
+layer = cat.get_layer(file_name)
+default_style = cat.get_style(style_name)
+layer.default_style = default_style_style
+cat.save(layer)
+cat.reload()
