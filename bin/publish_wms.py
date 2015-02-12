@@ -1,5 +1,6 @@
 import os
 from geoserver.catalog import Catalog
+import geoserver.util
 
 def publish_raster(geoserver_rest, username,password, in_raster, workspace):
     file_name = os.path.splitext(os.path.basename(in_raster))[0]
