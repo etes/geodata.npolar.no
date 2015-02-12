@@ -50,6 +50,9 @@ coverage.xml
 .pydevproject
 .settings
 
+# Komodo project
+.komodoproject
+
 # Rope
 .ropeproject
 
