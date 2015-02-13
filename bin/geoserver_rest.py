@@ -63,7 +63,7 @@ def raster_to_geoserver(geoserver_url, raster, workspace):
     file_name = os.path.splitext(os.path.basename(raster))[0]
     workspace = cat.get_workspace(workspace)
     if not file_name in [l.name for l in cat.get_layers()]:
-        print 'Creating new layer: %s' %shapefile
+        print 'Creating new layer: %s' %file_name
         cat.create_coveragestore(file_name, raster, workspace)
     else:
         print 'Layer %s already exists' %file_name
